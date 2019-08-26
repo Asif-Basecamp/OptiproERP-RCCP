@@ -5,10 +5,10 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { GridModule, ExcelModule } from '@progress/kendo-angular-grid';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
-import { UserGroupComponent } from './user-group/user-group.component';
+import { BOMComponent } from './bom/bom.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { UserAuthorizationComponent } from './user-authorization/user-authorization.component';
 import { UserRolesComponent } from './user-roles/user-roles.component';
@@ -24,8 +24,9 @@ import { ConnectedUsersComponent } from './connected-users/connected-users.compo
     DialogsModule,
     DropDownsModule,
     MainRoutingModule,
-    FlexLayoutModule   
+    FlexLayoutModule,
+    DateInputsModule  
   ],
-  declarations: [MainComponent, UserGroupComponent, UserManagementComponent, UserAuthorizationComponent, UserRolesComponent, ConnectedUsersComponent]
+  declarations: [MainComponent, BOMComponent, UserManagementComponent, UserAuthorizationComponent, UserRolesComponent, ConnectedUsersComponent]
 })
 export class MainModule { }

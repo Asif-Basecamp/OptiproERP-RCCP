@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { products } from 'src/app/dummyData/data';
+import { products } from '../../dummyData/data';
 import { GridComponent } from '@progress/kendo-angular-grid';
 
 @Component({

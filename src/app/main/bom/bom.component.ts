@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { products } from 'src/app/dummyData/data';
+import { products } from '../../dummyData/data';
 import { GridComponent } from '@progress/kendo-angular-grid';
 
 @Component({
-  selector: 'app-user-group',
-  templateUrl: './user-group.component.html',
-  styleUrls: ['./user-group.component.scss']
+  selector: 'bom',
+  templateUrl: './bom.component.html',
+  styleUrls: ['./bom.component.scss']
 })
-export class UserGroupComponent implements OnInit {
+export class BOMComponent implements OnInit {
   // public paginationButtonCount = 5;
   // public paginationInfo = true;
   // public paginationType: 'input';
