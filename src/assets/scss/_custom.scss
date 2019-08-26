@@ -1,0 +1,282 @@
+@import './themes/default';
+@import './variables';
+
+html, body{
+    min-height: 100vh;
+}
+.icon {
+  width: 16px;
+  height: auto;
+  fill: #fff;
+}
+//Layout
+.compact-layout {
+  & app-header .navbar-inner, & .layout-mode{
+    margin-left: auto;
+    margin-right: auto;
+    @media screen and (min-width: 576px){
+      max-width: 540px !important;
+    }
+    @media screen and (min-width: 768px){
+      max-width: 720px !important;
+    }
+    @media screen and (min-width: 992px){
+      max-width: 960px !important;
+    }
+    @media screen and (min-width: 1200px){
+      max-width: 1140px !important;
+    }
+  }
+}
+.no-sidebar .navbar-toggler{
+  display: none !important;
+}
+body.no-header .content{
+  max-height: 100vh !important;
+}
+body.with-header .content{
+  max-height: calc(100vh - 40px) !important;
+}
+//sidebar
+app-sidebar.toggle  {
+  @media screen and (max-width:991px){ 
+    & + .content-area {
+      & > app-header{
+        & .navbar-toggle-btn{
+          & .menu-icon{
+            display: none;
+          }
+          & .menu-icon-mobile{
+            display: flex;
+            width: 14px;
+          }
+        }
+      }
+      & > .content{    
+        overflow: hidden;
+        & > *:not(router-outlet) {
+          position: relative;
+          &:before{
+            content: "";
+            background-color: rgba(0,0,0,.06);
+            user-select: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top:0;
+            left:0;
+            z-index: 1;
+          }
+        }
+      }
+    }
+  }
+}
+//page header
+.page-header {
+  position: fixed;
+  top: 9px;
+  left: 300px;
+  color: #fff;
+  & > h4{
+    margin: 0;
+  }
+  app-sidebar.toggle + .content-area > .content .layout-mode > &{
+    left: 120px;
+  }
+  @media screen and (max-width:991px){
+    left:50px; 
+    top: 12px;   
+    & > h4{
+      font-size:14px;
+    }
+    app-sidebar.toggle + .content-area > .content .layout-mode > &{
+      white-space: nowrap;
+      left: 285px;
+    }
+  }
+}
+//Gradiant
+.bg-primary-gradient {
+    background: $primary-gradiant !important;
+}
+.bg-purple-gradient {
+    background: $purple-gradient!important;
+}
+
+.bg-peach-gradient {
+    background: $peach-gradient !important;
+}
+
+.bg-aqua-gradient {
+    background: $aqua-gradient!important;
+}
+
+.bg-blue-gradient {
+    background: $blue-gradiant !important;
+}
+//custom-ui
+button.btn.btn-icon {
+  padding: 4px 5px;
+  &.btn-outline-secondary{
+    &:hover, &:active{
+      & svg{
+        fill:#fff;
+      }
+    }
+    & svg{
+      fill:$secondary;
+    }
+  }
+  &.k-grid-excel{
+    background: transparent;
+    border: none;
+    & > svg {
+      fill: $primary-text-color;
+    }
+    &:hover, &:focus, &:active{
+      box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.08);
+      border: none;
+      background: rgba(0, 0, 0, 0.08);
+      border-radius: 1px;
+    }
+  }
+}
+
+.btn-sm:not(.btn-icon){
+  min-height:28px;
+}
+
+//bootstrap-custom
+.card{
+  box-shadow: 0 1px 10px 0 rgba(69, 90, 100, 0.08);
+  border:none;
+  border-radius: 5px;
+}
+
+//Form control
+.form-control-sm {
+  height: 28px;
+}
+.custom-checkbox {
+    position: relative; // take it out of document flow
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+
+    & input[type="checkbox"]{
+        opacity:0;
+        width: 0;
+        height: 0;
+        overflow: hidden;        
+    }
+    & input[type="checkbox"] + span {
+      position: relative;
+      width:16px;
+      height:16px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    & input[type=checkbox] + span + span {
+        margin-left: 8px;
+        line-height: 16px;
+    }
+    & input[type="checkbox"] + span:before {
+      content: '';
+      display: inline-block;
+      vertical-align: text-top;
+      width: 16px;
+      height: 16px;
+      border-radius: 2px;
+      background: white;
+      border: 1px solid #ced4da;
+      transition: all 100ms ease-in-out;
+      // background-image: url(~src/assets/images/svg/svg-sprite.svg#checkbox);
+      // background-image: url("~/images/svg/svg-sprite.svg#checkbox");
+    }
+    & input[type="checkbox"]:hover + span:before {
+      background: theme-color("primary");
+      border-color:theme-color("primary");
+    }
+    & input[type="checkbox"]:focus + span {
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+    }
+    & input[type="checkbox"]:checked + span:before {
+      background: theme-color("primary");
+      border-color:theme-color("primary");
+    }
+    & input[type="checkbox"]:disabled + span {
+      color: #b8b8b8;
+      cursor: auto;
+    }
+    & input[type="checkbox"]:disabled + span:before {
+      box-shadow: none;
+      background: #ddd;
+    }
+    & input[type="checkbox"]:checked + span:after {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 7px;
+      background: white;
+      width: 2px;
+      height: 2px;
+      box-shadow: 
+        2px 0 0 white,
+        4px 0 0 white,
+        4px -2px 0 white,
+        4px -4px 0 white,
+        4px -6px 0 white,
+        4px -8px 0 white;
+      transform: rotate(45deg);
+    }
+  }
+
+// Kendo Custom
+body .k-input, body .k-textbox > input{
+  font-size: 12px !important;
+}
+body .k-widget, body .k-reset{
+  font-size: 12px;
+}
+body .k-popup.k-menu-popup {
+  padding: 0;
+  margin: 0;
+  font-size:12px;
+  min-width: 135px;
+}
+.k-dropdown .k-dropdown-wrap{
+  border-color: #fff;
+  background-color: #fff;
+  color:#495057 !important
+}
+body .k-widget.form-control-sm .k-input {
+  padding: 0.25rem 0.5rem;
+  height: auto;
+}
+.k-textbox, .k-input.k-textbox {
+  height: 28px;
+}
+.k-filtercell > span, .k-filtercell .k-filtercell-wrapper {
+  align-items: center;
+}
+.k-filtercell .k-filtercell-wrapper > .k-textbox{
+  flex: 1 1 100%;
+}
+.k-filtercell .k-filtercell-operator{
+
+}
+// Kendo grid
+
+body .k-grid th, body .k-grid td{
+  padding: 5px;
+}
+
+.kendo-responsive-grid{
+  @media screen and (max-width:767px){
+    & .k-grid-header{
+      display: none;
+    }
+  }
+}

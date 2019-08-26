@@ -1,0 +1,29 @@
+:host{
+    flex: 1 1 100%;
+}
+.kendo-grid-wrapper{
+    max-height: calc(100vh - 142px) !important;
+    ::ng-deep{
+        & .full-height-grid{
+            height: 100%;
+            overflow: auto;
+        }
+    }
+    @media screen and (max-width:767px){
+        max-height: calc(100vh - 116px) !important;        
+    }
+}
+.layout-mode{
+    padding: 15px;
+    @media screen and (max-width:767px){
+        padding: 0;
+        ::ng-deep{
+            & .card{
+                border-radius: 0;
+            }
+        }
+    }
+    & > .card .card-body{
+        padding: 15px;
+    }
+}
