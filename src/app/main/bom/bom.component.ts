@@ -13,11 +13,13 @@ export class BOMComponent implements OnInit {
   public bomGrid: boolean = false;
   public CompanyDB: any;
   public lookupStatus: boolean = false;
+  public WarehouseStatus: boolean = false;
   public itemCode: any;
+  public warehouseCode: any;
   public ItemCodeFrom: any;
   public ItemCodeTo: any;
-  public DateFrom: any;
-  public DateTo: any;
+  public WarehouseFrom: any;
+  public WarehouseTo: any;
 
   constructor(private BOMService: BOMService) { }
 
@@ -47,10 +49,32 @@ export class BOMComponent implements OnInit {
     } 
   }
 
+  warehouseEventHander(){
+    this.WarehouseStatus = false;
+  }
+
+  openWarehouseFromLookup(){
+    this.warehouseCode = 'From';
+    this.WarehouseStatus = true;
+  }
+
+  openWarehouseToLookup(){
+    this.warehouseCode = 'To';
+    this.WarehouseStatus = true;
+  }
+
+  warehouseCodeEventHander(e){
+    if(this.warehouseCode == 'From'){
+      this.WarehouseFrom = e;
+    }if(this.warehouseCode == 'To'){
+      this.WarehouseTo = e;
+    } 
+  }
+
   processData(){
     this.gridData = '';
     this.bomGrid = false;
-    this.BOMService.GetItemExplosionData(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.DateFrom, this.DateTo).subscribe(
+    this.BOMService.GetItemExplosionData(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.WarehouseFrom, this.WarehouseTo).subscribe(
       data => {
         this.bomGrid = true;
         this.gridData = data;

@@ -2,45 +2,15 @@
     <span style="font-size: 20px;">Simple Grid View</span>
     <kendo-grid [kendoGridBinding]="gridData" [selectable]="true"
     [resizable]="true"
-    (selectionChange)="gridRowSelect($event)" 
+    (selectionChange)="simpleGridRowSelect($event)" 
     [ngStyle]="{ 'cursor': 'pointer'}" height="200">
-            <kendo-grid-column field="ItemCode" title="Item" width="80">
-                </kendo-grid-column>
-                <kendo-grid-column field="U_O_BOM_SEQ" title="BOM Sequence" width="80" class="text-right"
-                  headerClass="text-right">
-                </kendo-grid-column>
-                <kendo-grid-column field="OnHand" title="In Stock" width="80" class="text-right"
-                  headerClass="text-right">
-                  <ng-template kendoGridCellTemplate let-dataItem>
-                    <a class="cursor-pointer text-primary"
-                      (click)="showDetailsInStockLookup(dataItem,'CP',true)">{{dataItem.OnHand}}</a>
-                  </ng-template>
-                </kendo-grid-column>
-                <kendo-grid-column field="IsCommited" title="Committed" width="80" class="text-right"
-                  headerClass="text-right">
-                  <ng-template kendoGridCellTemplate let-dataItem>
-                  <a class="cursor-pointer text-primary"
-                      (click)="showDetailsCommittedLookup(dataItem)">{{dataItem.IsCommited}}</a>
-                  </ng-template>
-                </kendo-grid-column>
-                <kendo-grid-column field="OnOrder" title="On Order" width="80" class="text-right"
-                  headerClass="text-right">
-                  <ng-template kendoGridCellTemplate let-dataItem>
-                    <a class="cursor-pointer text-primary"
-                      (click)="showDetailsOnOrderLookup(dataItem,'CP',true)">{{dataItem.OnOrder}}</a>
-                  </ng-template>
-                </kendo-grid-column>
-                <kendo-grid-column field="AVAILABLE" title="Available Quantity" width="120"
-                  class="text-right" headerClass="text-right">
-                  <ng-template kendoGridCellTemplate let-dataItem>
-                    <span *ngIf="!CmpInventShort || (dataItem.AVAILABLE > 0)">{{dataItem.AVAILABLE}}</span>
-                    <span *ngIf="CmpInventShort && (dataItem.AVAILABLE <= 0)"
-                      class="text-danger">{{dataItem.AVAILABLE}}</span>
-                  </ng-template>
-                </kendo-grid-column>
-                <kendo-grid-column field="U_O_UOM" title="UOM" width="80" class="text-right"
-                  headerClass="text-right">
-                </kendo-grid-column>
+            <kendo-grid-column field="Code" title="Code" width="80"></kendo-grid-column>
+            <kendo-grid-column field="U_O_BOM_SEQ" title="BOM Sequence" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+            <kendo-grid-column field="U_O_ITEMCODE" title="Item Code" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+            <kendo-grid-column field="U_O_UOM" title="UOM" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+            <kendo-grid-column field="U_O_REVISION" title="Revision" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+            <kendo-grid-column field="U_O_WHSECODE" title="Warehouse Code" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+            <kendo-grid-column field="CreateDate" title="Create Date" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>  
     </kendo-grid>
 </div> 
 
@@ -84,7 +54,7 @@
     <span style="font-size: 20px;">BOM Detail</span>
 
     <kendo-grid [kendoGridBinding]="BomDetail" [selectable]="true"
-    [resizable]="true" (selectionChange)="RoutingHeaderSelect($event)"
+    [resizable]="true" (cellClick)="RoutingHeaderSelect($event)"
     [ngStyle]="{ 'cursor': 'pointer'}" height="200">
         <kendo-grid-column field="BOMLINE_ITEMCODE" title="Item Code" width="80"></kendo-grid-column>
         <kendo-grid-column field="BOMLINE_QTY" title="BOM Line Quantity" width="80"></kendo-grid-column> 
@@ -111,7 +81,7 @@
   <span style="font-size: 20px;">Routing Header Detail</span>
 
   <kendo-grid [kendoGridBinding]="RoutingHeaderDetail" [selectable]="true"
-  [resizable]="true" (selectionChange)="gridHeaderRowSelect($event)"
+  [resizable]="true" (cellClick)="gridHeaderRowSelect($event)"
   [ngStyle]="{ 'cursor': 'pointer'}" height="200">
   <kendo-grid-column field="Code" title="Code" width="80"></kendo-grid-column>
   <kendo-grid-column field="ROUTTYPE" title="Route Type" width="80"></kendo-grid-column>
@@ -126,7 +96,7 @@
 <span style="font-size: 20px;">Routing Line Detail</span>
 
 <kendo-grid [kendoGridBinding]="RoutingLineDetail" [selectable]="true"
-  [resizable]="true" (selectionChange)="gridLineRowSelect($event)"
+  [resizable]="true" (cellClick)="gridLineRowSelect($event)"
   [ngStyle]="{ 'cursor': 'pointer'}" height="200">
   <kendo-grid-column field="Code" title="Code" width="80"></kendo-grid-column>
   <kendo-grid-column field="OPERATIONCODE" title="OPERATIONCODE" width="80"></kendo-grid-column>
