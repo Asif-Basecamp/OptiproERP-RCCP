@@ -12,6 +12,7 @@ import { BOMComponent } from './bom/bom.component';
 import { BOMGridViewComponent } from './bom/bom-grid-view/bom-grid-view.component';
 import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
 import { TreeTableModule } from 'primeng/components/treetable/treetable';
+import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,6 @@ import { TreeTableModule } from 'primeng/components/treetable/treetable';
     DateInputsModule,
     TreeTableModule
   ],
-  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent]
+  declarations: [MainComponent, BOMComponent, UserManagementComponent, UserAuthorizationComponent, UserRolesComponent, ConnectedUsersComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent]
 })
 export class MainModule { }

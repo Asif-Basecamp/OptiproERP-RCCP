@@ -22,18 +22,23 @@ export class BOMService {
     }])};
     return this.httpClient.post(optiProDashboardAPIURL +"ProductionDashboard/GetItemListForFinishedGoods",jObject,this.httpOptions);
   } 
-  
-  GetItemExplosionData(optiProDashboardAPIURL:string,CompanyDBID:string,ItemFrom:string,ItemTo:string,FromDate:any, ToDate:any):Observable<any>{
 
-    FromDate = new Date(FromDate).toLocaleString();
-    ToDate = new Date(ToDate).toLocaleString();
+  GetWarehouseList(optiProDashboardAPIURL:string,CompanyDBID:string): Observable<any>{
+    let jObject:any={ ItemList: JSON.stringify([{ 
+     CompanyDBID: CompanyDBID
+    }])};
+    return this.httpClient.post(optiProDashboardAPIURL +"BOMDashboard/GetWarehouseList",jObject,this.httpOptions);
+  } 
+  
+  GetItemExplosionData(optiProDashboardAPIURL:string,CompanyDBID:string,ItemFrom:string,ItemTo:string,WarehouseFrom:any, WarehouseTo:any):Observable<any>{
      
     let jObject:any={ GetData: JSON.stringify([{ 
       CompanyDBID: CompanyDBID,
       ItemFrom: ItemFrom,
       ItemTo: ItemTo,
-      FromDate: FromDate,
-      ToDate: ToDate
+      WarehouseFrom: WarehouseFrom,
+      WarehouseTo: WarehouseTo,
+      IsPrimary: 'Y'
   }]) };
   return this.httpClient.post(optiProDashboardAPIURL +"BOMDashboard/GetFinishedGoodsList",jObject,this.httpOptions);
  } 

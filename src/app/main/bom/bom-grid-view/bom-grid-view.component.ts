@@ -54,7 +54,13 @@ export class BOMGridViewComponent implements OnInit {
     this.CompanyDB = 'OPTIPRO129';
   }
 
-  gridRowSelect(evt){
+  simpleGridRowSelect(evt){
+    this.BomDetail = '';
+    this.BOMDetailShow = false;
+    this.RoutingHeaderDetail = '';
+    this.RoutingHeaderDetailShow = false;
+    this.RoutingLineDetail = '';
+    this.ResourceDetail = '';
     if(evt.selectedRows[0].dataItem){
       this.detailView = true;
       this.simpleGridData = evt.selectedRows[0].dataItem;
@@ -147,17 +153,16 @@ export class BOMGridViewComponent implements OnInit {
     this.BOMService.GetResourceDetail(environment.optiProDashboardAPIURL, this.CompanyDB, Linedata.Code, Linedata.U_O_LINE_NO).subscribe(
       data => {
         this.ResourceDetail = data;
-        console.log(this.ResourceDetail);
     });
   }
 
   gridHeaderRowSelect(evt){
     this.RoutingLineDetail = '';
+    this.ResourceDetail = '';
     if(evt.selectedRows[0].dataItem){
       this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.Code).subscribe(
         data => {
           this.RoutingLineDetail = data;
-          console.log(this.RoutingLineDetail[0]);
           this.getResourceDetail(this.RoutingLineDetail[0]);
       }); 
     }

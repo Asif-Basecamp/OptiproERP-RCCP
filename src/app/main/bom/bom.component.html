@@ -43,25 +43,31 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="fromDate" class="form-label">BOM Date From</label>
+                            <label for="WarehouseFrom" class="form-label">Warehouse From</label>
                             <div class="w-100">
                                 <div class="input-group">
-                                    <kendo-datepicker name="DateFrom"
-                                    [(ngModel)]="DateFrom" format="dd/MM/yyyy" formatPlaceholder="formatPattern"
-                                    [min]="min"
-                                    [max]="max"></kendo-datepicker>
+                                <input nbInput fieldSize="small" type="text" name="WarehouseFrom" id="WarehouseFrom" 
+                                   class="form-control"  #WarehouseCF=ngModel [(ngModel)]="WarehouseFrom" placeholder="Warehouse From" autocomplete="off">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary btn-icon-with-input" (click)="openWarehouseFromLookup()" nbButton size="xsmall">
+                                        <i class="optipro-icon-hamburger"></i>
+                                    </button>
+                                </div>
                                 </div>
                             </div>
                         </div>
-                  
+
                         <div class="form-group">
-                            <label for="inputPassword3" class="form-label">BOM Date To</label>
+                            <label for="WarehouseTo" class="form-label">Warehouse To</label>
                             <div class="w-100">
                                 <div class="input-group">
-                                    <kendo-datepicker name="DateTo"
-                                    [(ngModel)]="DateTo" format="dd/MM/yyyy" formatPlaceholder="formatPattern"
-                                    [min]="min"
-                                    [max]="max"></kendo-datepicker>
+                                <input nbInput fieldSize="small" type="text" name="WarehouseTo" id="WarehouseTo" 
+                                   class="form-control"  #WarehouseCT=ngModel [(ngModel)]="WarehouseTo" placeholder="Warehouse To" autocomplete="off">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary btn-icon-with-input" (click)="openWarehouseToLookup()" nbButton size="xsmall">
+                                        <i class="optipro-icon-hamburger"></i>
+                                    </button>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -80,5 +86,6 @@
     </div>    
 </div>
 <app-item-code-lookup *ngIf="lookupStatus" (lookupEvent)="lookupEventHander($event)" (itemCodeEvent)="itemCodeEventHander($event)"></app-item-code-lookup>
+<app-warehouse-code-lookup *ngIf="WarehouseStatus" (warehouseEvent)="warehouseEventHander($event)" (warehouseCodeEvent)="warehouseCodeEventHander($event)"></app-warehouse-code-lookup>
 <app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData"></app-bom-grid-view>
   
