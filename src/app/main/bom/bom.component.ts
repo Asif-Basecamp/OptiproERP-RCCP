@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { products } from '../../dummyData/data';
-import { GridComponent } from '@progress/kendo-angular-grid';
+import { BOMService } from './service/bom.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'bom',
@@ -8,42 +8,56 @@ import { GridComponent } from '@progress/kendo-angular-grid';
   styleUrls: ['./bom.component.scss']
 })
 export class BOMComponent implements OnInit {
-  // public paginationButtonCount = 5;
-  // public paginationInfo = true;
-  // public paginationType: 'input';
-  // public paginationPageSizes = true;
-  // public paginationInfoPreviousNext = true;
-  public dialogOpened = false;
+  
+  public gridData: any;
+  public bomGrid: boolean = false;
+  public CompanyDB: any;
+  public lookupStatus: boolean = false;
+  public itemCode: any;
+  public ItemCodeFrom: any;
+  public ItemCodeTo: any;
+  public DateFrom: any;
+  public DateTo: any;
 
-  public gridData: any[];
-
-  constructor() { }
+  constructor(private BOMService: BOMService) { }
 
   ngOnInit() {
-    this.gridData = products;
-    // this.isMobile();
+    this.CompanyDB = 'OPTIPRO129';
   }
 
-  onFilterChange(checkBox:any,grid:GridComponent){
-    if(checkBox.checked==false){
-      this.clearFilter(grid);
-    }
+  lookupEventHander(){
+    this.lookupStatus = false;
   }
 
-  clearFilter(grid:GridComponent){      
-    //grid.filter.filters=[];
+  openItemCodeFromLookup(){
+    this.itemCode = 'From';
+    this.lookupStatus = true;
   }
 
-  // public isMobile(): void {
-  //   if(window.innerWidth <= 991){
-  //     // this.paginationInfo = false;
-  //     this.paginationPageSizes = false; 
-  //     this.paginationInfoPreviousNext = false;  
-  //     this.paginationButtonCount = 3;                 
-  //   }
-  // }
-
-  public dialougeToggle() {
-    this.dialogOpened = !this.dialogOpened;
+  openItemCodeToLookup(){
+    this.itemCode = 'To';
+    this.lookupStatus = true;
   }
+
+  itemCodeEventHander(e){
+    if(this.itemCode == 'From'){
+      this.ItemCodeFrom = e;
+    }if(this.itemCode == 'To'){
+      this.ItemCodeTo = e;
+    } 
+  }
+
+  processData(){
+    this.gridData = '';
+    this.bomGrid = false;
+    this.BOMService.GetItemExplosionData(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.DateFrom, this.DateTo).subscribe(
+      data => {
+        this.bomGrid = true;
+        this.gridData = data;
+      },
+      error => {
+        
+    })
+  }
+
 }

@@ -13,7 +13,9 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { UserAuthorizationComponent } from './user-authorization/user-authorization.component';
 import { UserRolesComponent } from './user-roles/user-roles.component';
 import { ConnectedUsersComponent } from './connected-users/connected-users.component';
-
+import { BOMGridViewComponent } from './bom/bom-grid-view/bom-grid-view.component';
+import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
+import { TreeTableModule } from 'primeng/components/treetable/treetable';
 
 @NgModule({
   imports: [
@@ -25,8 +27,9 @@ import { ConnectedUsersComponent } from './connected-users/connected-users.compo
     DropDownsModule,
     MainRoutingModule,
     FlexLayoutModule,
-    DateInputsModule  
+    DateInputsModule,
+    TreeTableModule
   ],
-  declarations: [MainComponent, BOMComponent, UserManagementComponent, UserAuthorizationComponent, UserRolesComponent, ConnectedUsersComponent]
+  declarations: [MainComponent, BOMComponent, UserManagementComponent, UserAuthorizationComponent, UserRolesComponent, ConnectedUsersComponent, BOMGridViewComponent, ItemCodeLookupComponent]
 })
 export class MainModule { }

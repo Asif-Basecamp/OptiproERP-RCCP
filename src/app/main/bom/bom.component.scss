@@ -1,5 +1,8 @@
 :host{
     flex: 1 1 100%;
+    display: flex;
+    overflow: auto;
+    flex-direction: row;
 }
 .kendo-grid-wrapper{
     max-height: calc(100vh - 142px) !important;
@@ -31,9 +34,14 @@
 
 .dashboard-left{
     padding-right:5px;
-    height: calc(100vh - 65px); 
-    width: 265px;
+    padding-top: 30px;
+    padding-left: 20px;
+    height: 100%; 
+    width: 300px;
     flex: 1 1 265px;
+    flex: 1 1 265px;
+    min-width: 300px;
+    max-width: 300px;
     & > nb-card{
         height:100%;
         & > nb-card-header{

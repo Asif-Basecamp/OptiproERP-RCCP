@@ -1,0 +1,156 @@
+<div class="dashboard-right">
+    <span style="font-size: 20px;">Simple Grid View</span>
+    <kendo-grid [kendoGridBinding]="gridData" [selectable]="true"
+    [resizable]="true"
+    (selectionChange)="gridRowSelect($event)" 
+    [ngStyle]="{ 'cursor': 'pointer'}" height="200">
+            <kendo-grid-column field="ItemCode" title="Item" width="80">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_BOM_SEQ" title="BOM Sequence" width="80" class="text-right"
+                  headerClass="text-right">
+                </kendo-grid-column>
+                <kendo-grid-column field="OnHand" title="In Stock" width="80" class="text-right"
+                  headerClass="text-right">
+                  <ng-template kendoGridCellTemplate let-dataItem>
+                    <a class="cursor-pointer text-primary"
+                      (click)="showDetailsInStockLookup(dataItem,'CP',true)">{{dataItem.OnHand}}</a>
+                  </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="IsCommited" title="Committed" width="80" class="text-right"
+                  headerClass="text-right">
+                  <ng-template kendoGridCellTemplate let-dataItem>
+                  <a class="cursor-pointer text-primary"
+                      (click)="showDetailsCommittedLookup(dataItem)">{{dataItem.IsCommited}}</a>
+                  </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="OnOrder" title="On Order" width="80" class="text-right"
+                  headerClass="text-right">
+                  <ng-template kendoGridCellTemplate let-dataItem>
+                    <a class="cursor-pointer text-primary"
+                      (click)="showDetailsOnOrderLookup(dataItem,'CP',true)">{{dataItem.OnOrder}}</a>
+                  </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="AVAILABLE" title="Available Quantity" width="120"
+                  class="text-right" headerClass="text-right">
+                  <ng-template kendoGridCellTemplate let-dataItem>
+                    <span *ngIf="!CmpInventShort || (dataItem.AVAILABLE > 0)">{{dataItem.AVAILABLE}}</span>
+                    <span *ngIf="CmpInventShort && (dataItem.AVAILABLE <= 0)"
+                      class="text-danger">{{dataItem.AVAILABLE}}</span>
+                  </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_UOM" title="UOM" width="80" class="text-right"
+                  headerClass="text-right">
+                </kendo-grid-column>
+    </kendo-grid>
+</div> 
+
+<div class="dashboard-Detail-Grid" *ngIf="detailView" style="max-width: 400px;">
+  <span style="font-size: 20px;">Detail Grid View</span>
+
+      <div class="tree-wrapper pt-3 px-2">
+      <div class="content-section implementation restrictedHeight">
+  <p-treeTable [value]="files2" selectionMode="single" [scrollable]="true" scrollHeight="100%"
+  [resizableColumns]="true" columnResizeMode="expand" height="200">
+  <ng-template pTemplate="colgroup">
+    <colgroup>
+      <col style="width: 120px;">
+      <col style="width: 65px;">
+      <col style="width: 81px;">
+      <col style="width: 71px;">
+      <col style="width: 120px;">
+      <col style="width: 50px;">
+    </colgroup>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th ttResizableColumn>Item</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowNode let-node="node" let-rowNodeIndex="rowNodeIndex" let-rowData="rowData">
+    <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">
+      <td>
+        <p-treeTableToggler [rowNode]="rowNode" class="cursor-pointer"></p-treeTableToggler>
+        <span class="cursor-pointer" (click)="ItemRowSelect(node)">{{rowData.ItemCode}}</span>
+      </td>
+    </tr>
+  </ng-template>
+</p-treeTable>  
+</div>
+</div>
+</div> 
+
+<div class="d-flex" style="flex-direction: column;">
+  <div *ngIf="BOMDetailShow">
+    <span style="font-size: 20px;">BOM Detail</span>
+
+    <kendo-grid [kendoGridBinding]="BomDetail" [selectable]="true"
+    [resizable]="true" (selectionChange)="RoutingHeaderSelect($event)"
+    [ngStyle]="{ 'cursor': 'pointer'}" height="200">
+        <kendo-grid-column field="BOMLINE_ITEMCODE" title="Item Code" width="80"></kendo-grid-column>
+        <kendo-grid-column field="BOMLINE_QTY" title="BOM Line Quantity" width="80"></kendo-grid-column> 
+        <kendo-grid-column field="BOM_ITEMCODE" title="BOM Itemcode" width="80"></kendo-grid-column>
+        <kendo-grid-column field="BOM_QUANTITY" title="BOM Quantity" width="80"></kendo-grid-column>      
+        <kendo-grid-column field="Code" title="Code" width="80"></kendo-grid-column>      
+        <kendo-grid-column field="U_O_ALTERNATIVE" title="Alternative" width="80"></kendo-grid-column>      
+        <kendo-grid-column field="U_O_BASIS_CODE" title="Basis Code" width="80"></kendo-grid-column>      
+        <kendo-grid-column field="U_O_BIN" title="Bin" width="80"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_BOM_SEQ" title="BOM Sequence" width="80"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_COST_ROLLUP" title="Cost RollUp" width="80"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_ISSUE_METHOD" title="Issue Method" width="80"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_ISSUE_WHSE" title="Warehouse Issue" width="80"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_OPERATION" title="Operation" width="80"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_REVISION" title="Revision" width="80"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_TREE_TYPE" title="Tree Type" width="80"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_WHSECODE" title="Warehouse Code" width="80"></kendo-grid-column> 
+
+    </kendo-grid>
+</div>
+
+<div *ngIf="RoutingHeaderDetailShow" class="d-flex" style="flex-direction: column;">
+<div>
+  <span style="font-size: 20px;">Routing Header Detail</span>
+
+  <kendo-grid [kendoGridBinding]="RoutingHeaderDetail" [selectable]="true"
+  [resizable]="true" (selectionChange)="gridHeaderRowSelect($event)"
+  [ngStyle]="{ 'cursor': 'pointer'}" height="200">
+  <kendo-grid-column field="Code" title="Code" width="80"></kendo-grid-column>
+  <kendo-grid-column field="ROUTTYPE" title="Route Type" width="80"></kendo-grid-column>
+  <kendo-grid-column field="U_O_PRODUCT_NO" title="Product Number" width="80"></kendo-grid-column>
+  <kendo-grid-column field="U_O_FG_WH_ID" title="U_O_FG_WH_ID" width="80"></kendo-grid-column>
+  <kendo-grid-column field="U_O_RECUID" title="U_O_RECUID" width="80"></kendo-grid-column>
+
+  </kendo-grid>
+</div>
+
+<div>
+<span style="font-size: 20px;">Routing Line Detail</span>
+
+<kendo-grid [kendoGridBinding]="RoutingLineDetail" [selectable]="true"
+  [resizable]="true" (selectionChange)="gridLineRowSelect($event)"
+  [ngStyle]="{ 'cursor': 'pointer'}" height="200">
+  <kendo-grid-column field="Code" title="Code" width="80"></kendo-grid-column>
+  <kendo-grid-column field="OPERATIONCODE" title="OPERATIONCODE" width="80"></kendo-grid-column>
+  <kendo-grid-column field="OPERATIONTYPE" title="OPERATIONTYPE" width="80"></kendo-grid-column>
+  <kendo-grid-column field="TIME_UOM" title="TIME_UOM" width="80"></kendo-grid-column>
+  <kendo-grid-column field="U_O_OPR_DESC" title="U_O_OPR_DESC" width="80"></kendo-grid-column>
+  <kendo-grid-column field="U_O_WC_ID" title="U_O_WC_ID" width="80"></kendo-grid-column>
+
+</kendo-grid>
+</div>
+
+<div>
+<span style="font-size: 20px;">Resource Detail</span>
+<kendo-grid [kendoGridBinding]="ResourceDetail" [selectable]="true"
+  [resizable]="true"
+  [ngStyle]="{ 'cursor': 'pointer'}" height="200">
+  <kendo-grid-column field="Code" title="Code" width="80"></kendo-grid-column>
+  <kendo-grid-column field="CONSUMPTION_TYPE" title="Consumption Type" width="80"></kendo-grid-column>
+  <kendo-grid-column field="CONSUMPTION_BASIS" title="Consumption Basis" width="80"></kendo-grid-column>
+  <kendo-grid-column field="U_O_RESO_ID" title="Resource ID" width="80"></kendo-grid-column>
+
+</kendo-grid>
+</div>
+</div>
+</div>
+
+
