@@ -46,6 +46,7 @@ export class BOMGridViewComponent implements OnInit {
   public RoutingHeaderDetail: any; 
   public RoutingLineDetail: any;
   public ResourceDetail: any;
+  @Input() primaryEvent;
  
   constructor(private BOMService: BOMService) {}
   
@@ -83,10 +84,9 @@ export class BOMGridViewComponent implements OnInit {
   }
 
   detailGridData(GridViewdata, db){
-    this.BOMService.GetBOMDetailedData(environment.optiProDashboardAPIURL, db, GridViewdata.ItemCode, 
-      GridViewdata.CreateDate, GridViewdata.Code, 
-      GridViewdata.U_O_BOM_SEQ, GridViewdata.U_O_WHSECODE, GridViewdata.OnHand, GridViewdata.IsCommited, 
-      GridViewdata.OnOrder, GridViewdata.AVAILABLE).subscribe(
+    this.BOMService.GetBOMDetailedData(environment.optiProDashboardAPIURL, db, GridViewdata.U_O_ITEMCODE, 
+      GridViewdata.CreateDate, GridViewdata.Code, GridViewdata.U_O_BOM_SEQ, GridViewdata.U_O_WHSECODE, 
+      GridViewdata.U_O_REVISION, this.primaryEvent).subscribe(
       data => {
         this.DetailViewData = data;
         if(data.length > 0){
@@ -125,10 +125,10 @@ export class BOMGridViewComponent implements OnInit {
   RoutingHeaderSelect(evt){
     this.ItemCode = '';
     this.RoutingHeaderDetailShow = false;
-    if(evt.selectedRows[0].dataItem.BOM_ITEMCODE){
+    if(evt.dataItem.BOM_ITEMCODE){
       this.RoutingHeaderDetailShow = true;
-      this.ItemCode = evt.selectedRows[0].dataItem.BOM_ITEMCODE;
-      this.BOMService.GetRoutingHeaderDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCode).subscribe(
+      this.ItemCode = evt.dataItem.BOM_ITEMCODE;
+      this.BOMService.GetRoutingHeaderDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCode, this.primaryEvent).subscribe(
         data => {
           this.RoutingHeaderDetail = data;
           this.getRoutingLineDetail(this.RoutingHeaderDetail);
@@ -159,7 +159,7 @@ export class BOMGridViewComponent implements OnInit {
   gridHeaderRowSelect(evt){
     this.RoutingLineDetail = '';
     this.ResourceDetail = '';
-    if(evt.selectedRows[0].dataItem){
+    if(evt.dataItem){
       this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.Code).subscribe(
         data => {
           this.RoutingLineDetail = data;
@@ -170,8 +170,8 @@ export class BOMGridViewComponent implements OnInit {
 
   gridLineRowSelect(evt){
     this.ResourceDetail = '';
-    if(evt.selectedRows[0].dataItem){
-      this.getResourceDetail(evt.selectedRows[0].dataItem);
+    if(evt.dataItem){
+      this.getResourceDetail(evt.dataItem);
     }
   }
 }

@@ -30,7 +30,7 @@ export class BOMService {
     return this.httpClient.post(optiProDashboardAPIURL +"BOMDashboard/GetWarehouseList",jObject,this.httpOptions);
   } 
   
-  GetItemExplosionData(optiProDashboardAPIURL:string,CompanyDBID:string,ItemFrom:string,ItemTo:string,WarehouseFrom:any, WarehouseTo:any):Observable<any>{
+  GetItemExplosionData(optiProDashboardAPIURL:string,CompanyDBID:string,ItemFrom:string,ItemTo:string,WarehouseFrom:any, WarehouseTo:any, IsPrimary:any):Observable<any>{
      
     let jObject:any={ GetData: JSON.stringify([{ 
       CompanyDBID: CompanyDBID,
@@ -38,13 +38,13 @@ export class BOMService {
       ItemTo: ItemTo,
       WarehouseFrom: WarehouseFrom,
       WarehouseTo: WarehouseTo,
-      IsPrimary: 'Y'
+      IsPrimary: IsPrimary
   }]) };
   return this.httpClient.post(optiProDashboardAPIURL +"BOMDashboard/GetFinishedGoodsList",jObject,this.httpOptions);
  } 
 
  GetBOMDetailedData(optiProDashboardAPIURL:string,CompanyDBID:string,ItemCode:string,
-  CreatedDate:string,Code:any,BOMSeq:any,whsecode:any,OnHand:any,IsCommited:any,OnOrder:any, Available:any):Observable<any>{
+  CreatedDate:string,Code:any,BOMSEQ:any,WHSECODE:any,Revision:any,IsPrimary:any):Observable<any>{
 
     CreatedDate = new Date(CreatedDate).toLocaleString();
    
@@ -53,12 +53,10 @@ export class BOMService {
     ItemCode: ItemCode,
     CreateDate: CreatedDate,
     Code: Code,
-    BOMSEQ: BOMSeq,
-    WHSECODE: whsecode,
-    OnHand: OnHand,
-    IsCommited: IsCommited,
-    OnOrder: OnOrder,
-    AVAILABLE: Available
+    BOMSEQ: BOMSEQ,
+    WHSECODE: WHSECODE,
+    Revision: Revision,
+    IsPrimary: IsPrimary
 }]) };
 return this.httpClient.post(optiProDashboardAPIURL +"BOMDashboard/GetDetailedFinishedGoodsList",jObject,this.httpOptions);
 } 
@@ -72,11 +70,12 @@ return this.httpClient.post(optiProDashboardAPIURL +"BOMDashboard/GetDetailedFin
   return this.httpClient.post(optiProDashboardAPIURL +"BOMDashboard/GetFinishedGoodsBOMDetails",jObject,this.httpOptions);
 } 
 
-GetRoutingHeaderDetail(optiProDashboardAPIURL:string,CompanyDBID:string,ItemCode:string):Observable<any>{
+GetRoutingHeaderDetail(optiProDashboardAPIURL:string,CompanyDBID:string,ItemCode:string,IsPrimary:any):Observable<any>{
    
   let jObject:any={ GetData: JSON.stringify([{ 
     CompanyDBID: CompanyDBID,
-    ItemCode: ItemCode
+    ItemCode: ItemCode,
+    IsPrimary: IsPrimary
   }]) };
   return this.httpClient.post(optiProDashboardAPIURL +"BOMDashboard/GetFinishedGoodsRoutingHeaderDetails",jObject,this.httpOptions);
 } 

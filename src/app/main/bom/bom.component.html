@@ -71,6 +71,16 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="WarehouseTo" class="form-label">Primary</label>
+                            <div class="w-100">
+                                <div class="input-group">
+                                <input type="checkbox" [checked]="myVar1" (change)="onChange($event)" /> 
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -87,5 +97,5 @@
 </div>
 <app-item-code-lookup *ngIf="lookupStatus" (lookupEvent)="lookupEventHander($event)" (itemCodeEvent)="itemCodeEventHander($event)"></app-item-code-lookup>
 <app-warehouse-code-lookup *ngIf="WarehouseStatus" (warehouseEvent)="warehouseEventHander($event)" (warehouseCodeEvent)="warehouseCodeEventHander($event)"></app-warehouse-code-lookup>
-<app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData"></app-bom-grid-view>
+<app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary"></app-bom-grid-view>
   

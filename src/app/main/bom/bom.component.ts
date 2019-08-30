@@ -20,11 +20,21 @@ export class BOMComponent implements OnInit {
   public ItemCodeTo: any;
   public WarehouseFrom: any;
   public WarehouseTo: any;
+  public IsPrimary: any = 'Y';
+  myVar1 = true;
 
   constructor(private BOMService: BOMService) { }
 
   ngOnInit() {
     this.CompanyDB = 'OPTIPRO129';
+  }
+
+  onChange(e){
+    if(e.target.checked){
+      this.IsPrimary = 'Y';
+    }else{
+      this.IsPrimary = 'N';
+    }
   }
 
   lookupEventHander(){
@@ -74,7 +84,7 @@ export class BOMComponent implements OnInit {
   processData(){
     this.gridData = '';
     this.bomGrid = false;
-    this.BOMService.GetItemExplosionData(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.WarehouseFrom, this.WarehouseTo).subscribe(
+    this.BOMService.GetItemExplosionData(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.WarehouseFrom, this.WarehouseTo, this.IsPrimary).subscribe(
       data => {
         this.bomGrid = true;
         this.gridData = data;
