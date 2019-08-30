@@ -27,6 +27,6 @@ import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/wareho
     DateInputsModule,
     TreeTableModule
   ],
-  declarations: [MainComponent, BOMComponent, UserManagementComponent, UserAuthorizationComponent, UserRolesComponent, ConnectedUsersComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent]
+  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent]
 })
 export class MainModule { }
