@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  optiProDashboardAPIURL: "http://localhost:41420/",
+  optiProDashboardAPIURL: "http://172.16.6.140/OptiProDashboard/",
 };
 
 /*

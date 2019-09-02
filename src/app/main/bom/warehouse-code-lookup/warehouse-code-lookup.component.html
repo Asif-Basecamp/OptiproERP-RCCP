@@ -1,28 +1,44 @@
 <div class="example-wrapper">
-    <kendo-dialog title="Warehouse" (close)="close()" [minWidth]="250" [width]="450">
-            <kendo-grid [data]="WarehouseData" [groupable]=isColumnGroup
-            [selectable]="true" 
-            [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)"
-            [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px'}">
-            <ng-template kendoGridToolbarTemplate>
-              <form class="k-form opti_show-hide-grid-column-filter float-left opti_hide-in-mobile pl-0 pt-0">
-                <div class="k-form-field d-flex">
-                  <input #chkFilter1 type="checkbox" 
-                    id="opti_SalesOrderListColumnFilterID1" [(ngModel)]="isColumnFilter1" class="k-checkbox"
-                    name="columnfilter" />
-                  <label class="k-checkbox-label"
-                    for="opti_SalesOrderListColumnFilterID1">Enable Filter</label>
-                </div>
-                
-              </form>
-            </ng-template>
-            <kendo-grid-column field="WhsCode" title="Warehouse Code" width="80">
-            </kendo-grid-column>
-            <kendo-grid-column field="WhsName" title="Warehouse Name" width="80">
-            </kendo-grid-column>
-          </kendo-grid>
-        <kendo-dialog-actions>
-            <button kendoButton (click)="close()">Cancel</button>
-        </kendo-dialog-actions>
-    </kendo-dialog>
+  <kendo-dialog title="Warehouse" (close)="close()" [minWidth]="250" [width]="450">
+    <kendo-grid [data]="WarehouseData" [groupable]=isColumnGroup [filterable]=isColumnFilter [selectable]="true"
+      [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)"
+      [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px'}">
+      <ng-template kendoGridToolbarTemplate>
+        <div class="d-flex align-items-center">
+          <!-- show hide column start show hide -->
+          <!-- <kendo-grid-column-chooser class="float-left opti_hide-in-mobile"></kendo-grid-column-chooser> -->
+
+          <!-- checkbox -->
+          <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
+            <input type="checkbox" [(ngModel)]="isColumnFilter" [ngModelOptions]="{standalone: true}">
+            <span class="checkbox"></span>
+            <span>Enable filter</span>
+          </label>
+          <label class="custom-checkbox mb-0 grouping-checkbox">
+            <input type="checkbox" [(ngModel)]="isColumnGroup" [ngModelOptions]="{standalone: true}">
+            <span class="checkbox"></span>
+            <span>Enable grouping</span>
+          </label>
+          <!-- export -->
+          <button type="button" kendoGridExcelCommand title="Export to excel file"
+            class="ml-auto btn btn-link btn-sm btn-icon p-0">
+            <svg viewBox="0 0 512 512" class="icon">
+              <use xlink:href="#download"></use>
+            </svg>
+          </button>
+        </div>
+      </ng-template>
+      <kendo-grid-column field="WhsCode" title="Warehouse Code" width="80">
+      </kendo-grid-column>
+      <kendo-grid-column field="WhsName" title="Warehouse Name" width="80">
+      </kendo-grid-column>
+    </kendo-grid>
+    <kendo-dialog-actions class="p-2 align-items-end">
+      <button class="btn btn-danger btn-sm d-flex align-items-center" type="button" (click)="close()"> 
+          <svg viewBox="0 0 489 489" class="icon mr-2">
+              <use xlink:href="#cancel"></use>
+          </svg> Cancel
+      </button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
 </div>

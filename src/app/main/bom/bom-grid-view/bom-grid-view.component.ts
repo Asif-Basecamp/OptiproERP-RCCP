@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { BOMService } from '../service/bom.service';
 import { environment } from '../../../../environments/environment';
-
+import {products} from '../../../dummyData/data'
 export interface TreeNode {
   label?: string;
   data?: any;
@@ -48,6 +48,9 @@ export class BOMGridViewComponent implements OnInit {
   public ResourceDetail: any;
   @Input() primaryEvent;
  
+
+  public gridDataBottomTable: any[] = products;
+
   constructor(private BOMService: BOMService) {}
   
   ngOnInit() {

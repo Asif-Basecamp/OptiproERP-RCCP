@@ -1,10 +1,9 @@
 <div class="example-wrapper">
     <kendo-dialog title="Item Code" (close)="close()" [minWidth]="250" [width]="450">
-            <kendo-grid [data]="ItemData" [groupable]=isColumnGroup [filterable]=isColumnFilter
-            [selectable]="true" 
+        <kendo-grid [data]="ItemData" [groupable]=isColumnGroup [filterable]=isColumnFilter [selectable]="true"
             [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)"
             [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px'}">
-            <ng-template kendoGridToolbarTemplate >
+            <ng-template kendoGridToolbarTemplate>
                 <div class="d-flex align-items-center">
                     <!-- show hide column start show hide -->
                     <!-- <kendo-grid-column-chooser class="float-left opti_hide-in-mobile"></kendo-grid-column-chooser> -->
@@ -21,7 +20,8 @@
                         <span>Enable grouping</span>
                     </label>
                     <!-- export -->
-                    <button type="button" kendoGridExcelCommand title="Export to excel file" class="ml-auto btn btn-link btn-sm btn-icon p-0">
+                    <button type="button" kendoGridExcelCommand title="Export to excel file"
+                        class="ml-auto btn btn-link btn-sm btn-icon p-0">
                         <svg viewBox="0 0 512 512" class="icon">
                             <use xlink:href="#download"></use>
                         </svg>
@@ -32,9 +32,13 @@
             </kendo-grid-column>
             <kendo-grid-column field="ItemName" title="Item Name" width="80">
             </kendo-grid-column>
-          </kendo-grid>
-        <kendo-dialog-actions>
-            <button kendoButton (click)="close()">Cancel</button>
+        </kendo-grid>
+        <kendo-dialog-actions class="p-2 align-items-end">
+            <button class="btn btn-danger btn-sm d-flex align-items-center" type="button" (click)="close()">
+                <svg viewBox="0 0 489 489" class="icon mr-2">
+                    <use xlink:href="#cancel"></use>
+                </svg> Cancel
+            </button>
         </kendo-dialog-actions>
     </kendo-dialog>
 </div>

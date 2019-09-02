@@ -40,6 +40,10 @@ body.no-header .content{
 body.with-header .content{
   max-height: calc(100vh - 40px) !important;
 }
+//Global Custom Classes
+.cursor-pointer{
+  cursor: pointer;
+}
 //sidebar
 app-sidebar.toggle  {
   @media screen and (max-width:991px){ 

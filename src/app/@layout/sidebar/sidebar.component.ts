@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.navList = [  
-      { "itemName": "BOM", "itemNav": "/main/BOM", "itemIcon": "#userGroup", "itemIconSize": "0 0 512 512", "permission":true},
+      { "itemName": "BOM", "itemNav": "/main/BOM", "itemIcon": "#bill", "itemIconSize": "0 0 512 512", "permission":true},
       // { "itemName": "User Managment", "itemNav": "/main/user-management", "itemIcon": "#userManagement", "itemIconSize": "0 -8 480 480", "permission":true},
       // { "itemName": "Roles", "itemNav": "/main/roles", "itemIcon": "#role", "itemIconSize": "0 0 512.24328 512", "permission":true},
       // { "itemName": "Authorization", "itemNav": "/main/authorization", "itemIcon": "#security", "itemIconSize": "-38 0 511 511.99956", "permission":true},

@@ -1,101 +1,116 @@
 <div class="dashboard-left" id="dashboard-left">
-    <div class="card" accent="primary" id="selection-criteria-section" fxFlex="100%">
-        <div class="card-header border-bottom d-flex">
-            <svg viewBox="0 0 410.23 410.23" class="icon mr-2 icon-dark"  fill="#2a2a2a">
+    <div class="card" id="selection-criteria-section" fxFlex="100%">
+        <div class="card-header d-flex">
+            <svg viewBox="0 0 410.23 410.23" class="icon mr-2 icon-dark" fill="#2a2a2a">
                 <use xlink:href="#search"></use>
             </svg>
-            <span>Selection Criteria</span>
-            <span class="ml-auto mr-3 d-flex justify-content-center align-items-center timer-wrapper "></span>
+            <span class="h5 mb-0">Selection Criteria</span>
+            <span class="ml-auto mr-3 d-flex justify-content-center align-items-center timer-wrapper"></span>
             <span class="optipro-icon-arrow-left cursor-pointer mr-1 d-flex"></span>
-        </div> 
-        <div id="selection-criteria-body" class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3 pt-3">
-            <div class="row">
-                <div class="col-sm-12">
-                    <form>
-                        <div class="form-group">
-                            <label for="ItemFrom" class="form-label">Item From</label>
-                            <div class="w-100">
-                                <div class="input-group">
-                                <input nbInput fieldSize="small" type="text" name="ItemCodeFrom" id="ItemCodeFrom"
-                                      class="form-control" #ItemCF=ngModel [(ngModel)]="ItemCodeFrom" placeholder="Item From" autocomplete="off">
-                                <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary btn-icon-with-input" (click)="openItemCodeFromLookup()" nbButton size="xsmall">
-                                    <i class="optipro-icon-hamburger"></i>
+        </div>
+        <div id="selection-criteria-body" class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3 pt-1">
+            <form class="w-100">
+                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                    <label for="ItemFrom" class="form-label mb-0">Item From</label>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" name="ItemCodeFrom" id="ItemCodeFrom" class="form-control form-control-sm" #ItemCF=ngModel [(ngModel)]="ItemCodeFrom"
+                                placeholder="Item From" autocomplete="off">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary btn-icon d-flex d-flex" (click)="openItemCodeFromLookup()">
+                                    <svg viewBox="0 -96 512 512" class="icon">
+                                        <use xlink:href="#menu"></use>
+                                    </svg>
                                 </button>
-                                </div>
-                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="ItemFrom" class="form-label">Item To</label>
-                            <div class="w-100">
-                                <div class="input-group">
-                                <input nbInput fieldSize="small" type="text" name="ItemCodeTo" id="ItemCodeTo" 
-                                   class="form-control"  #ItemCT=ngModel [(ngModel)]="ItemCodeTo" placeholder="Item To" autocomplete="off">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary btn-icon-with-input" (click)="openItemCodeToLookup()" nbButton size="xsmall">
-                                        <i class="optipro-icon-hamburger"></i>
-                                    </button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="WarehouseFrom" class="form-label">Warehouse From</label>
-                            <div class="w-100">
-                                <div class="input-group">
-                                <input nbInput fieldSize="small" type="text" name="WarehouseFrom" id="WarehouseFrom" 
-                                   class="form-control"  #WarehouseCF=ngModel [(ngModel)]="WarehouseFrom" placeholder="Warehouse From" autocomplete="off">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary btn-icon-with-input" (click)="openWarehouseFromLookup()" nbButton size="xsmall">
-                                        <i class="optipro-icon-hamburger"></i>
-                                    </button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="WarehouseTo" class="form-label">Warehouse To</label>
-                            <div class="w-100">
-                                <div class="input-group">
-                                <input nbInput fieldSize="small" type="text" name="WarehouseTo" id="WarehouseTo" 
-                                   class="form-control"  #WarehouseCT=ngModel [(ngModel)]="WarehouseTo" placeholder="Warehouse To" autocomplete="off">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary btn-icon-with-input" (click)="openWarehouseToLookup()" nbButton size="xsmall">
-                                        <i class="optipro-icon-hamburger"></i>
-                                    </button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="WarehouseTo" class="form-label">Primary</label>
-                            <div class="w-100">
-                                <div class="input-group">
-                                <input type="checkbox" [checked]="myVar1" (change)="onChange($event)" /> 
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
-            </div>
-        </div> 
+
+                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                    <label for="ItemFrom" class="form-label mb-0">Item To</label>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" name="ItemCodeTo" id="ItemCodeTo" class="form-control form-control-sm" #ItemCT=ngModel [(ngModel)]="ItemCodeTo"
+                                placeholder="Item To" autocomplete="off">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary btn-icon d-flex" (click)="openItemCodeToLookup()">
+                                    <svg viewBox="0 -96 512 512" class="icon">
+                                        <use xlink:href="#menu"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                    <label for="WarehouseFrom" class="form-label mb-0">Warehouse From</label>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" name="WarehouseFrom" id="WarehouseFrom" class="form-control form-control-sm" #WarehouseCF=ngModel [(ngModel)]="WarehouseFrom"
+                                placeholder="Warehouse From" autocomplete="off">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary btn-icon d-flex" (click)="openWarehouseFromLookup()">
+                                    <svg viewBox="0 -96 512 512" class="icon">
+                                        <use xlink:href="#menu"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                    <label for="WarehouseTo" class="form-label mb-0">Warehouse To</label>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" name="WarehouseTo" id="WarehouseTo" class="form-control form-control-sm" #WarehouseCT=ngModel [(ngModel)]="WarehouseTo"
+                                placeholder="Warehouse To" autocomplete="off">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary btn-icon d-flex" (click)="openWarehouseToLookup()">
+                                    <svg viewBox="0 -96 512 512" class="icon">
+                                        <use xlink:href="#menu"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                    <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
+                        <input type="checkbox" [checked]="myVar1" (change)="onChange($event)">
+                        <span class="checkbox"></span>
+                        <span>Primary</span>
+                    </label>
+                </div>
+            </form>
+        </div>
         <div class="card-footer text-center py-2">
-            <button type="submit" (click)="processData()" nbButton class="btn btn-primary btn-with-icon-right btn-sm" id="process" size="small">
-                Process 
+            <button type="submit" (click)="processData()" class="btn btn-primary btn-icon btn-sm" id="process">
+                Process
                 <svg viewBox="0 0 24 24" class="icon">
                     <use xlink:href="#rightArrow"></use>
                 </svg>
             </button>
         </div>
+    </div>
+</div>
+<div class="dashboard-right" id="dashboard-right">
+    <!-- <div class="default-screen" fxFlex="100%">
+        <div class="welcome-page" fxLayout="column" fxFlex="100%">
+            <div class="welcome-innner" fxLayout="column" fxFlex="100%">
+                <div class="welcome-logo mx-auto"><img src="./../../../assets/images/logo/OptiProERP.png" title="OptiPro-ERP" /></div>
+                <div class="app-detail text-center">
+                    <p>Welcome to<br />OptiProERP</p>
+                    <small>Version - 1.0</small>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="card" fxFlex="100%">
+        <div class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3" [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
+            <app-item-code-lookup *ngIf="lookupStatus" (lookupEvent)="lookupEventHander($event)" (itemCodeEvent)="itemCodeEventHander($event)"></app-item-code-lookup>
+            <app-warehouse-code-lookup *ngIf="WarehouseStatus" (warehouseEvent)="warehouseEventHander($event)" (warehouseCodeEvent)="warehouseCodeEventHander($event)"></app-warehouse-code-lookup>
+            <app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary"></app-bom-grid-view>
+        </div>
     </div>    
 </div>
-<app-item-code-lookup *ngIf="lookupStatus" (lookupEvent)="lookupEventHander($event)" (itemCodeEvent)="itemCodeEventHander($event)"></app-item-code-lookup>
-<app-warehouse-code-lookup *ngIf="WarehouseStatus" (warehouseEvent)="warehouseEventHander($event)" (warehouseCodeEvent)="warehouseCodeEventHander($event)"></app-warehouse-code-lookup>
-<app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary"></app-bom-grid-view>
-  

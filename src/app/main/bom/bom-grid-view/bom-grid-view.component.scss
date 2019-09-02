@@ -1,7 +1,44 @@
-.dashboard-right{
 
-}
 
 :host{
     display: flex;
+    flex-direction: column;
+}
+.simple-grid-view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.detail-grid-wrapper{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    height: calc(100vh - 307px);
+}
+.dashboard-detail-grid{
+    display: flex;
+    width: 350px;
+    min-width: 350px;
+    height: 100%;
+    flex-direction: column;
+}
+
+.bom-detail-grid{
+    max-width: calc(100% - 350px) !important;
+    overflow: auto;
+}
+
+.tree-wrapper{
+    border: 1px solid rgba(33, 37, 41, 0.125);
+    padding: 10px;
+    border-radius: 0.2rem;
+    display: flex;
+    flex: 1 1 100%;
+    max-height: 100%;
+    overflow: auto;
 }
