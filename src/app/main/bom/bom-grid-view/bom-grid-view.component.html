@@ -80,7 +80,7 @@
     <div *ngIf="BomDetail">
       <div class="h5 mb-2">{{'BOMDetail' | translate}}</div>
       <kendo-grid [kendoGridBinding]="BomDetail"  [loading]="BOMEnableLoader" [selectable]="true" [resizable]="true" [groupable]=isColumnGroup2 [filterable]=isColumnFilter2 [sortable]="true"
-        (cellClick)="RoutingHeaderSelect($event)" [ngStyle]="{ 'cursor': 'pointer'}" height="297">
+        (cellClick)="RoutingHeaderSelect($event)" [ngStyle]="{ 'cursor': 'pointer'}" height="187">
         <ng-template kendoGridToolbarTemplate>
             <div class="d-flex align-items-center">        
                 <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
