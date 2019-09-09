@@ -59,13 +59,13 @@ export class BOMComponent implements OnInit {
   }
 
   openItemCodeFromLookup(){
-    this.itemCode = 'From';
     this.lookupStatus = true;
+    this.itemCode = 'From';
   }
 
   openItemCodeToLookup(){
-    this.itemCode = 'To';
     this.lookupStatus = true;
+    this.itemCode = 'To';
   }
 
   itemCodeEventHander(e){

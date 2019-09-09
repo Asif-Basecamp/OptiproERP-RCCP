@@ -17,6 +17,7 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
 import { TrnaslateLazyModule } from './bom/translate-lazy.module';
 import { CountdownModule } from 'ngx-countdown';
 import {DatePipe} from '@angular/common';
+import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,6 @@ import {DatePipe} from '@angular/common';
   providers: [
     DatePipe
   ],
-  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent]
+  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent, GanttChartComponent]
 })
 export class MainModule { }
