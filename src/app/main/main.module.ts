@@ -6,17 +6,23 @@ import { GridModule, ExcelModule } from '@progress/kendo-angular-grid';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
-import { MainRoutingModule } from './main-routing.module';
-import { MainComponent } from './main.component';
-import { BOMComponent } from './bom/bom.component';
-import { BOMGridViewComponent } from './bom/bom-grid-view/bom-grid-view.component';
 import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
 import { TreeTableModule } from 'primeng/components/treetable/treetable';
-import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { TrnaslateLazyModule } from './bom/translate-lazy.module';
 import { CountdownModule } from 'ngx-countdown';
-import {DatePipe} from '@angular/common';
+import { GanttModule } from '@syncfusion/ej2-angular-gantt';
+import { DatePipe } from '@angular/common';
+
+import { MainRoutingModule } from './main-routing.module';
+
+import { MainComponent } from './main.component';
+import { BOMComponent } from './bom/bom.component';
+import { BOMGridViewComponent } from './bom/bom-grid-view/bom-grid-view.component';
+import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
+import { GanttComponent } from './gantt/gantt.component';
+import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-view.component';
+
 
 @NgModule({
   imports: [
@@ -32,11 +38,12 @@ import {DatePipe} from '@angular/common';
     TreeTableModule,
     NotificationModule,
     TrnaslateLazyModule,
-    CountdownModule
+    CountdownModule,
+    GanttModule
   ],
   providers: [
     DatePipe
   ],
-  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent]
+  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent, GanttComponent, GanttChartViewComponent]
 })
 export class MainModule { }

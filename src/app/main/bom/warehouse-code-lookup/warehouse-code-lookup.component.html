@@ -1,7 +1,7 @@
 <div *ngIf="EnableLoader" class="k-i-loading"></div>
 <div class="example-wrapper" *ngIf="WarehouseData">
   <kendo-dialog title="{{'Warehouse' | translate}}" (close)="close()" [minWidth]="250" [width]="450">
-    <kendo-grid [data]="WarehouseData" [groupable]=isColumnGroup [filterable]=isColumnFilter [selectable]="true"
+    <kendo-grid [kendoGridBinding]="WarehouseData" [filterable]=isColumnFilter [selectable]="true" [sortable]="true"
       [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)"
       [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px'}">
       <ng-template kendoGridToolbarTemplate>
