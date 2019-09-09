@@ -4,7 +4,7 @@ import { Gantt } from '@syncfusion/ej2-gantt';
 @Component({
   selector: 'app-gantt-chart-view',
   template:
-       `<ejs-gantt id="ganttDefault" height="430px" [dataSource]="data" [taskFields]="taskSettings"></ejs-gantt>`,
+       `<ejs-gantt id="ganttDefault" height="430px" width="100%" [dataSource]="data" [taskFields]="taskSettings"></ejs-gantt>`,
     encapsulation: ViewEncapsulation.None
 })
 export class GanttChartViewComponent implements OnInit {
