@@ -1,26 +1,24 @@
-<div class="example-wrapper">
-    <kendo-dialog title="Item Code" (close)="close()" [minWidth]="250" [width]="450">
+<div *ngIf="EnableLoader" class="k-i-loading"></div>
+<div class="example-wrapper" *ngIf="ItemData">
+    <kendo-dialog title="{{'ItemCode' | translate}}" (close)="close()" [minWidth]="250" [width]="450">
         <kendo-grid [data]="ItemData" [groupable]=isColumnGroup [filterable]=isColumnFilter [selectable]="true"
             [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)"
             [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px'}">
             <ng-template kendoGridToolbarTemplate>
                 <div class="d-flex align-items-center">
-                    <!-- show hide column start show hide -->
-                    <!-- <kendo-grid-column-chooser class="float-left opti_hide-in-mobile"></kendo-grid-column-chooser> -->
-
-                    <!-- checkbox -->
+                
                     <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
                         <input type="checkbox" [(ngModel)]="isColumnFilter" [ngModelOptions]="{standalone: true}">
                         <span class="checkbox"></span>
-                        <span>Enable filter</span>
+                        <span>{{'EnableFilter' | translate}}</span>
                     </label>
-                    <label class="custom-checkbox mb-0 grouping-checkbox">
+                   <!-- <label class="custom-checkbox mb-0 grouping-checkbox">
                         <input type="checkbox" [(ngModel)]="isColumnGroup" [ngModelOptions]="{standalone: true}">
                         <span class="checkbox"></span>
                         <span>Enable grouping</span>
-                    </label>
+                    </label> -->
                     <!-- export -->
-                    <button type="button" kendoGridExcelCommand title="Export to excel file"
+                    <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
                         class="ml-auto btn btn-link btn-sm btn-icon p-0">
                         <svg viewBox="0 0 512 512" class="icon">
                             <use xlink:href="#download"></use>
@@ -28,16 +26,16 @@
                     </button>
                 </div>
             </ng-template>
-            <kendo-grid-column field="ItemCode" title="Item Code" width="80">
+            <kendo-grid-column field="ItemCode" title="{{'ItemCode' | translate}}" width="80">
             </kendo-grid-column>
-            <kendo-grid-column field="ItemName" title="Item Name" width="80">
+            <kendo-grid-column field="ItemName" title="{{'ItemName' | translate}}" width="80">
             </kendo-grid-column>
         </kendo-grid>
         <kendo-dialog-actions class="p-2 align-items-end">
             <button class="btn btn-danger btn-sm d-flex align-items-center" type="button" (click)="close()">
                 <svg viewBox="0 0 489 489" class="icon mr-2">
                     <use xlink:href="#cancel"></use>
-                </svg> Cancel
+                </svg> {{'Cancel' | translate}}
             </button>
         </kendo-dialog-actions>
     </kendo-dialog>

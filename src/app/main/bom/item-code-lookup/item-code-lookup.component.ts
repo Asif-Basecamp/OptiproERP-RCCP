@@ -3,6 +3,7 @@ import { BOMService } from '../service/bom.service';
 import { environment } from '../../../../environments/environment';
 import { GridComponent } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-item-code-lookup',
@@ -16,8 +17,9 @@ export class ItemCodeLookupComponent implements OnInit {
   public ItemData: any;
   public CompanyDB: any;
   public itemCode: any;
+  public EnableLoader: boolean = true;
 
-  constructor(private BOMService: BOMService) {}
+  constructor(private BOMService: BOMService, private translate: TranslateService) {}
 
   close(){
     this.lookupEvent.emit('false');
@@ -37,6 +39,7 @@ export class ItemCodeLookupComponent implements OnInit {
     this.BOMService.GetItemList(api, companyDB).subscribe(
       data => {
         this.ItemData = data;
+        this.EnableLoader = false;
       });    
   } 
 

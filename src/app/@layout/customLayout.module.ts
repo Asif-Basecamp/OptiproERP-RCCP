@@ -5,14 +5,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { MenuModule } from '@progress/kendo-angular-menu';
-
+import { TrnaslateLazyModule } from '../main/bom/translate-lazy.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FlexLayoutModule,
     RouterModule,
-    MenuModule
+    MenuModule,
+    TrnaslateLazyModule
   ],
   exports: [
     HeaderComponent,

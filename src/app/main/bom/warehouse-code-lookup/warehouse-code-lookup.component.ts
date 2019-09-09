@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BOMService } from '../service/bom.service';
 import { environment } from '../../../../environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-warehouse-code-lookup',
@@ -13,8 +14,9 @@ export class WarehouseCodeLookupComponent implements OnInit {
   @Output() warehouseCodeEvent = new EventEmitter<any>();
   public WarehouseData: any;
   public CompanyDB: any;
+  public EnableLoader: boolean = true;
 
-  constructor(private BOMService: BOMService) { }
+  constructor(private BOMService: BOMService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.CompanyDB = 'OPTIPRO129';
@@ -34,6 +36,7 @@ export class WarehouseCodeLookupComponent implements OnInit {
     this.BOMService.GetWarehouseList(api, companyDB).subscribe(
       data => {
         this.WarehouseData = data;
+        this.EnableLoader = false;
       });    
   } 
 

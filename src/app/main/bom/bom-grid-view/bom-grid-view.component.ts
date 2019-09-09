@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { BOMService } from '../service/bom.service';
 import { environment } from '../../../../environments/environment';
-import {products} from '../../../dummyData/data'
+import { TranslateService } from '@ngx-translate/core';
+
 export interface TreeNode {
   label?: string;
   data?: any;
@@ -47,11 +48,14 @@ export class BOMGridViewComponent implements OnInit {
   public RoutingLineDetail: any;
   public ResourceDetail: any;
   @Input() primaryEvent;
- 
+  public detailGridEnableLoader: boolean = false;
+  public BOMEnableLoader: boolean = false;
+  public RoutingHeaderEnableLoader: boolean = false;
+  public RoutingLineEnableLoader: boolean = false;
+  public ResourceEnableLoader: boolean = false;
+  public datas: any = [];
 
-  public gridDataBottomTable: any[] = products;
-
-  constructor(private BOMService: BOMService) {}
+  constructor(private BOMService: BOMService, private translate: TranslateService) {}
   
   ngOnInit() {
     this.gridData = this.gridDataEvent;
@@ -87,6 +91,7 @@ export class BOMGridViewComponent implements OnInit {
   }
 
   detailGridData(GridViewdata, db){
+    this.detailGridEnableLoader = true;
     this.BOMService.GetBOMDetailedData(environment.optiProDashboardAPIURL, db, GridViewdata.U_O_ITEMCODE, 
       GridViewdata.CreateDate, GridViewdata.Code, GridViewdata.U_O_BOM_SEQ, GridViewdata.U_O_WHSECODE, 
       GridViewdata.U_O_REVISION, this.primaryEvent).subscribe(
@@ -101,6 +106,7 @@ export class BOMGridViewComponent implements OnInit {
             } 
             this.nodes2 = this.getHierarchy(Arr, '-1');
             this.files2 = this.nodes2;
+            this.detailGridEnableLoader = false;
           }
       },
       error => {
@@ -115,12 +121,14 @@ export class BOMGridViewComponent implements OnInit {
     this.RoutingHeaderDetail = '';
     this.BOMDetailShow = false;
     this.RoutingHeaderDetailShow = false;
+    this.BOMEnableLoader = true;
     if(e.parent == null){
       this.BOMDetailShow = true;
       this.Code = e.data.Code;
       this.BOMService.GetBOMDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.Code).subscribe(
         data => {
           this.BomDetail = data;
+          this.BOMEnableLoader = false;
       }); 
     }
   }
@@ -128,13 +136,28 @@ export class BOMGridViewComponent implements OnInit {
   RoutingHeaderSelect(evt){
     this.ItemCode = '';
     this.RoutingHeaderDetailShow = false;
+    this.RoutingHeaderEnableLoader = true;
+    this.datas = [];
     if(evt.dataItem.BOM_ITEMCODE){
       this.RoutingHeaderDetailShow = true;
       this.ItemCode = evt.dataItem.BOM_ITEMCODE;
       this.BOMService.GetRoutingHeaderDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCode, this.primaryEvent).subscribe(
-        data => {
-          this.RoutingHeaderDetail = data;
-          this.getRoutingLineDetail(this.RoutingHeaderDetail);
+        headerdata => {
+          this.RoutingHeaderDetail = headerdata;
+          for(let i=0;i< this.RoutingHeaderDetail.length; i++){
+            this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.RoutingHeaderDetail[i].Code).subscribe(
+              Linedata => {
+                this.RoutingHeaderDetail[i]["LineDetail"] = Linedata;
+                for(let j=0;j< this.RoutingHeaderDetail[i].LineDetail.length; j++){
+                  this.BOMService.GetResourceDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.RoutingHeaderDetail[i].LineDetail[j].Code, this.RoutingHeaderDetail[i].LineDetail[j].U_O_LINE_NO).subscribe(
+                  ResourceData => {
+                    this.RoutingHeaderDetail[i].LineDetail[j]["ResourceDetail"] = ResourceData;
+                    this.RoutingHeaderEnableLoader = false;
+                  });
+                } 
+                 this.datas.push(this.RoutingHeaderDetail[i]);
+            });
+          }
       });
     }
   }
@@ -156,23 +179,26 @@ export class BOMGridViewComponent implements OnInit {
     this.BOMService.GetResourceDetail(environment.optiProDashboardAPIURL, this.CompanyDB, Linedata.Code, Linedata.U_O_LINE_NO).subscribe(
       data => {
         this.ResourceDetail = data;
+        this.ResourceEnableLoader = false;
     });
   }
 
   gridHeaderRowSelect(evt){
     this.RoutingLineDetail = '';
     this.ResourceDetail = '';
+    this.RoutingLineEnableLoader = true;
     if(evt.dataItem){
-      this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.Code).subscribe(
+      this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, evt.dataItem.Code).subscribe(
         data => {
           this.RoutingLineDetail = data;
-          this.getResourceDetail(this.RoutingLineDetail[0]);
+          this.RoutingLineEnableLoader = false;
       }); 
     }
   }
 
   gridLineRowSelect(evt){
     this.ResourceDetail = '';
+    this.ResourceEnableLoader = true;
     if(evt.dataItem){
       this.getResourceDetail(evt.dataItem);
     }

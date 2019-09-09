@@ -20,7 +20,7 @@ export class BOMService {
     let jObject:any={ GetData: JSON.stringify([{ 
      CompanyDBID: CompanyDBID
     }])};
-    return this.httpClient.post(optiProDashboardAPIURL +"ProductionDashboard/GetItemListForFinishedGoods",jObject,this.httpOptions);
+    return this.httpClient.post(optiProDashboardAPIURL +"BOMDashboard/GetItemListForFinishedGoods",jObject,this.httpOptions);
   } 
 
   GetWarehouseList(optiProDashboardAPIURL:string,CompanyDBID:string): Observable<any>{

@@ -13,6 +13,10 @@ import { BOMGridViewComponent } from './bom/bom-grid-view/bom-grid-view.componen
 import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
 import { TreeTableModule } from 'primeng/components/treetable/treetable';
 import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
+import { NotificationModule } from '@progress/kendo-angular-notification';
+import { TrnaslateLazyModule } from './bom/translate-lazy.module';
+import { CountdownModule } from 'ngx-countdown';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   imports: [
@@ -25,7 +29,13 @@ import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/wareho
     MainRoutingModule,
     FlexLayoutModule,
     DateInputsModule,
-    TreeTableModule
+    TreeTableModule,
+    NotificationModule,
+    TrnaslateLazyModule,
+    CountdownModule
+  ],
+  providers: [
+    DatePipe
   ],
   declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent]
 })
