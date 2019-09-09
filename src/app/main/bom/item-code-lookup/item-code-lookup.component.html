@@ -8,7 +8,9 @@
                 <div class="d-flex align-items-center">
                 
                     <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
-                        <input type="checkbox" [(ngModel)]="isColumnFilter" [ngModelOptions]="{standalone: true}">
+                        <input #chkFilter type="checkbox" (change)="onFilterChange(chkFilter,gridItem)" 
+                        id="opti_SalesOrderListColumnFilterID" [(ngModel)]="isColumnFilter" class="k-checkbox" 
+                        name="columnfilter" />
                         <span class="checkbox"></span>
                         <span>{{'EnableFilter' | translate}}</span>
                     </label>

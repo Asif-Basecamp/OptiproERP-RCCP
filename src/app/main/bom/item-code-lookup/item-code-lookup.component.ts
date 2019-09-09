@@ -14,10 +14,12 @@ export class ItemCodeLookupComponent implements OnInit {
 
   @Output() lookupEvent = new EventEmitter<string>();
   @Output() itemCodeEvent = new EventEmitter<any>();
-  public ItemData: any;
+  @Input() ItemData: any;
   public CompanyDB: any;
   public itemCode: any;
   public EnableLoader: boolean = true;
+  isColumnFilter: boolean = false;
+
 
   constructor(private BOMService: BOMService, private translate: TranslateService) {}
 
@@ -30,17 +32,48 @@ export class ItemCodeLookupComponent implements OnInit {
     this.close();
   }
 
-  ngOnInit() {
-    this.CompanyDB = 'OPTIPRO129';
-    this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
+  public state: State = {
+    skip: 0,
+    take: 5,
+    filter: {
+      logic: 'and',
+      filters: []
+    }
+  };
+  public clearFilters() {
+    this.state.filter = {
+      logic: 'and',
+      filters: []
+    };
+  }
+  onFilterChange(checkBox: any, grid: GridComponent) {
+    if (checkBox.checked == false) {
+      this.clearFilter(grid);
+    }
+  }
+  clearFilter(grid: GridComponent) {
+    this.clearFilters()
   }
 
-  getItemData(api, companyDB){
+  async ngOnChanges(): Promise<void> {
+    this.clearFilters();
+    this.isColumnFilter = false
+  }
+
+  ngOnInit() {
+    this.CompanyDB = 'OPTIPRO129';
+    this.EnableLoader = false;
+ //   this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
+  }
+  
+
+ /* getItemData(api, companyDB){
     this.BOMService.GetItemList(api, companyDB).subscribe(
       data => {
         this.ItemData = data;
+        console.log(this.ItemData);
         this.EnableLoader = false;
       });    
-  } 
+  } */
 
 }

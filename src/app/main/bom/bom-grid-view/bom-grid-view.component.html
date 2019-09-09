@@ -44,7 +44,7 @@
 </div>
 
 
-<div class="detail-grid-wrapper d-flex">
+<div class="detail-grid-wrapper d-flex" *ngIf="files2">
   <div *ngIf="detailGridEnableLoader" class="k-i-loading"></div>
   <div class="dashboard-detail-grid pr-3" *ngIf="files2">
     <div class="h5 mb-2">{{'DetailGrid' | translate}}</div>
