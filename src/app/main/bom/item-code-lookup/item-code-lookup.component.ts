@@ -14,7 +14,7 @@ export class ItemCodeLookupComponent implements OnInit {
 
   @Output() lookupEvent = new EventEmitter<string>();
   @Output() itemCodeEvent = new EventEmitter<any>();
-  public ItemData: any;
+  @Input() ItemData: any;
   public CompanyDB: any;
   public itemCode: any;
   public EnableLoader: boolean = true;
@@ -62,17 +62,18 @@ export class ItemCodeLookupComponent implements OnInit {
 
   ngOnInit() {
     this.CompanyDB = 'OPTIPRO129';
-    this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
+    this.EnableLoader = false;
+ //   this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
   }
   
 
-  getItemData(api, companyDB){
+ /* getItemData(api, companyDB){
     this.BOMService.GetItemList(api, companyDB).subscribe(
       data => {
         this.ItemData = data;
         console.log(this.ItemData);
         this.EnableLoader = false;
       });    
-  } 
+  } */
 
 }

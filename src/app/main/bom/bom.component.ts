@@ -39,12 +39,30 @@ export class BOMComponent implements OnInit {
   public minutes: any;
   public seconds: any;
   time: any;
+  public ItemData: any;
+  public WarehouseData: any;
 
   constructor(private BOMService: BOMService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.CompanyDB = 'OPTIPRO129';
+    this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
+    this.getWarehouseData(environment.optiProDashboardAPIURL, this.CompanyDB);
   }
+
+  getItemData(api, companyDB){
+    this.BOMService.GetItemList(api, companyDB).subscribe(
+      data => {
+        this.ItemData = data;
+      });    
+  } 
+
+  getWarehouseData(api, companyDB){
+    this.BOMService.GetWarehouseList(api, companyDB).subscribe(
+      data => {
+        this.WarehouseData = data;
+      });    
+  } 
 
   onChange(e){
     if(e.target.checked){
@@ -160,7 +178,9 @@ export class BOMComponent implements OnInit {
       data => {
         this.gridData = data;
         this.SimpleGridEnableLoader = false;
-        if(!this.gridData){
+       // console.log(this.gridData);
+        if(this.gridData.length==0){
+          this.bomGrid = false;
           this.notificationService.show({
             content: 'No Record Found',
             hideAfter: 3000,
@@ -175,6 +195,7 @@ export class BOMComponent implements OnInit {
       },
       error => {
         this.SimpleGridEnableLoader = false;
+        this.bomGrid = false;
       })
     }
   }
