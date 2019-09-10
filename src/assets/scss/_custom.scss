@@ -380,6 +380,9 @@ th.k-hierarchy-cell:first-child[kendogridlogicalcell],
 td.k-hierarchy-cell:first-child[kendogridlogicalcell] {
   width: 40px;
 }
+body .k-grid .k-hierarchy-cell > .k-icon{
+  padding: 5px 0;
+}
 kendo-grid-filter-wrapper-cell{
   & > .k-textbox{
     font-size:12px;

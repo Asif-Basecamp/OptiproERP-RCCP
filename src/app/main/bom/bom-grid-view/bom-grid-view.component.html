@@ -58,8 +58,10 @@
             let-rowData="rowData">
             <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">
               <td>
-                <p-treeTableToggler [rowNode]="rowNode" class="cursor-pointer"></p-treeTableToggler>
-                <span class="cursor-pointer" (click)="DetailGridRowSelect(node)">{{rowData.U_O_ITEMCODE}}</span>
+                <div class="d-flex align-items-center">
+                  <p-treeTableToggler [rowNode]="rowNode" class="cursor-pointer"></p-treeTableToggler>
+                  <span class="cursor-pointer d-flex w-100" (click)="DetailGridRowSelect(node)">{{rowData.U_O_ITEMCODE}}</span>
+                </div>
               </td>
             </tr>
           </ng-template>
@@ -115,7 +117,7 @@
 
 <div class="d-flex mt-3" fxFlex fxLayout="column" *ngIf="RoutingHeaderDetail">
   <div class="h5 mb-2">{{'RoutingHeader' | translate}}</div>
-  <kendo-grid [kendoGridBinding]="datas"  [loading]="RoutingHeaderEnableLoader" [height]="250" [navigable]="true" [resizable]="true" [groupable]=isColumnGroup3 [filterable]=isColumnFilter3 [sortable]="true"
+  <kendo-grid [kendoGridBinding]="datas"  [loading]="RoutingHeaderEnableLoader" [height]="330" [navigable]="true" [resizable]="true" [groupable]=isColumnGroup3 [filterable]=isColumnFilter3 [sortable]="true"
    [ngStyle]="{ 'cursor': 'pointer'}" kendoGridFocusable>
     <ng-template kendoGridToolbarTemplate>
         <div class="d-flex align-items-center">        
@@ -143,7 +145,7 @@
     <kendo-grid-column field="U_OPTM_APCLBLBOMUNIT" title="{{'ApplicableBOMUnit' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
     <div *kendoGridDetailTemplate="let dataItem">
       <div class="h5 mb-2">{{'RoutingLine' | translate}}</div>
-      <kendo-grid [kendoGridBinding]="dataItem.LineDetail" [height]="250" [navigable]="true" [resizable]="true" [resizable]="true" [groupable]=isColumnGroup4 [filterable]=isColumnFilter4 [sortable]="true"
+      <kendo-grid [kendoGridBinding]="dataItem.LineDetail" [navigable]="true" [resizable]="true" [resizable]="true" [groupable]=isColumnGroup4 [filterable]=isColumnFilter4 [sortable]="true"
         [ngStyle]="{ 'cursor': 'pointer'}" kendoGridFocusable>
         <ng-template kendoGridToolbarTemplate>
           <div class="d-flex align-items-center">        
@@ -207,7 +209,7 @@
         </kendo-grid-column>
         <div *kendoGridDetailTemplate="let dataItem">
           <div class="h5 mb-2">{{'ResourceDetail' | translate}}</div>
-          <kendo-grid [kendoGridBinding]="dataItem.ResourceDetail" [height]="250" [navigable]="true" [resizable]="true" kendoGridFocusable [groupable]=isColumnGroup5 [filterable]=isColumnFilter5 [sortable]="true">
+          <kendo-grid [kendoGridBinding]="dataItem.ResourceDetail" [navigable]="true" [resizable]="true" kendoGridFocusable [groupable]=isColumnGroup5 [filterable]=isColumnFilter5 [sortable]="true">
             <ng-template kendoGridToolbarTemplate>
               <div class="d-flex align-items-center">        
                   <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
