@@ -54,7 +54,6 @@ export class BOMGridViewComponent implements OnInit {
   public RoutingLineEnableLoader: boolean = false;
   public ResourceEnableLoader: boolean = false;
   public datas: any = [];
-  public DetailItemCode: any;
 
   constructor(private BOMService: BOMService, private translate: TranslateService) {}
   
@@ -122,11 +121,10 @@ export class BOMGridViewComponent implements OnInit {
     this.RoutingLineDetail = '';
     this.BOMDetailShow = false;
     this.RoutingHeaderDetailShow = false;
+    this.BOMEnableLoader = true;
     if(e.parent == null){
       this.BOMDetailShow = true;
-      this.BOMEnableLoader = true;
       this.Code = e.data.Code;
-      this.DetailItemCode = e.data.U_O_ITEMCODE;
       this.BOMService.GetBOMDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.Code).subscribe(
         data => {
           this.BomDetail = data;

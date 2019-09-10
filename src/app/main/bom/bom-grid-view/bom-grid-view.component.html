@@ -36,7 +36,7 @@
 </div>
 
 
-<div class="detail-grid-wrapper d-flex" *ngIf="files2">
+<div class="detail-grid-wrapper d-flex">
   <div *ngIf="detailGridEnableLoader" class="k-i-loading"></div>
   <div class="dashboard-detail-grid pr-3" *ngIf="files2">
     <div class="h5 mb-2">{{'DetailGrid' | translate}}</div>
@@ -72,7 +72,7 @@
 
   <div class="bom-detail-grid" fxFlex="100%">
     <div *ngIf="BomDetail">
-      <div class="h5 mb-2">{{'BOMDetail' | translate}} ({{DetailItemCode}})</div>
+      <div class="h5 mb-2">{{'BOMDetail' | translate}} ({{Code}})</div>
       <kendo-grid [kendoGridBinding]="BomDetail"  [loading]="BOMEnableLoader" [selectable]="true" [resizable]="true" [groupable]=isColumnGroup2 [filterable]=isColumnFilter2 [sortable]="true"
         (cellClick)="OnSelectBOMDetail($event)" [ngStyle]="{ 'cursor': 'pointer'}" height="187">
         <ng-template kendoGridToolbarTemplate>
