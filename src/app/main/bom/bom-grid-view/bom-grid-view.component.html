@@ -115,7 +115,7 @@
 
 <div class="d-flex mt-3" fxFlex fxLayout="column">
   <div *ngIf="RoutingHeaderStatus" class="k-i-loading"></div>
-  <div class="h5 mb-2" *ngIf="BomDetail">{{'RoutingHeader' | translate}} (BOM Seq: {{headerData.U_O_BOM_SEQ}}, BOM Revision: {{headerData.U_O_REVISION}})</div>
+  <div class="h5 mb-2" *ngIf="BomDetail">{{'RoutingHeader' | translate}} (Item Code: {{headerData.U_O_ITEMCODE}})</div>
   <kendo-grid *ngIf="BomDetail" [kendoGridBinding]="datas" [height]="330" [navigable]="true" [resizable]="true" [groupable]=isColumnGroup3 [filterable]=isColumnFilter3 [sortable]="true"
    [ngStyle]="{ 'cursor': 'pointer'}" kendoGridFocusable>
     <ng-template kendoGridToolbarTemplate>
