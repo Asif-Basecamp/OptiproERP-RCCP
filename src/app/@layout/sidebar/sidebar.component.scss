@@ -42,8 +42,9 @@
       }
     }
     & svg.logo-svg {
-        width: 140px;
-        height: auto;
+      width: 100%;
+      height: auto;
+      max-width: 140px;
     }
   } 
   &.toggle{
