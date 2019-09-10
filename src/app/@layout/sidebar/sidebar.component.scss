@@ -41,6 +41,10 @@
         }
       }
     }
+    & svg.logo-svg {
+        width: 140px;
+        height: auto;
+    }
   } 
   &.toggle{
     flex: 1 1 65px !important;
@@ -85,5 +89,5 @@
         }
       }
     }
-  }
+  }  
 }

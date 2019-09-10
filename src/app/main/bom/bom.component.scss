@@ -102,7 +102,7 @@
     padding: 15px 15px 15px 7px;
     max-height: calc(100vh - 40px);
     overflow: auto;
-    width: 100%;
+    width: calc(100vw - 540px) !important;
     height: 100%;
     & > .card{
         overflow: auto;
@@ -137,28 +137,30 @@
 .app-detail{
     width: 100%;
     max-width: 370px;
-    background-color: rgba(255,255,255,0.2);
-    color:#fff;
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 5px;
-    padding: 30px;
+    padding: 25px 40px 20px 40px;
     margin-top: 15px;
+    font-size: 9px;
     ::ng-deep{
         & p{
-            font-size: 18px
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
         & small{
             font-size: 12px
         }
+        & svg.logo-svg {
+            width: 200px;
+            height: auto;
+        }
     }
 }
 
-.k-i-loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    font-size: 64px;
-    background-color: rgba(255,255,255,.3);
-    color: #ff6757;
+.restrictedHeight{
+    & .ui-treetable-scrollable-body{
+        max-height: calc(100vh - 370px) !important;
+        height: calc(100vh - 370px) !important;
+    }
   }

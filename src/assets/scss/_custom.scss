@@ -12,6 +12,25 @@ html, body{
     fill:$gray-900;
   }
 }
+//Scrollbar 
+@media screen and (min-width:1025px){
+  *::-webkit-scrollbar-track{
+    background-color: #F5F5F5;
+  }
+  
+  *::-webkit-scrollbar{
+    width: 6px;
+    height: 6px;
+    background-color: #F5F5F5;
+  }
+  
+  *::-webkit-scrollbar-thumb{
+    // background-color: theme-color("primary");
+    background: #dadada;
+    cursor: pointer;
+    border-radius: 2.5px;
+  }
+}
 //Layout
 .compact-layout {
   & app-header .navbar-inner, & .layout-mode{
@@ -262,10 +281,24 @@ body .k-popup.k-menu-popup {
   color:#495057 !important;
   height: 100%;
 }
-
 body .k-widget.form-control-sm .k-input {
   padding: 0.25rem 0.5rem;
   height: auto;
+}
+body kendo-timepicker.k-widget.form-control-sm.k-timepicker {
+  padding:0;  
+  & .k-picker-wrap{
+    border-color: #ced4da;
+  }
+  & .k-dateinput-wrap .k-input {
+    padding: 0.25rem 0.5rem;
+    height: 26px;    
+  }
+  & .k-select{
+    background: theme-color("primary");
+    color:#fff;
+    margin: -1px -1px -1px 0;
+  }
 }
 .k-textbox, .k-input.k-textbox {
   height: 28px;
@@ -339,6 +372,14 @@ dd {
   overflow: hidden;
   border: none;
 }
+.k-grid .k-hierarchy-col{
+  width: 40px;
+  max-width: 40px;
+}
+th.k-hierarchy-cell:first-child[kendogridlogicalcell],
+td.k-hierarchy-cell:first-child[kendogridlogicalcell] {
+  width: 40px;
+}
 kendo-grid-filter-wrapper-cell{
   & > .k-textbox{
     font-size:12px;
@@ -383,5 +424,372 @@ kendo-grid-filter-wrapper-cell{
     max-width: calc(100vw - 30px);
   }
 }
+//Kendow Loader
+.k-i-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 64px;
+  background-color: rgba(255,255,255,.3);
+  color: theme-color("primary") !important;
+}
+
+//Tree table
 
 
+.ui-treetable {
+  position: relative;
+  // border:1px solid rgba(0, 0, 0, 0.08);
+  // border-radius: nb-theme(card-border-radius)
+}
+
+.ui-treetable table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.ui-treetable .ui-treetable-tbody>tr>td,.ui-treetable .ui-treetable-tfoot>tr>td,.ui-treetable .ui-treetable-thead>tr>th {
+  padding: .25em .5em
+}
+
+.ui-treetable .ui-treetable-toggler {
+  cursor: pointer;
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  top: 50%;
+  margin-top: -.5em
+}
+.ui-treetable .ui-treetable-toggler i{
+  border: 1px solid theme-color("primary");
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+
+.ui-treetable .ui-sortable-column {
+  cursor: pointer
+}
+
+.ui-treetable p-treetablesorticon {
+  vertical-align: middle
+}
+
+.ui-treetable-auto-layout>.ui-treetable-wrapper {
+  overflow-x: auto
+}
+
+.ui-treetable-auto-layout>.ui-treetable-wrapper>table {
+  table-layout: auto
+}
+
+.ui-treetable .ui-treetable-chkbox {
+  margin: 0 .25em;
+  vertical-align: middle
+}
+
+.ui-treetable-caption,.ui-treetable-summary {
+  padding: .25em .5em;
+  text-align: center;
+  font-weight: 700
+}
+
+.ui-treetable-caption {
+  border-bottom: 0
+}
+
+.ui-treetable-summary {
+  border-top: 0
+}
+
+.ui-treetable .ui-paginator-top {
+  border-bottom: 0
+}
+
+.ui-treetable .ui-paginator-bottom {
+  border-top: 0
+}
+
+.ui-treetable-scrollable-wrapper {
+  position: relative
+}
+
+.ui-treetable-scrollable-footer,.ui-treetable-scrollable-header {
+  overflow: hidden;
+  border: 0
+}
+
+.ui-treetable-scrollable-body {
+  overflow: auto;
+  position: relative
+}
+
+.ui-treetable-scrollable-body>table>.ui-treetable-tbody>tr:first-child>td {
+  border-top: 0
+}
+
+.ui-treetable-virtual-table {
+  position: absolute
+}
+
+.ui-treetable-frozen-view .ui-treetable-scrollable-body {
+  overflow: hidden
+}
+
+.ui-treetable-frozen-view>.ui-treetable-scrollable-body>table>.ui-treetable-tbody>tr>td:last-child {
+  border-right: 0
+}
+
+.ui-treetable-unfrozen-view {
+  position: absolute;
+  top: 0
+}
+
+.ui-treetable-resizable>.ui-treetable-wrapper {
+  overflow-x: auto
+}
+
+.ui-treetable-resizable .ui-treetable-tbody>tr>td,.ui-treetable-resizable .ui-treetable-tfoot>tr>td,.ui-treetable-resizable .ui-treetable-thead>tr>th {
+  overflow: hidden
+}
+
+.ui-treetable-resizable .ui-resizable-column {
+  background-clip: padding-box;
+  position: relative
+}
+
+.ui-treetable-resizable-fit .ui-resizable-column:last-child .ui-column-resizer {
+  display: none
+}
+
+.ui-treetable .ui-column-resizer {
+  display: block;
+  position: absolute!important;
+  top: 0;
+  right: 0;
+  margin: 0;
+  width: .5em;
+  height: 100%;
+  padding: 0;
+  cursor: col-resize;
+  border: 1px solid transparent
+}
+
+.ui-treetable .ui-column-resizer-helper {
+  width: 1px;
+  position: absolute;
+  z-index: 10;
+  display: none
+}
+
+.ui-treetable-reorder-indicator-down,.ui-treetable-reorder-indicator-up {
+  position: absolute;
+  display: none
+}
+
+.ui-treetable-responsive .ui-treetable-tbody>tr>td .ui-column-title {
+  display: none
+}
+
+body .ui-treetable .ui-treetable-caption,
+body .ui-treetable .ui-treetable-summary {
+  background-color: #f4f4f4;
+  color: #333333;
+  border: 1px solid #c8c8c8;
+  padding: 0.571em 1em;
+  text-align: center;
+}
+body .ui-treetable .ui-treetable-caption {
+  border-bottom: 0 none;
+  font-weight: 700;
+}
+body .ui-treetable .ui-treetable-summary {
+  border-top: 0 none;
+  font-weight: 700;
+}
+body .ui-treetable .ui-treetable-thead > tr{
+  background-color: theme-color("primary");
+}
+body .ui-treetable .ui-treetable-thead > tr > th {
+  padding: 0.571em 0.857em;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  font-size:12px;
+  color: $white;
+  white-space: nowrap;
+  background-color: theme-color("primary");
+  &:last-child{
+    border:none;
+  }
+}
+body .ui-treetable .ui-treetable-tbody > tr > td {
+  padding: 0.571em 0.857em;
+  white-space: nowrap;
+}
+body .ui-treetable .ui-treetable-tfoot > tr > td {
+  padding: 0.571em 0.857em;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-weight: 700;
+  color: nb-theme(color-fg-heading);
+  background-color: $white;
+}
+body .ui-treetable .ui-sortable-column .ui-sortable-column-icon {
+  color: nb-theme(color-fg-heading);
+}
+body .ui-treetable .ui-sortable-column:not(.ui-state-highlight):hover {
+  background-color: #e0e0e0;
+  color: nb-theme(color-fg-heading);
+}
+body .ui-treetable .ui-sortable-column:not(.ui-state-highlight):hover .ui-sortable-column-icon {
+  color: nb-theme(color-fg-heading);
+}
+body .ui-treetable .ui-sortable-column.ui-state-highlight {
+  background-color: theme-color("primary");
+  color: $white;
+}
+body .ui-treetable .ui-sortable-column.ui-state-highlight .ui-sortable-column-icon {
+  color: $white;
+}
+body .ui-treetable .ui-editable-column input {
+  font-size: 14px;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+}
+body .ui-treetable .ui-editable-column input:focus {
+  outline: 1px solid theme-color("primary");
+  outline-offset: 2px;
+}
+body .ui-treetable-scrollable-header-box{
+  background-color: theme-color("primary");
+  // border-radius: 0.2rem 0.2rem 0 0;
+  overflow: hidden;
+}
+body .ui-treetable .ui-treetable-tbody > tr {
+  background-color: $white;
+  color: #333333;
+}
+body .ui-treetable .ui-treetable-tbody > tr > td {
+  background-color: inherit;
+  white-space: nowrap;
+}
+body .ui-treetable .ui-treetable-tbody > tr > td .ui-treetable-toggler {
+  color: #000;
+  vertical-align: middle;
+}
+body .ui-treetable .ui-treetable-tbody > tr > td .ui-treetable-chkbox {
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+body .ui-treetable .ui-treetable-tbody > tr.ui-state-highlight {
+  background-color: lighten($color: theme-color("primary"), $amount: 30%);
+}
+body .ui-treetable .ui-treetable-tbody > tr.ui-state-highlight > td {
+  background-color: inherit;
+  // border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body .ui-treetable .ui-treetable-tbody > tr.ui-contextmenu-selected {
+  background-color: theme-color("primary");
+  color: $white;
+}
+body .ui-treetable .ui-treetable-tbody > tr.ui-contextmenu-selected > td {
+  background-color: inherit;
+  // border: 1px solid rgba(0, 0, 0, 0.08);
+}
+body .ui-treetable .ui-treetable-tbody > tr.ui-contextmenu-selected > td .ui-treetable-toggler {
+  color: $white;
+}
+body .ui-treetable.ui-treetable-hoverable-rows .ui-treetable-tbody > tr:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover {
+  cursor: pointer;
+  background-color: #eaeaea;
+  color: #333333;
+}
+body .ui-treetable .ui-column-resizer-helper {
+  background-color: theme-color("primary");
+}
+.ui-treetable .ui-treetable-toggler i{
+  border: 1px solid theme-color("primary");
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  margin-right: 5px;
+  &:before{
+    content: "-";
+    width: 16px;
+    height: 16px;
+    font-size: 23px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 14px;
+    font-family: Roboto;
+    font-style: normal;
+  }
+  &.pi-chevron-right{
+    &:before{
+      content: "+";
+      line-height: 16px;
+      font-size: 16px;
+    }
+  }
+}
+p-treetabletoggler:empty {
+  min-width: 23px;
+  display: inline-block;
+  cursor: initial !important;
+}
+
+
+@media screen and (max-width: 40em) {
+  .ui-treetable-responsive .ui-treetable-tfoot>tr>td,.ui-treetable-responsive .ui-treetable-thead>tr>th {
+      display:none!important
+  }
+
+  .ui-treetable-responsive .ui-treetable-tbody>tr>td {
+      text-align: left;
+      display: block;
+      border: 0;
+      width: 100%!important;
+      box-sizing: border-box;
+      float: left;
+      clear: left
+  }
+
+  .ui-treetable-responsive .ui-treetable-tbody>tr>td .ui-column-title {
+      padding: .4em;
+      min-width: 30%;
+      display: inline-block;
+      margin: -.4em 1em -.4em -.4em;
+      font-weight: 700
+  }
+}
+
+.ui-treetable-loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  opacity: .1;
+  z-index: 1
+}
+
+.ui-treetable-loading-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  margin-top: -1em;
+  margin-left: -1em
+}
+
+.ui-treetable .ui-treetable-loading-icon {
+  font-size: 2em
+}

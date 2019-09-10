@@ -43,6 +43,7 @@
     "@progress/kendo-data-query": "^1.0.0",
     "@progress/kendo-drawing": "^1.0.0",
     "@progress/kendo-theme-bootstrap": "^4.1.0",
+    "@syncfusion/ej2-angular-gantt": "^17.2.47",
     "angular-tree-component": "^8.4.0",
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
@@ -50,6 +51,7 @@
     "primeicons": "^2.0.0",
     "primeng": "^8.0.2",
     "rxjs": "~6.4.0",
+    "ts": "^0.2.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

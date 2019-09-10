@@ -89,17 +89,18 @@
             </form>
         </div>
 
-            <div class="row ">
-                <div class="col-12 d-flex justify-content-between align-items-center">
-                  <div class="k-form-field d-flex align-items-center">
-                    <input type="checkbox" class="k-checkbox" id="autorefreshTime" name="autorefreshTime"
-                      [(ngModel)]="refreshCheck" (click)="refreshEvent($event)" />
-                    <label class="k-checkbox-label d-flex align-items-center" for="autorefreshTime">Auto Refresh
-                    </label>
-        
-                    <kendo-timepicker class="ml-2" format="HH:mm" formatPlaceholder="formatPattern" [(value)]="value" [disabled]="!refreshStatus"></kendo-timepicker>
-        
+            <div class="row no-gutters">
+                <div class="col-12 d-flex align-items-center px-3 pb-3">
+                  <div class="k-form-field d-flex align-items-center mr-2">
+                    <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
+                        <input type="checkbox" id="autorefreshTime" name="autorefreshTime"
+                        [(ngModel)]="refreshCheck" (click)="refreshEvent($event)">
+                        <span class="checkbox"></span>
+                        <span class="text-nowrap">Auto Refresh</span>
+                    </label>        
+                    <kendo-timepicker class="form-control-sm"  [ngStyle]="{'max-width': '109px'}" format="HH:mm" formatPlaceholder="formatPattern" [(value)]="value" [disabled]="!refreshStatus"></kendo-timepicker>        
                   </div>
+
                   <button class="btn btn-default btn-icon btn-sm p-0 btn-icon-only" id="start" title="Auto Refresh"
                     (click)="autoRefresh();" [disabled]="!refreshStatus">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#212529" viewBox="0 0 24 24">
@@ -117,14 +118,14 @@
                     </svg>
                   </button>
                 </div>
-                <button type="submit" class="btn btn-primary ml-auto" nbButton size="xsmall" style="text-transform: none;text-align: center;
-                margin: 10px auto 0;" (click)="processData()">Manual Refresh</button>
+                <!-- <button type="submit" class="btn btn-primary mx-auto btn-sm" nbButton size="xsmall" style="text-transform: none;text-align: center;
+                margin: 10px auto 0;" (click)="processData()">Manual Refresh</button> -->
             </div>
 
 
 
         <div class="card-footer text-center py-2">
-            <button type="submit" (click)="processData()" class="btn btn-primary btn-icon btn-sm" id="process">
+            <button type="submit" (click)="processData()" class="btn btn-primary btn-icon btn-sm px-2" id="process">
                 {{'Process' | translate}}
                 <svg viewBox="0 0 24 24" class="icon">
                     <use xlink:href="#rightArrow"></use>
@@ -135,22 +136,26 @@
 </div>
 <div class="dashboard-right" id="dashboard-right">
     <div class="card" fxFlex="100%">
-        <div class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3" [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
-            <app-item-code-lookup *ngIf="lookupStatus" [ItemData]="ItemData" (lookupEvent)="lookupEventHander($event)" (itemCodeEvent)="itemCodeEventHander($event)"></app-item-code-lookup>
-            <app-warehouse-code-lookup *ngIf="WarehouseStatus" [WarehouseData]="WarehouseData" (warehouseEvent)="warehouseEventHander($event)" (warehouseCodeEvent)="warehouseCodeEventHander($event)"></app-warehouse-code-lookup>
+        <div class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3" *ngIf="bomGrid" [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
+            <app-item-code-lookup *ngIf="lookupStatus" (lookupEvent)="lookupEventHander($event)" (itemCodeEvent)="itemCodeEventHander($event)"></app-item-code-lookup>
+            <app-warehouse-code-lookup *ngIf="WarehouseStatus" (warehouseEvent)="warehouseEventHander($event)" (warehouseCodeEvent)="warehouseCodeEventHander($event)"></app-warehouse-code-lookup>
             <div *ngIf="SimpleGridEnableLoader" class="k-i-loading"></div>
             <app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary"></app-bom-grid-view>
-            
-            <div *ngIf="!bomGrid" class="welcome-page" fxLayout="column" fxFlex="100%">
-                <div class="welcome-innner" fxLayout="column" fxFlex="100%">
-                <div class="welcome-logo mx-auto"><img src="./../../assets/images/logo/OptiProERP.png" title="OptiPro-ERP" /></div>
-                    <div class="app-detail text-center">
-                        <p>{{'WelcomeTo' | translate}}<br />{{'OptiproERP' | translate}}</p>
-                        <small>{{'Version' | translate}}</small>
+        </div>
+        <div *ngIf="!bomGrid" class="welcome-page" fxLayout="column" fxFlex="100%">
+            <div class="welcome-innner" fxLayout="column" fxFlex="100%">
+                <div class="app-detail text-center">
+                    <div class="welcome-logo mx-auto" title="OptiProERP - RCCP">
+                        <svg viewBox="0 0 179 53" class="logo-svg">
+                            <use xlink:href="#optiproLogoColored"></use>
+                        </svg>
+                    </div>
+                    <div class="mt-3">
+                        <p>Version</p>
+                        <small>Copyright 2000-2019. All rights reserved.</small>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>    
 </div>
