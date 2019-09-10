@@ -178,7 +178,6 @@ export class BOMComponent implements OnInit {
       data => {
         this.gridData = data;
         this.SimpleGridEnableLoader = false;
-       // console.log(this.gridData);
         if(this.gridData.length==0){
           this.bomGrid = false;
           this.notificationService.show({

@@ -63,17 +63,5 @@ export class ItemCodeLookupComponent implements OnInit {
   ngOnInit() {
     this.CompanyDB = 'OPTIPRO129';
     this.EnableLoader = false;
- //   this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
   }
-  
-
- /* getItemData(api, companyDB){
-    this.BOMService.GetItemList(api, companyDB).subscribe(
-      data => {
-        this.ItemData = data;
-        console.log(this.ItemData);
-        this.EnableLoader = false;
-      });    
-  } */
-
 }

@@ -72,6 +72,7 @@ export class BOMGridViewComponent implements OnInit {
     if(evt.selectedRows[0].dataItem){
       this.detailView = true;
       this.simpleGridData = evt.selectedRows[0].dataItem;
+
       this.detailGridData(this.simpleGridData, this.CompanyDB);
     }
   }
@@ -114,7 +115,7 @@ export class BOMGridViewComponent implements OnInit {
     })
   }
 
-  ItemRowSelect(e){
+  DetailGridRowSelect(e){
     this.Code = '';
     this.ResourceDetail = '';
     this.RoutingLineDetail = '';
@@ -128,79 +129,45 @@ export class BOMGridViewComponent implements OnInit {
       this.BOMService.GetBOMDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.Code).subscribe(
         data => {
           this.BomDetail = data;
-          this.BOMEnableLoader = false;
+          this.getRoutingHeaderDetail(this.BomDetail[0].BOM_ITEMCODE);
       }); 
     }
   }
 
-  RoutingHeaderSelect(evt){
+  /*-- on Click BOM Detail row --*/
+  OnSelectBOMDetail(evt){
     this.ItemCode = '';
     this.RoutingHeaderDetailShow = false;
     this.RoutingHeaderEnableLoader = true;
-    this.datas = [];
     if(evt.dataItem.BOM_ITEMCODE){
       this.RoutingHeaderDetailShow = true;
       this.ItemCode = evt.dataItem.BOM_ITEMCODE;
-      this.BOMService.GetRoutingHeaderDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCode, this.primaryEvent).subscribe(
-        headerdata => {
-          this.RoutingHeaderDetail = headerdata;
-          for(let i=0;i< this.RoutingHeaderDetail.length; i++){
-            this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.RoutingHeaderDetail[i].Code).subscribe(
-              Linedata => {
-                this.RoutingHeaderDetail[i]["LineDetail"] = Linedata;
-                for(let j=0;j< this.RoutingHeaderDetail[i].LineDetail.length; j++){
-                  this.BOMService.GetResourceDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.RoutingHeaderDetail[i].LineDetail[j].Code, this.RoutingHeaderDetail[i].LineDetail[j].U_O_LINE_NO).subscribe(
-                  ResourceData => {
-                    this.RoutingHeaderDetail[i].LineDetail[j]["ResourceDetail"] = ResourceData;
-                    this.RoutingHeaderEnableLoader = false;
-                  });
-                } 
-                 this.datas.push(this.RoutingHeaderDetail[i]);
-            });
-          }
-      });
+      this.getRoutingHeaderDetail(this.ItemCode);
     }
   }
 
-  getRoutingLineDetail(routingHeaderData){
-    for(let i=0; i<routingHeaderData.length; i++){
-      if(routingHeaderData[i].ROUTTYPE === 'Primary'){
-        this.Code = routingHeaderData[i].Code;
-        this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.Code).subscribe(
-          data => {
-            this.RoutingLineDetail = data;
-            this.getResourceDetail(this.RoutingLineDetail[0]);
-        });
-      }
-    }
-  }
-
-  getResourceDetail(Linedata){
-    this.BOMService.GetResourceDetail(environment.optiProDashboardAPIURL, this.CompanyDB, Linedata.Code, Linedata.U_O_LINE_NO).subscribe(
-      data => {
-        this.ResourceDetail = data;
-        this.ResourceEnableLoader = false;
+  /*-- get Routing header data , Line Data, Resource Data --*/
+  getRoutingHeaderDetail(ItemCode){
+    this.datas = [];
+    this.BOMService.GetRoutingHeaderDetail(environment.optiProDashboardAPIURL, this.CompanyDB, ItemCode, this.primaryEvent).subscribe(
+      headerdata => {
+        this.RoutingHeaderDetail = headerdata;
+        console.log(this.RoutingHeaderDetail);
+        this.RoutingHeaderEnableLoader = false;
+        this.BOMEnableLoader = false;
+        for(let i=0;i< this.RoutingHeaderDetail.length; i++){
+          this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.RoutingHeaderDetail[i].Code).subscribe(
+            Linedata => {
+              this.RoutingHeaderDetail[i]["LineDetail"] = Linedata;
+              for(let j=0;j< this.RoutingHeaderDetail[i].LineDetail.length; j++){
+                this.BOMService.GetResourceDetail(environment.optiProDashboardAPIURL, this.CompanyDB, this.RoutingHeaderDetail[i].LineDetail[j].Code, this.RoutingHeaderDetail[i].LineDetail[j].U_O_LINE_NO).subscribe(
+                ResourceData => {
+                  this.RoutingHeaderDetail[i].LineDetail[j]["ResourceDetail"] = ResourceData;
+                });
+              } 
+               this.datas.push(this.RoutingHeaderDetail[i]);
+          });
+        }
     });
-  }
-
-  gridHeaderRowSelect(evt){
-    this.RoutingLineDetail = '';
-    this.ResourceDetail = '';
-    this.RoutingLineEnableLoader = true;
-    if(evt.dataItem){
-      this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, evt.dataItem.Code).subscribe(
-        data => {
-          this.RoutingLineDetail = data;
-          this.RoutingLineEnableLoader = false;
-      }); 
-    }
-  }
-
-  gridLineRowSelect(evt){
-    this.ResourceDetail = '';
-    this.ResourceEnableLoader = true;
-    if(evt.dataItem){
-      this.getResourceDetail(evt.dataItem);
-    }
   }
 }
