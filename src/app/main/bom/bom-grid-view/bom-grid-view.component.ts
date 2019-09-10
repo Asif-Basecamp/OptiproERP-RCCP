@@ -119,7 +119,6 @@ export class BOMGridViewComponent implements OnInit {
     this.Code = '';
     this.ResourceDetail = '';
     this.RoutingLineDetail = '';
-    this.RoutingHeaderDetail = '';
     this.BOMDetailShow = false;
     this.RoutingHeaderDetailShow = false;
     this.BOMEnableLoader = true;
@@ -140,7 +139,6 @@ export class BOMGridViewComponent implements OnInit {
     this.RoutingHeaderDetailShow = false;
     this.RoutingHeaderEnableLoader = true;
     if(evt.dataItem.BOM_ITEMCODE){
-      this.RoutingHeaderDetailShow = true;
       this.ItemCode = evt.dataItem.BOM_ITEMCODE;
       this.getRoutingHeaderDetail(this.ItemCode);
     }
@@ -152,7 +150,7 @@ export class BOMGridViewComponent implements OnInit {
     this.BOMService.GetRoutingHeaderDetail(environment.optiProDashboardAPIURL, this.CompanyDB, ItemCode, this.primaryEvent).subscribe(
       headerdata => {
         this.RoutingHeaderDetail = headerdata;
-        console.log(this.RoutingHeaderDetail);
+        this.RoutingHeaderDetailShow = true;
         this.RoutingHeaderEnableLoader = false;
         this.BOMEnableLoader = false;
         for(let i=0;i< this.RoutingHeaderDetail.length; i++){

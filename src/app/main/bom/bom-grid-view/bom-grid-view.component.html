@@ -23,12 +23,12 @@
     <kendo-grid-column field="U_O_DESC" title="{{'Description' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
     <kendo-grid-column field="U_O_BOM_SEQ" title="{{'BOMSequence' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
     <kendo-grid-column field="U_O_REVISION" title="{{'Revision' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
-    <kendo-grid-column field="TYPE" title="{{'Type' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
-    <kendo-grid-column field="EFFECTIVEDATE" title="{{'EffectiveDate' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column> 
+    <kendo-grid-column field="TYPE" title="{{'Type' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
+    <kendo-grid-column field="EFFECTIVEDATE" title="{{'EffectiveDate' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column> 
     <kendo-grid-column field="U_O_WHSECODE" title="{{'Warehouse' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
     <kendo-grid-column field="U_O_QUANTITY" title="{{'BOMQuantity' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column> 
     <kendo-grid-column field="U_O_UOM" title="{{'UOM' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>  
-    <kendo-grid-column field="BOMTYPE" title="{{'BOMType' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>   
+    <kendo-grid-column field="BOMTYPE" title="{{'BOMType' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>   
     <!-- xlsx template start -->
     <kendo-grid-excel fileName="grid-view.xlsx"></kendo-grid-excel>
     <!-- xlsx template end -->
@@ -36,7 +36,7 @@
 </div>
 
 
-<div class="detail-grid-wrapper d-flex" *ngIf="files2">
+<div class="detail-grid-wrapper d-flex">
   <div *ngIf="detailGridEnableLoader" class="k-i-loading"></div>
   <div class="dashboard-detail-grid pr-3" *ngIf="files2">
     <div class="h5 mb-2">{{'DetailGrid' | translate}}</div>
@@ -72,7 +72,7 @@
 
   <div class="bom-detail-grid" fxFlex="100%">
     <div *ngIf="BomDetail">
-      <div class="h5 mb-2">{{'BOMDetail' | translate}}</div>
+      <div class="h5 mb-2">{{'BOMDetail' | translate}} ({{Code}})</div>
       <kendo-grid [kendoGridBinding]="BomDetail"  [loading]="BOMEnableLoader" [selectable]="true" [resizable]="true" [groupable]=isColumnGroup2 [filterable]=isColumnFilter2 [sortable]="true"
         (cellClick)="OnSelectBOMDetail($event)" [ngStyle]="{ 'cursor': 'pointer'}" height="187">
         <ng-template kendoGridToolbarTemplate>
@@ -97,8 +97,8 @@
         <kendo-grid-column field="BOM_QUANTITY" title="{{'BOMQuantity' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
         <kendo-grid-column field="U_O_UOM" title="{{'UOM' | translate}}" width="80"></kendo-grid-column>
         <kendo-grid-column field="U_O_BASIS_CODE" title="{{'ItemBasis' | translate}}" width="80"></kendo-grid-column>
-        <kendo-grid-column field="U_O_EFF_FROM_DATE" title="{{'EffectiveFromDate' | translate}}" width="80"></kendo-grid-column>
-        <kendo-grid-column field="U_O_EFF_TO_DATE" title="{{'EffectiveToDate' | translate}}" width="80"></kendo-grid-column>
+        <kendo-grid-column field="EFFECIVEFROMDATE" title="{{'EffectiveFromDate' | translate}}" width="80"></kendo-grid-column>
+        <kendo-grid-column field="EFFECIVETODATE" title="{{'EffectiveToDate' | translate}}" width="80"></kendo-grid-column>
         <kendo-grid-column field="U_O_ISSUE_METHOD" title="{{'IssueMethod' | translate}}" width="80"></kendo-grid-column>
         <kendo-grid-column field="U_O_ISSUE_WHSE" title="{{'WarehouseIssue' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
         <kendo-grid-column field="U_O_BIN" title="{{'BinIssue' | translate}}" width="80"></kendo-grid-column>
@@ -139,7 +139,7 @@
     <kendo-grid-column field="U_O_ROUT_SEQ" title="{{'RoutingSequence' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
     <kendo-grid-column field="U_O_REVI_NO" title="{{'RoutingRevision' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
     <kendo-grid-column field="ROUTTYPE" title="{{'RoutingType' | translate}}" width="80"></kendo-grid-column>
-    <kendo-grid-column field="U_O_REVI_EFF_DATE" title="{{'EffectiveDate' | translate}}" width="80"></kendo-grid-column>
+    <kendo-grid-column field="EFFECTIVEDATE" title="{{'EffectiveDate' | translate}}" width="80"></kendo-grid-column>
     <kendo-grid-column field="U_O_FG_WH_ID" title="{{'Warehouse' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
     <kendo-grid-column field="U_O_DFLT_LOT_SIZE" title="{{'DefaultBatchSize' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
     <kendo-grid-column field="U_OPTM_APCLBLBOMUNIT" title="{{'ApplicableBOMUnit' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
