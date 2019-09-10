@@ -15,7 +15,6 @@ import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http'
 import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
-import { GanttModule } from '@syncfusion/ej2-angular-gantt';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,7 +46,6 @@ export function createTranslateLoader(http: HttpClient) {
       isolate: false
     }),
     NotificationModule,
-    GanttModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,7 +11,6 @@ import { TreeTableModule } from 'primeng/components/treetable/treetable';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { TrnaslateLazyModule } from './bom/translate-lazy.module';
 import { CountdownModule } from 'ngx-countdown';
-import { GanttModule } from '@syncfusion/ej2-angular-gantt';
 import { DatePipe } from '@angular/common';
 
 import { MainRoutingModule } from './main-routing.module';
@@ -20,9 +19,8 @@ import { MainComponent } from './main.component';
 import { BOMComponent } from './bom/bom.component';
 import { BOMGridViewComponent } from './bom/bom-grid-view/bom-grid-view.component';
 import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
-import { GanttComponent } from './gantt/gantt.component';
+import { GanttChartComponent } from './gantt/gantt-chart.component';
 import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-view.component';
-
 
 @NgModule({
   imports: [
@@ -39,11 +37,10 @@ import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-vi
     NotificationModule,
     TrnaslateLazyModule,
     CountdownModule,
-    GanttModule
   ],
   providers: [
     DatePipe
   ],
-  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent, GanttComponent, GanttChartViewComponent]
+  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent, GanttChartComponent, GanttChartViewComponent]
 })
 export class MainModule { }
