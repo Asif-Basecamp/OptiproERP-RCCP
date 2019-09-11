@@ -45,7 +45,7 @@ export class BOMComponent implements OnInit {
   constructor(private BOMService: BOMService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { }
 
   ngOnInit() {
-    this.CompanyDB = 'OPTIPRO129';
+    this.CompanyDB = 'QAS2129IR1';
     this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
     this.getWarehouseData(environment.optiProDashboardAPIURL, this.CompanyDB);
   }
