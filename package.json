@@ -43,6 +43,7 @@
     "@progress/kendo-data-query": "^1.0.0",
     "@progress/kendo-drawing": "^1.0.0",
     "@progress/kendo-theme-bootstrap": "^4.1.0",
+    "@progress/kendo-ui": "^2019.2.910",
     "angular-tree-component": "^8.4.0",
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
