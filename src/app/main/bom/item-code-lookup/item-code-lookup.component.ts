@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { GridComponent } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { TranslateService } from '@ngx-translate/core';
+import { RowArgs } from '@progress/kendo-angular-grid';
 
 @Component({
   selector: 'app-item-code-lookup',
@@ -19,8 +20,7 @@ export class ItemCodeLookupComponent implements OnInit {
   public itemCode: any;
   public EnableLoader: boolean = true;
   isColumnFilter: boolean = false;
-
-
+  
   constructor(private BOMService: BOMService, private translate: TranslateService) {}
 
   close(){
@@ -61,7 +61,7 @@ export class ItemCodeLookupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.CompanyDB = 'OPTIPRO129';
+    this.CompanyDB = 'QAS2129IR1';
     this.EnableLoader = false;
   }
 }

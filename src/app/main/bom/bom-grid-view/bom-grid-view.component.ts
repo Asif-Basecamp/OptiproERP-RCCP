@@ -43,7 +43,7 @@ export class BOMGridViewComponent implements OnInit {
   constructor(private BOMService: BOMService, private translate: TranslateService) {}
   
   ngOnInit() {
-    this.CompanyDB = 'OPTIPRO129';
+    this.CompanyDB = 'QAS2129IR1';
   }
 
   /*-- on click simple Grid Row--*/
