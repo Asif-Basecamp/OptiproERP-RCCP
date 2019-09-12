@@ -2,13 +2,15 @@
 
 :host {
   background: #fff;  
+  min-width: 240px;
+  width:240px;
   ::ng-deep{
     .main-nav{    
       & > ul{
         padding: 0;
         margin: 0;
         list-style: none;
-        max-height: calc(100vh - 73px);
+        max-height: calc(100vh - 59px);
         overflow: auto;
         & > li{
           display: flex;
@@ -44,14 +46,26 @@
     & svg.logo-svg {
       width: 100%;
       height: auto;
+      max-width: 200px;
+    }
+    & svg.logo-svg-mini {
+      width: 100%;
+      height: auto;
       max-width: 140px;
+      display: none;
     }
   } 
   &.toggle{
-    flex: 1 1 65px !important;
+    flex: 0 1 65px !important;
     max-width: 65px !important;
     min-width: 65px !important;
     ::ng-deep{
+      & svg.logo-svg-mini {
+        display: flex;
+      }
+      & svg.logo-svg {
+        display: none;
+      }
       & .main-nav{
         & > ul > li > a {
           padding: 10px 20px;
@@ -67,14 +81,23 @@
         }
       }
     }
-  } 
+    & ~ .content-area{
+      max-width: calc(100% - 65px);
+    }
+  }   
   @media screen and (max-width:1199px){
     flex: 1 1 200px !important;
     max-width: 200px !important;
     min-width: 200px !important;
+    & ~ .content-area{
+      max-width: calc(100% - 200px);
+    }
   }
   @media screen and (max-width:991px){
     display: none !important;
+    & svg.logo-svg-mini {
+      display: none;
+    }
     &.toggle{
       display: flex !important;
       flex: 1 1 240px !important;

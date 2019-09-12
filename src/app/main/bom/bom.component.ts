@@ -177,6 +177,7 @@ export class BOMComponent implements OnInit {
     this.BOMService.GetItemExplosionData(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.WarehouseFrom, this.WarehouseTo, this.IsPrimary).subscribe(
       data => {
         this.gridData = data;
+        console.log(this.gridData);
         this.SimpleGridEnableLoader = false;
         if(this.gridData.length==0){
           this.bomGrid = false;
