@@ -1,5 +1,5 @@
 <div class="dashboard-left" id="dashboard-left">
-    <div class="card" id="selection-criteria-section" fxFlex="100%">
+    <div class="card" id="selection-criteria-section" fxFlex="0 0 100%">
         <div class="card-header d-flex">
             <svg viewBox="0 0 410.23 410.23" class="icon mr-2 icon-dark" fill="#2a2a2a">
                 <use xlink:href="#search"></use>
@@ -7,123 +7,135 @@
             <span class="ml-auto mr-3 d-flex justify-content-center align-items-center timer-wrapper ">
                 <span>{{hours}}</span>
                 <span>{{minutes}}</span>
-                <span>{{seconds}}</span>       
+                <span>{{seconds}}</span>
             </span>
             <span class="h5 mb-0">{{'SelectionCriteria' | translate}}</span>
             <span class="ml-auto mr-3 d-flex justify-content-center align-items-center timer-wrapper"></span>
             <span class="optipro-icon-arrow-left cursor-pointer mr-1 d-flex"></span>
         </div>
-        <div id="selection-criteria-body" class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3 pt-1">
-            <form class="w-100">
-                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                    <label for="ItemFrom" class="form-label mb-0">{{'ItemForm' | translate}}</label>
-                    <div class="w-100">
-                        <div class="input-group">
-                            <input type="text" name="ItemCodeFrom" id="ItemCodeFrom" class="form-control form-control-sm" #ItemCF=ngModel [(ngModel)]="ItemCodeFrom"
-                                placeholder="{{'ItemForm' | translate}}" autocomplete="off">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary btn-icon d-flex d-flex" (click)="openItemCodeFromLookup()">
-                                    <svg viewBox="0 -96 512 512" class="icon">
-                                        <use xlink:href="#menu"></use>
-                                    </svg>
-                                </button>
+        <div class="overflow-auto d-flex flex-column" fxFlex="0 1 100%">
+            <div id="selection-criteria-body"
+                class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3 pt-1 h-100">
+                <form class="w-100">
+                    <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                        <label for="ItemFrom" class="form-label mb-0">{{'ItemForm' | translate}}</label>
+                        <div class="w-100">
+                            <div class="input-group">
+                                <input type="text" name="ItemCodeFrom" id="ItemCodeFrom"
+                                    class="form-control form-control-sm" #ItemCF=ngModel [(ngModel)]="ItemCodeFrom"
+                                    placeholder="{{'ItemForm' | translate}}" autocomplete="off">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary btn-icon d-flex d-flex"
+                                        (click)="openItemCodeFromLookup()">
+                                        <svg viewBox="0 -96 512 512" class="icon">
+                                            <use xlink:href="#menu"></use>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                    <label for="ItemFrom" class="form-label mb-0">{{'ItemTo' | translate}}</label>
-                    <div class="w-100">
-                        <div class="input-group">
-                            <input type="text" name="ItemCodeTo" id="ItemCodeTo" class="form-control form-control-sm" #ItemCT=ngModel [(ngModel)]="ItemCodeTo"
-                                placeholder="{{'ItemTo' | translate}}" autocomplete="off">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary btn-icon d-flex" (click)="openItemCodeToLookup()">
-                                    <svg viewBox="0 -96 512 512" class="icon">
-                                        <use xlink:href="#menu"></use>
-                                    </svg>
-                                </button>
+                    <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                        <label for="ItemFrom" class="form-label mb-0">{{'ItemTo' | translate}}</label>
+                        <div class="w-100">
+                            <div class="input-group">
+                                <input type="text" name="ItemCodeTo" id="ItemCodeTo"
+                                    class="form-control form-control-sm" #ItemCT=ngModel [(ngModel)]="ItemCodeTo"
+                                    placeholder="{{'ItemTo' | translate}}" autocomplete="off">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary btn-icon d-flex"
+                                        (click)="openItemCodeToLookup()">
+                                        <svg viewBox="0 -96 512 512" class="icon">
+                                            <use xlink:href="#menu"></use>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                    <label for="WarehouseFrom" class="form-label mb-0">{{'WarehouseFrom' | translate}}</label>
-                    <div class="w-100">
-                        <div class="input-group">
-                            <input type="text" name="WarehouseFrom" id="WarehouseFrom" class="form-control form-control-sm" #WarehouseCF=ngModel [(ngModel)]="WarehouseFrom"
-                                placeholder="{{'WarehouseFrom' | translate}}" autocomplete="off">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary btn-icon d-flex" (click)="openWarehouseFromLookup()">
-                                    <svg viewBox="0 -96 512 512" class="icon">
-                                        <use xlink:href="#menu"></use>
-                                    </svg>
-                                </button>
+                    <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                        <label for="WarehouseFrom" class="form-label mb-0">{{'WarehouseFrom' | translate}}</label>
+                        <div class="w-100">
+                            <div class="input-group">
+                                <input type="text" name="WarehouseFrom" id="WarehouseFrom"
+                                    class="form-control form-control-sm" #WarehouseCF=ngModel
+                                    [(ngModel)]="WarehouseFrom" placeholder="{{'WarehouseFrom' | translate}}"
+                                    autocomplete="off">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary btn-icon d-flex"
+                                        (click)="openWarehouseFromLookup()">
+                                        <svg viewBox="0 -96 512 512" class="icon">
+                                            <use xlink:href="#menu"></use>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                    <label for="WarehouseTo" class="form-label mb-0">{{'WarehouseTo' | translate}}</label>
-                    <div class="w-100">
-                        <div class="input-group">
-                            <input type="text" name="WarehouseTo" id="WarehouseTo" class="form-control form-control-sm" #WarehouseCT=ngModel [(ngModel)]="WarehouseTo"
-                                placeholder="{{'WarehouseTo' | translate}}" autocomplete="off">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary btn-icon d-flex" (click)="openWarehouseToLookup()">
-                                    <svg viewBox="0 -96 512 512" class="icon">
-                                        <use xlink:href="#menu"></use>
-                                    </svg>
-                                </button>
+                    <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                        <label for="WarehouseTo" class="form-label mb-0">{{'WarehouseTo' | translate}}</label>
+                        <div class="w-100">
+                            <div class="input-group">
+                                <input type="text" name="WarehouseTo" id="WarehouseTo"
+                                    class="form-control form-control-sm" #WarehouseCT=ngModel [(ngModel)]="WarehouseTo"
+                                    placeholder="{{'WarehouseTo' | translate}}" autocomplete="off">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary btn-icon d-flex"
+                                        (click)="openWarehouseToLookup()">
+                                        <svg viewBox="0 -96 512 512" class="icon">
+                                            <use xlink:href="#menu"></use>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                    <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
-                        <input type="checkbox" [checked]="myVar1" (change)="onChange($event)">
-                        <span class="checkbox"></span>
-                        <span>{{'Primary' | translate}}</span>
-                    </label>
-                </div>
-            </form>
-        </div>
+                    <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                        <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
+                            <input type="checkbox" [checked]="myVar1" (change)="onChange($event)">
+                            <span class="checkbox"></span>
+                            <span>{{'Primary' | translate}}</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
 
             <div class="row no-gutters">
                 <div class="col-12 d-flex align-items-center px-3 pb-3">
-                  <div class="k-form-field d-flex align-items-center mr-2">
-                    <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
-                        <input type="checkbox" id="autorefreshTime" name="autorefreshTime"
-                        [(ngModel)]="refreshCheck" (click)="refreshEvent($event)">
-                        <span class="checkbox"></span>
-                        <span class="text-nowrap">Auto Refresh</span>
-                    </label>        
-                    <kendo-timepicker class="form-control-sm"  [ngStyle]="{'max-width': '109px'}" format="HH:mm" formatPlaceholder="formatPattern" [(value)]="value" [disabled]="!refreshStatus"></kendo-timepicker>        
-                  </div>
+                    <div class="k-form-field d-flex align-items-center mr-2">
+                        <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
+                            <input type="checkbox" id="autorefreshTime" name="autorefreshTime"
+                                [(ngModel)]="refreshCheck" (click)="refreshEvent($event)">
+                            <span class="checkbox"></span>
+                            <span class="text-nowrap">Auto Refresh</span>
+                        </label>
+                        <kendo-timepicker class="form-control-sm" [ngStyle]="{'max-width': '109px'}" format="HH:mm"
+                            formatPlaceholder="formatPattern" [(value)]="value" [disabled]="!refreshStatus">
+                        </kendo-timepicker>
+                    </div>
 
-                  <button class="btn btn-default btn-icon btn-sm p-0 btn-icon-only" id="start" title="Auto Refresh"
-                    (click)="autoRefresh();" [disabled]="!refreshStatus">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#212529" viewBox="0 0 24 24">
-                      <g data-name="Layer 2">
-                        <g data-name="sync">
-                          <rect width="24" height="24" opacity="0"></rect>
-                          <path
-                            d="M21.66 10.37a.62.62 0 0 0 .07-.19l.75-4a1 1 0 0 0-2-.36l-.37 2a9.22 9.22 0 0 0-16.58.84 1 1 0 0 0 .55 1.3 1 1 0 0 0 1.31-.55A7.08 7.08 0 0 1 12.07 5a7.17 7.17 0 0 1 6.24 3.58l-1.65-.27a1 1 0 1 0-.32 2l4.25.71h.16a.93.93 0 0 0 .34-.06.33.33 0 0 0 .1-.06.78.78 0 0 0 .2-.11l.08-.1a1.07 1.07 0 0 0 .14-.16.58.58 0 0 0 .05-.16z">
-                          </path>
-                          <path
-                            d="M19.88 14.07a1 1 0 0 0-1.31.56A7.08 7.08 0 0 1 11.93 19a7.17 7.17 0 0 1-6.24-3.58l1.65.27h.16a1 1 0 0 0 .16-2L3.41 13a.91.91 0 0 0-.33 0H3a1.15 1.15 0 0 0-.32.14 1 1 0 0 0-.18.18l-.09.1a.84.84 0 0 0-.07.19.44.44 0 0 0-.07.17l-.75 4a1 1 0 0 0 .8 1.22h.18a1 1 0 0 0 1-.82l.37-2a9.22 9.22 0 0 0 16.58-.83 1 1 0 0 0-.57-1.28z">
-                          </path>
-                        </g>
-                      </g>
-                    </svg>
-                  </button>
+                    <button class="btn btn-default btn-icon btn-sm p-0 btn-icon-only" id="start" title="Auto Refresh"
+                        (click)="autoRefresh();" [disabled]="!refreshStatus">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#212529"
+                            viewBox="0 0 24 24">
+                            <g data-name="Layer 2">
+                                <g data-name="sync">
+                                    <rect width="24" height="24" opacity="0"></rect>
+                                    <path
+                                        d="M21.66 10.37a.62.62 0 0 0 .07-.19l.75-4a1 1 0 0 0-2-.36l-.37 2a9.22 9.22 0 0 0-16.58.84 1 1 0 0 0 .55 1.3 1 1 0 0 0 1.31-.55A7.08 7.08 0 0 1 12.07 5a7.17 7.17 0 0 1 6.24 3.58l-1.65-.27a1 1 0 1 0-.32 2l4.25.71h.16a.93.93 0 0 0 .34-.06.33.33 0 0 0 .1-.06.78.78 0 0 0 .2-.11l.08-.1a1.07 1.07 0 0 0 .14-.16.58.58 0 0 0 .05-.16z">
+                                    </path>
+                                    <path
+                                        d="M19.88 14.07a1 1 0 0 0-1.31.56A7.08 7.08 0 0 1 11.93 19a7.17 7.17 0 0 1-6.24-3.58l1.65.27h.16a1 1 0 0 0 .16-2L3.41 13a.91.91 0 0 0-.33 0H3a1.15 1.15 0 0 0-.32.14 1 1 0 0 0-.18.18l-.09.1a.84.84 0 0 0-.07.19.44.44 0 0 0-.07.17l-.75 4a1 1 0 0 0 .8 1.22h.18a1 1 0 0 0 1-.82l.37-2a9.22 9.22 0 0 0 16.58-.83 1 1 0 0 0-.57-1.28z">
+                                    </path>
+                                </g>
+                            </g>
+                        </svg>
+                    </button>
                 </div>
                 <!-- <button type="submit" class="btn btn-primary mx-auto btn-sm" nbButton size="xsmall" style="text-transform: none;text-align: center;
-                margin: 10px auto 0;" (click)="processData()">Manual Refresh</button> -->
+                        margin: 10px auto 0;" (click)="processData()">Manual Refresh</button> -->
             </div>
-
-
-
+        </div>
         <div class="card-footer text-center py-2">
             <button type="submit" (click)="processData()" class="btn btn-primary btn-icon btn-sm px-2" id="process">
                 {{'Process' | translate}}
@@ -135,15 +147,20 @@
     </div>
 </div>
 <div class="dashboard-right" id="dashboard-right">
-    <div class="card" fxFlex="100%">
-        <div class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3" [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
-            <app-item-code-lookup *ngIf="lookupStatus" [ItemData]="ItemData" (lookupEvent)="lookupEventHander($event)" (itemCodeEvent)="itemCodeEventHander($event)"></app-item-code-lookup>
-            <app-warehouse-code-lookup *ngIf="WarehouseStatus" [WarehouseData]="WarehouseData" (warehouseEvent)="warehouseEventHander($event)" (warehouseCodeEvent)="warehouseCodeEventHander($event)"></app-warehouse-code-lookup>
+    <div class="card" fxFlex="0 0 100%">
+        <div *ngIf="bomGrid" class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3"
+            [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
+            <app-item-code-lookup *ngIf="lookupStatus" [ItemData]="ItemData" (lookupEvent)="lookupEventHander($event)"
+                (itemCodeEvent)="itemCodeEventHander($event)"></app-item-code-lookup>
+            <app-warehouse-code-lookup *ngIf="WarehouseStatus" [WarehouseData]="WarehouseData"
+                (warehouseEvent)="warehouseEventHander($event)" (warehouseCodeEvent)="warehouseCodeEventHander($event)">
+            </app-warehouse-code-lookup>
             <div *ngIf="SimpleGridEnableLoader" class="k-i-loading"></div>
-            <app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary"></app-bom-grid-view>
+            <app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary">
+            </app-bom-grid-view>
         </div>
-        <div *ngIf="!bomGrid" class="welcome-page" fxLayout="column" fxFlex="100%">
-            <div class="welcome-innner" fxLayout="column" fxFlex="100%">
+        <div *ngIf="!bomGrid" class="welcome-page" fxLayout="column" fxFlex="0 0 100%">
+            <div class="welcome-innner" fxLayout="column" fxFlex="0 0 100%">
                 <div class="app-detail text-center">
                     <div class="welcome-logo mx-auto" title="OptiProERP - RCCP">
                         <svg viewBox="0 0 360.6 52.8" class="logo-svg">
@@ -157,5 +174,5 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
