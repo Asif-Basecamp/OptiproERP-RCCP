@@ -59,7 +59,7 @@ export class GanttChartViewComponent implements OnInit {
         gantt.config.drag_progress = true;
 
         //gantt editable configuration
-        gantt.config.readonly = true;
+        gantt.config.readonly = false;
 
         gantt.config.columns = [
             {name: "text", label:"Opration", tree: true, width: '120', resize: true},
@@ -215,7 +215,8 @@ export class GanttChartViewComponent implements OnInit {
                 Start = tConvert(StartEl.toTimeString().substr(0,5)) +" "+ StartEl.getUTCDate() +"-" + StartEl.getUTCMonth() + "-" + StartEl.getUTCFullYear(),
                 End = tConvert(EndEl.toTimeString().substr(0,5)) +" "+ EndEl.getUTCDate() +"-" + EndEl.getUTCMonth() + "-" + EndEl.getUTCFullYear();
 
-            return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration:</b><span> " + task.duration/2 + " Hour(s)"+"</span></div><div><b>Progress:</b><span> " + Math.round(task.progress*100) + "%</span></div>";
+            return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration:</b><span> " + task.duration/2 + " Hour(s)"+"</span></div><div><b>Progress:</b><span> ";
+             //+ Math.round(task.progress*100) + "%</span></div>";
         };
         gantt.init(this.ganttContainer.nativeElement);
         Promise.all([this.taskService.get(), this.linkService.get()])
