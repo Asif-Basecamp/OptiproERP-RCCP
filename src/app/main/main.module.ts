@@ -21,7 +21,7 @@ import { BOMGridViewComponent } from './bom/bom-grid-view/bom-grid-view.componen
 import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
 import { GanttChartComponent } from './gantt/gantt-chart.component';
 import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-view.component';
-import { NgGanttEditorModule } from 'ng-gantt';
+
 
 @NgModule({
   imports: [
@@ -38,7 +38,6 @@ import { NgGanttEditorModule } from 'ng-gantt';
     NotificationModule,
     TrnaslateLazyModule,
     CountdownModule,
-    NgGanttEditorModule
   ],
   providers: [
     DatePipe

@@ -14,17 +14,23 @@ html, body{
 }
 //Scrollbar 
 @media screen and (min-width:1025px){
-  *::-webkit-scrollbar-track{
+  .overflow-auto::-webkit-scrollbar-track,
+  .slim-scroll::-webkit-scrollbar-track,
+  .main-nav > ul::-webkit-scrollbar-track{
     background-color: #F5F5F5;
   }
   
-  *::-webkit-scrollbar{
+  .overflow-auto::-webkit-scrollbar,
+  .slim-scroll::-webkit-scrollbar,
+  .main-nav > ul::-webkit-scrollbar{
     width: 6px;
     height: 6px;
     background-color: #F5F5F5;
   }
   
-  *::-webkit-scrollbar-thumb{
+  .overflow-auto::-webkit-scrollbar-thumb,
+  .slim-scroll::-webkit-scrollbar-thumb,
+  .main-nav > ul::-webkit-scrollbar-thumb{
     // background-color: theme-color("primary");
     background: #dadada;
     cursor: pointer;

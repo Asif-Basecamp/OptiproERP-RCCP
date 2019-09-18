@@ -1,21 +1,7 @@
 :host{
-    display: flex;
-    flex:0 0 100%;
-    width:100%;
-    max-width: 100%;
-    ::ng-deep{
-        & ng-gantt{
-            display: flex;
-            flex:0 0  100%;
-            max-width: 100%;
-            width:100%;
-            & > div{
-                display: flex;
-                flex:0 0  100%;
-                max-width: 100%;
-                width:100%;
-                overflow: auto;
-            }
-        }
-    }
+    display: block;
+    height: calc(100vh - 140px);
+    position: relative;
+    width: 100%;
 }
+
