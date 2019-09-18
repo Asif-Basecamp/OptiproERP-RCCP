@@ -143,7 +143,7 @@
     <kendo-grid-column field="U_OPTM_APCLBLBOMUNIT" title="{{'ApplicableBOMUnit' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
     <div *kendoGridDetailTemplate="let dataItem">
       <div class="h5 mb-2">{{'RoutingLine' | translate}}</div>
-      <kendo-grid [kendoGridBinding]="dataItem.LineDetail" [navigable]="true" [resizable]="true" [resizable]="true" [groupable]=isColumnGroup4 [filterable]=isColumnFilter4 [sortable]="true"
+      <kendo-grid [kendoGridBinding]="dataItem.LineDetail" [navigable]="true" [resizable]="true" [groupable]=isColumnGroup4 [filterable]=isColumnFilter4 [sortable]="true"
         [ngStyle]="{ 'cursor': 'pointer'}" kendoGridFocusable>
         <ng-template kendoGridToolbarTemplate>
           <div class="d-flex align-items-center">        
