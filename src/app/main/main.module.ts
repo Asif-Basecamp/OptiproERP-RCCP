@@ -21,6 +21,8 @@ import { BOMGridViewComponent } from './bom/bom-grid-view/bom-grid-view.componen
 import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
 import { GanttChartComponent } from './gantt/gantt-chart.component';
 import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-view.component';
+import { PlanDefinitionComponent } from './gantt/plan-definition/plan-definition.component';
+import { PlanOrderComponent } from './gantt/plan-order/plan-order.component';
 
 
 @NgModule({
@@ -42,6 +44,6 @@ import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-vi
   providers: [
     DatePipe
   ],
-  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent, GanttChartComponent, GanttChartViewComponent]
+  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent, GanttChartComponent, GanttChartViewComponent, PlanDefinitionComponent, PlanOrderComponent]
 })
 export class MainModule { }

@@ -12,4 +12,12 @@ export class GanttChartComponent implements OnInit {
   ngOnInit() {
   }
 
+  openPlanDefinition(){
+    alert('hello');
+  }
+
+  openPlanOrderNumber(){
+    alert('hello');
+  }
+
 }

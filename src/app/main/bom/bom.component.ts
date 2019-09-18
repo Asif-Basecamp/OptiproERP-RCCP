@@ -45,7 +45,7 @@ export class BOMComponent implements OnInit {
   constructor(private BOMService: BOMService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { }
 
   ngOnInit() {
-    this.CompanyDB = 'QAS2129IR1';
+    this.CompanyDB = 'OPTIPRO129';
     this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
     this.getWarehouseData(environment.optiProDashboardAPIURL, this.CompanyDB);
   }
@@ -177,7 +177,6 @@ export class BOMComponent implements OnInit {
     this.BOMService.GetItemExplosionData(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.WarehouseFrom, this.WarehouseTo, this.IsPrimary).subscribe(
       data => {
         this.gridData = data;
-        console.log(this.gridData);
         this.SimpleGridEnableLoader = false;
         if(this.gridData.length==0){
           this.bomGrid = false;

@@ -1,12 +1,12 @@
-
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-
 import "./../../../../assets/scripts/dhtmlx-gantt";
 import { TaskService } from "../../../service/task.service";
 import { LinkService } from "../../../service/link.service";
 import { Task } from 'src/app/model/task';
 import { Link } from 'src/app/model/link';
 import { Scale } from 'src/app/model/scale';
+import { environment } from '../../../../environments/environment';
+import { GanttChartService } from '../service/gantt-chart.service';
 
 @Component({
     selector: "<gantt></gantt>",
@@ -23,7 +23,7 @@ export class GanttChartViewComponent implements OnInit {
         { value: "month", name: 'Month' }
     ];
     public scaler:string = 'day';
-    constructor(private taskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef) { }
+    constructor(private taskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef, private GanttChartService: GanttChartService) { }
 
     // ngOnInit(){
     //     gantt.config.xml_date = "%Y-%m-%d %H:%i";

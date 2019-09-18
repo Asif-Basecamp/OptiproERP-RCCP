@@ -93,6 +93,7 @@
     "MoveTime": "Move Time",
     "QCTime": "QC Time",
     "PerExternalInfuseQty": "% External Infuse Qty",
-    "Instruction": "Instruction"
-    
+    "Instruction": "Instruction",
+    "PlanDefinition": "Plan Definition",
+    "PlanOrderNo": "Plan Order No."
 }
