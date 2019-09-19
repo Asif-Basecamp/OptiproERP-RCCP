@@ -1,35 +1,40 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SigninComponent } from './auth/signin/signin.component';
-import { FormsModule } from '@angular/forms';
-import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { CustomLayoutModule } from './@layout/customLayout.module';
+import { NotificationModule } from '@progress/kendo-angular-notification';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
-import { ToastrModule } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
-    FormsModule,
-    DropDownsModule,
+    FlexLayoutModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    GridModule,
+    BrowserAnimationsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
+    NotificationModule,
+    CustomLayoutModule,
+    DialogsModule,
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -38,8 +43,9 @@ export function createTranslateLoader(http: HttpClient) {
       },
       isolate: false
     }),
+    NotificationModule,
   ],
-  providers: [DatePipe],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

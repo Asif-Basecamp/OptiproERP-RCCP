@@ -1,0 +1,181 @@
+:host{
+    flex:0 0 100%;
+    display: flex;
+    overflow: auto;
+    flex-direction: row;
+    ::ng-deep{
+        .k-splitter{
+            background-color:transparent; 
+            & .k-splitbar{
+                background-color: transparent;
+            }
+            & .k-ghost-splitbar-horizontal, .k-splitbar-horizontal{
+                width: 15px;
+                &:hover{
+                    background-color: rgba(0,0,0,0.05)
+                }
+            }
+        }
+    }
+}
+
+
+.kendo-grid-wrapper{
+    max-height: calc(100vh - 142px) !important;
+    ::ng-deep{
+        & .full-height-grid{
+            height: 100%;
+            overflow: auto;
+        }
+    }
+    @media screen and (max-width:767px){
+        max-height: calc(100vh - 116px) !important;        
+    }
+}
+.layout-mode{
+    padding: 15px;
+    @media screen and (max-width:767px){
+        padding: 0;
+        ::ng-deep{
+            & .card{
+                border-radius: 0;
+            }
+        }
+    }
+    & > .card .card-body{
+        padding: 15px;
+    }
+}
+
+
+.dashboard-left{
+    padding:15px 0 15px 15px;
+    height: 100%; 
+    width: 300px;
+    flex: 0 0 300px;
+    min-width: 300px;
+    max-width: 300px;
+    & > nb-card{
+        height:100%;
+        & > nb-card-header{
+            align-items: center;
+            justify-content: flex-start;
+            & > span{
+                &:first-of-type{
+                    line-height: 1px;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    &.shrink{
+        width: 36px; 
+        flex: 0 0 36px;   
+        & > nb-card{
+            & > nb-card-header{
+                transform: rotateZ(-90deg) translateX(-150px) translateY(2px);
+                transform-origin: left top;
+                white-space: nowrap;
+                width: 156px;
+                border-bottom: none !important;
+                & > span{
+                    margin-right: 0;
+                    order:1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    &:first-of-type{
+                        margin-right: 10px;
+                    }                    
+                }
+                & > .optipro-icon-arrow-left{
+                    margin-right: 0;
+                    transform: rotateZ(270deg);
+                    display: block;
+                    margin-left: 0 !important;
+                } 
+                & > svg{
+                    order:2;
+                    transform: rotateZ(90deg);
+                }
+                & > .timer-wrapper{
+                    display: none !important;
+                }
+            }
+            & > nb-card-footer{
+                display: none;
+            }
+        }
+        & + .dashboard-right{
+            max-width: calc(100% - 36px);
+        }
+    }
+}
+.dashboard-right{    
+    padding: 15px 15px 15px 0;
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+    width: 100% !important;
+    height: 100%;
+    & > .card{
+        overflow: auto;
+        height:100%;
+    }
+}
+.card-header{
+    background: #fff;
+    border:none;
+    border-radius: 5px 5px 0 0 !important;
+}
+.card-footer{
+    background: #fff;
+    border:none;
+    border-radius: 0 0 5px 5px !important;
+}
+
+.welcome-page{
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.welcome-innner{
+    background: url("~src/assets/images/auth/bg.jpg") no-repeat;
+    width: 100%;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    background-size:cover; 
+    padding:20px;
+    box-shadow: 0 1px 10px 0 rgba(69, 90, 100, 0.08);
+}
+.app-detail{
+    width: 100%;
+    max-width: 370px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    padding: 25px 40px 20px 40px;
+    margin-top: 15px;
+    font-size: 9px;
+    ::ng-deep{
+        & p{
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        & small{
+            font-size: 12px
+        }
+        & svg.logo-svg {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+.restrictedHeight{
+    & .ui-treetable-scrollable-body{
+        max-height: calc(100vh - 370px) !important;
+        height: calc(100vh - 370px) !important;
+    }
+  }

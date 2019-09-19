@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  optiProDashboardURL: "http://172.16.6.147/OptiProAdmin/",
   optiProDashboardAPIURL: "http://172.16.6.117/OptiProDashboard/",
   optiProGanttChartAPIURL: "http://172.16.6.117/OptiProRCCPGanttChart/RCCPGanttChart/",
 };
