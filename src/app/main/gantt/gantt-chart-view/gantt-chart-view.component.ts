@@ -23,32 +23,9 @@ export class GanttChartViewComponent implements OnInit {
         { value: "month", name: 'Month' }
     ];
     public scaler:string = 'day';
+
     constructor(private taskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef, private GanttChartService: GanttChartService) { }
 
-    // ngOnInit(){
-    //     gantt.config.xml_date = "%Y-%m-%d %H:%i";
-
-    //     gantt.init(this.ganttContainer.nativeElement);
-
-    //     const dp = gantt.createDataProcessor({
-    //         task: {
-    //             update: (data: Task) => this.taskService.update(data),
-    //             create: (data: Task) => this.taskService.insert(data),
-    //             delete: (id) => this.taskService.remove(id)
-    //         },
-    //         link: {
-    //             update: (data: Link) => this.linkService.update(data),
-    //             create: (data: Link) => this.linkService.insert(data),
-    //             delete: (id) => this.linkService.remove(id)
-    //         }
-    //     });
-
-
-    //     Promise.all([this.taskService.get(), this.linkService.get()])
-    //         .then(([data, links]) => {
-    //             gantt.parse({data, links});
-    //         });
-    // }
     ngOnInit() {
         gantt.config.scale_height = 25 * 3;
         gantt.config.link_line_width = 1;
@@ -68,7 +45,8 @@ export class GanttChartViewComponent implements OnInit {
             {name: "end_date", label:"End Date", template:function(obj){
                 return obj.end_date}, align: "center", width: '90', resize: true},
             {name: "duration", label:"Duration (H)", template:function(obj){
-                return obj.duration/2},align: "center", width: '100', resize: true},
+                console.log(obj.duration);
+                return obj.duration/60},align: "center", width: '100', resize: true},
             // {name: "progress", label:"Progress",template:function(obj){
             //     return Math.round(obj.progress*100) + "%"}, align: "center", width: '80', resize: true},
             // {name: "add", width: 40}
@@ -95,22 +73,13 @@ export class GanttChartViewComponent implements OnInit {
               {view: "scrollbar", id: "scrollVer"}
             ]
           };
-  
-        
-        // gantt.config.scale_unit = "hour";
-        // gantt.config.date_scale = "%h";
-        // gantt.config.start_on_monday = false;
-    
-        // gantt.config.subscales = [
-        //     // {unit: "month", step: 1, format: "%F, %Y"},
-        //     // {unit:"week", step:1},
-        //     {unit: "hour", step: 1, format: "%g %a"},
-        // ];
         
         gantt.config.duration_unit = "minute";//an minute
-        gantt.config.duration_step = 30; // 0.5 hour
+        // gantt.config.duration_step = 30; // 0.5 hour
         // gantt.config.work_time = true;
-        gantt.config.xml_date = "%h:%i %d-%m-%Y";
+        // gantt.config.xml_date = "%h:%i %d-%m-%Y";
+        gantt.config.xml_date = "%Y-%m-%d %H:%i";
+        
 
         var zoomConfig = {
             levels: [
@@ -154,32 +123,8 @@ export class GanttChartViewComponent implements OnInit {
                         {unit: "month", format: "%F, %Y"},
                         {unit: "week", format: "Week #%W"}
                     ]
-                },
-                // {
-                //     name:"quarter",
-                //     height: 50,
-                //     min_column_width:90,
-                //     scales:[
-                //         {unit: "month", step: 1, format: "%M"},
-                //         {
-                //             unit: "quarter", step: 1, format: function (date) {
-                //                 var dateToStr = gantt.date.date_to_str("%M");
-                //                 var endDate = gantt.date.add(gantt.date.add(date, 3, "month"), -1, "day");
-                //                 return dateToStr(date) + " - " + dateToStr(endDate);
-                //             }
-                //         }
-                //     ]
-                // },
-                // {
-                //     name:"year",
-                //     scale_height: 50,
-                //     min_column_width: 30,
-                //     scales:[
-                //         {unit: "year", step: 1, format: "%Y"}
-                //     ]
-                // }
-            ]
-        };
+                }]};
+
         let  that = this;
         gantt.ext.zoom.init(zoomConfig);
         gantt.ext.zoom.setLevel("day");
@@ -190,7 +135,6 @@ export class GanttChartViewComponent implements OnInit {
         //gantt popup
         gantt.config.lightbox.sections = [
             {name:"description",height:28, map_to:"text", type:"textarea", focus:true},
-            // {name:"description", height:70, map_to:"description", type:"textarea", focus:false},
             {name: "type", type: "typeselect", map_to: "type"},
             {name:"time",type:"duration",map_to:"auto",time_format:["%d","%m","%Y","%H:%i"]}
         ];         
@@ -215,7 +159,7 @@ export class GanttChartViewComponent implements OnInit {
                 Start = tConvert(StartEl.toTimeString().substr(0,5)) +" "+ StartEl.getUTCDate() +"-" + StartEl.getUTCMonth() + "-" + StartEl.getUTCFullYear(),
                 End = tConvert(EndEl.toTimeString().substr(0,5)) +" "+ EndEl.getUTCDate() +"-" + EndEl.getUTCMonth() + "-" + EndEl.getUTCFullYear();
 
-            return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration:</b><span> " + task.duration/2 + " Hour(s)"+"</span></div><div><b>Progress:</b><span> ";
+            return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration:</b><span> " + task.duration/60 + " Hour(s)"+"</span></div><div><b>Progress:</b><span> ";
              //+ Math.round(task.progress*100) + "%</span></div>";
         };
         gantt.init(this.ganttContainer.nativeElement);
