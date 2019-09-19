@@ -30,7 +30,8 @@
             ],
             "styles": [
               "node_modules/@progress/kendo-theme-bootstrap/scss/all.scss",    
-              "src/styles.scss"              
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"                            
             ],
             "scripts": []
           },

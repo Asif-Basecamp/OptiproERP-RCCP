@@ -1,23 +1,13 @@
 import { NgModule } from '@angular/core';
+import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { SigninComponent } from './auth/signin/signin.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'main',
-    pathMatch: 'full'    
-  },  
-  { path: 'main',
-    loadChildren: () => import('./main/main.module').then(m => m.MainModule),    
-    data: { showHeader: true, showSidebar: true, showFooter:false, compactLayout:false }
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule),    
-    data: { showHeader: false, showSidebar: false, showFooter:false, compactLayout:false }
-  },
-];
+  { path: '', redirectTo: 'Auth/Signin', pathMatch: 'full' },
+  { path: 'Auth/Signin', component: SigninComponent },
+  { path: 'Dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule', data: { preload: true } },
+  { path: '**', redirectTo: 'Auth/Signin' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

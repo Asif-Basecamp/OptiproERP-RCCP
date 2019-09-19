@@ -1,0 +1,424 @@
+<div class="dashboard-left" id="dashboard-left">
+    <div class="card" id="selection-criteria-section" fxFlex="100%">
+        <div class="card-header d-flex">
+            <svg viewBox="0 0 410.23 410.23" class="icon mr-2 icon-dark" fill="#2a2a2a">
+                <use xlink:href="#search"></use>
+            </svg>
+            <span class="h5 mb-0">{{'SelectionCriteria' | translate}}</span>
+            <span class="ml-auto mr-3 d-flex justify-content-center align-items-center timer-wrapper"></span>
+            <span class="optipro-icon-arrow-left cursor-pointer mr-1 d-flex"></span>
+        </div>
+        <div id="selection-criteria-body" class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3 pt-1">
+            <form class="w-100" #criteriaForm="ngForm"> 
+                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                    <label for="ItemFrom" class="form-label mb-0">{{'Item' | translate}}</label>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" name="ItemValue" id="ItemValue" class="form-control form-control-sm"
+                            placeholder="{{'Item' | translate}}" #ItemVal=ngModel [(ngModel)]="ItemValue" (blur)="onItemCodeBlur()" required autocomplete="off">    
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary btn-icon d-flex d-flex" (click)="openItemCodeFromLookup()">
+                                    <svg viewBox="0 -96 512 512" class="icon">
+                                        <use xlink:href="#menu"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <small id="itemHelp" class="form-text text-muted opti_error-msg text-right" *ngIf="ItemVal.errors?.required && !itemStatus && ItemVal.touched">{{'item_code_req' | translate}}</small>
+                    <small id="itemHelp" class="form-text text-muted opti_error-msg text-right" *ngIf="itemStatus && ItemVal.touched">{{'correct_item_code' | translate}}</small>
+                </div>
+
+                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                    <label for="ItemFrom" class="form-label mb-0">{{'description' | translate}}</label>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" name="description" id="description" class="form-control form-control-sm"  #ItemDes=ngModel [(ngModel)]="ItemDesc"
+                                placeholder="{{'description' | translate}}" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                    <label for="ItemFrom" class="form-label mb-0">{{'warehouse' | translate}}</label>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" name="warehouse" id="warehouse" class="form-control form-control-sm"  #Whse=ngModel [(ngModel)]="DfltWarehouse"
+                                placeholder="{{'warehouse' | translate}}" autocomplete="off">
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-primary btn-icon d-flex d-flex">
+                                <svg viewBox="0 -96 512 512" class="icon">
+                                    <use xlink:href="#menu"></use>
+                                </svg>
+                              </button>
+                            </div>    
+                        </div>
+                    </div>
+                    <small id="emalHelp" class="form-text text-muted text-right opti_error-msg" *ngIf="Whse.errors?.required && !WarehouseStatus && Whse.touched && !showValidation">{{'warehouse_code_req' | translate}}</small>
+                    <small id="emailHelp" class="form-text text-muted text-right opti_error-msg" *ngIf="WarehouseStatus && Whse.touched && !showValidation">{{'correct_warehouse_code' | translate}}</small>
+                </div>
+
+                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                    <label for="ItemFrom" class="form-label mb-0">{{'lot_from' | translate}}</label>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" name="DistNumFrom" id="DistNumFrom" class="form-control form-control-sm" #LotF=ngModel [(ngModel)]="DistNumFrom"
+                                placeholder="{{'select_lot_from' | translate}}" autocomplete="off">
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-primary btn-icon d-flex d-flex">
+                                <svg viewBox="0 -96 512 512" class="icon">
+                                    <use xlink:href="#menu"></use>
+                                </svg>
+                              </button>
+                            </div>    
+                        </div>
+                    </div>
+                    <small id="emailHelp" class="form-text text-muted opti_error-msg text-right" *ngIf="LotFromStatus && LotF.touched">{{'correct_lot_from' | translate}}</small>
+                </div>
+
+                <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
+                    <label for="ItemFrom" class="form-label mb-0">{{'lot_to' | translate}}</label>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" name="DistNumTo" id="DistNumTo" class="form-control form-control-sm"  #LotT=ngModel [(ngModel)]="DistNumTo"
+                                placeholder="{{'select_lot_to' | translate}}" autocomplete="off">
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-primary btn-icon d-flex d-flex">
+                                <svg viewBox="0 -96 512 512" class="icon">
+                                    <use xlink:href="#menu"></use>
+                                </svg>
+                              </button>
+                            </div>    
+                        </div>
+                    </div>
+                    <small id="lotToHelp" class="form-text text-muted opti_error-msg text-right" *ngIf="LotToStatus && LotT.touched">{{'correct_lot_to' | translate}}</small>                
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center py-2">
+            <button type="submit" class="btn btn-primary btn-icon btn-sm px-2" id="process">
+                {{'Process' | translate}}
+                <svg viewBox="0 0 24 24" class="icon">
+                    <use xlink:href="#rightArrow"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--<div class="dashboard-right" id="dashboard-right">
+    <div class="card" fxFlex="100%">
+        <div class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3" [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
+            <app-item-code-lookup *ngIf="lookup" [ItemData]="ItemData" (lookupEvent)="lookupCloseEvent($event)"></app-item-code-lookup>
+            <h2>dfgdfgfdg</h2>
+
+        </div>
+    </div>    
+</div>-->
+
+<div class="dashboard-right">
+    <div class="custom-accordian analysis-accordian-open grid-accordian-open " [ngClass]="{'default-screen':!gridViewShow}" id="custom-accordian">
+        <as-split direction="vertical" restrictMove="true" gutterSize="1">
+            <as-split-area class="grid-accordian expanded" size="1" minSize="10px" id="grid-accordian">
+            <div class="border-bottom card-header d-flex" id="grid-accordian-trigger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="mr-2" fill="#2a2a2a"><rect width="24" height="24" opacity="0"></rect><path d="M9 3H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"></path><path d="M19 3h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"></path><path d="M9 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2z"></path><path d="M19 13h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2z"></path></svg>
+                <span>Grid View</span>
+            </div>
+            <div class="card-body p-0" id="grid-accordian-body">
+                <as-split direction="horizontal" restrictMove="true" gutterSize="1">
+                    <as-split-area size="25" minSize="15">
+                    <div class="overflow-auto h-100 px-2">
+                        <div class="tree-wrapper pt-2">
+                        <div class="d-flex w-100 mb-2">
+                            <span size="xsmall" status="success" class=" cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" title="Expand All"><i class="optipro-icon-expand"></i></span>
+                            <span size="xsmall" class=" cursor-pointer btn btn-primary btn-icon-with-input" title="Collapse All"><i class="optipro-icon-collapse"></i></span>
+                        </div>
+                        <tree-root [nodes]="nodes" [options]="options"></tree-root>
+                        </div>   
+                        </div>    
+                    </as-split-area>
+
+                    <as-split-area size="75" minSize="25">
+                            <div class="p-2 overflow-auto h-100 d-flex flex-column" >
+                              <div class="clearfix mb-2">
+                                <div class="col-12 p-0">
+                                 <!-- <nb-radio-group class="d-flex flex-wrap" [(ngModel)]="radioTransaction" name="radioTransaction" (valueChange)="getTransactionRadioClick($event)" >
+                                    <nb-radio [value]="'ParentLot'">
+                                      {{language.show_parent_lot}}
+                                    </nb-radio>
+                                    <nb-radio [value]="'ImmediateLot'">
+                                      {{language.show_immediate_lot}}
+                                    </nb-radio>
+                                  </nb-radio-group>-->
+                                </div>
+                              </div>
+                
+                              <div class="card mb-0 no-shadow-card flex-100 card-min-85">
+                                <div class="card-header">Transaction Type</div>
+                                <div class="card-body p-2">
+                                  <div class="d-flex w-100 mb-2">
+                                      <span size="xsmall" class="nbButton cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" status="success" title="Expand All"><i class="optipro-icon-expand"></i></span>
+                                      <span size="xsmall" class="nbButton cursor-pointer btn btn-primary btn-icon-with-input"  title="Collapse All"><i class="optipro-icon-collapse"></i></span>
+                                  </div>
+                                  <tree-root [nodes]="nodes" [options]="options"></tree-root>
+                                
+                                </div>
+                            </div>
+                            </div>
+
+                          </as-split-area>
+                </as-split>            
+            </div>    
+            </as-split-area>  
+            
+            <as-split-area  size="50" minSize="1" class="analysis-accordian expanded" id="analysis-accordian">
+                    <div class="card" accent="primary" size="xsmall">
+                      <div class="card-header border-bottom d-flex" id="analysis-accordian-trigger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="mr-2" fill="#2a2a2a"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect><path d="M3.24 7.29l8.52 4.63a.51.51 0 0 0 .48 0l8.52-4.63a.44.44 0 0 0-.05-.81L12.19 3a.5.5 0 0 0-.38 0L3.29 6.48a.44.44 0 0 0-.05.81z"></path><path d="M20.71 10.66l-1.83-.78-6.64 3.61a.51.51 0 0 1-.48 0L5.12 9.88l-1.83.78a.48.48 0 0 0 0 .85l8.52 4.9a.46.46 0 0 0 .48 0l8.52-4.9a.48.48 0 0 0-.1-.85z"></path><path d="M20.71 15.1l-1.56-.68-6.91 3.76a.51.51 0 0 1-.48 0l-6.91-3.76-1.56.68a.49.49 0 0 0 0 .87l8.52 5a.51.51 0 0 0 .48 0l8.52-5a.49.49 0 0 0-.1-.87z"></path></svg>
+                        <span>Analysis View</span>
+                      </div>
+                      <div id="analysis-accordian-body" class="card-body p-0">
+                        <div id="chart-container" class="overflow-auto h-100 w-100 d-flex position-relative"></div>
+                        <div class="color-code-wrapper" id="color-code-wrapper">
+                          <div class="color-code-content">
+                            <div class="color-code-toggle">
+                                <button type="button"><i class="optipro-icon-chevron-left"></i></button>
+                            </div>
+                            <div class="color-code-heading">Color scheme</div>
+                            <ul class="list-unstyled">
+                              <li>
+                                <span class="color-code JournalEntry"></span>
+                                <span class="color-type">Journal Entry</span>
+                              </li>
+                              <li>
+                                <span class="color-code SalesQuotation"></span>
+                                <span class="color-type">Sales Quotation</span>
+                              </li>
+                              <li>
+                                <span class="color-code SalesOrder"></span>
+                                <span class="color-type">Sales Order</span>
+                              </li>
+                              <li>
+                                <span class="color-code Delivery"></span>
+                                <span class="color-type">Delivery </span>
+                              </li>
+                              <li>
+                                <span class="color-code ReturnRequest"></span>
+                                <span class="color-type">Return Request</span>
+                              </li>
+                              <li>
+                                <span class="color-code Return"></span>
+                                <span class="color-type">Return</span>
+                              </li>
+                              <li>
+                                <span class="color-code ARDownPayment"></span>
+                                <span class="color-type">AR Down Payment</span>
+                              </li>
+                              <li>
+                                <span class="color-code ARCreditMemo"></span>
+                                <span class="color-type">AR Credit Memo</span>
+                              </li>
+                              <li>
+                                <span class="color-code ARInvoice"></span>
+                                <span class="color-type">AR Invoice</span>
+                              </li>
+                              <li>
+                                <span class="color-code PurchaseRequest"></span>
+                                <span class="color-type">Purchase Request</span>
+                              </li>
+                              <li>
+                                <span class="color-code PurchaseQuotation"></span>
+                                <span class="color-type">Purchase Quotation</span>
+                              </li>
+                              <li>
+                                <span class="color-code PurchaseOrder"></span>
+                                <span class="color-type">Purchase_Order</span>
+                              </li>
+                              <li>
+                                <span class="color-code GoodsReceiptPO"></span>
+                                <span class="color-type">Goods Receipt PO</span>
+                              </li>
+                              <li>
+                                <span class="color-code GoodsReturnRequest"></span>
+                                <span class="color-type">Goods Return Request</span>
+                              </li>
+                              <li>
+                                <span class="color-code GoodsReturn"></span>
+                                <span class="color-type">Goods Return</span>
+                              </li>
+                              <li>
+                                <span class="color-code APDownPaymentInvoice"></span>
+                                <span class="color-type">AP DownPayment Invoice</span>
+                              </li>
+                              <li>
+                                <span class="color-code APInvoice"></span>
+                                <span class="color-type">AP Invoice</span>
+                              </li>
+                              <li>
+                                <span class="color-code APCreditMemo"></span>
+                                <span class="color-type">AP Credit Memo</span>
+                              </li>
+                              <li>
+                                <span class="color-code Deposit"></span>
+                                <span class="color-type">Deposit</span>
+                              </li>
+                              <li>
+                                <span class="color-code OutgoingPayment"></span>
+                                <span class="color-type">Outgoing Payment</span>
+                              </li>
+                              <li>
+                                <span class="color-code GoodsReceipt"></span>
+                                <span class="color-type">Goods_Receipt</span>
+                              </li>
+                              <li>
+                                <span class="color-code GoodsIssue"></span>
+                                <span class="color-type">Goods Issue</span>
+                              </li>
+                              <li>
+                                <span class="color-code InventoryTransferRequest"></span>
+                                <span class="color-type">Inventory Transfer Request</span>
+                              </li>
+                              <li>
+                                <span class="color-code InventoryTransfer"></span>
+                                <span class="color-type">Inventory Transfer</span>
+                              </li>
+                              <li>
+                                <span class="color-code InventoryRevaluation"></span>
+                                <span class="color-type">Inventory Revaluation</span>
+                              </li>
+                              <li>
+                                <span class="color-code ProductionOrder"></span>
+                                <span class="color-type">Production Order</span>
+                              </li>
+                              <li>
+                                <span class="color-code IssueFromProduction"></span>
+                                <span class="color-type">Issue from Production</span>
+                              </li>
+                              <li>
+                                <span class="color-code ReceiptFromProduction"></span>
+                                <span class="color-type">Receipt from Production</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                </as-split-area>
+
+                <div class="card h-100 w-100 overflow-hidden mb-0 border-0"  accent="primary" size="xsmall">
+                  <div class="default-page-bg">
+                    <div class="text-center opti-logo">
+                      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                      viewBox="0 0 360.6 52.8" style="enable-background:new 0 0 360.6 52.8;" xml:space="preserve">
+                    <style type="text/css">
+                      .st0{fill:#1C8DCD;}
+                      .st1{fill:#EFAA1F;}
+                    </style>
+                    <g id="Layer_x0020_1">
+                      <polygon class="st0" points="44.1,43.9 44.1,15.3 44.1,14.4 45,14.4 108,14.4 108.9,14.4 108.9,15.3 108.9,31.5 107.1,31.5 
+                        107.1,16.1 45.9,16.1 45.9,43.9 	"/>
+                      <path class="st0" d="M41.1,42.7h8.3h0.9v0.9v8.1v0.9h-0.9h-8.3h-0.9v-0.9v-8.1v-0.9H41.1z M48.5,44.4H42v6.3h6.6V44.4z"/>
+                      <polygon class="st0" points="88.3,43.6 88.3,31.3 88.3,30.5 89.2,30.5 126.4,30.5 127.2,30.5 127.2,31.3 127.2,43.6 125.6,43.6 
+                        125.6,32.2 90.1,32.2 90.1,43.6 	"/>
+                      <path class="st0" d="M85.2,42.7h8.3h0.9v0.9v8.1v0.9h-0.9h-8.3h-0.8v-0.9v-8.1v-0.9H85.2z M92.7,44.4H86v6.3h6.6V44.4z"/>
+                      <path class="st0" d="M122.3,42.7h8.3h0.9v0.9v8.1v0.9h-0.9h-8.3h-0.9v-0.9v-8.1v-0.9H122.3z M129.7,44.4h-6.6v6.3h6.6V44.4z"/>
+                      <polygon class="st0" points="108.1,21.2 147.3,21.2 148.1,21.2 148.1,22.1 148.1,43.6 146.4,43.6 146.4,22.9 108.1,22.9 	"/>
+                      <path class="st0" d="M143.3,42.7h8.3h0.9v0.9v8.1v0.9h-0.9h-8.3h-0.9v-0.9v-8.1v-0.9H143.3z M150.8,44.4h-6.6v6.3h6.6V44.4z"/>
+                      <polygon class="st0" points="147.7,30.4 164.8,30.4 165.7,30.4 165.7,31.2 165.7,43.6 163.9,43.6 163.9,32.1 147.7,32.1 	"/>
+                      <path class="st0" d="M161.1,42.7h8.3h0.9v0.9v8.1v0.9h-0.9h-8.3h-0.9v-0.9v-8.1v-0.9H161.1z M168.5,44.4H162v6.3h6.6V44.4z"/>
+                      <polygon class="st0" points="44.4,22.9 6,22.9 6,43.6 4.3,43.6 4.3,22.1 4.3,21.2 5.2,21.2 44.4,21.2 	"/>
+                      <path class="st0" d="M8.3,44.4H1.7v6.3h6.6V44.4z M0.9,42.7h8.3h0.8v0.9v8.1v0.9H9.1H0.9H0v-0.9v-8.1v-0.9H0.9z"/>
+                      <polygon class="st0" points="19.6,48.5 9.1,48.5 9.1,46.8 19.6,46.8 	"/>
+                      <path class="st0" d="M26.4,44.4h-6.6v6.3h6.6V44.4z M18.9,42.7h8.3h0.9v0.9v8.1v0.9h-0.9h-8.3h-0.9v-0.9v-8.1v-0.9H18.9z"/>
+                      <polygon class="st0" points="78.3,8.6 78.3,15.3 76.6,15.3 76.6,8.6 	"/>
+                      <path class="st0" d="M73.4,0h8.3h0.9v0.9v8.1v0.9h-0.9h-8.3h-0.9V8.9V0.9V0H73.4z M80.8,1.7h-6.6v6.3h6.6V1.7z"/>
+                      <path class="st0" d="M262.8,46.8c0,0.9-0.1,1.7-0.4,2.4s-0.7,1.4-1.2,1.9c-0.5,0.5-1.2,0.9-1.9,1.2c-0.8,0.3-1.6,0.4-2.4,0.4h-4.5
+                        V40.9h4.5c0.9,0,1.7,0.1,2.4,0.4c0.7,0.3,1.4,0.7,1.9,1.2c0.5,0.5,0.9,1.2,1.2,1.9C262.6,45.1,262.8,45.9,262.8,46.8z M260.5,46.8
+                        c0-0.6-0.1-1.2-0.2-1.7c-0.1-0.6-0.4-1-0.7-1.4c-0.4-0.4-0.7-0.6-1.2-0.8c-0.4-0.2-0.9-0.3-1.5-0.3h-2.3v8.3h2.3
+                        c0.6,0,1.1-0.1,1.5-0.2c0.5-0.2,0.9-0.5,1.2-0.9c0.3-0.4,0.6-0.8,0.7-1.3S260.5,47.4,260.5,46.8z M270.6,48.2l-1.4-4
+                        c-0.1-0.1-0.1-0.4-0.2-0.6c-0.1-0.3-0.1-0.5-0.2-0.8c-0.1,0.3-0.1,0.5-0.2,0.8c-0.1,0.2-0.1,0.4-0.2,0.6l-1.4,3.9H270.6z
+                        M274.5,52.7h-1.7c-0.1,0-0.3-0.1-0.4-0.1c-0.1-0.1-0.2-0.2-0.3-0.4l-0.9-2.4h-4.9l-0.9,2.4c-0.1,0.1-0.1,0.2-0.3,0.4
+                        c-0.1,0.1-0.3,0.1-0.4,0.1h-1.7l4.7-11.8h2.2L274.5,52.7z M281.9,43.1c-0.1,0.1-0.1,0.1-0.2,0.2c-0.1,0.1-0.1,0.1-0.2,0.1
+                        c-0.1,0-0.3,0-0.4-0.1c-0.1-0.1-0.4-0.1-0.5-0.3c-0.2-0.1-0.4-0.1-0.6-0.2c-0.3-0.1-0.6-0.1-0.9-0.1c-0.4,0-0.6,0-0.8,0.1
+                        c-0.3,0.1-0.4,0.2-0.6,0.4c-0.2,0.1-0.3,0.3-0.4,0.4c-0.1,0.2-0.1,0.4-0.1,0.6c0,0.3,0.1,0.6,0.2,0.7c0.2,0.2,0.4,0.4,0.6,0.5
+                        c0.2,0.1,0.6,0.2,0.9,0.4c0.4,0.1,0.6,0.1,1,0.3c0.4,0.1,0.6,0.3,1,0.4c0.3,0.1,0.6,0.4,0.9,0.6c0.3,0.2,0.5,0.5,0.6,0.9
+                        c0.1,0.4,0.2,0.8,0.2,1.2c0,0.6-0.1,1.1-0.3,1.5c-0.1,0.5-0.4,0.9-0.8,1.2c-0.4,0.4-0.8,0.6-1.3,0.8c-0.5,0.2-1.1,0.4-1.7,0.4
+                        c-0.4,0-0.7-0.1-1.1-0.1c-0.4-0.1-0.7-0.1-1.1-0.3c-0.4-0.1-0.6-0.3-0.9-0.5c-0.3-0.2-0.6-0.4-0.8-0.6l0.6-1.1
+                        c0.1-0.1,0.1-0.1,0.2-0.1c0.1-0.1,0.1-0.1,0.3-0.1c0.1,0,0.3,0,0.4,0.1c0.1,0.1,0.4,0.2,0.6,0.4c0.2,0.1,0.4,0.3,0.7,0.4
+                        c0.3,0.1,0.6,0.2,1.1,0.2c0.6,0,1.1-0.1,1.4-0.5c0.4-0.3,0.5-0.7,0.5-1.2c0-0.4-0.1-0.6-0.2-0.8c-0.1-0.2-0.4-0.4-0.6-0.5
+                        c-0.2-0.1-0.5-0.2-0.9-0.3c-0.3-0.1-0.6-0.2-1-0.4c-0.3-0.1-0.6-0.2-0.9-0.4c-0.4-0.1-0.6-0.4-0.9-0.6c-0.2-0.3-0.4-0.6-0.6-0.9
+                        c-0.1-0.4-0.2-0.8-0.2-1.4c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.8,0.8-1.1c0.3-0.4,0.7-0.6,1.2-0.8c0.5-0.2,1.1-0.3,1.7-0.3
+                        c0.7,0,1.4,0.1,1.9,0.4c0.6,0.2,1.1,0.5,1.5,0.9L281.9,43.1z M294.6,40.9v11.8h-2.2v-5.2h-5.5v5.2h-2.2V40.9h2.2v5h5.5v-5H294.6z
+                        M301.6,51c0.4,0,0.8-0.1,1.1-0.1c0.3-0.1,0.5-0.2,0.6-0.4c0.1-0.1,0.3-0.3,0.4-0.5c0.1-0.2,0.1-0.5,0.1-0.7c0-0.3-0.1-0.5-0.1-0.7
+                        c-0.1-0.2-0.2-0.4-0.4-0.5c-0.1-0.1-0.4-0.2-0.6-0.4c-0.3-0.1-0.6-0.1-1-0.1h-2.2V51H301.6z M299.4,42.6V46h1.7
+                        c0.7,0,1.3-0.1,1.7-0.4c0.4-0.3,0.6-0.7,0.6-1.3s-0.2-1.1-0.6-1.3c-0.4-0.3-0.9-0.4-1.6-0.4H299.4z M301.3,40.9
+                        c0.7,0,1.4,0.1,1.9,0.2c0.6,0.1,1,0.4,1.4,0.6c0.4,0.2,0.6,0.6,0.8,0.9c0.1,0.4,0.2,0.9,0.2,1.3c0,0.3-0.1,0.6-0.1,0.8
+                        c-0.1,0.3-0.2,0.5-0.4,0.7c-0.1,0.2-0.4,0.4-0.6,0.6c-0.3,0.1-0.6,0.3-0.9,0.4c1.6,0.4,2.4,1.2,2.4,2.7c0,0.5-0.1,0.9-0.3,1.4
+                        c-0.2,0.4-0.5,0.8-0.9,1.1c-0.4,0.3-0.8,0.6-1.4,0.7c-0.5,0.2-1.1,0.3-1.8,0.3h-4.5V40.9H301.3z M319.2,46.8c0,0.9-0.1,1.7-0.4,2.4
+                        s-0.7,1.4-1.2,1.9c-0.5,0.5-1.2,0.9-1.9,1.2c-0.7,0.3-1.6,0.5-2.4,0.5c-0.9,0-1.7-0.2-2.4-0.5s-1.4-0.7-1.9-1.2
+                        c-0.6-0.6-0.9-1.2-1.2-1.9c-0.3-0.7-0.4-1.5-0.4-2.4s0.1-1.7,0.4-2.4c0.3-0.7,0.6-1.4,1.2-1.9c0.5-0.6,1.2-1,1.9-1.3
+                        s1.5-0.4,2.4-0.4c0.6,0,1.2,0.1,1.7,0.2c0.6,0.1,1,0.4,1.4,0.6c0.5,0.3,0.9,0.6,1.2,0.9s0.6,0.7,0.9,1.2c0.3,0.4,0.4,0.9,0.6,1.4
+                        C319.2,45.6,319.2,46.2,319.2,46.8z M317,46.8c0-0.6-0.1-1.2-0.3-1.7c-0.1-0.6-0.4-1-0.7-1.4c-0.4-0.4-0.7-0.6-1.2-0.8
+                        c-0.4-0.2-0.9-0.3-1.5-0.3s-1.1,0.1-1.6,0.3c-0.4,0.2-0.9,0.4-1.2,0.8c-0.4,0.4-0.6,0.8-0.7,1.4c-0.2,0.5-0.3,1.1-0.3,1.7
+                        c0,0.6,0.1,1.2,0.3,1.7c0.1,0.5,0.4,0.9,0.7,1.3c0.3,0.4,0.7,0.6,1.2,0.9c0.5,0.1,1,0.2,1.6,0.2s1.1-0.1,1.5-0.2
+                        c0.5-0.2,0.9-0.5,1.2-0.9c0.3-0.4,0.6-0.8,0.7-1.3C316.9,48,317,47.4,317,46.8z M327,48.2l-1.4-4c-0.1-0.1-0.1-0.4-0.2-0.6
+                        c-0.1-0.3-0.1-0.5-0.2-0.8c-0.1,0.3-0.1,0.5-0.2,0.8c-0.1,0.2-0.1,0.4-0.2,0.6l-1.4,3.9H327z M330.9,52.7h-1.7
+                        c-0.2,0-0.4-0.1-0.5-0.1c-0.1-0.1-0.2-0.2-0.3-0.4l-0.9-2.4h-4.9l-0.9,2.4c-0.1,0.1-0.1,0.2-0.3,0.4c-0.1,0.1-0.2,0.1-0.4,0.1h-1.7
+                        l4.7-11.8h2.2L330.9,52.7z M335.7,46.5c0.4,0,0.7-0.1,1.1-0.1c0.3-0.1,0.6-0.3,0.7-0.4c0.2-0.2,0.4-0.4,0.4-0.6
+                        c0.1-0.3,0.2-0.6,0.2-0.9c0-0.6-0.2-1-0.6-1.4c-0.4-0.3-1-0.5-1.8-0.5h-1.4v4H335.7z M341.3,52.7h-1.9c-0.4,0-0.6-0.1-0.9-0.4
+                        l-2.4-3.8c-0.1-0.1-0.2-0.2-0.3-0.3c-0.1-0.1-0.3-0.1-0.5-0.1h-0.9v4.6h-2.2V40.9h3.6c0.8,0,1.5,0.1,2.1,0.2c0.6,0.2,1,0.4,1.4,0.7
+                        c0.4,0.3,0.6,0.6,0.9,1.1c0.1,0.4,0.2,0.9,0.2,1.4c0,0.4,0,0.8-0.1,1.2c-0.1,0.4-0.3,0.6-0.5,0.9c-0.2,0.3-0.5,0.6-0.8,0.8
+                        c-0.4,0.2-0.7,0.4-1.2,0.5c0.1,0.1,0.3,0.1,0.4,0.3c0.1,0.1,0.2,0.2,0.3,0.4L341.3,52.7z M353.1,46.8c0,0.9-0.1,1.7-0.4,2.4
+                        s-0.7,1.4-1.2,1.9c-0.6,0.5-1.2,0.9-1.9,1.2c-0.7,0.3-1.5,0.4-2.4,0.4h-4.5V40.9h4.5c0.9,0,1.7,0.1,2.4,0.4
+                        c0.8,0.3,1.4,0.7,1.9,1.2c0.5,0.5,0.9,1.2,1.2,1.9C353,45.1,353.1,45.9,353.1,46.8z M350.8,46.8c0-0.6-0.1-1.2-0.2-1.7
+                        c-0.2-0.6-0.4-1-0.8-1.4c-0.3-0.4-0.7-0.6-1.2-0.8c-0.4-0.2-1-0.3-1.6-0.3h-2.2v8.3h2.2c0.6,0,1.2-0.1,1.6-0.2
+                        c0.4-0.2,0.9-0.5,1.2-0.9c0.4-0.4,0.6-0.8,0.8-1.3C350.8,48,350.8,47.4,350.8,46.8z"/>
+                      <g id="_2429774247616">
+                        <path class="st0" d="M201.7,19c0,6.9-0.9,11.9-2.9,14.9c-1.7,2.4-4,3.7-7.1,3.7s-5.4-1.2-7-3.7c-1.9-3-3-8-3-14.9s1-11.9,3-14.9
+                          c1.6-2.4,3.9-3.7,7-3.7s5.4,1.2,7.1,3.7C200.7,7.1,201.7,12,201.7,19z M194.6,19c0-8.4-1-12.6-2.9-12.6s-2.9,4.2-2.9,12.6
+                          s1,12.6,2.9,12.6S194.6,27.4,194.6,19z"/>
+                        <path class="st0" d="M221.5,23.7c0,4.5-1.4,8.1-4,10.6c-1.9,1.7-4,2.7-6.2,2.9v8.2h-6.6V12.8h6.2v1.4l1.6-1.6
+                          c0.1-0.1,0.4-0.1,0.6-0.1c2.4-0.1,4.3,0.7,5.8,2.5C220.7,17.1,221.5,19.9,221.5,23.7z M215,23.2c0-1.5-0.2-2.7-0.7-3.7
+                          c-0.4-0.9-0.9-1.4-1.6-1.4s-1.2,0.4-1.4,1.2v12c0.9-0.2,1.8-0.9,2.4-2.1C214.6,27.7,215,25.8,215,23.2z"/>
+                        <path class="st0" d="M235.9,37.1c-0.6,0.1-1.2,0.1-1.9,0.1c-2.1,0-3.9-0.6-5.4-1.9c-2.4-1.9-3.5-5-3.5-9.2v-7.4h-1.9v-5.8h1.9V6.3
+                          h6.4v6.6h3.9v5.8h-3.7v8.4c0,1.5,0.3,2.7,0.9,3.5c0.6,0.8,1.4,1.2,2.2,1.2c0.3,0,0.7,0,1.2,0V37.1L235.9,37.1z"/>
+                        <path class="st0" d="M245.1,37.2h-6.6V12.8h6.6V37.2z M244.9,9.4h-6.3V0.7h6.3V9.4z"/>
+                        <path class="st0" d="M267.5,12.2c0,4.7-1.6,8.4-4.8,11.2c-1.8,1.6-3.9,2.7-6.1,3.2v10.7h-7.1V0.7h5.4c3.8,0,6.8,1,9.1,3.1
+                          C266.4,5.8,267.5,8.6,267.5,12.2z M260.4,12.2c0-3.7-1.3-5.5-3.8-5.5v13c0.8,0,1.5-0.6,2.3-1.7C259.8,16.6,260.4,14.7,260.4,12.2z
+                          "/>
+                        <path class="st0" d="M281.1,18.6h-0.5c-1.2,0-2.2,0.5-3,1.3c-0.9,1-1.4,2.2-1.4,3.8v13.5h-6.6V12.8h6.3v2.4
+                          c0.9-1.7,2.4-2.4,4.5-2.4h0.6V18.6L281.1,18.6z"/>
+                        <path class="st0" d="M299.5,25c0,4.8-1.1,8.2-3.2,10.3c-1.4,1.4-3.2,2.2-5.4,2.2c-2.1,0-3.9-0.7-5.3-2.2c-2.2-2-3.3-5.5-3.3-10.3
+                          s1.1-8.1,3.3-10.2c1.4-1.4,3.2-2.2,5.3-2.2c2.2,0,3.9,0.8,5.4,2.2C298.4,16.8,299.5,20.2,299.5,25z M293,25c0-4.4-0.7-6.6-2-6.6
+                          s-2,2.2-2,6.6s0.7,6.6,2,6.6S293,29.4,293,25z"/>
+                        <polygon class="st1" points="317.9,37.2 303,37.2 303,26 301.2,26 301.2,20.1 303,20.1 303,0.7 317.9,0.7 317.9,6.6 310.1,6.6 
+                          310.1,20.2 316.4,20.2 316.4,26.1 310.1,26.1 310.1,31.5 317.9,31.5 		"/>
+                        <path class="st1" d="M339,12c0,5.4-1.7,9.2-5,11.4c1.5,1.8,2.7,3.7,3.5,5.8c0.9,2.2,1.3,4.8,1.3,7.9h-7.1c0-2.1-0.4-4-0.9-5.5
+                          c-0.8-1.8-1.7-3.2-2.7-4.2v9.8H321V0.7h5.6c3.6,0,6.5,0.9,8.7,2.7C337.7,5.5,339,8.4,339,12z M331.8,12.1c0-3.6-1.3-5.4-3.7-5.4
+                          v13c0.6,0,1.4-0.7,2.2-2C331.4,16.1,331.8,14.3,331.8,12.1z"/>
+                        <path class="st1" d="M360.6,12.2c0,4.7-1.6,8.4-4.8,11.2c-1.8,1.6-3.9,2.7-6.1,3.2v10.7h-7.1V0.7h5.4c3.8,0,6.8,1,9.1,3.1
+                          C359.4,5.8,360.6,8.6,360.6,12.2z M353.5,12.2c0-3.7-1.3-5.5-3.8-5.5v13c0.7,0,1.5-0.6,2.3-1.7C352.9,16.6,353.5,14.7,353.5,12.2z
+                          "/>
+                      </g>
+                      <polygon class="st0" points="73.8,1.4 81.4,1.4 81.4,8.6 73.8,8.6 	"/>
+                      <polygon class="st1" points="1.2,44 8.8,44 8.8,51.2 1.2,51.2 	"/>
+                      <polygon class="st1" points="41.5,44 49,44 49,51.2 41.5,51.2 	"/>
+                      <polygon class="st1" points="85.5,44 93.2,44 93.2,51.2 85.5,51.2 	"/>
+                      <polygon class="st1" points="143.7,44 151.3,44 151.3,51.2 143.7,51.2 	"/>
+                      <polygon class="st0" points="19.3,44 26.9,44 26.9,51.2 19.3,51.2 	"/>
+                      <polygon class="st0" points="122.7,44 130.2,44 130.2,51.2 122.7,51.2 	"/>
+                      <polygon class="st0" points="161.5,44 169.1,44 169.1,51.2 161.5,51.2 	"/>
+                    </g>
+                    </svg>
+                      <div class="text-center opti_version-info w-100">
+                        Version <span></span>
+            
+                        <div>Copyright</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>        
+
+        </as-split>    
+    </div>
+</div>           
