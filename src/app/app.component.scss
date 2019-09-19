@@ -16,7 +16,10 @@
     & app-sidebar{
         & ~ .content-area{
             max-width: calc(100% - 240px) !important;
-        }
+            @media screen and (max-width:1199px){
+                max-width: calc(100% - 200px) !important;
+            }
+        }        
         &.toggle{
             & ~ .content-area{
                 max-width: calc(100% - 65px) !important;

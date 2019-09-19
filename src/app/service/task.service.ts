@@ -34,12 +34,14 @@ export class TaskService {
 	// }
     get(): Promise<Task[]>{
         return Promise.resolve([
-            {id: 1, text: "Project #1", start_date: "09:18 15-09-2019", description:"demo", duration:6, progress: 0.45, parent: "", open:true, type:'project'},
-			{id: 2, text: "Task #1-1", start_date: "09:18 15-09-2019", description:"demo", duration:3, progress: 0.45, parent: "1", open:true, type:'task' },
-			{id: 3, text: "Task #1-2", start_date: "10:54 16-09-2019", description:"demo", duration:3, progress: 0.45, parent: "1", open:true, type:'task'},
-			{id: 4, text:"Project #2", start_date:"15:29 17-09-2019", description:"demo", duration:16, progress:0.6, parent: "", open: true, type:'project'},
-        	{id: 5, text:"Task #2-1", start_date:"15:29 17-09-2019", description:"demo", duration:8, progress:0.6, parent:"4", open: true, type:'task' },
-			{id: 6, text:"Task #2-2", start_date:"11:17 18-09-2019", description:"demo", duration:8, progress:0.6, parent:"4", open: true, type:'task'}
+            // {id: 1, text: "Project #1", start_date: "15:18 15-09-2019", description:"demo", duration:3, progress: 1, parent: "", open:true, type:'project'},
+            {id: 1, text: "Project #1", start_date: "15:18 15-09-2019", description:"demo", duration:3, progress: 1, parent: "", open:true, type:'task'},
+			// {id: 2, text: "Task #1-1", start_date: "09:18 15-09-2019", description:"demo", duration:3, progress: 0.45, parent: "1", open:true, type:'task' },
+			// {id: 3, text: "Task #1-2", start_date: "10:54 16-09-2019", description:"demo", duration:3, progress: 0.45, parent: "1", open:true, type:'task'},
+			// {id: 4, text:"Project #2", start_date:"17:29 17-09-2019", description:"demo", duration:2, progress:1, parent: "", open: true, type:'project'},
+			{id: 4, text:"Project #2", start_date:"17:29 17-09-2019", description:"demo", duration:2, progress:1, parent: "", open: true, type:'task'},
+        	// {id: 5, text:"Task #2-1", start_date:"15:29 17-09-2019", description:"demo", duration:8, progress:0.6, parent:"4", open: true, type:'task' },
+			// {id: 6, text:"Task #2-2", start_date:"11:17 18-09-2019", description:"demo", duration:8, progress:0.6, parent:"4", open: true, type:'task'}
         ]);
     }
 }

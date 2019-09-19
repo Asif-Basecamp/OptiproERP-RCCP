@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { GridModule, ExcelModule } from '@progress/kendo-angular-grid';
+import { SplitterModule } from '@progress/kendo-angular-layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
@@ -34,6 +35,7 @@ import { PlanOrderComponent } from './gantt/plan-order/plan-order.component';
     DialogsModule,
     DropDownsModule,
     MainRoutingModule,
+    SplitterModule,
     FlexLayoutModule,
     DateInputsModule,
     TreeTableModule,

@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomLayoutModule } from './@layout/customLayout.module';
 import { NotificationModule } from '@progress/kendo-angular-notification';
-import { LayoutModule } from '@progress/kendo-angular-layout';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
@@ -27,7 +26,6 @@ export function createTranslateLoader(http: HttpClient) {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LayoutModule,
     FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     GridModule,
