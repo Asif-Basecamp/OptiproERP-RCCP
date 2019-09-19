@@ -98,6 +98,9 @@
     & svg.logo-svg-mini {
       display: none;
     }
+    & svg.logo-svg {
+      display: flex;
+    }
     &.toggle{
       display: flex !important;
       flex: 1 1 240px !important;

@@ -34,9 +34,10 @@ export class GanttChartViewComponent implements OnInit {
         gantt.config.grid_resize = true;
         gantt.config.drag_links = true;
         gantt.config.drag_progress = true;
+        gantt.config.date_grid = "%d-%M-%Y";
 
         //gantt editable configuration
-        gantt.config.readonly = false;
+        gantt.config.readonly = true;
 
         gantt.config.columns = [
             {name: "text", label:"Opration", tree: true, width: '120', resize: true},
@@ -46,7 +47,11 @@ export class GanttChartViewComponent implements OnInit {
                 return obj.end_date}, align: "center", width: '90', resize: true},
             {name: "duration", label:"Duration (H)", template:function(obj){
                 console.log(obj.duration);
+<<<<<<< HEAD
                 return obj.duration/60},align: "center", width: '100', resize: true},
+=======
+                return obj.duration/2},align: "center", width: '100', resize: true},
+>>>>>>> 527b814bb8e6190ce5cc5db6e2fbf08384d483e1
             // {name: "progress", label:"Progress",template:function(obj){
             //     return Math.round(obj.progress*100) + "%"}, align: "center", width: '80', resize: true},
             // {name: "add", width: 40}
@@ -159,8 +164,13 @@ export class GanttChartViewComponent implements OnInit {
                 Start = tConvert(StartEl.toTimeString().substr(0,5)) +" "+ StartEl.getUTCDate() +"-" + StartEl.getUTCMonth() + "-" + StartEl.getUTCFullYear(),
                 End = tConvert(EndEl.toTimeString().substr(0,5)) +" "+ EndEl.getUTCDate() +"-" + EndEl.getUTCMonth() + "-" + EndEl.getUTCFullYear();
 
+<<<<<<< HEAD
             return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration:</b><span> " + task.duration/60 + " Hour(s)"+"</span></div><div><b>Progress:</b><span> ";
              //+ Math.round(task.progress*100) + "%</span></div>";
+=======
+            return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration:</b><span> " + task.duration/2 + " Hour(s)"+"</span></div>";
+            //+"</span></div><div><b>Progress:</b><span> "+ Math.round(task.progress*100) + "%</span></div>";
+>>>>>>> 527b814bb8e6190ce5cc5db6e2fbf08384d483e1
         };
         gantt.init(this.ganttContainer.nativeElement);
         Promise.all([this.taskService.get(), this.linkService.get()])

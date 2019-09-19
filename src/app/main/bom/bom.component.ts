@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { BOMService } from './service/bom.service';
 import { environment } from '../../../environments/environment';
 import { NotificationService } from '@progress/kendo-angular-notification';
@@ -13,6 +13,8 @@ import { DatePipe } from '@angular/common';
 })
 export class BOMComponent implements OnInit {
   
+  public isMobile:boolean;
+  public seachPanelCollapse:boolean;
   public gridData: any;
   public bomGrid: boolean = false;
   public CompanyDB: any;
@@ -22,6 +24,7 @@ export class BOMComponent implements OnInit {
   public warehouseCode: any;
   // @ts-ignore
   @ViewChild('countdown') counter: CountdownComponent;
+  
   public ItemCodeFrom: any;
   public ItemCodeTo: any;
   public WarehouseFrom: any;
@@ -41,13 +44,25 @@ export class BOMComponent implements OnInit {
   time: any;
   public ItemData: any;
   public WarehouseData: any;
+  
 
-  constructor(private BOMService: BOMService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { }
-
+  constructor(private BOMService: BOMService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { }  
+  @HostListener('window:resize', ['$event']) onResize() {
+    this.mobileView();
+  }
   ngOnInit() {
     this.CompanyDB = 'OPTIPRO129';
     this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
     this.getWarehouseData(environment.optiProDashboardAPIURL, this.CompanyDB);
+    this.mobileView();
+  }
+
+  public mobileView(): void {
+    if(window.innerWidth <= 991){
+      this.isMobile = true;
+    }else{
+      this.isMobile = false;
+    }
   }
 
   getItemData(api, companyDB){
@@ -190,6 +205,7 @@ export class BOMComponent implements OnInit {
           });
         }else{
           this.bomGrid = true;
+          this.seachPanelCollapse = true;
         }
       },
       error => {
@@ -197,6 +213,7 @@ export class BOMComponent implements OnInit {
         this.bomGrid = false;
       })
     }
+    
   }
 
   refreshEvent(e){
