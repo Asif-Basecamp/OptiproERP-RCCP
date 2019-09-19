@@ -44,6 +44,8 @@ export class BOMComponent implements OnInit {
   time: any;
   public ItemData: any;
   public WarehouseData: any;
+  public isMobile: any;
+  public seachPanelCollapse: any;
 
   constructor(private BOMService: BOMService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe, private localStorageService: LocalStorageService, private injector: Injector) { 
     let userLang: string = this.localStorageService.getCurrentLanguage();
@@ -55,6 +57,17 @@ export class BOMComponent implements OnInit {
     this.CompanyDB = 'OPTIPRO129';
     this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
     this.getWarehouseData(environment.optiProDashboardAPIURL, this.CompanyDB);
+    this.mobileView();
+  }
+
+  public mobileView(): void {
+    if(window.innerWidth <= 767){
+      this.isMobile = true;
+      this.seachPanelCollapse = true;
+    }else{
+      this.isMobile = false;
+      this.seachPanelCollapse = false;
+    }
   }
 
   getItemData(api, companyDB){
