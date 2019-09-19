@@ -164,7 +164,7 @@
                 <app-item-code-lookup *ngIf="lookupStatus" [ItemData]="ItemData"
                     (lookupEvent)="lookupEventHander($event)" (itemCodeEvent)="itemCodeEventHander($event)">
                 </app-item-code-lookup>
-                <app-warehouse-code-lookup *ngIf="WarehouseStatus" [WarehouseData]="WarehouseData"
+                <!-- <app-warehouse-code-lookup *ngIf="WarehouseStatus" [WarehouseData]="WarehouseData"
                     (warehouseEvent)="warehouseEventHander($event)"
                     (warehouseCodeEvent)="warehouseCodeEventHander($event)">
                 </app-warehouse-code-lookup>
@@ -173,7 +173,24 @@
                     <div *ngIf="SimpleGridEnableLoader" class="k-i-loading"></div>
                     <app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary">
                     </app-bom-grid-view>
-                </div>
+                </div> -->                
+                <kendo-splitter [orientation]="vertical">
+                    <kendo-splitter-pane [collapsible]="true" *ngIf="WarehouseStatus">
+                        <app-warehouse-code-lookup [WarehouseData]="WarehouseData"
+                            (warehouseEvent)="warehouseEventHander($event)"
+                            (warehouseCodeEvent)="warehouseCodeEventHander($event)">
+                        </app-warehouse-code-lookup>
+                    </kendo-splitter-pane>
+                    <kendo-splitter-pane [collapsible]="true" *ngIf="bomGrid">
+                        <div class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3"
+                            [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
+                            <div *ngIf="SimpleGridEnableLoader" class="k-i-loading"></div>
+                            <app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary">
+                            </app-bom-grid-view>
+                        </div>
+                    </kendo-splitter-pane>
+                    <!-- <kendo-splitter-pane [collapsible]="true"></kendo-splitter-pane> -->
+                </kendo-splitter>
                 <div *ngIf="!bomGrid" class="welcome-page" fxLayout="column" fxFlex="0 0 100%">
                     <div class="welcome-innner" fxLayout="column" fxFlex="0 0 100%">
                         <div class="app-detail text-center">
