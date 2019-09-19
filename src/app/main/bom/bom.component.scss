@@ -11,6 +11,9 @@
             }
             & .k-ghost-splitbar-horizontal, .k-splitbar-horizontal{
                 width: 15px;
+                &:hover{
+                    background-color: rgba(0,0,0,0.05)
+                }
             }
         }
     }
@@ -143,6 +146,7 @@
     justify-content: center;
     background-position: center;
     background-size:cover; 
+    padding:20px;
     box-shadow: 0 1px 10px 0 rgba(69, 90, 100, 0.08);
 }
 .app-detail{

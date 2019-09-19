@@ -58,10 +58,12 @@ export class BOMComponent implements OnInit {
   }
 
   public mobileView(): void {
-    if(window.innerWidth <= 991){
+    if(window.innerWidth <= 767){
       this.isMobile = true;
+      this.seachPanelCollapse = true;
     }else{
       this.isMobile = false;
+      this.seachPanelCollapse = false;
     }
   }
 
