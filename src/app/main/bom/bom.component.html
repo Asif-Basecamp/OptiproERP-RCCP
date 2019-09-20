@@ -169,7 +169,7 @@
                     (warehouseCodeEvent)="warehouseCodeEventHander($event)">
                 </app-warehouse-code-lookup>
                 <div *ngIf="bomGrid" class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3"
-                    [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
+                    [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}" fxFlex="0 0 100%">
                     <div *ngIf="SimpleGridEnableLoader" class="k-i-loading"></div>
                     <app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary">
                     </app-bom-grid-view>

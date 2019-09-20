@@ -424,6 +424,50 @@ kendo-grid-filter-wrapper-cell{
     }
   }
 }
+.primary-table-colored{
+  kendo-grid-toolbar{
+    background-color: theme-color("primary");
+    color: $white;
+    & button.btn.btn-icon.k-grid-excel > svg{
+      fill: $white;
+    }
+    & .custom-checkbox{
+      & input[type=checkbox]{
+        & + span:before{
+          background-color: $white;
+        } 
+        &:checked + span:before{
+          background-color: $white;
+          border-color: $white;
+        }
+        &:checked + span:after{
+          background: theme-color("primary");
+          box-shadow:2px 0 0 theme-color("primary"), 4px 0 0 theme-color("primary"), 4px -2px 0 theme-color("primary"), 4px -4px 0 theme-color("primary"), 4px -6px 0 theme-color("primary"), 4px -8px 0 theme-color("primary");
+        }
+      }
+      &:hover{
+        & input[type=checkbox]{
+          & + span:before{
+            background-color: $white;
+          } 
+          &:checked + span:before{
+            background-color: $white;
+            border-color: $white;
+          }
+          &:checked + span:after{
+            background: theme-color("primary");
+            box-shadow:2px 0 0 theme-color("primary"), 4px 0 0 theme-color("primary"), 4px -2px 0 theme-color("primary"), 4px -4px 0 theme-color("primary"), 4px -6px 0 theme-color("primary"), 4px -8px 0 theme-color("primary");
+          }
+        }
+      }
+    }
+  }
+  .k-grid-header, .k-grid-header .k-header{
+    background-color: theme-color("primary");
+    color: $white;  
+    border-color: rgba(0,0,0,0.1);
+  }
+}
 //Kendow Modal
 .k-window-titlebar{
   background: $primary-gradiant !important;
@@ -645,9 +689,32 @@ body .ui-treetable .ui-treetable-thead > tr > th {
     border:none;
   }
 }
-body .ui-treetable .ui-treetable-tbody > tr > td {
-  padding: 0.571em 0.857em;
-  white-space: nowrap;
+body .ui-treetable .ui-treetable-tbody > tr > td:not(:first-of-type) {
+  border-left:1px solid rgba(33, 37, 41, 0.125);
+}
+body .ui-treetable-scrollable-header-box{
+  overflow: hidden;
+  overflow-y: scroll !important;
+  background-color: theme-color("primary");  
+  @media screen and (min-width:1025px){
+    &::-webkit-scrollbar-track{
+      background-color: #F5F5F5;
+    }
+    
+    &::-webkit-scrollbar{
+      background-color: #F5F5F5;
+    }
+    
+    &::-webkit-scrollbar-thumb{
+      // background-color: theme-color("primary");
+      background: #dadada;
+      cursor: pointer;
+      border-radius: 2.5px;
+    }
+  }
+}
+body .ui-treetable .ui-treetable-tbody > tr:nth-child(even){
+  background-color:rgba(33, 37, 41, 0.03);
 }
 body .ui-treetable .ui-treetable-tfoot > tr > td {
   padding: 0.571em 0.857em;
@@ -681,18 +748,14 @@ body .ui-treetable .ui-editable-column input:focus {
   outline: 1px solid theme-color("primary");
   outline-offset: 2px;
 }
-body .ui-treetable-scrollable-header-box{
-  background-color: theme-color("primary");
-  // border-radius: 0.2rem 0.2rem 0 0;
-  overflow: hidden;
-}
 body .ui-treetable .ui-treetable-tbody > tr {
   background-color: $white;
   color: #333333;
 }
 body .ui-treetable .ui-treetable-tbody > tr > td {
   background-color: inherit;
-  white-space: nowrap;
+  white-space: normal;
+  padding:5px;
 }
 body .ui-treetable .ui-treetable-tbody > tr > td .ui-treetable-toggler {
   color: #000;
