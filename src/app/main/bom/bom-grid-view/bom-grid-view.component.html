@@ -44,7 +44,7 @@
         <div class="h5 mb-2">{{'DetailGrid' | translate}}</div>
         <div class="tree-wrapper">
           <div class="content-section implementation restrictedHeight">
-            <p-treeTable [value]="files2" selectionMode="single" [scrollable]="true" scrollHeight="100%"
+           <!-- <p-treeTable [value]="files2" selectionMode="single" [scrollable]="true" scrollHeight="100%"
               [resizableColumns]="true" columnResizeMode="expand" height="200">
               <ng-template pTemplate="colgroup">
                 <colgroup>
@@ -67,12 +67,75 @@
                   </td>
                 </tr>
               </ng-template>
-            </p-treeTable>
+            </p-treeTable>-->
+        <p-treeTable [value]="files2" selectionMode="single" [scrollable]="true" scrollHeight="100%"
+        [resizableColumns]="true" columnResizeMode="expand">
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col style="width: 120px;">
+            <col style="width: 65px;">
+            <col style="width: 81px;">
+            <col style="width: 71px;">
+            <col style="width: 120px;">
+            <col style="width: 50px;">
+            <col style="width: 50px;">
+            <col style="width: 50px;">
+            <col style="width: 50px;">
+            <col style="width: 50px;">
+            <col style="width: 50px;">
+            <col style="width: 50px;">
+            <col style="width: 50px;">
+            <col style="width: 50px;">
+            <col style="width: 50px;">
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th ttResizableColumn>{{'BOMItemCode' | translate}}</th>
+            <th ttResizableColumn>{{'Description' | translate}}</th>
+            <th ttResizableColumn>{{'BOMQuantity' | translate}}</th>
+            <th ttResizableColumn>{{'UOM' | translate}}</th>
+            <th ttResizableColumn>{{'ItemBasis' | translate}}</th>
+            <th ttResizableColumn>{{'EffectiveFromDate' | translate}}</th>
+            <th ttResizableColumn>{{'EffectiveToDate' | translate}}</th>
+            <th ttResizableColumn>{{'IssueMethod' | translate}}</th>
+            <th ttResizableColumn>{{'WarehouseIssue' | translate}}</th>
+            <th ttResizableColumn>{{'BinIssue' | translate}}</th>
+            <th ttResizableColumn>{{'OperationNumber' | translate}}</th>
+            <th ttResizableColumn>{{'CostRollUp' | translate}}</th>
+            <th ttResizableColumn>{{'ECO' | translate}}</th>
+            <th ttResizableColumn>{{'Comments' | translate}}</th>
+            <th ttResizableColumn>{{'Attachments' | translate}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-node="node" let-rowNodeIndex="rowNodeIndex" let-rowData="rowData">
+          <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">
+            <td>
+              <p-treeTableToggler [rowNode]="rowNode" class="cursor-pointer"></p-treeTableToggler>
+              <span class="cursor-pointer" (click)="DetailGridRowSelect(node)">{{rowData.U_O_ITEMCODE}}</span>
+            </td>
+            <td class="text-right" headerClass="text-right">{{rowData.U_O_DESC}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.BOM_QUANTITY}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.U_O_UOM}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.U_O_BASIS_CODE}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.EFFECIVEFROMDATE}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.EFFECIVETODATE}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.U_O_ISSUE_METHOD}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.U_O_ISSUE_WHSE}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.U_O_BIN}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.U_O_OPERATION}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.U_O_COST_ROLLUP}}</td>
+             <td class="text-right" headerClass="text-right">{{rowData.U_OPTM_ECONO}}</td>
+              <td class="text-right" headerClass="text-right">{{rowData.U_OPTM_COMMENTS}}</td>
+              <td class="text-right" headerClass="text-right">{{rowData.U_OPTM_ATTACHMENT}}</td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
           </div>
         </div>
       </div>
     
-      <div class="bom-detail-grid" fxFlex="0 0 100%">
+      <!--<div class="bom-detail-grid" fxFlex="0 0 100%">
         <div *ngIf="BOMDetailStatus" class="k-i-loading"></div>
         <div>
           <div class="h5 mb-2" *ngIf="BomDetail">{{'BOMDetail' | translate}} (Item Code: {{headerData.U_O_ITEMCODE}}, BOM Seq: {{headerData.U_O_BOM_SEQ}}, BOM Revision: {{headerData.U_O_REVISION}})</div>
@@ -112,7 +175,7 @@
             <kendo-grid-excel fileName="BOM-Detail.xlsx"></kendo-grid-excel>
           </kendo-grid>
         </div>
-      </div>
+      </div>-->
     </div>
   </kendo-splitter-pane>
   <kendo-splitter-pane class="slim-scroll" *ngIf="headerRowGridCollapse" [collapsible]="true">
