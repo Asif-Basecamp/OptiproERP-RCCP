@@ -1,4 +1,10 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { GanttChartService } from './service/gantt-chart.service';
+import { environment } from '../../../environments/environment';
+import { NotificationService } from '@progress/kendo-angular-notification';
+import { TranslateService } from '@ngx-translate/core';
+import { CountdownComponent } from 'ngx-countdown';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-gantt',
@@ -9,13 +15,18 @@ export class GanttChartComponent implements OnInit {
 
   public isMobile:boolean;
   public seachPanelCollapse:boolean;
+  public CompanyDB: any;
+  public planDefinition: any;
 
-  constructor() { }
+  constructor(private GanttChartService:GanttChartService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { }
+
   @HostListener('window:resize', ['$event']) onResize() {
     this.mobileView();
   }
   
   ngOnInit() {
+    this.CompanyDB =  'PLANNING_ENGINE03',
+    this.openPlanDefinition(environment.optiProGanttChartAPIURL, this.CompanyDB);
     this.mobileView();
   }
 
@@ -29,8 +40,12 @@ export class GanttChartComponent implements OnInit {
     }
   }
 
-  openPlanDefinition(){
-    alert('hello');
+  openPlanDefinition(api, companyDB){
+      this.GanttChartService.GetPlanDefinition(api, companyDB).subscribe(
+        data => {
+          this.planDefinition = data;
+          console.log(this.planDefinition);
+        });    
   }
 
   openPlanOrderNumber(){
