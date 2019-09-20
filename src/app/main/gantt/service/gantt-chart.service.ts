@@ -20,6 +20,6 @@ export class GanttChartService {
     let jObject:any={ GetData: JSON.stringify([{ 
      CompanyDBID: CompanyDBID
     }])};
-    return this.httpClient.post(optiProDashboardAPIURL +"BOMDashboard/GetItemListForFinishedGoods",jObject,this.httpOptions);
+    return this.httpClient.post(optiProDashboardAPIURL +"GetPlanDefinitionList",jObject,this.httpOptions);
   } 
 }
