@@ -17,9 +17,11 @@
                 }
             }
             & .k-ghost-splitbar-vertical, .k-splitbar-vertical{
-                height: 15px;
+                height: 10px;
                 &:hover{
-                    background-color: rgba(0,0,0,0.05)
+                    // background-color: rgba(0,0,0,0.05);
+                    background-color: rgb(88, 132, 232);
+                    
                 }
             }
         }

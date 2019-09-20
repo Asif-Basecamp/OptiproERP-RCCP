@@ -46,9 +46,8 @@ export class GanttChartViewComponent implements OnInit {
             {name: "start_date", label:"Start Date", align: "center", width: '90', resize: true},
             {name: "end_date", label:"End Date", template:function(obj){
                 return obj.end_date}, align: "center", width: '90', resize: true},
-            {name: "duration", label:"Duration (H)", template:function(obj){
-                console.log(obj.duration);
-                return obj.duration/60},align: "center", width: '100', resize: true},
+            {name: "duration", label:"Duration", template:function(obj){
+                return Math.round((obj.duration/1440) *10)/10 + " Day(s)"},align: "center", width: '100', resize: true},
             // {name: "progress", label:"Progress",template:function(obj){
             //     return Math.round(obj.progress*100) + "%"}, align: "center", width: '80', resize: true},
             // {name: "add", width: 40}
@@ -161,7 +160,7 @@ export class GanttChartViewComponent implements OnInit {
                 Start = tConvert(StartEl.toTimeString().substr(0,5)) +" "+ StartEl.getUTCDate() +"-" + StartEl.getUTCMonth() + "-" + StartEl.getUTCFullYear(),
                 End = tConvert(EndEl.toTimeString().substr(0,5)) +" "+ EndEl.getUTCDate() +"-" + EndEl.getUTCMonth() + "-" + EndEl.getUTCFullYear();
 
-            return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration:</b><span> " + task.duration/60 + " Hour(s)"+"</span></div><div><b>Progress:</b><span> ";
+            return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration:</b><span> " + Math.round((task.duration/1440) *10)/10 + " Day(s)"+"</span></div>";
              //+ Math.round(task.progress*100) + "%</span></div>";
         };
         gantt.init(this.ganttContainer.nativeElement);
