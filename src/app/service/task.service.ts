@@ -41,7 +41,7 @@ export class TaskService {
                 obj['end_date'] = obj['ENDDATETIME']; 
                 delete obj['ENDDATETIME']; 
 
-                obj['progress'] = 1; 
+                // obj['progress'] = 1; 
 
                 obj['parent'] = obj['ParantId']; 
                 delete obj['ParantId'];
@@ -49,9 +49,12 @@ export class TaskService {
                 obj['open'] = true; 
 
                 if(obj['parent'] == ""){
-                    obj['type'] = "operation"; 
+                    // obj['type'] = "operation"; 
+                    obj['type'] = "project"; 
+                    
                 }else{
-                    obj['type'] = "resource";  
+                    // obj['type'] = "resource";  
+                    obj['type'] = "task";  
                 }
 
                 delete obj['OPTM_OPERNO'];
@@ -66,7 +69,7 @@ export class TaskService {
 
         this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
         this.products = this.arrays; 
-        //console.log(JSON.stringify(this.products));
+        console.log(JSON.stringify(this.products));
 
 		return Promise.resolve(
 			this.products
