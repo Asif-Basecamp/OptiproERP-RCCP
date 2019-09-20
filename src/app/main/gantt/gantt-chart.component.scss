@@ -3,6 +3,27 @@
     display: flex;
     overflow: auto;
     flex-direction: row;
+    ::ng-deep{
+        .k-splitter{
+            background-color:transparent; 
+            border: none;
+            & .k-splitbar{
+                background-color: transparent;
+            }
+            & .k-ghost-splitbar-horizontal, .k-splitbar-horizontal{
+                width: 15px;
+                &:hover{
+                    background-color: rgba(0,0,0,0.05)
+                }
+            }
+            & .k-ghost-splitbar-vertical, .k-splitbar-vertical{
+                height: 15px;
+                &:hover{
+                    background-color: rgba(0,0,0,0.05)
+                }
+            }
+        }
+    }
 }
 
 
@@ -35,7 +56,7 @@
 
 
 .dashboard-left{
-    padding:15px 7px 15px 15px;
+    padding:15px 0 15px 15px;
     height: 100%; 
     width: 300px;
     flex: 0 0 300px;
@@ -98,7 +119,7 @@
     }
 }
 .dashboard-right{    
-    padding: 15px 15px 15px 7px;
+    padding: 15px 15px 15px 0;
     max-height: calc(100vh - 40px);
     overflow: auto;
     width: 100% !important;
@@ -153,8 +174,15 @@
             font-size: 12px
         }
         & svg.logo-svg {
-            width: 200px;
+            width: 100%;
             height: auto;
         }
     }
 }
+
+.restrictedHeight{
+    & .ui-treetable-scrollable-body{
+        max-height: calc(100vh - 370px) !important;
+        height: calc(100vh - 370px) !important;
+    }
+  }

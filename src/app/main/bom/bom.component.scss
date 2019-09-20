@@ -6,11 +6,18 @@
     ::ng-deep{
         .k-splitter{
             background-color:transparent; 
+            border: none;
             & .k-splitbar{
                 background-color: transparent;
             }
             & .k-ghost-splitbar-horizontal, .k-splitbar-horizontal{
                 width: 15px;
+                &:hover{
+                    background-color: rgba(0,0,0,0.05)
+                }
+            }
+            & .k-ghost-splitbar-vertical, .k-splitbar-vertical{
+                height: 15px;
                 &:hover{
                     background-color: rgba(0,0,0,0.05)
                 }
