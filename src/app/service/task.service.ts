@@ -37,14 +37,12 @@ export class TaskService {
 		});
 
 		return Promise.resolve(
-			// [{id: 1, text: "Project #1", start_date: "09:18 15-09-2019", description:"demo", duration:6, progress: 0.45, parent: "", open:true, type:'project'},
-			[{id: 1, text: "Project #1", start_date: "2019-10-09 08:00", description:"demo", end_date:"2019-10-11 15:30", progress: 0.45, parent: "", open:true, type:'task'},
-			// {id: 2, text: "Task #1-1", start_date: "09:18 15-09-2019", description:"demo", duration:3, progress: 0.45, parent: "1", open:true, type:'task' },
-			// {id: 3, text: "Task #1-2", start_date: "10:54 16-09-2019", description:"demo", duration:3, progress: 0.45, parent: "1", open:true, type:'task'},
-			// {id: 4, text:"Project #2", start_date:"15:29 17-09-2019", description:"demo", duration:16, progress:0.6, parent: "", open: true, type:'project'},
-			{id: 4, text:"Project #2", start_date:"2019-10-23 18:00", description:"demo", end_date:"2019-10-24 15:00", progress:0.6, parent: "", open: true, type:'task'}]
-        	// {id: 5, text:"Task #2-1", start_date:"15:29 17-09-2019", description:"demo", duration:8, progress:0.6, parent:"4", open: true, type:'task' },
-			// {id: 6, text:"Task #2-2", start_date:"11:17 18-09-2019", description:"demo", duration:8, progress:0.6, parent:"4", open: true, type:'task'}]
+			 [{id: 1, text: "Operation #1", start_date: "2019-09-15 09:18 ", description:"demo", end_date:"2019-09-18 15:30", progress: 0.45, parent: "", open:true, type:'operation'},
+             {id: 2, text: "Resource #1-1", start_date: "2019-09-15 09:18", description:"demo", end_date:"2019-09-18 15:30", progress: 0.45, parent: "1", open:true, type:'resource' },
+             {id: 3, text: "Resource #1-2", start_date: "2019-09-16 10:54", description:"demo", end_date:"2019-09-18 15:30", progress: 0.45, parent: "1", open:true, type:'resource'},
+             {id: 4, text:"Operation #2", start_date:"2019-09-17 15:29", description:"demo", end_date:"2019-09-19 15:30", progress:0.6, parent: "", open: true, type:'operation'},
+             {id: 5, text:"Resource #2-1", start_date:"2019-09-17 15:29 ", description:"demo", end_date:"2019-09-18 15:30", progress:0.6, parent:"4", open: true, type:'resource' },
+             {id: 6, text:"Resource #2-2", start_date:"2019-09-18 11:17", description:"demo", end_date:"2019-09-21 15:30", progress:0.6, parent:"4", open: true, type:'resource'}]
 		);
 	}
 }	

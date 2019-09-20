@@ -94,6 +94,7 @@ export class BOMGridViewComponent implements OnInit {
 
   /*-- On click Detail Grid Row --*/
   DetailGridRowSelect(e){
+    console.log(e);
     this.BOMDetailStatus = true;
     this.datas = [];
     if(e.parent == null){
