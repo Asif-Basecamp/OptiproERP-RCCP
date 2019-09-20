@@ -165,10 +165,13 @@ export class GanttChartViewComponent implements OnInit {
              //+ Math.round(task.progress*100) + "%</span></div>";
         };
         gantt.init(this.ganttContainer.nativeElement);
-        Promise.all([this.taskService.get(), this.linkService.get()])
+        /*Promise.all([this.taskService.get(), this.linkService.get()])
             .then(([data, links]) => {
                 gantt.parse({ data, links });
-            });
+            });*/
+        Promise.all([this.taskService.get()]).then(([data]) => {
+            gantt.parse({data});
+        });   
     }
     public onScaleChange(el) {
         gantt.ext.zoom.setLevel(el.target.value)
