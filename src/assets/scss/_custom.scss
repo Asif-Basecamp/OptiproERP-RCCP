@@ -362,9 +362,6 @@ body .k-grid th, body .k-grid td{
 .k-filtercell > span, .k-filtercell .k-filtercell-wrapper {
   align-items: center;
 }
-.k-filtercell .k-filtercell-wrapper > .k-textbox{
-  flex:0 0 100%;
-}
 .text-center[kendogridcell] .k-checkbox-label, 
 .k-grid .text-center .k-checkbox-label{
     padding-left: 16px;
@@ -425,48 +422,51 @@ kendo-grid-filter-wrapper-cell{
   }
 }
 .primary-table-colored{
-  kendo-grid-toolbar{
-    background-color: theme-color("primary");
-    color: $white;
-    & button.btn.btn-icon.k-grid-excel > svg{
-      fill: $white;
-    }
-    & .custom-checkbox{
-      & input[type=checkbox]{
-        & + span:before{
-          background-color: $white;
-        } 
-        &:checked + span:before{
-          background-color: $white;
-          border-color: $white;
-        }
-        &:checked + span:after{
-          background: theme-color("primary");
-          box-shadow:2px 0 0 theme-color("primary"), 4px 0 0 theme-color("primary"), 4px -2px 0 theme-color("primary"), 4px -4px 0 theme-color("primary"), 4px -6px 0 theme-color("primary"), 4px -8px 0 theme-color("primary");
-        }
-      }
-      &:hover{
-        & input[type=checkbox]{
-          & + span:before{
-            background-color: $white;
-          } 
-          &:checked + span:before{
-            background-color: $white;
-            border-color: $white;
-          }
-          &:checked + span:after{
-            background: theme-color("primary");
-            box-shadow:2px 0 0 theme-color("primary"), 4px 0 0 theme-color("primary"), 4px -2px 0 theme-color("primary"), 4px -4px 0 theme-color("primary"), 4px -6px 0 theme-color("primary"), 4px -8px 0 theme-color("primary");
-          }
-        }
-      }
-    }
-  }
-  .k-grid-header, .k-grid-header .k-header{
+  // kendo-grid-toolbar{
+  //   background-color: theme-color("primary");
+  //   color: $white;
+  //   & button.btn.btn-icon.k-grid-excel > svg{
+  //     fill: $white;
+  //   }
+  //   & .custom-checkbox{
+  //     & input[type=checkbox]{
+  //       & + span:before{
+  //         background-color: $white;
+  //       } 
+  //       &:checked + span:before{
+  //         background-color: $white;
+  //         border-color: $white;
+  //       }
+  //       &:checked + span:after{
+  //         background: theme-color("primary");
+  //         box-shadow:2px 0 0 theme-color("primary"), 4px 0 0 theme-color("primary"), 4px -2px 0 theme-color("primary"), 4px -4px 0 theme-color("primary"), 4px -6px 0 theme-color("primary"), 4px -8px 0 theme-color("primary");
+  //       }
+  //     }
+  //     &:hover{
+  //       & input[type=checkbox]{
+  //         & + span:before{
+  //           background-color: $white;
+  //         } 
+  //         &:checked + span:before{
+  //           background-color: $white;
+  //           border-color: $white;
+  //         }
+  //         &:checked + span:after{
+  //           background: theme-color("primary");
+  //           box-shadow:2px 0 0 theme-color("primary"), 4px 0 0 theme-color("primary"), 4px -2px 0 theme-color("primary"), 4px -4px 0 theme-color("primary"), 4px -6px 0 theme-color("primary"), 4px -8px 0 theme-color("primary");
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  & > .k-grid-aria-root > .k-grid-header, & > .k-grid-aria-root > .k-grid-header > .k-grid-header-wrap > table > thead > tr > th.k-header{
     background-color: theme-color("primary");
     color: $white;  
     border-color: rgba(0,0,0,0.1);
   }
+}
+.k-grid th.k-state-selected, .k-grid td.k-state-selected, .k-grid tr.k-state-selected > td{
+  background-color: lighten(theme-color("primary"), 28%);
 }
 //Kendow Modal
 .k-window-titlebar{

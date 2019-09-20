@@ -187,5 +187,9 @@ export class GanttChartViewComponent implements OnInit {
 		else
 			gantt.config.highlight_critical_path = true;
 		gantt.render();
-	}
+    }
+    
+    // ngOnDestroy(){
+    //     gantt.destructor();
+    // }
 }
