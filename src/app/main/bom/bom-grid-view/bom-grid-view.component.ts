@@ -40,6 +40,9 @@ export class BOMGridViewComponent implements OnInit {
   public BOMDetailStatus: boolean = false;
   public RoutingHeaderStatus: boolean = false;
 
+  public detailRowGridCollapse: boolean = false;
+  public headerRowGridCollapse: boolean = false;
+
   constructor(private BOMService: BOMService, private translate: TranslateService) {}
   
   ngOnInit() {
@@ -49,6 +52,7 @@ export class BOMGridViewComponent implements OnInit {
   /*-- on click simple Grid Row--*/
 
   simpleGridRowSelect(evt){
+    this.detailRowGridCollapse = true;
     this.DetailGridStatus = true;
     this.BomDetail = '';
     if(evt.selectedRows[0].dataItem){
@@ -94,6 +98,7 @@ export class BOMGridViewComponent implements OnInit {
 
   /*-- On click Detail Grid Row --*/
   DetailGridRowSelect(e){
+    this.headerRowGridCollapse = true;
     this.BOMDetailStatus = true;
     this.datas = [];
     if(e.parent == null){

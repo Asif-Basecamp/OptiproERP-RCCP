@@ -322,7 +322,9 @@ body kendo-timepicker.k-widget.form-control-sm.k-timepicker {
   margin-top: -2px;
 }
 .k-i-arrow-60-right::before, .k-i-expand-e::before, .k-i-expand::before, .k-i-sarrow-e::before, .k-i-arrow-e::before,
-.k-i-arrow-60-down::before, .k-i-expand-s::before, .k-i-collapse::before, .k-i-sarrow-s::before, .k-i-arrow-s::before{
+.k-i-arrow-60-down::before, .k-i-expand-s::before, .k-i-collapse::before, .k-i-sarrow-s::before, .k-i-arrow-s::before,
+.k-i-arrow-60-up::before, .k-i-expand-n::before, .k-i-sarrow-n::before, .k-i-arrow-n::before, .k-i-arrow-n::before,
+.k-i-arrow-60-left::before, .k-i-expand-w::before, .k-i-sarrow-w::before, .k-i-arrow-w::before, .k-i-arrow-w::before{
   content: "";
   width: 8px;
   height: 8px;
@@ -335,6 +337,12 @@ body kendo-timepicker.k-widget.form-control-sm.k-timepicker {
 }
 .k-i-arrow-60-down::before, .k-i-expand-s::before, .k-i-collapse::before, .k-i-sarrow-s::before, .k-i-arrow-s::before{
   transform:rotateZ(90deg);
+}
+.k-i-arrow-60-up::before, .k-i-expand-n::before, .k-i-sarrow-n::before, .k-i-arrow-n::before, .k-i-arrow-n::before{
+  transform:rotateZ(270deg);
+}
+.k-i-arrow-60-left::before, .k-i-expand-w::before, .k-i-sarrow-w::before, .k-i-arrow-w::before, .k-i-arrow-w::before{
+  transform:rotateZ(180deg);
 }
 //kendo checkbox
 .k-checkbox:checked + .k-checkbox-label::after {

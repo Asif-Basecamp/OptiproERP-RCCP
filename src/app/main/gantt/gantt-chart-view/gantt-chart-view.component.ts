@@ -35,6 +35,7 @@ export class GanttChartViewComponent implements OnInit {
         gantt.config.drag_links = true;
         gantt.config.drag_progress = true;
         gantt.config.date_grid = "%d-%M-%Y";
+        gantt.config.fit_tasks = true;
 
         //gantt editable configuration
         gantt.config.readonly = true;
