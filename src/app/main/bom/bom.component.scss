@@ -18,9 +18,9 @@
             }
             & .k-ghost-splitbar-vertical, .k-splitbar-vertical{
                 height: 10px;
-                &:hover{
+                &:hover, &:active{
                     // background-color: rgba(0,0,0,0.05);
-                    background-color: rgb(88, 132, 232);
+                    background-color: #00e3d1;
                     
                 }
             }
