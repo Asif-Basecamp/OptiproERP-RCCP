@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import "./../../../../assets/scripts/dhtmlx-gantt";
 import { TaskService } from "../../../service/task.service";
 import { LinkService } from "../../../service/link.service";
@@ -24,7 +24,8 @@ export class GanttChartViewComponent implements OnInit {
     ];
     public scaler:string = 'day';
 
-    constructor(private taskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef, private GanttChartService: GanttChartService) { }
+    constructor(private taskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef, private GanttChartService: GanttChartService) { 
+    }
 
     ngOnInit() {
         gantt.config.scale_height = 25 * 3;
@@ -164,14 +165,13 @@ export class GanttChartViewComponent implements OnInit {
              //+ Math.round(task.progress*100) + "%</span></div>";
         };
         gantt.init(this.ganttContainer.nativeElement);
-        /*Promise.all([this.taskService.get(), this.linkService.get()])
-            .then(([data, links]) => {
-                gantt.parse({ data, links });
-            });*/
-        Promise.all([this.taskService.get()]).then(([data]) => {
+        Promise.all([this.taskService.get('','','')]).then(([data]) => {
+            console.log({data});
             gantt.parse({data});
-        });   
+        });
     }
+
+
     public onScaleChange(el) {
         gantt.ext.zoom.setLevel(el.target.value)
     }

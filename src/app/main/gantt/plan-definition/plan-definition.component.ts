@@ -15,8 +15,8 @@ export class PlanDefinitionComponent implements OnInit {
 
   
   @Output() lookupEvent = new EventEmitter<string>();
-  @Output() itemCodeEvent = new EventEmitter<any>();
-  @Input() ItemData: any;
+  @Output() PlanDefinitionEvent = new EventEmitter<any>();
+  @Input() planDefinitionData: any;
   public CompanyDB: any;
   public itemCode: any;
   public EnableLoader: boolean = true;
@@ -29,7 +29,7 @@ export class PlanDefinitionComponent implements OnInit {
   }
 
   gridRowSelectionChange(evt, ref){
-    this.itemCodeEvent.emit(evt.selectedRows[0].dataItem.ItemCode);
+    this.PlanDefinitionEvent.emit(evt.selectedRows[0].dataItem.Code);
     this.close();
   }
 

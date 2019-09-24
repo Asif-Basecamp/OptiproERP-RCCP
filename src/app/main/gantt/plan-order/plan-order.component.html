@@ -1,1 +1,36 @@
-<p>plan-order works!</p>
+<div *ngIf="EnableLoader" class="k-i-loading"></div>
+<div class="example-wrapper" *ngIf="planOrderData">
+    <kendo-dialog title="Plan Order No" (close)="close()" [minWidth]="250" [width]="450">
+        <kendo-grid [kendoGridBinding]="planOrderData" [filterable]=isColumnFilter [selectable]="true" [sortable]="true"
+            [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)"
+            [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px'}">
+            <ng-template kendoGridToolbarTemplate>
+                <div class="d-flex align-items-center">
+                
+                    <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
+                        <input #chkFilter type="checkbox" (change)="onFilterChange(chkFilter,gridItem)" 
+                        id="opti_SalesOrderListColumnFilterID" [(ngModel)]="isColumnFilter" class="k-checkbox" 
+                        name="columnfilter" />
+                        <span class="checkbox"></span>
+                        <span>{{'EnableFilter' | translate}}</span>
+                    </label>
+                    <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
+                        class="ml-auto btn btn-link btn-sm btn-icon p-0">
+                        <svg viewBox="0 0 512 512" class="icon">
+                            <use xlink:href="#download"></use>
+                        </svg>
+                    </button>
+                </div>
+            </ng-template>
+            <kendo-grid-column field="OPTM_SUPPLLY_ID" title="Order No" width="80">
+            </kendo-grid-column>
+        </kendo-grid>
+        <kendo-dialog-actions class="p-2 align-items-end">
+            <button class="btn btn-danger btn-sm d-flex align-items-center" type="button" (click)="close()">
+                <svg viewBox="0 0 489 489" class="icon mr-2">
+                    <use xlink:href="#cancel"></use>
+                </svg> {{'Cancel' | translate}}
+            </button>
+        </kendo-dialog-actions>
+    </kendo-dialog>
+</div>
