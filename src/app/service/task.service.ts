@@ -42,7 +42,7 @@ export class TaskService {
     
         if(db && desc && order){
             this.httpClient.post("http://172.16.6.117/OptiProRCCPGanttChart/RCCPGanttChart/GetGanttChartData",jObject,this.httpOptions).subscribe((res : any[])=>{
-                this.products = res.map(function(obj) { 
+                this.products = res.map(function(obj) {
                     obj['id'] = obj['SeqNo'];
                     delete obj['SeqNo'];
     
@@ -78,12 +78,12 @@ export class TaskService {
                     
                     return obj; 
                 }); 
-                localStorage.setItem('ganttChart', JSON.stringify(this.products));
+                //localStorage.setItem('ganttChart', JSON.stringify(this.products));
             });  
         }
 
-        this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
-        this.products = this.arrays; 
+       // this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
+       // this.products = this.arrays; 
 
         //console.log(JSON.stringify(this.products));
 
