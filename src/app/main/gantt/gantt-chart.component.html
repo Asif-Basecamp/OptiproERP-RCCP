@@ -14,7 +14,7 @@
                 <div class="overflow-auto d-flex flex-column" fxFlex="0 1 100%">
                     <div id="selection-criteria-body"
                         class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3 pt-1 flex-100">
-                        <form class="w-100">
+                        <form class="w-100" #criteriaForm="ngForm">
                             <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
                                 <label for="ItemFrom" class="form-label mb-0">{{'PlanDefinition' | translate}}</label>
                                 <div class="w-100">
@@ -22,7 +22,7 @@
                                         <input type="text" name="PlanDefinition" id="PlanDefinition"
                                             class="form-control form-control-sm" #PlanDF=ngModel
                                             [(ngModel)]="PlanDefinition" placeholder="{{'PlanDefinition' | translate}}"
-                                            autocomplete="off">
+                                            autocomplete="off" required>
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary btn-icon d-flex d-flex"
                                                 (click)="openPlanDefinition()">
@@ -33,6 +33,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="emailHelp" class="form-text text-muted float-right opti_error-msg" *ngIf="PlanDF.invalid && (PlanDF.dirty || PlanDF.touched)"
+                                >
+                                <small *ngIf="PlanDF.errors.required">Plan Definition Required</small>
+                            </div>
                             </div>
                             <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
                                 <label for="ItemFrom" class="form-label mb-0">{{'PlanOrderNo' | translate}}</label>
@@ -41,7 +45,7 @@
                                         <input type="text" name="PlanOrderNo" id="PlanOrderNo"
                                             class="form-control form-control-sm" #PlanOrder=ngModel
                                             [(ngModel)]="PlanOrderNo" placeholder="{{'PlanOrderNo' | translate}}"
-                                            autocomplete="off">
+                                            autocomplete="off" required>
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary btn-icon d-flex"
                                                 (click)="openPlanOrderNo()">
@@ -52,6 +56,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="emailHelp" class="form-text text-muted float-right opti_error-msg" *ngIf="PlanOrder.invalid && (PlanOrder.dirty || PlanOrder.touched)">
+                                    <small *ngIf="PlanOrder.errors.required">Plan Order Number Required</small>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -59,7 +66,7 @@
 
                 <div class="card-footer text-center py-2">
                     <button type="submit" (click)="processData()" class="btn btn-primary btn-icon btn-sm px-2"
-                        id="process">
+                        id="process" [disabled]="!criteriaForm.form.valid">
                         {{'Process' | translate}}
                         <svg viewBox="0 0 24 24" class="icon">
                             <use xlink:href="#rightArrow"></use>
@@ -74,7 +81,7 @@
             <div class="card" fxFlex="0 0 100%">
                 <div class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3"
                     [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
-                   <form class="gantt_control p-2 border border-bottom-0">
+                   <form *ngIf="GanttChartStatus" class="gantt_control p-2 border border-bottom-0">
                         <div class="d-flex">
                             <button type="button" class="btn btn-primary btn-icon btn-sm mr-2" (click)="zoomIn()">
                                 <svg viewBox="0 0 129 129" class="icon">

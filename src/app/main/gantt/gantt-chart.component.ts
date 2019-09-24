@@ -101,6 +101,7 @@ export class GanttChartComponent implements OnInit {
   }
 
   processData(){
+    this.GanttChartStatus = true;
     this.TaskService.toggle(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo);
     this.ganttChart();
   }

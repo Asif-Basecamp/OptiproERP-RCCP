@@ -42,50 +42,50 @@ export class TaskService {
     
         if(db && desc && order){
             this.httpClient.post("http://172.16.6.117/OptiProRCCPGanttChart/RCCPGanttChart/GetGanttChartData",jObject,this.httpOptions).subscribe((res : any[])=>{
-                this.products = res.map(function(obj) {
-                    obj['id'] = obj['SeqNo'];
-                    delete obj['SeqNo'];
-    
-                    obj['text'] = obj['name'];
-                    delete obj['name'];
-    
-                    obj['start_date'] = obj['STARTDATETIME']; 
-                    delete obj['STARTDATETIME'];
-                     
-                    obj['end_date'] = obj['ENDDATETIME']; 
-                    delete obj['ENDDATETIME']; 
-    
-                    // obj['progress'] = 1; 
-    
-                    obj['parent'] = obj['ParantId']; 
-                    delete obj['ParantId'];
-    
-                    obj['open'] = true; 
-    
-                    if(obj['parent'] == ""){
-                        // obj['type'] = "operation"; 
-                        obj['type'] = "project"; 
+                if(res){
+                    this.products = res.map(function(obj) {
+                        obj['id'] = obj['SeqNo'];
+                        delete obj['SeqNo'];
+        
+                        obj['text'] = obj['name'];
+                        delete obj['name'];
+        
+                        obj['start_date'] = obj['STARTDATETIME']; 
+                        delete obj['STARTDATETIME'];
+                         
+                        obj['end_date'] = obj['ENDDATETIME']; 
+                        delete obj['ENDDATETIME']; 
+        
+                        // obj['progress'] = 1; 
+        
+                        obj['parent'] = obj['ParantId']; 
+                        delete obj['ParantId'];
+        
+                        obj['open'] = true; 
+        
+                        if(obj['parent'] == ""){
+                            // obj['type'] = "operation"; 
+                            obj['type'] = "project"; 
+                            
+                        }else{
+                            // obj['type'] = "resource";  
+                            obj['type'] = "task";  
+                        }
+        
+                        delete obj['OPTM_OPERNO'];
+                        delete obj['OPTM_OPR_ID'];
+                        delete obj['OPTM_RES_ID']
+                        delete obj['U_O_RESNAME']
                         
-                    }else{
-                        // obj['type'] = "resource";  
-                        obj['type'] = "task";  
-                    }
-    
-                    delete obj['OPTM_OPERNO'];
-                    delete obj['OPTM_OPR_ID'];
-                    delete obj['OPTM_RES_ID']
-                    delete obj['U_O_RESNAME']
-                    
-                    return obj; 
-                }); 
-                //localStorage.setItem('ganttChart', JSON.stringify(this.products));
+                        return obj; 
+                    });   
+                }
+                localStorage.setItem('ganttChart', JSON.stringify(this.products));
             });  
         }
 
-       // this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
-       // this.products = this.arrays; 
-
-        //console.log(JSON.stringify(this.products));
+        this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
+        this.products = this.arrays; 
 
 		return Promise.resolve(
 			this.products
