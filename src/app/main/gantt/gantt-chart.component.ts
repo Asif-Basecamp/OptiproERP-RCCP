@@ -101,13 +101,13 @@ export class GanttChartComponent implements OnInit {
   }
 
   processData(){
-    this.GanttChartStatus = true;
     this.TaskService.toggle(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo);
     this.ganttChart();
   }
 
   ganttChart(){
-    
+    Promise.all([this.TaskService.get('','','')]).then(([data]) => {
+    if(data.length > 0){  
     gantt.config.scale_height = 25 * 3;
     gantt.config.link_line_width = 1;
     gantt.config.row_height = 25;
@@ -245,10 +245,13 @@ export class GanttChartComponent implements OnInit {
          //+ Math.round(task.progress*100) + "%</span></div>";
     };
     gantt.init(this.ganttContainer.nativeElement);
-    Promise.all([this.TaskService.get('','','')]).then(([data]) => {
-        console.log({data});
-        gantt.parse({data});
+      this.GanttChartStatus = true;
+      gantt.parse({data});
+    }else{
+      this.GanttChartStatus = false;
+    }
     });
+
   }
 
   public onScaleChange(el) {

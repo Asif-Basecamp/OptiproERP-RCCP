@@ -33,7 +33,7 @@ export class TaskService {
       this.get(this.db, this.description, this.order);
     }
 
-	get(db, desc, order): Promise<Task[]>{
+	get(db, desc, order): Promise<any>{
 		let jObject:any={ ItemList: JSON.stringify([{ 
             CompanyDBID: db,
 			PlannedDefination: desc,
@@ -80,17 +80,28 @@ export class TaskService {
                         return obj; 
                     });   
                 }
+                console.log(this.products);
                 localStorage.setItem('ganttChart', JSON.stringify(this.products));
             });  
         }
 
-        this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
-        this.products = this.arrays; 
+        return new Promise(resolve => {
+            setTimeout(() => {
+                this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
+                this.products = this.arrays; 
+                resolve(this.products);
+            }, 6000);
+        });
 
+       /* this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
+        this.products = this.arrays; 
+        console.log(this.products);
 		return Promise.resolve(
 			this.products
-        );
+        );*/
     }
+
+    
 }	
 	
 	

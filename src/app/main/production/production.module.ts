@@ -12,7 +12,6 @@ import { TrnaslateLazyModule } from '../../core/module/translate-lazy.module';
 import { SharedModules } from 'src/app/shared/shared.module';
 import { SplitterModule } from '@progress/kendo-angular-layout';
 
-
 @NgModule({
   declarations: [ProductionComponent],
   imports: [

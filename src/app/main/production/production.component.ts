@@ -768,7 +768,8 @@ gridRowSelectionChange(evt) {
       }  
       this.prod.GetItemExplosionData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.viewOption, this.FromDate, this.ToDate).subscribe(
         data => {
-            if(data.length == 0){
+          console.log(data);
+          /*  if(!data){
               this.loading = false;
               this.notificationService.show({
                 content:this.language.no_record_found,
@@ -799,8 +800,8 @@ gridRowSelectionChange(evt) {
                 type: { style: 'error', icon: true },
                 hideAfter: 1000
               }); 
-              }
-            }  
+              }*/
+           // }  
         },
         error => {
           this.notificationService.show({
