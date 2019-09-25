@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Injector } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { GenealogyService } from 'src/app/service/genealogy.service.js';
-import { LocalStorageService } from '../bom/localstorage.service.js';
 import { ServiceLocator } from 'src/app/servicelocator.js';
+import { GenealogyService } from 'src/app/core/service/genealogy.service.js';
+import { LocalStorageService } from 'src/app/core/service/localstorage.service.js';
 
 @Component({
   selector: 'app-genealogy',

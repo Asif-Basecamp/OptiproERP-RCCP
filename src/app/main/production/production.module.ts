@@ -8,8 +8,9 @@ import { TreeTableModule } from 'primeng/components/treetable/treetable';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { GridModule, PDFModule, ExcelModule  } from '@progress/kendo-angular-grid';
 import { DialogModule } from '@progress/kendo-angular-dialog';
-import { TrnaslateLazyModule } from '../bom/translate-lazy.module';
+import { TrnaslateLazyModule } from '../../core/module/translate-lazy.module';
 import { SharedModules } from 'src/app/shared/shared.module';
+import { SplitterModule } from '@progress/kendo-angular-layout';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SharedModules } from 'src/app/shared/shared.module';
     GridModule,
     PDFModule,
     ExcelModule,
-    DialogModule
+    DialogModule,
+    SplitterModule
   ],
   providers: [],
 })

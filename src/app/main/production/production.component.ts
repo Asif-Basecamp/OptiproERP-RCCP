@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild, HostListener} from '@angular/core';
 import { GridComponent } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { CountdownComponent } from 'ngx-countdown';
@@ -6,7 +6,7 @@ import { RowArgs } from '@progress/kendo-angular-grid';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { DialogService } from '@progress/kendo-angular-dialog';
-import { ProductionService } from 'src/app/service/production.service';
+import { ProductionService } from 'src/app/core/service/production.service';
 import { NotificationService } from '@progress/kendo-angular-notification';
 
 export interface TreeNode {
@@ -34,6 +34,9 @@ export interface TreeNode {
   styleUrls: ['./production.component.scss']
 })
 export class ProductionComponent implements OnInit {
+  public isMobile:boolean;
+  public seachPanelCollapse:boolean;
+
   public language: any;
   public ItemData: any;
   gridStatus: boolean;
@@ -105,7 +108,9 @@ export class ProductionComponent implements OnInit {
   public viewOption: any;  
 
   constructor(private router: Router, private notificationService: NotificationService, private dialogService: DialogService, private datePipe: DatePipe,private prod: ProductionService) {}
- 
+  @HostListener('window:resize', ['$event']) onResize() {
+    this.mobileView();
+  }
  ngOnInit() { 
   this.language = JSON.parse(window.localStorage.getItem('language'));
   this.arrConfigData = JSON.parse(window.localStorage.getItem('arrConfigData'));   
@@ -131,7 +136,15 @@ export class ProductionComponent implements OnInit {
  ];
 // this.viewOption = 'SIMPLE';  
  }
-
+ public mobileView(): void {
+  if(window.innerWidth <= 767){
+    this.isMobile = true;
+    this.seachPanelCollapse = true;
+  }else{
+    this.isMobile = false;
+    this.seachPanelCollapse = false;
+  }
+}
  //open(dialog: TemplateRef < any > ) {
   //this.dialogService.open(dialog);
  //}
@@ -717,111 +730,95 @@ gridRowSelectionChange(evt, ref) {
  }
 
   GetExplosionData() {
-   if(this.ItemCodeFrom && !this.ItemCodeTo){
-     this.notificationService.show({
-      content:this.language.item_code_to_msg,
-      animation: { type: 'fade', duration: 400 },
-      position: { horizontal: 'right', vertical: 'top' },
-      type: { style: 'error', icon: true },
-      hideAfter: 1000
-    }); 
-   }else if(!this.ItemCodeFrom && this.ItemCodeTo){
-     this.notificationService.show({
-      content:this.language.item_code_from_msg,
-      animation: { type: 'fade', duration: 400 },
-      position: { horizontal: 'right', vertical: 'top' },
-      type: { style: 'error', icon: true },
-      hideAfter: 1000
-    }); 
-   }else{
-   let gridItemSelect = [];
-   this.GridViewSelected = (e: RowArgs) => gridItemSelect.indexOf(e.dataItem.Code) >=0 ;
-   
-   let WoSelect = [];
-   this.WOSelected = (e: RowArgs) => WoSelect.indexOf(e.dataItem.DocEntry) >=0 ;
+    if(this.ItemCodeFrom && !this.ItemCodeTo){
+      this.notificationService.show({
+        content:this.language.item_code_to_msg,
+        animation: { type: 'fade', duration: 400 },
+        position: { horizontal: 'right', vertical: 'top' },
+        type: { style: 'error', icon: true },
+        hideAfter: 1000
+      }); 
+    }else if(!this.ItemCodeFrom && this.ItemCodeTo){
+      this.notificationService.show({
+        content:this.language.item_code_from_msg,
+        animation: { type: 'fade', duration: 400 },
+        position: { horizontal: 'right', vertical: 'top' },
+        type: { style: 'error', icon: true },
+        hideAfter: 1000
+      }); 
+    }else{
+    let gridItemSelect = [];
+    this.GridViewSelected = (e: RowArgs) => gridItemSelect.indexOf(e.dataItem.Code) >=0 ;
+    
+    let WoSelect = [];
+    this.WOSelected = (e: RowArgs) => WoSelect.indexOf(e.dataItem.DocEntry) >=0 ;
 
-   if(this.checkedList.length<=0){
-     this.checkboxStatus =  true;
-   }else{
-     this.checkboxStatus =  false; 
-   if(this.viewOption == "SIMPLE")
-     this.showView = 'simple';
-        
-   else 
-   this.showView = 'detail'; 
-   this.times = '';  
-   this.loading = true; 
-   if(this.ItemCodeFrom == 'undefined' || this.ItemCodeFrom == undefined){
-     this.ItemCodeFrom = '';
-   }
-   if(this.ItemCodeTo == 'undefined' || this.ItemCodeTo == undefined){
-     this.ItemCodeTo = '';
-   }  
-   this.prod.GetItemExplosionData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.viewOption, this.FromDate, this.ToDate).subscribe(
-     data => {
-        if(data.length == 0){
-           this.loading = false;
-           this.notificationService.show({
-            content:this.language.no_record_found,
-            animation: { type: 'fade', duration: 400 },
-            position: { horizontal: 'right', vertical: 'top' },
-            type: { style: 'error', icon: true },
-            hideAfter: 1000
-          }); 
-         }else{
-           this.gridViewData = data;
-           this.loading = false;
-           if(data.length > 0){
-             let Arr = [];
-             for(var i=0; i<this.gridViewData.length; i++){
-              if(this.gridViewData[i]){
-                  Arr.push({data : this.gridViewData[i]});
+    if(this.checkedList.length<=0){
+      this.checkboxStatus =  true;
+    }else{
+      this.checkboxStatus =  false; 
+      if(this.viewOption == "SIMPLE")
+        this.showView = 'simple';
+            
+      else 
+      this.showView = 'detail'; 
+      this.times = '';  
+      this.loading = true; 
+      if(this.ItemCodeFrom == 'undefined' || this.ItemCodeFrom == undefined){
+        this.ItemCodeFrom = '';
+      }
+      if(this.ItemCodeTo == 'undefined' || this.ItemCodeTo == undefined){
+        this.ItemCodeTo = '';
+      }  
+      this.prod.GetItemExplosionData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.viewOption, this.FromDate, this.ToDate).subscribe(
+        data => {
+            if(data.length == 0){
+              this.loading = false;
+              this.notificationService.show({
+                content:this.language.no_record_found,
+                animation: { type: 'fade', duration: 400 },
+                position: { horizontal: 'right', vertical: 'top' },
+                type: { style: 'error', icon: true },
+                hideAfter: 1000
+              }); 
+            }else{
+              this.gridViewData = data;
+              this.loading = false;
+              if(data.length > 0){
+                let Arr = [];
+                for(var i=0; i<this.gridViewData.length; i++){
+                  if(this.gridViewData[i]){
+                      Arr.push({data : this.gridViewData[i]});
+                  }
+                } 
+                this.nodes2 = this.getHierarchy(Arr, '-1');
+                this.files2 = this.nodes2;
+                this.getWorkOrder(this.gridViewData[0].ItemCode);
               }
-             } 
-             this.nodes2 = this.getHierarchy(Arr, '-1');
-             this.files2 = this.nodes2;
-             this.getWorkOrder(this.gridViewData[0].ItemCode);
-           }
-           else {
-            this.notificationService.show({
-            content:this.language.no_record_found,
-            animation: { type: 'fade', duration: 400 },
-            position: { horizontal: 'right', vertical: 'top' },
-            type: { style: 'error', icon: true },
-            hideAfter: 1000
-          }); 
-           }
-         }  
-     },
-     error => {
-       this.notificationService.show({
-            content:this.language.no_record_found,
-            animation: { type: 'fade', duration: 400 },
-            position: { horizontal: 'right', vertical: 'top' },
-            type: { style: 'error', icon: true },
-            hideAfter: 1000
-          }); 
-     })
-     this.searchCriteriaToggle(event);
-   }
-   } 
-   }
-
- //Search criteria expand-shrink function  
- searchCriteriaToggle(event) {
-  event.stopPropagation();
-  if (document.getElementById("dashboard-left").classList.contains('shrink')) {
-   document.getElementById("dashboard-left").classList.remove('shrink');
-   document.getElementById("selection-criteria-body").style.height = '100%';
-   document.getElementById("selection-criteria-body").style.display = 'flex';
-   this.searchCriteria = false;
-  } else {
-   document.getElementById("dashboard-left").classList.add('shrink');
-   document.getElementById("selection-criteria-body").style.height = '0';
-   document.getElementById("selection-criteria-body").style.display = 'none';
-   this.searchCriteria = true;
+              else {
+                this.notificationService.show({
+                content:this.language.no_record_found,
+                animation: { type: 'fade', duration: 400 },
+                position: { horizontal: 'right', vertical: 'top' },
+                type: { style: 'error', icon: true },
+                hideAfter: 1000
+              }); 
+              }
+            }  
+        },
+        error => {
+          this.notificationService.show({
+                content:this.language.no_record_found,
+                animation: { type: 'fade', duration: 400 },
+                position: { horizontal: 'right', vertical: 'top' },
+                type: { style: 'error', icon: true },
+                hideAfter: 1000
+              }); 
+        })
+        this.seachPanelCollapse = true;
+      }
+    } 
   }
- } 
 
  onCheckboxClick(checked: any, index: number) {
 

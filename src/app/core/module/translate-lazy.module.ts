@@ -2,8 +2,8 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LocalFileContants } from "./constants";
-import { LocalStorageService } from "./localstorage.service";
+import { LocalStorageService } from '../service/localstorage.service';
+import { LocalFileContants } from '../constants/constants';
 // import { CommonHelper, LocalStorageService } from "ewapps-lib";
 
 export function createTranslateLoader(http: HttpClient) {

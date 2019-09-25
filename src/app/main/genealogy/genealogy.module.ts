@@ -5,7 +5,7 @@ import { GenealogyComponent } from './genealogy.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { TreeModule } from 'angular-tree-component';
-import { TrnaslateLazyModule } from '../bom/translate-lazy.module';
+import { TrnaslateLazyModule } from '../../core/module/translate-lazy.module';
 import { SharedModules } from 'src/app/shared/shared.module';
 
 @NgModule({

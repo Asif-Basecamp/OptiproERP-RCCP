@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'src/app/core/service/localstorage.service';
+import { ServiceLocator } from 'src/app/servicelocator';
 
 @Component({
     selector: 'app-header',
@@ -9,7 +11,10 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit {
     private _sidebarStatus: string ;
 
-    constructor(private translate: TranslateService) {
+    constructor(private translate: TranslateService, private localStorageService: LocalStorageService, private injector: Injector) {
+        let userLang: string = this.localStorageService.getCurrentLanguage();
+        translate.use(userLang);
+        ServiceLocator.injector = this.injector;
     }
     ngOnInit() {        
         this.sidebar();

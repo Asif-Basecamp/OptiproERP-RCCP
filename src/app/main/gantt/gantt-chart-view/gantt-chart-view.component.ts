@@ -1,10 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import "./../../../../assets/scripts/dhtmlx-gantt";
-import { TaskService } from "../../../service/task.service";
-import { LinkService } from "../../../service/link.service";
-import { Task } from 'src/app/model/task';
-import { Link } from 'src/app/model/link';
-import { Scale } from 'src/app/model/scale';
+import { TaskService } from "../../../core/service/task.service";
+import { LinkService } from "../../../core/service/link.service";
+import { Task } from 'src/app/core/model/task';
+import { Link } from 'src/app/core/model/link';
+import { Scale } from 'src/app/core/model/scale';
 import { environment } from '../../../../environments/environment';
 import { GanttChartService } from '../service/gantt-chart.service';
 

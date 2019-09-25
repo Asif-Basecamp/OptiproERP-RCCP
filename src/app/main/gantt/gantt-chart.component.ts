@@ -6,11 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { CountdownComponent } from 'ngx-countdown';
 import { DatePipe } from '@angular/common';
 import "./../../../assets/scripts/dhtmlx-gantt";
-import { Task } from 'src/app/model/task';
-import { Link } from 'src/app/model/link';
-import { Scale } from 'src/app/model/scale';
-import { TaskService } from 'src/app/service/task.service';
-import { LinkService } from 'src/app/service/link.service';
+import { Task } from 'src/app/core/model/task';
+import { Link } from 'src/app/core/model/link';
+import { Scale } from 'src/app/core/model/scale';
+import { TaskService } from 'src/app/core/service/task.service';
+import { LinkService } from 'src/app/core/service/link.service';
 
 @Component({
   selector: 'app-gantt',

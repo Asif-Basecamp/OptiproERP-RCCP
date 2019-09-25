@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { GridModule, ExcelModule } from '@progress/kendo-angular-grid';
-import { ItemCodeLookupComponent } from '../main/bom/item-code-lookup/item-code-lookup.component';
-import { TrnaslateLazyModule } from '../main/bom/translate-lazy.module';
+// import { ItemCodeLookupComponent } from '../main/bom/item-code-lookup/item-code-lookup.component';
+import { TrnaslateLazyModule } from '../core/module/translate-lazy.module';
 
 @NgModule({
   declarations: [
-    ItemCodeLookupComponent
+    // ItemCodeLookupComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -21,7 +21,9 @@ import { TrnaslateLazyModule } from '../main/bom/translate-lazy.module';
     ExcelModule,
     FormsModule
   ],
-  exports: [ItemCodeLookupComponent],
+  exports: [
+    // ItemCodeLookupComponent
+  ],
   providers: [],
   bootstrap: []
 })

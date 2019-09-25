@@ -269,9 +269,9 @@ button.btn.btn-icon {
   }
 
 // Kendo Custom
-body .k-input, body .k-textbox > input{
-  font-size: 12px !important;
-}
+// body .k-input, body .k-textbox > input{
+//   font-size: 12px !important;
+// }
 body .k-widget, body .k-reset{
   font-size: 12px;
 }
@@ -287,9 +287,31 @@ body .k-popup.k-menu-popup {
   color:#495057 !important;
   height: 100%;
 }
+body .k-datepicker {
+  & .k-select{
+    background: theme-color("primary");
+    color:#fff;
+    margin: -1px -1px -1px 0;
+    width:28px;
+  }
+  & .k-picker-wrap {
+    border: 1px solid #ced4da;
+    height: 28px;
+    & .k-dateinput-wrap{
+      height:26px;
+    }
+  } 
+}
 body .k-widget.form-control-sm .k-input {
   padding: 0.25rem 0.5rem;
   height: auto;
+}
+body .k-autocomplete .k-input, body .k-dateinput-wrap .k-input, 
+body .k-dropdown-wrap .k-input, body .k-picker-wrap .k-input, 
+body .k-multiselect-wrap .k-input, body .k-numeric-wrap .k-input{
+  height:26px;
+  @include font-size($input-font-size-sm);
+  user-select:none;
 }
 body kendo-timepicker.k-widget.form-control-sm.k-timepicker {
   padding:0;  
