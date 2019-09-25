@@ -5,7 +5,6 @@ import { CountdownComponent } from 'ngx-countdown';
 import { RowArgs } from '@progress/kendo-angular-grid';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { DialogService } from '@progress/kendo-angular-dialog';
 import { ProductionService } from 'src/app/core/service/production.service';
 import { NotificationService } from '@progress/kendo-angular-notification';
 
@@ -36,6 +35,7 @@ export interface TreeNode {
 export class ProductionComponent implements OnInit {
   public isMobile:boolean;
   public seachPanelCollapse:boolean;
+  public opened : boolean = false;
 
   public language: any;
   public ItemData: any;
@@ -107,7 +107,7 @@ export class ProductionComponent implements OnInit {
   public viewOptions: any;
   public viewOption: any;  
 
-  constructor(private router: Router, private notificationService: NotificationService, private dialogService: DialogService, private datePipe: DatePipe,private prod: ProductionService) {}
+  constructor(private router: Router, private notificationService: NotificationService, private datePipe: DatePipe,private prod: ProductionService) {}
   @HostListener('window:resize', ['$event']) onResize() {
     this.mobileView();
   }
@@ -145,6 +145,8 @@ export class ProductionComponent implements OnInit {
     this.seachPanelCollapse = false;
   }
 }
+
+
  //open(dialog: TemplateRef < any > ) {
   //this.dialogService.open(dialog);
  //}
@@ -496,7 +498,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
   
 }
 
- openItemFromLookup(dialog: TemplateRef<any>){ 
+ openItemFromLookup(){ 
    let itemFromSelect = [];
    if(this.isColumnFilter1 == true){
      this.isColumnFilter1 = !this.isColumnFilter1;
@@ -513,10 +515,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
   }        
     this.lookUpHeading = this.language.item_from;
     this.gridData = this.ItemData;
-    this.dialogService.open({content: dialog,
-      actions: [
-      { text: 'Cancel' }
-    ]});
+    this.open();
     this.ItemFrom = true;
     this.ItemTo = false;
  }
@@ -540,7 +539,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
   } 
 }
 
-openItemToLookup(dialog: TemplateRef<any>){
+openItemToLookup(){
  let itemToSelect = [];
  if(this.isColumnFilter1 == true){
    this.isColumnFilter1 = !this.isColumnFilter1;
@@ -557,10 +556,7 @@ openItemToLookup(dialog: TemplateRef<any>){
   }        
     this.lookUpHeading = this.language.item_to;
     this.gridData = this.ItemData;
-    this.dialogService.open({content: dialog,
-      actions: [
-      { text: 'Cancel' }
-    ]});
+    this.open();
     this.ItemFrom = false;
     this.ItemTo = true;
 }
@@ -982,4 +978,13 @@ showDetailsCommittedLookup(dataItem){
           }); 
   })
 }
+
+
+  public close() {
+    this.opened = false;
+  }
+
+  public open() {
+    this.opened = true;
+  }
 }
