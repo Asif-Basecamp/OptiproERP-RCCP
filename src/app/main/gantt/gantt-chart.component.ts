@@ -245,10 +245,12 @@ export class GanttChartComponent implements OnInit {
          //+ Math.round(task.progress*100) + "%</span></div>";
     };
     gantt.init(this.ganttContainer.nativeElement);
-    Promise.all([this.TaskService.get('','','')]).then(([data]) => {
+    
+   Promise.all([this.TaskService.get('','','')]).then(([data]) => {
         console.log({data});
         gantt.parse({data});
     });
+
   }
 
   public onScaleChange(el) {
