@@ -580,14 +580,14 @@ onItemToBlur(){
   } 
 }
 
-gridRowSelectionChange(evt, ref) {
+gridRowSelectionChange(evt) {
   if (this.ItemFrom) {
    this.ItemCodeFrom = evt.selectedRows[0].dataItem.ItemCode;
   }
   else if (this.ItemTo) {
    this.ItemCodeTo = evt.selectedRows[0].dataItem.ItemCode;
   } 
-  ref.close();
+  this.close();
  }
 
  gridRowSelectFG(evt){

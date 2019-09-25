@@ -168,7 +168,7 @@
       <div class="custom-accordian grid-accordian-open" id="custom-accordian">
 
         <div class="grid-accordian expanded" id="grid-accordian" *ngIf="gridViewData">
-          <div class="card">
+          <div class="card" fxFlex="0 0 100%">
             <div class="card-header border-bottom d-flex" id="grid-accordian-trigger">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="mr-2"
                 fill="#2a2a2a">
@@ -180,7 +180,7 @@
               </svg>
               <span>{{'grid_view' | translate}}</span>
             </div>
-            <div class="card-body p-0" id="grid-accordian-body">
+            <div class="card-body p-0" id="grid-accordian-body" fxFlex="0 0 100%">
               <kendo-splitter>
                 <!--[orientation]="isMobile ? 'vertical':'horizontal'"-->
                 <kendo-splitter-pane [collapsible]="true" size="25%" [resizable]="true">
@@ -290,9 +290,9 @@
 
                   </div>
                 </kendo-splitter-pane>
-                <kendo-splitter-pane size="75%" [resizable]="true">
-                  <div class="px-2 pt-1 pb-2 overflow-auto h-100">
-                    <div class="d-flex flex-wrap">
+                <kendo-splitter-pane [resizable]="true">
+                  <div class="px-2 pt-1 pb-2 overflow-auto h-100 flex-column" fxflex="0 1 100%">
+                    <div class="d-flex flex-wrap flex-column" fxflex="0 0 100%">
                       <!--<nb-radio-group class="d-inline-flex flex-wrap" [(ngModel)]="RadioBtnWO" name="RadioBtnWO"
                                           (valueChange)="getWoRadioClick($event)">
                                           <nb-radio [value]="'simple'">{{language.show_Wo_FG}}</nb-radio>
@@ -308,38 +308,37 @@
 
                     </div>
 
-                    <div class="mt-2">
-                      <kendo-grid [kendoGridBinding]="gridWOFG" [filterable]=isColumnFilter2 [groupable]=isColumnGroup
+                    <div class="mt-2 d-flex w-100" fxflex="0 0 100%">
+                      <kendo-grid [kendoGridBinding]="gridWOFG" class="w-100" [filterable]=isColumnFilter2 [groupable]=isColumnGroup
                         [pageable]="showgridWOPage" [pageSize]="10" [selectable]="true" [rowSelected]="WOSelected"
                         [sort]="state.sort" [filter]="state.filter" [resizable]="true"
                         (selectionChange)="gridRowSelectDocEntry($event)"
                         [ngStyle]="{ 'cursor': 'pointer', 'max-height':'490px'}">
                         <ng-template kendoGridToolbarTemplate>
-                          <div class="d-flex align-items-center w-100">
-                            <form
-                              class="k-form opti_show-hide-grid-column-filter float-left opti_hide-in-mobile pl-0 pt-0">
-                              <div class="k-form-field d-flex">
-                                <input #chkFilter2 type="checkbox" (change)="onFilterChange(chkFilter2,gridWOFG)"
-                                  id="opti_SalesOrderListColumnFilterID2" [(ngModel)]="isColumnFilter2"
-                                  class="k-checkbox" name="columnfilter" />
-                                <label class="k-checkbox-label"
-                                  for="opti_SalesOrderListColumnFilterID2">{{'enable_filter' | translate}}</label>
-                              </div>
-                            </form>
-                            <span class="ml-auto d-flex align-items-center flex-wrap">
-                              <button type="button" kendoGridPDFCommand
-                                class="btn btn-default btn-icon btn-sm p-0 btn-icon-only" title="Export To PDF">
-                                <i class="optipro-icon-pdf-file"></i><span>{{'Export_To_PDF' | translate}}</span>
-                              </button>
-                              <button type="button" kendoGridExcelCommand
-                                class="btn btn-default btn-icon btn-sm p-0 btn-icon-only" title="Export To Excel">
-                                <i class="optipro-icon-xls-file"></i><span>{{'Export_To_Excel' | translate}}</span>
-                              </button>
-                            </span>
+                          <div class="d-flex align-items-center">
+
+                            <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
+                              <input #chkFilter2 type="checkbox" (change)="onFilterChange(chkFilter2,gridItem1)"
+                                id="opti_SalesOrderListColumnFilterID2" [(ngModel)]="isColumnFilter2" class="k-checkbox"
+                                name="columnfilter" />
+                              <span class="checkbox"></span>
+                              <span>{{'EnableFilter' | translate}}</span>
+                            </label>
+                            <!-- <label class="custom-checkbox mb-0 grouping-checkbox">
+                                    <input type="checkbox" [(ngModel)]="isColumnGroup" [ngModelOptions]="{standalone: true}">
+                                    <span class="checkbox"></span>
+                                    <span>Enable grouping</span>
+                                </label> -->
+                            <!-- export -->
+                            <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
+                              class="ml-auto btn btn-link btn-sm btn-icon p-0">
+                              <svg viewBox="0 0 512 512" class="icon">
+                                <use xlink:href="#download"></use>
+                              </svg>
+                            </button>
                           </div>
                         </ng-template>
 
-                        <kendo-grid-pdf fileName="WorkOrderGrid.pdf"></kendo-grid-pdf>
                         <kendo-grid-excel fileName="WorkOrderGrid.xlsx"></kendo-grid-excel>
 
                         <kendo-grid-checkbox-column *ngIf="showSelection==true" title="Select" [width]="25">
@@ -435,8 +434,8 @@
 
                     <!-- Grid -->
 
-                    <div class="card mt-4 no-shadow border border-light-gray">
-                      <div class="card-body p-0">
+                    <div class="card mt-4 no-shadow border border-light-gray" fxFlex="0 0 100%">
+                      <div class="card-body p-0" fxFlex="0 0 100%">
                         <!-- <nb-tabset (changeTab)="toggleLoadingAnimation()">
                                             <nb-tab tabTitle="{{language.material}}" [nbSpinner]="Tabloading" nbSpinnerStatus="primary"
                                               nbSpinnerSize="xxlarge" nbSpinnerMessage="{{language.please_wait}}">
@@ -1093,45 +1092,44 @@
 
 
 <kendo-dialog *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450">
-    <kendo-dialog-titlebar>{{lookUpHeading}}</kendo-dialog-titlebar>
-    <kendo-grid [kendoGridBinding]="gridData" [filterable]=isColumnFilter1 [groupable]=isColumnGroup
-      [selectable]="true" [rowSelected]="ItemCodeSelected" [sort]="state.sort" [filter]="filter"
-      [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)"
-      [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px'}">
-      <ng-template kendoGridToolbarTemplate>
-          <div class="d-flex align-items-center">
-          
-              <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
-                  <input #chkFilter1 type="checkbox" (change)="onFilterChange(chkFilter1,gridItem1)" 
-                  id="opti_SalesOrderListColumnFilterID1" [(ngModel)]="isColumnFilter1" class="k-checkbox" 
-                  name="columnfilter" />
-                  <span class="checkbox"></span>
-                  <span>{{'EnableFilter' | translate}}</span>
-              </label>
-              <!-- <label class="custom-checkbox mb-0 grouping-checkbox">
+  <kendo-dialog-titlebar>{{lookUpHeading}}</kendo-dialog-titlebar>
+  <kendo-grid [kendoGridBinding]="gridData" [filterable]=isColumnFilter1 [groupable]=isColumnGroup [selectable]="true"
+    [rowSelected]="ItemCodeSelected" [sort]="state.sort" [filter]="filter" [resizable]="true"
+    (selectionChange)="gridRowSelectionChange($event)" [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px'}">
+    <ng-template kendoGridToolbarTemplate>
+      <div class="d-flex align-items-center">
+
+        <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
+          <input #chkFilter1 type="checkbox" (change)="onFilterChange(chkFilter1,gridItem1)"
+            id="opti_SalesOrderListColumnFilterID1" [(ngModel)]="isColumnFilter1" class="k-checkbox"
+            name="columnfilter" />
+          <span class="checkbox"></span>
+          <span>{{'EnableFilter' | translate}}</span>
+        </label>
+        <!-- <label class="custom-checkbox mb-0 grouping-checkbox">
                   <input type="checkbox" [(ngModel)]="isColumnGroup" [ngModelOptions]="{standalone: true}">
                   <span class="checkbox"></span>
                   <span>Enable grouping</span>
               </label> -->
-              <!-- export -->
-              <!-- <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
+        <!-- export -->
+        <!-- <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
                   class="ml-auto btn btn-link btn-sm btn-icon p-0">
                   <svg viewBox="0 0 512 512" class="icon">
                       <use xlink:href="#download"></use>
                   </svg>
               </button> -->
-          </div>
-      </ng-template>
-      <kendo-grid-column field="ItemCode" title="{{language.item_code}}" width="80">
-      </kendo-grid-column>
-      <kendo-grid-column field="ItemName" title="{{language.description}}" width="80">
-      </kendo-grid-column>
-    </kendo-grid>
-    <kendo-dialog-actions class="p-2 align-items-end">
-        <button class="btn btn-danger btn-sm d-flex align-items-center" type="button" (click)="close()">
-            <svg viewBox="0 0 489 489" class="icon mr-2">
-                <use xlink:href="#cancel"></use>
-            </svg> {{'Cancel' | translate}}
-        </button>
-    </kendo-dialog-actions>
+      </div>
+    </ng-template>
+    <kendo-grid-column field="ItemCode" title="{{language.item_code}}" width="80">
+    </kendo-grid-column>
+    <kendo-grid-column field="ItemName" title="{{language.description}}" width="80">
+    </kendo-grid-column>
+  </kendo-grid>
+  <kendo-dialog-actions class="p-2 align-items-end">
+    <button class="btn btn-danger btn-sm d-flex align-items-center" type="button" (click)="close()">
+      <svg viewBox="0 0 489 489" class="icon mr-2">
+        <use xlink:href="#cancel"></use>
+      </svg> {{'Cancel' | translate}}
+    </button>
+  </kendo-dialog-actions>
 </kendo-dialog>
