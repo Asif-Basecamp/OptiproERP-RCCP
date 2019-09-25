@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
+  optiProDashboardURL: "http://172.16.6.140/OptiProDashboard/",
   optiProDashboardAPIURL: "http://172.16.6.117/OptiProDashboard/",
   optiProGanttChartAPIURL: "http://172.16.6.117/OptiProRCCPGanttChart/RCCPGanttChart/",
+  language: "en"
 };
 /*
  * For easier debugging in development mode, you can import the following file

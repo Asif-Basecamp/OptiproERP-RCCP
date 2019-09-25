@@ -43,7 +43,6 @@ export function createTranslateLoader(http: HttpClient) {
       },
       isolate: false
     }),
-    NotificationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 
+
 export class AppUserSession {
     // Tenant 
     public TenantId: string

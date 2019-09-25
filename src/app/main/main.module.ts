@@ -7,10 +7,9 @@ import { SplitterModule } from '@progress/kendo-angular-layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
-import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
 import { TreeTableModule } from 'primeng/components/treetable/treetable';
 import { NotificationModule } from '@progress/kendo-angular-notification';
-import { TrnaslateLazyModule } from './bom/translate-lazy.module';
+import { TrnaslateLazyModule } from '../core/module/translate-lazy.module';
 import { CountdownModule } from 'ngx-countdown';
 import { DatePipe } from '@angular/common';
 
@@ -24,6 +23,7 @@ import { GanttChartComponent } from './gantt/gantt-chart.component';
 import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-view.component';
 import { PlanDefinitionComponent } from './gantt/plan-definition/plan-definition.component';
 import { PlanOrderComponent } from './gantt/plan-order/plan-order.component';
+import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
 
 
 @NgModule({
