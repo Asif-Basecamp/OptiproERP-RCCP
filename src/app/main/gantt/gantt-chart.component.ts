@@ -101,7 +101,6 @@ export class GanttChartComponent implements OnInit {
   }
 
   processData(){
-    this.GanttChartStatus = true;
     this.TaskService.toggle(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo);
     this.ganttChart();
   }
@@ -247,8 +246,13 @@ export class GanttChartComponent implements OnInit {
     gantt.init(this.ganttContainer.nativeElement);
     
    Promise.all([this.TaskService.get('','','')]).then(([data]) => {
-        console.log({data});
-        gantt.parse({data});
+        if(data.length == 0){
+          this.GanttChartStatus = false;
+          localStorage.clear();
+        }else{
+          this.GanttChartStatus = true;
+          gantt.parse({data});
+        }
     });
 
   }

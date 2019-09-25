@@ -166,7 +166,8 @@ export class GanttChartViewComponent implements OnInit {
         };
         gantt.init(this.ganttContainer.nativeElement);
         Promise.all([this.taskService.get('','','')]).then(([data]) => {
-            console.log({data});
+           // console.log({data});
+           // console.log(data);
             gantt.parse({data});
         });
     }

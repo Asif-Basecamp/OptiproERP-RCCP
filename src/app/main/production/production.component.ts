@@ -513,6 +513,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
   }        
     this.lookUpHeading = this.language.item_from;
     this.gridData = this.ItemData;
+    console.log(this.gridData);
     this.dialogService.open({content: dialog,
       actions: [
       { text: 'Cancel' }
@@ -772,7 +773,8 @@ gridRowSelectionChange(evt, ref) {
       }  
       this.prod.GetItemExplosionData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.viewOption, this.FromDate, this.ToDate).subscribe(
         data => {
-            if(data.length == 0){
+          console.log(data);
+          /*  if(!data){
               this.loading = false;
               this.notificationService.show({
                 content:this.language.no_record_found,
@@ -803,8 +805,8 @@ gridRowSelectionChange(evt, ref) {
                 type: { style: 'error', icon: true },
                 hideAfter: 1000
               }); 
-              }
-            }  
+              }*/
+           // }  
         },
         error => {
           this.notificationService.show({
