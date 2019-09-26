@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
-import "./../../../../assets/scripts/dhtmlx-gantt";
+import "./../../../../assets/scripts/dhtmlx-gantt/codebase/dhtmlx-gantt.js";
 import { TaskService } from "../../../core/service/task.service";
 import { LinkService } from "../../../core/service/link.service";
 import { Task } from 'src/app/core/model/task';

@@ -26,12 +26,6 @@ export class TaskService {
 		  })
     };
     
-    toggle(db, process, order) {
-      this.db = db;
-      this.description = process;
-      this.order = order;
-      this.get(this.db, this.description, this.order);
-    }
 
 	get(db, desc, order): Promise<any>{
 		let jObject:any={ ItemList: JSON.stringify([{ 
@@ -76,11 +70,9 @@ export class TaskService {
                         delete obj['OPTM_OPR_ID'];
                         delete obj['OPTM_RES_ID']
                         delete obj['U_O_RESNAME']
-                        
                         return obj; 
                     });   
                 }
-                console.log(this.products);
                 localStorage.setItem('ganttChart', JSON.stringify(this.products));
             });  
         }
@@ -89,19 +81,11 @@ export class TaskService {
             setTimeout(() => {
                 this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
                 this.products = this.arrays; 
+                console.log(this.products);
                 resolve(this.products);
             }, 6000);
         });
-
-       /* this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
-        this.products = this.arrays; 
-        console.log(this.products);
-		return Promise.resolve(
-			this.products
-        );*/
     }
-
-    
 }	
 	
 	

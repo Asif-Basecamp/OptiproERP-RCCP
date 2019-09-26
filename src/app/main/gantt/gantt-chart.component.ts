@@ -5,7 +5,7 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 import { TranslateService } from '@ngx-translate/core';
 import { CountdownComponent } from 'ngx-countdown';
 import { DatePipe } from '@angular/common';
-import "./../../../assets/scripts/dhtmlx-gantt";
+import "./../../../assets/scripts/dhtmlx-gantt/codebase/dhtmlx-gantt.js";
 import { Task } from 'src/app/core/model/task';
 import { Link } from 'src/app/core/model/link';
 import { Scale } from 'src/app/core/model/scale';
@@ -38,7 +38,7 @@ export class GanttChartComponent implements OnInit {
   public planOrderData: any;
   public planDefinitionStatus: boolean = false;
   public planDefinitionOrderStatus: boolean = false;
-  public GanttChartStatus: boolean = false;
+  public GanttChartStatus: boolean;
 
   constructor(private linkService: LinkService, private _elementRef: ElementRef, private TaskService: TaskService, private GanttChartService:GanttChartService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { 
 
@@ -101,13 +101,14 @@ export class GanttChartComponent implements OnInit {
   }
 
   processData(){
-    this.TaskService.toggle(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo);
+    localStorage.clear();
     this.ganttChart();
   }
 
   ganttChart(){
-    Promise.all([this.TaskService.get('','','')]).then(([data]) => {
+      Promise.all([this.TaskService.get(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo)]).then(([data]) => {
     if(data.length > 0){  
+      
     gantt.config.scale_height = 25 * 3;
     gantt.config.link_line_width = 1;
     gantt.config.row_height = 25;
@@ -117,7 +118,7 @@ export class GanttChartComponent implements OnInit {
     gantt.config.drag_progress = true;
     gantt.config.date_grid = "%d-%M-%Y";
     gantt.config.fit_tasks = true;
-
+ 
     //gantt editable configuration
     gantt.config.readonly = true;
 
@@ -246,9 +247,18 @@ export class GanttChartComponent implements OnInit {
     };
     gantt.init(this.ganttContainer.nativeElement);
       this.GanttChartStatus = true;
+      console.log({data});
       gantt.parse({data});
     }else{
       this.GanttChartStatus = false;
+      this.notificationService.show({
+        content: 'No Record Found',
+        animation: { type: 'slide', duration: 400 },
+        hideAfter: 600,
+        position: { horizontal: 'right', vertical: 'top' },
+        type: { style: 'error', icon: true },
+        closable: true
+    });
     }
     });
 
@@ -270,4 +280,9 @@ else
   gantt.config.highlight_critical_path = true;
 gantt.render();
 }
+
+ /*ngOnDestroy(){
+    gantt.destructor();
+ }*/
+
 }
