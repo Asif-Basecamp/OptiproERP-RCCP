@@ -4,7 +4,7 @@
     overflow: auto;
     flex-direction: row;
     ::ng-deep{
-        .k-splitter{
+        & .k-splitter{
             background-color:transparent; 
             border: none;
             & .k-splitbar{
@@ -12,7 +12,7 @@
             }
             & .k-ghost-splitbar-horizontal, .k-splitbar-horizontal{
                 width: 15px;
-                &:hover{
+                &:hover, &:active{
                     background-color: rgba(0,0,0,0.05)
                 }
             }
@@ -24,7 +24,15 @@
                     
                 }
             }
-        }
+            &.internal-spitter{
+                & .k-ghost-splitbar-horizontal, .k-splitbar-horizontal{
+                    width: 10px;
+                    &:hover, &:active{
+                        background-color:#00e3d1;
+                    }
+                }
+            }
+        }        
         & .tree-wrapper{
             border: 1px solid rgba(33, 37, 41, 0.125);
             // padding: 5px;
@@ -34,12 +42,18 @@
             flex:0 0 100%;
             max-height: calc(100% - 33px);
             overflow: auto;
+            height:calc(100% - 33px);
         }        
         & .detail-view-tree-table{
             & .ui-treetable-scrollable-body {
-                max-height: calc(100% - 183px) !important;
-                height: calc(100% - 183px) !important;
+                max-height: calc(100vh - 183px) !important;
+                height: calc(100vh - 183px) !important;
                 overflow-y: scroll !important;
+            }
+        }
+        & .custom-tab{
+            & .k-tabstrip-top > .k-tabstrip-items .k-item{
+                
             }
         }
     }
