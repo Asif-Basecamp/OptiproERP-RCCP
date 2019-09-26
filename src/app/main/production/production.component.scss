@@ -25,6 +25,23 @@
                 }
             }
         }
+        & .tree-wrapper{
+            border: 1px solid rgba(33, 37, 41, 0.125);
+            // padding: 5px;
+            border-top:none;
+            border-radius: 0.2rem;
+            display: flex;
+            flex:0 0 100%;
+            max-height: calc(100% - 33px);
+            overflow: auto;
+        }        
+        & .detail-view-tree-table{
+            & .ui-treetable-scrollable-body {
+                max-height: calc(100% - 183px) !important;
+                height: calc(100% - 183px) !important;
+                overflow-y: scroll !important;
+            }
+        }
     }
 }
 
@@ -188,3 +205,5 @@
         height: calc(100vh - 370px) !important;
     }
   }
+
+ 
