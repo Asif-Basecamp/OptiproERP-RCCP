@@ -10,10 +10,11 @@ import { GridModule, PDFModule, ExcelModule  } from '@progress/kendo-angular-gri
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { TrnaslateLazyModule } from '../../core/module/translate-lazy.module';
 import { SharedModules } from 'src/app/shared/shared.module';
-import { SplitterModule } from '@progress/kendo-angular-layout';
+import { SplitterModule, TabStripModule } from '@progress/kendo-angular-layout';
+import { LookupComponent } from '../lookup/lookup.component';
 
 @NgModule({
-  declarations: [ProductionComponent],
+  declarations: [ProductionComponent, LookupComponent],
   imports: [
     CommonModule,
     ProductionRoutingModule,
@@ -27,7 +28,8 @@ import { SplitterModule } from '@progress/kendo-angular-layout';
     PDFModule,
     ExcelModule,
     DialogModule,
-    SplitterModule
+    SplitterModule,
+    TabStripModule
   ],
   providers: [],
 })
