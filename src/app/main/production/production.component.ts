@@ -134,7 +134,7 @@ export class ProductionComponent implements OnInit {
    { value: 'SIMPLE', label: this.language.simple_View },
    { value: 'Multi', label: this.language.detail_view },
  ];
-// this.viewOption = 'SIMPLE';  
+this.viewOption = 'SIMPLE';  
  }
  public mobileView(): void {
   if(window.innerWidth <= 767){
@@ -768,8 +768,7 @@ gridRowSelectionChange(evt) {
       }  
       this.prod.GetItemExplosionData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.viewOption, this.FromDate, this.ToDate).subscribe(
         data => {
-          console.log(data);
-          /*  if(!data){
+            if(data.length == 0){
               this.loading = false;
               this.notificationService.show({
                 content:this.language.no_record_found,
@@ -800,8 +799,8 @@ gridRowSelectionChange(evt) {
                 type: { style: 'error', icon: true },
                 hideAfter: 1000
               }); 
-              }*/
-           // }  
+              }
+            }  
         },
         error => {
           this.notificationService.show({
@@ -812,7 +811,7 @@ gridRowSelectionChange(evt) {
                 hideAfter: 1000
               }); 
         })
-        this.seachPanelCollapse = true;
+        this.seachPanelCollapse = !(this.seachPanelCollapse);
       }
     } 
   }

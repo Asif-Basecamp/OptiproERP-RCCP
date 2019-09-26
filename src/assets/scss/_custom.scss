@@ -268,6 +268,73 @@ button.btn.btn-icon {
     }
   }
 
+  .custom-radio {
+    position: relative; // take it out of document flow
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+
+    & input[type="radio"]{
+        opacity:0;
+        width: 0;
+        height: 0;
+        overflow: hidden;        
+    }
+    & input[type="radio"] + span {
+      position: relative;
+      width:16px;
+      height:16px;
+      border-radius: 50px;
+      overflow: hidden;
+    }
+    & input[type="radio"] + span + span {
+        margin-left: 8px;
+        line-height: 16px;
+    }
+    & input[type="radio"] + span:before {
+      content: '';
+      display: inline-block;
+      vertical-align: text-top;
+      width: 16px;
+      height: 16px;
+      border-radius: 50px;
+      background: white;
+      border: 1px solid #ced4da;
+      transition: all 100ms ease-in-out;
+    }
+    & input[type="radio"]:hover + span:before {
+      background: theme-color("primary");
+      border-color:theme-color("primary");
+    }
+    & input[type="radio"]:focus + span {
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+    }
+    & input[type="radio"]:checked + span:before {
+      background: theme-color("primary");
+      border-color:theme-color("primary");
+    }
+    & input[type="radio"]:disabled + span {
+      color: #b8b8b8;
+      cursor: auto;
+    }
+    & input[type="radio"]:disabled + span:before {
+      box-shadow: none;
+      background: #ddd;
+    }
+    & input[type="radio"]:checked + span:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: white;
+      width: 8px;
+      height: 8px;
+      border-radius: 50px;
+    transform: translateY(-50%)translateX(-50%);
+    }
+  }
+
 // Kendo Custom
 // body .k-input, body .k-textbox > input{
 //   font-size: 12px !important;
