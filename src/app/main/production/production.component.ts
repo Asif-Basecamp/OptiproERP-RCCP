@@ -26,7 +26,6 @@ export interface TreeNode {
   selectable?: boolean;
  }
 
-
 @Component({
   selector: 'app-production',
   templateUrl: './production.component.html',
@@ -36,7 +35,6 @@ export class ProductionComponent implements OnInit {
   public isMobile:boolean;
   public seachPanelCollapse:boolean;
   public opened : boolean = false;
-
   public language: any;
   public ItemData: any;
   gridStatus: boolean;
@@ -105,7 +103,11 @@ export class ProductionComponent implements OnInit {
   public minutes: any;
   public seconds: any;
   public viewOptions: any;
-  public viewOption: any;  
+  public viewOption: any;
+  public FGLoader: any;  
+  public MaterialLoader: any;  
+  public OperationLoader: any;  
+  public ResourceLoader: any;  
 
   constructor(private router: Router, private notificationService: NotificationService, private datePipe: DatePipe,private prod: ProductionService) {}
   @HostListener('window:resize', ['$event']) onResize() {
@@ -366,7 +368,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
  } 
 
   getWorkOrder(itemName){
-   this.loading = true; 
+   this.FGLoader = true; 
    this.itemName = itemName;
    this.prod.GetWorkOrderFG(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, itemName, this.RadioBtnWO, this.checkedList.toString(), this.FromDate, this.ToDate).subscribe(
      data => {
@@ -392,10 +394,10 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
              this.gridResource = [];
            }
          }
-        this.loading = false;
+        this.FGLoader = false;
      },
      error => {
-       this.loading = false;
+       this.FGLoader = false;
        this.notificationService.show({
         content:this.language.no_record_found,
         animation: { type: 'fade', duration: 400 },
@@ -623,7 +625,7 @@ gridRowSelectionChange(evt) {
 
   getMaterials(DocEntry,ItemCode){
 
-   this.loading = true;
+   this.MaterialLoader = true;
    this.DocEntry = DocEntry;
    this.ItemCode = ItemCode;
 
@@ -644,11 +646,11 @@ gridRowSelectionChange(evt) {
              this.showgridMaterialPage = false;             
            } 
 
-           this.loading = false;         
+           this.MaterialLoader = false;         
            
        },
        error => {
-         this.loading = false;
+         this.MaterialLoader = false;
          this.notificationService.show({
             content:this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
@@ -660,7 +662,7 @@ gridRowSelectionChange(evt) {
   }
 
   getOperations(DocEntry){
-     this.loading = true;
+     this.OperationLoader = true;
      this.prod.GetOperationData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, DocEntry).subscribe(
        data => {
            this.gridOperation = data; 
@@ -670,10 +672,10 @@ gridRowSelectionChange(evt) {
              else
              this.showgridOperationPage = false;             
            }  
-           this.loading = false;    
+           this.OperationLoader = false;    
        },
        error => {
-         this.loading = false;       
+         this.OperationLoader = false;       
          this.notificationService.show({
             content:this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
@@ -685,7 +687,7 @@ gridRowSelectionChange(evt) {
   }
 
   getResources(DocEntry){
-   this.loading = true; 
+   this.ResourceLoader = true; 
    this.prod.GetResourceData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, DocEntry).subscribe(
      data => {
          this.gridResource = data;
@@ -695,11 +697,11 @@ gridRowSelectionChange(evt) {
            else
            this.showgridResourcePage = false;             
          }           
-         this.loading = false;       
+         this.ResourceLoader = false;       
          
      },
      error => {
-       this.loading = false;       
+       this.ResourceLoader = false;       
        this.notificationService.show({
             content:this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
@@ -726,6 +728,7 @@ gridRowSelectionChange(evt) {
  }
 
   GetExplosionData() {
+    this.seachPanelCollapse = false;
     if(this.ItemCodeFrom && !this.ItemCodeTo){
       this.notificationService.show({
         content:this.language.item_code_to_msg,
@@ -770,6 +773,7 @@ gridRowSelectionChange(evt) {
         data => {
             if(data.length == 0){
               this.loading = false;
+              this.collapse();
               this.notificationService.show({
                 content:this.language.no_record_found,
                 animation: { type: 'fade', duration: 400 },
@@ -790,8 +794,10 @@ gridRowSelectionChange(evt) {
                 this.nodes2 = this.getHierarchy(Arr, '-1');
                 this.files2 = this.nodes2;
                 this.getWorkOrder(this.gridViewData[0].ItemCode);
+                this.collapse();
               }
               else {
+                this.collapse();
                 this.notificationService.show({
                 content:this.language.no_record_found,
                 animation: { type: 'fade', duration: 400 },
@@ -799,6 +805,7 @@ gridRowSelectionChange(evt) {
                 type: { style: 'error', icon: true },
                 hideAfter: 1000
               }); 
+              
               }
             }  
         },
@@ -811,9 +818,12 @@ gridRowSelectionChange(evt) {
                 hideAfter: 1000
               }); 
         })
-        this.seachPanelCollapse = !(this.seachPanelCollapse);
       }
     } 
+  }
+
+  collapse(){
+    this.seachPanelCollapse = true;
   }
 
  onCheckboxClick(checked: any, index: number) {
@@ -912,7 +922,7 @@ autoRefresh(){
 }
 
 
-getWoRadioClick(evt){    
+getWoRadioClick(evt){ 
  if(this.itemName != ''){
    this.loading = true;
    this.RadioBtnWO = evt;
