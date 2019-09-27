@@ -82,7 +82,7 @@ export class GenealogyComponent implements OnInit {
   public showValidation: boolean = false;
   isColumnFilter = true;
  
-  constructor(private dialogService: NbDialogService, private dash: GenealogyService, private router: Router, private notificationService: NotificationService) {}
+  constructor( private dash: GenealogyService, private router: Router, private notificationService: NotificationService) {}
  
   ngOnInit() {
    this.arrConfigData = JSON.parse(window.localStorage.getItem('arrConfigData'));
@@ -115,7 +115,7 @@ export class GenealogyComponent implements OnInit {
         this.LotFrom = false;
         this.lookUpHeading = this.language.Item_Code;
         this.gridData = gridData;
-        this.dialogService.open(dialog);
+        //this.dialogService.open(dialog);
   } 
   
  
@@ -225,7 +225,7 @@ export class GenealogyComponent implements OnInit {
       this.LotFrom = false;
       this.LotTo = false;
       this.lookUpHeading = this.language.warehouse;
-      this.dialogService.open(dialog);
+     // this.dialogService.open(dialog);
     }
   }
  
@@ -333,7 +333,7 @@ export class GenealogyComponent implements OnInit {
      this.lookUpHeading = this.language.vendor_lot_from;
      else
      this.lookUpHeading = this.language.lot_from;   
-     this.dialogService.open(dialog);
+    // this.dialogService.open(dialog);
     },
     error => {
     // this.toastrService.danger(this.language.no_record_found);   
@@ -374,7 +374,7 @@ export class GenealogyComponent implements OnInit {
      this.lookUpHeading = this.language.vendor_lot_to;
      else
      this.lookUpHeading = this.language.lot_to;
-     this.dialogService.open(dialog);
+    // this.dialogService.open(dialog);
     },
     error => {
     // this.toastrService.danger(this.language.no_record_found); 
@@ -882,7 +882,7 @@ export class GenealogyComponent implements OnInit {
   }
  
   open(dialog: TemplateRef < any > ) {
-   this.dialogService.open(dialog);
+   //this.dialogService.open(dialog);
   }
  
   process() {

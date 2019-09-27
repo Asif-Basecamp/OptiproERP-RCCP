@@ -13,6 +13,8 @@ import { TreeTableModule } from 'primeng/components/treetable/treetable';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModules } from 'src/app/core/shared.module';
+import { SplitterModule } from '@progress/kendo-angular-layout';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [BOMComponent, WarehouseCodeLookupComponent, BOMGridViewComponent],
@@ -28,8 +30,11 @@ import { SharedModules } from 'src/app/core/shared.module';
     TreeTableModule,
     NotificationModule,
     FlexLayoutModule,
-    SharedModules
+    SharedModules,
+    SplitterModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
 })
 export class BOMModule { }
