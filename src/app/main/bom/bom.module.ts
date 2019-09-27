@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BOMRoutingModule } from './bom-routing.module';
 import { BOMComponent } from './bom.component';
-import { TrnaslateLazyModule } from 'src/app/core/modules/translate-lazy.module';
+import { TrnaslateLazyModule } from 'src/app/core/module/translate-lazy.module';
 import { FormsModule } from '@angular/forms';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { WarehouseCodeLookupComponent } from '../warehouse-code-lookup/warehouse-code-lookup.component';
