@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { TreeModule } from 'angular-tree-component';
 import { TrnaslateLazyModule } from '../../core/module/translate-lazy.module';
 import { SharedModules } from 'src/app/shared/shared.module';
+import { SplitterModule } from '@progress/kendo-angular-layout';
 
 @NgModule({
   declarations: [GenealogyComponent],
@@ -17,6 +18,7 @@ import { SharedModules } from 'src/app/shared/shared.module';
     FormsModule,
     FlexLayoutModule,
     CommonModule,
+    SplitterModule,
     TreeModule.forRoot()
   ],
   exports: [],

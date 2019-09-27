@@ -136,7 +136,8 @@ export class ProductionComponent implements OnInit {
    { value: 'SIMPLE', label: this.language.simple_View },
    { value: 'Multi', label: this.language.detail_view },
  ];
-this.viewOption = 'SIMPLE';  
+this.viewOption = 'SIMPLE'; 
+this.mobileView(); 
  }
  public mobileView(): void {
   if(window.innerWidth <= 767){

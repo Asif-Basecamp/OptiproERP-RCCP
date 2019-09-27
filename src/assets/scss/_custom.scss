@@ -215,6 +215,7 @@ button.btn.btn-icon {
       height:16px;
       border-radius: 2px;
       overflow: hidden;
+      flex: 0 0 16px;
     }
     & input[type=checkbox] + span + span {
         margin-left: 8px;
@@ -290,6 +291,7 @@ button.btn.btn-icon {
       height:16px;
       border-radius: 50px;
       overflow: hidden;
+      flex: 0 0 16px;
     }
     & input[type="radio"] + span + span {
         margin-left: 8px;
