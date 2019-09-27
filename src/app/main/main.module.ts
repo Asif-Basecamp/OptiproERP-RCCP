@@ -12,13 +12,9 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
 import { TrnaslateLazyModule } from '../core/module/translate-lazy.module';
 import { CountdownModule } from 'ngx-countdown';
 import { DatePipe } from '@angular/common';
-
 import { MainRoutingModule } from './main-routing.module';
-
 import { MainComponent } from './main.component';
 import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
-//import { GanttChartComponent } from './gantt/gantt-chart.component';
-//import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-view.component';
 import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
 
 
