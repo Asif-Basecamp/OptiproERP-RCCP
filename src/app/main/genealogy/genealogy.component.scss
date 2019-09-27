@@ -39,7 +39,8 @@
             border-top:none;
             border-radius: 0.2rem;
             display: flex;
-            flex:0 0 100%;
+            flex-direction: column;
+            flex:0 1 100%;
             max-height: calc(100% - 33px);
             overflow: auto;
             height:calc(100% - 33px);

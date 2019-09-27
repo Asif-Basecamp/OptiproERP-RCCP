@@ -5,30 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'default', pathMatch: 'full'},
-  { path: 'default', component: MainComponent },
+  { path: '', component: MainComponent },
  // { path: 'BOM',  pathMatch: 'full', component: BOMComponent },
-  //{ path: 'gantt-chart',  pathMatch: 'full', component: GanttChartComponent },
-  {
-    path: 'BOM',
-    loadChildren: () => import('./bom/bom.module').then(m => m.BOMModule),     
-    data: { showHeader: false, showSidebar: false, showFooter:false, compactLayout:false }
-  },
-  {
-    path: 'gantt-chart',
-    loadChildren: () => import('./gantt/gantt-chart.module').then(m => m.GanttChartModule),     
-    data: { showHeader: false, showSidebar: false, showFooter:false, compactLayout:false }
-  },
-  {
-    path: 'genealogy',
-    loadChildren: () => import('./genealogy/genealogy.module').then(m => m.GenealogyModule),     
-    data: { showHeader: false, showSidebar: false, showFooter:false, compactLayout:false }
-  },
-  {
-    path: 'production',
-    loadChildren: () => import('./production/production.module').then(m => m.ProductionModule),     
-    data: { showHeader: false, showSidebar: false, showFooter:false, compactLayout:false }
-  },
+  //{ path: 'gantt-chart',  pathMatch: 'full', component: GanttChartComponent },  
 ];
 
 @NgModule({

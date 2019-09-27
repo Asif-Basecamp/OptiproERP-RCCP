@@ -174,21 +174,41 @@
     <div class="dashboard-right" [ngClass]="{'default-screen':!gridViewShow}">
       
       <div class="card" fxFlex="0 1 100%">
-        <kendo-splitter class="h-100" orientation="vertical">
+        <kendo-splitter class="h-100 internal-spitter" orientation="vertical">
           <kendo-splitter-pane [collapsible]="true" size="50%">
 
             <div class="card-body p-0" id="grid-accordian-body">
 
-              <kendo-splitter class="h-100">
+              <kendo-splitter class="h-100 internal-spitter">
                 <kendo-splitter-pane [collapsible]="true" size="250px">
 
                   <div class="overflow-auto h-100 px-2">
                     <div class="tree-wrapper pt-2">
                       <div class="d-flex w-100 mb-2">
-                        <span class=" cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" title="Expand All"><i class="optipro-icon-expand"></i></span>
-                        <span class=" cursor-pointer btn btn-primary btn-icon-with-input" title="Collapse All"><i class="optipro-icon-collapse"></i></span>
+                          <span class="cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" (click)="diffTree.treeModel.expandAll()" title="Expand All"><i class="optipro-icon-expand"></i></span>
+                          <span class="cursor-pointer btn btn-primary btn-icon-with-input" (click)="diffTree.treeModel.collapseAll()"  title="Collapse All"><i class="optipro-icon-collapse"></i></span>
                       </div>
-                      <tree-root [nodes]="nodes" [options]="options"></tree-root>
+                      <tree-root id="tree2" #diffTree [focused]="true" [nodes]="nodes2" (click)="clickTransaction($event)">
+                        <ng-template #treeNodeFullTemplate let-node let-index="index" let-templates="templates">
+                          <div class="tree-node">
+                            <tree-node-expander [node]="node"></tree-node-expander>
+                              <div class="node-content-wrapper" *ngIf="explodeDirection == 'DOWN'" [class.node-content-wrapper-active]="node.isActive"
+                              [class.node-content-wrapper-focused]="node.isFocused"
+                              (click)="node.mouseAction('click', $event)"
+                              (dblclick)="node.mouseAction('dblClick', $event)">
+                                <span *ngIf="node.data.OPTM_BTCHSERNO != null">{{node.data.OPTM_ITEMCODE}} ~ {{node.data.OPTM_BTCHSERNO }}</span>
+                                <span *ngIf="node.data.OPTM_BTCHSERNO == null">{{node.data.OPTM_ITEMCODE}}</span>
+                              </div>
+                              <div class="node-content-wrapper" *ngIf="explodeDirection == 'UP'" [class.node-content-wrapper-active]="node.isActive"
+                              [class.node-content-wrapper-focused]="node.isFocused"
+                              (click)="node.mouseAction('click', $event)" (dblclick)="node.mouseAction('dblClick', $event)">
+                                  <span *ngIf="node.data.OPTM_PARENTBTCHSERNO != null">{{node.data.OPTM_ITEMCODE}} ~ {{node.data.OPTM_PARENTBTCHSERNO }}</span>
+                                  <span *ngIf="node.data.OPTM_PARENTBTCHSERNO == null">{{node.data.OPTM_ITEMCODE}}</span>
+                                </div>
+                            <tree-node-children [node]="node" [templates]="templates"></tree-node-children>
+                          </div>
+                        </ng-template>
+                      </tree-root>
                     </div>
                   </div>
 
@@ -218,10 +238,29 @@
                       <div class="card-header">Transaction Type</div>
                       <div class="card-body p-2">
                         <div class="d-flex w-100 mb-2">
-                          <span class="nbButton cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" title="Expand All"><i class="optipro-icon-expand"></i></span>
-                          <span class="nbButton cursor-pointer btn btn-primary btn-icon-with-input" title="Collapse All"><i class="optipro-icon-collapse"></i></span>
+                          <span class="cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" status="success" (click)="diffTree2.treeModel.expandAll()" title="Expand All"><i class="optipro-icon-expand"></i></span>
+                          <span class="cursor-pointer btn btn-primary btn-icon-with-input" (click)="diffTree2.treeModel.collapseAll()"  title="Collapse All"><i class="optipro-icon-collapse"></i></span>
                         </div>
-                        <tree-root [nodes]="nodes" [options]="options"></tree-root>
+                        <tree-root id="tree2" #diffTree2 [focused]="true" [nodes]="nodes1" (click)="clickTransactionDetails($event)">
+                            <ng-template #treeNodeFullTemplate let-node let-index="index" let-templates="templates">
+                              <div class="tree-node">
+                                <tree-node-expander [node]="node"></tree-node-expander>
+                                <div class="node-content-wrapper" *ngIf="node.data.ObjectTypeDesc == null" [class.node-content-wrapper-active]="node.isActive"
+                                [class.node-content-wrapper-focused]="node.isFocused"
+                                (click)="node.mouseAction('click', $event)"
+                                (dblclick)="node.mouseAction('dblClick', $event)">
+                                    <span>{{node.data.ItemCode}} ~ {{node.data.DistNumber}}</span>
+                                  </div>
+                                  <div class="node-content-wrapper" *ngIf="node.data.ObjectTypeDesc != null" [class.node-content-wrapper-active]="node.isActive"
+                                  [class.node-content-wrapper-focused]="node.isFocused"
+                                  (click)="node.mouseAction('click', $event)"
+                                  (dblclick)="node.mouseAction('dblClick', $event)">
+                                    <span>({{node.data.DistNumber}}) {{language.Doc_Entry}}:{{node.data.DocEntry}} ~ {{node.data.ObjectTypeDesc}}</span>
+                                  </div>
+                                <tree-node-children [node]="node" [templates]="templates"></tree-node-children>
+                              </div>
+                            </ng-template>
+                          </tree-root>
                       </div>
                     </div>
                   </div>
@@ -243,7 +282,7 @@
                 <div class="color-code-wrapper" id="color-code-wrapper">
                   <div class="color-code-content">
                     <div class="color-code-toggle">
-                      <button type="button"><i class="optipro-icon-chevron-left"></i></button>
+                      <button type="button" (click)="colorCodeWrapperToggle($event)"><i class="optipro-icon-chevron-left"></i></button>
                     </div>
                     <div class="color-code-heading">Color scheme</div>
                     <ul class="list-unstyled">
@@ -419,7 +458,7 @@
       (selectionChange)="gridRowSelectionChange($event,ref)" [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px' }">
       <ng-template kendoGridToolbarTemplate>
         <div class="d-flex align-items-center">
-          <label class="custom-checkbox mb-0 mr-2 filter-checkbox">
+          <label class="custom-checkbox mb-0 filter-checkbox">
             <input #chkFilter16 type="checkbox" (change)="onFilterChange(chkFilter16,gridData)"
               id="opti_SalesOrderListColumnFilterID16" [(ngModel)]="isColumnFilter16" class="k-checkbox"
               name="columnfilter" />

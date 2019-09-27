@@ -4,7 +4,6 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
-import { NotificationService } from '@progress/kendo-angular-notification';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,8 +13,7 @@ import { FormsModule } from '@angular/forms';
     AuthenticationRoutingModule,
     DropDownsModule,
     FormsModule,
-    FlexLayoutModule,
-    NotificationService
+    FlexLayoutModule
   ]
 })
 export class AuthenticationModule { }
