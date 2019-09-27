@@ -44,30 +44,6 @@
         <div class="h5 p-2 mb-0 border border-bottom-0 bg-white">{{'DetailGrid' | translate}}</div>
         <div class="tree-wrapper">
           <div class="content-section implementation restrictedHeight">
-           <!-- <p-treeTable [value]="files2" selectionMode="single" [scrollable]="true" scrollHeight="100%"
-              [resizableColumns]="true" columnResizeMode="expand" height="200">
-              <ng-template pTemplate="colgroup">
-                <colgroup>
-                  <col style="width: 120px;">
-                </colgroup>
-              </ng-template>
-              <ng-template pTemplate="header">
-                <tr>
-                  <th ttResizableColumn>{{'Item' | translate}}</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-rowNode let-node="node" let-rowNodeIndex="rowNodeIndex"
-                let-rowData="rowData">
-                <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <p-treeTableToggler [rowNode]="rowNode" class="cursor-pointer"></p-treeTableToggler>
-                      <span class="cursor-pointer d-flex w-100" (click)="DetailGridRowSelect(node)">{{rowData.U_O_ITEMCODE}}</span>
-                    </div>
-                  </td>
-                </tr>
-              </ng-template>
-            </p-treeTable>-->
         <p-treeTable [value]="files2" [columns]="cols" selectionMode="single" [scrollable]="true" scrollHeight=""
         [resizableColumns]="true">
         <ng-template pTemplate="colgroup">
@@ -134,56 +110,14 @@
           </div>
         </div>
       </div>
-    
-      <!--<div class="bom-detail-grid" fxFlex="0 0 100%">
-        <div *ngIf="BOMDetailStatus" class="k-i-loading"></div>
-        <div>
-          <div class="h5 p-2 mb-0 border border-bottom-0" *ngIf="BomDetail">{{'BOMDetail' | translate}} (Item Code: {{headerData.U_O_ITEMCODE}}, BOM Seq: {{headerData.U_O_BOM_SEQ}}, BOM Revision: {{headerData.U_O_REVISION}})</div>
-          <kendo-grid *ngIf="BomDetail" [kendoGridBinding]="BomDetail" [resizable]="true" [groupable]=isColumnGroup2 [filterable]=isColumnFilter2 [sortable]="true"
-          height="187">
-            <ng-template kendoGridToolbarTemplate>
-                <div class="d-flex align-items-center">        
-                    <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
-                        <input type="checkbox" [(ngModel)]="isColumnFilter2" [ngModelOptions]="{standalone: true}">
-                        <span class="checkbox"></span>
-                        <span>{{'EnableFilter' | translate}}</span>
-                    </label>
-                    
-                    <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
-                        class="ml-auto btn btn-link btn-sm btn-icon p-0">
-                        <svg viewBox="0 0 512 512" class="icon">
-                            <use xlink:href="#download"></use>
-                        </svg>
-                    </button>
-                </div>
-            </ng-template>
-            <kendo-grid-column field="BOMLINE_ITEMCODE" title="{{'BOMItemCode' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="U_O_DESC" title="{{'Description' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="BOM_QUANTITY" title="{{'BOMQuantity' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
-            <kendo-grid-column field="U_O_UOM" title="{{'UOM' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="U_O_BASIS_CODE" title="{{'ItemBasis' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="EFFECIVEFROMDATE" title="{{'EffectiveFromDate' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="EFFECIVETODATE" title="{{'EffectiveToDate' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="U_O_ISSUE_METHOD" title="{{'IssueMethod' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="U_O_ISSUE_WHSE" title="{{'WarehouseIssue' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
-            <kendo-grid-column field="U_O_BIN" title="{{'BinIssue' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="U_O_OPERATION" title="{{'OperationNumber' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
-            <kendo-grid-column field="U_O_COST_ROLLUP" title="{{'CostRollUp' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="U_OPTM_ECONO" title="{{'ECO' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="U_OPTM_COMMENTS" title="{{'Comments' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-column field="U_OPTM_ATTACHMENT" title="{{'Attachments' | translate}}" width="80"></kendo-grid-column>
-            <kendo-grid-excel fileName="BOM-Detail.xlsx"></kendo-grid-excel>
-          </kendo-grid>
-        </div>
-      </div>-->
     </div>
   </kendo-splitter-pane>
   <kendo-splitter-pane class="slim-scroll" *ngIf="headerRowGridCollapse" [collapsible]="true">
     <div class="d-flex routingHeaderGridWrapper h-100" fxFlex fxLayout="column">
-      <div *ngIf="RoutingHeaderStatus" class="k-i-loading"></div>
+      <!--<div *ngIf="RoutingHeaderStatus" class="k-i-loading"></div>-->
       <div class="h5 p-2 mb-0 border border-bottom-0 bg-white" *ngIf="BomDetail">{{'RoutingHeader' | translate}} (Item Code: {{headerData.U_O_ITEMCODE}})</div>
       <kendo-grid *ngIf="BomDetail" [kendoGridBinding]="datas" class="routingHeaderGrid primary-table-colored" [navigable]="true" [resizable]="true" [groupable]=isColumnGroup3 [filterable]=isColumnFilter3 [sortable]="true"
-       [ngStyle]="{ 'cursor': 'pointer'}" kendoGridFocusable>
+       [ngStyle]="{ 'cursor': 'pointer'}" [loading]="RoutingHeaderStatus" kendoGridFocusable>
         <ng-template kendoGridToolbarTemplate>
             <div class="d-flex align-items-center">        
                 <label class="custom-checkbox mb-0 mr-3 filter-checkbox">

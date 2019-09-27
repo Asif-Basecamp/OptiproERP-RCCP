@@ -81,7 +81,7 @@
             <div class="card" fxFlex="0 0 100%">
                 <div class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3"
                     [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
-                    <div *ngIf="!GanttChartStatus" class="k-i-loading"></div>
+                    <div *ngIf="loading" class="k-i-loading"></div>
 
                    <form *ngIf="GanttChartStatus" class="gantt_control p-2 border border-bottom-0">
                         <div class="d-flex">

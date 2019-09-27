@@ -316,13 +316,13 @@
                                         </nb-radio-group>-->
                       <fieldset class="form-group px-0 mb-2">
                         <label class="custom-radio mr-3">
-                          <input #RadioBtnWO1 type="radio" id="radioExplode1"  [value]="'simple'" name="RadioBtnWO" [(ngModel)]="RadioBtnWO" (change)="getWoRadioClick(RadioBtnWO)" class="k-radio" checked />
+                          <input type="radio"  [value]="'simple'" name="RadioBtnWO" [(ngModel)]="RadioBtnWO" (change)="getWoRadioClick(RadioBtnWO)" class="k-radio" checked />
                           <span class="radio"></span>
                           <span>{{language.show_Wo_FG}}</span>
                         </label>
           
                         <label class="custom-radio">
-                          <input #RadioBtnWO2 type="radio" id="radioExplode2" [value]="'all'" name="RadioBtnWO" [(ngModel)]="RadioBtnWO" (change)="getWoRadioClick(RadioBtnWO)" class="k-radio" />
+                          <input type="radio" [value]="'all'" name="RadioBtnWO" [(ngModel)]="RadioBtnWO" (change)="getWoRadioClick(RadioBtnWO)" class="k-radio" />
                           <span class="radio"></span>
                           <span>{{language.show_Wo_subassemblies}}</span>
                         </label>
@@ -332,13 +332,13 @@
                         nbButton style="text-transform: none;">{{'Inventory_Shortage' | translate}}</button>
                       <fieldset class="form-group px-0 mb-2">
                         <label class="custom-radio mr-3">
-                          <input #RadioBtnInventShort1 type="radio" id="radioExplode3"  [value]="'Warehouse'" name="RadioBtnInventShort" [(ngModel)]="RadioBtnInventShort" class="k-radio" checked />
+                          <input type="radio" [value]="'Warehouse'" name="RadioBtnInventShort" [(ngModel)]="RadioBtnInventShort" class="k-radio" [checked]="RadioBtnInventShort == 'Warehouse'" />
                           <span class="radio"></span>
                           <span>{{language.Warehouse_Level}}</span>
                         </label>
           
                         <label class="custom-radio">
-                          <input #RadioBtnInventShort2 type="radio" id="radioExplode4" [value]="'Company'" name="RadioBtnInventShort" [(ngModel)]="RadioBtnInventShort" class="k-radio" />
+                          <input type="radio" [value]="'Company'" name="RadioBtnInventShort" [(ngModel)]="RadioBtnInventShort" class="k-radio" [checked]="RadioBtnInventShort == 'Company'"/>
                           <span class="radio"></span>
                           <span>{{language.Company_Level}}</span>
                         </label>
@@ -481,13 +481,13 @@
                                 <div class="pl-2">
                                   <fieldset class="form-group px-0 mb-0">
                                     <label class="custom-radio mr-3">
-                                      <input #RadioBtnInventShort1 type="radio" id="radioExplode1"  value="immediate" name="RadioBtnInventShort" [(ngModel)]="materialViewOption" class="k-radio" [checked]="materialViewOption == 'immediate'" />
+                                      <input type="radio"  [value]="'immediate'" name="materialViewOption" [(ngModel)]="materialViewOption" class="k-radio" [checked]="materialViewOption == 'immediate'" />
                                       <span class="radio"></span>
                                       <span>{{language.show_immediate_components}}</span>
                                     </label>
                       
                                     <label class="custom-radio">
-                                      <input #RadioBtnInventShort2 type="radio" id="radioExplode2" value="all" name="RadioBtnInventShort" [(ngModel)]="materialViewOption" class="k-radio" [checked]="materialViewOption == 'all'" />
+                                      <input type="radio" [value]="'all'" name="materialViewOption" [(ngModel)]="materialViewOption" class="k-radio" [checked]="materialViewOption == 'all'" />
                                       <span class="radio"></span>
                                       <span>{{language.show_subassemblies_components}}</span>
                                     </label>

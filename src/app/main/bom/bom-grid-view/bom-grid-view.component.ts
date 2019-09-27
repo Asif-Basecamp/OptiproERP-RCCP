@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { BOMService } from '../service/bom.service';
 import { environment } from '../../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 export interface TreeNode {
   label?: string;
@@ -43,7 +44,7 @@ export class BOMGridViewComponent implements OnInit {
   public detailRowGridCollapse: boolean = false;
   public headerRowGridCollapse: boolean = false;
 
-  constructor(private BOMService: BOMService, private translate: TranslateService) {}
+  constructor(private BOMService: BOMService, private translate: TranslateService, private notificationService: NotificationService) {}
   
   ngOnInit() {
     this.CompanyDB = 'OPTIPRO129';
@@ -126,6 +127,17 @@ export class BOMGridViewComponent implements OnInit {
     this.datas = [];
     this.BOMService.GetRoutingHeaderDetail(environment.optiProDashboardAPIURL, this.CompanyDB, ItemCode, this.primaryEvent).subscribe(
       headerdata => {
+        if(headerdata && headerdata.length == 0){
+          this.RoutingHeaderStatus = false;
+          this.BomDetail = '';
+          this.notificationService.show({
+            content: 'No Record Found',
+            animation: { type: 'fade', duration: 400 },
+            position: { horizontal: 'right', vertical: 'top' },
+            type: { style: 'error', icon: true },
+            hideAfter: 3000
+          }); 
+        }
         for(let i=0;i< headerdata.length; i++){
           this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, headerdata[i].Code).subscribe(
             Linedata => {
@@ -140,6 +152,9 @@ export class BOMGridViewComponent implements OnInit {
                this.RoutingHeaderStatus = false;
           });
         }
+    },
+    error => { 
+     
     });
   }
 }
