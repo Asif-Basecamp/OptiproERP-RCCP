@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/service/authentication.service';
 import { CommonData } from 'src/app/core/data/CommonData';
-import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
 	selector: 'app-login',
@@ -34,7 +34,7 @@ export class LoginComponent {
 	public psURL: string;
 
 
-	constructor(private toastr: ToastrService, private router: Router, private auth: AuthenticationService, private httpClientSer: HttpClient) { }
+	constructor(private notificationService: NotificationService, private router: Router, private auth: AuthenticationService, private httpClientSer: HttpClient) { }
 
 	ngOnInit() {
 		this.defaultCompnyComboValue = [{ OPTM_COMPID: 'Select Company' }];
@@ -52,9 +52,14 @@ export class LoginComponent {
 				this.loadLanguage(this.arrConfigData[0].language);
 			},
 			(err: HttpErrorResponse) => {
-				this.toastr.error('', err.message, {
-					timeOut: 1000
-				});
+				
+				this.notificationService.show({
+					content: err.message,
+					animation: { type: 'fade', duration: 400 },
+					position: { horizontal: 'right', vertical: 'top' },
+					type: { style: 'error', icon: true },
+					hideAfter: 1000
+				  }); 
 			}
 			
 		);
@@ -70,9 +75,13 @@ export class LoginComponent {
 				this.getPSURL();
 			},
 			error => {
-				this.toastr.error('', this.language.error_reading_file, {
-					timeOut: 1000
-				});
+				this.notificationService.show({
+					content:this.language.error_reading_file,
+					animation: { type: 'fade', duration: 400 },
+					position: { horizontal: 'right', vertical: 'top' },
+					type: { style: 'error', icon: true },
+					hideAfter: 1000
+				  }); 
 			});
 	}
 	getPSURL() {
@@ -84,9 +93,13 @@ export class LoginComponent {
 				}
 			},
 			error => {
-				this.toastr.error('', 'Some Error!',{
-					timeOut: 1000
-				});
+				this.notificationService.show({
+					content: 'Some Error!',
+					animation: { type: 'fade', duration: 400 },
+					position: { horizontal: 'right', vertical: 'top' },
+					type: { style: 'error', icon: true },
+					hideAfter: 1000
+				}); 
 			})
 	}
 
@@ -103,13 +116,27 @@ export class LoginComponent {
 					} else {
 						this.listItems = this.defaultCompnyComboValue;
 						this.selectedValue = this.listItems[0];
-						this.toastr.error(this.language.password_incorrect);
+						//this.toastr.error(this.language.password_incorrect);
+						this.notificationService.show({
+							content: this.language.password_incorrect,
+							animation: { type: 'fade', duration: 400 },
+							position: { horizontal: 'right', vertical: 'top' },
+							type: { style: 'error', icon: true },
+							hideAfter: 1000
+						}); 
 					}
 				},
 				error => {
-					this.toastr.error('', this.language.error_some_error,{
+					/*this.toastr.error('', this.language.error_some_error,{
 						timeOut: 1000
-					});
+					});*/
+					this.notificationService.show({
+						content: this.language.error_some_error,
+						animation: { type: 'fade', duration: 400 },
+						position: { horizontal: 'right', vertical: 'top' },
+						type: { style: 'error', icon: true },
+						hideAfter: 1000
+					}); 
 				})
 		}
 	}
@@ -125,9 +152,16 @@ export class LoginComponent {
 					this.selectedValue = this.listItems[0];
 					this.InvalidActiveUser = false;
 				} else {
-					this.toastr.error('','No Company assign!', {
+				/*	this.toastr.error('','No Company assign!', {
 						timeOut: 1000
-					});
+					});*/
+					this.notificationService.show({
+						content: 'No Company assign!',
+						animation: { type: 'fade', duration: 400 },
+						position: { horizontal: 'right', vertical: 'top' },
+						type: { style: 'error', icon: true },
+						hideAfter: 1000
+					}); 
 					this.InvalidActiveUser = true;
 				}
 			})
