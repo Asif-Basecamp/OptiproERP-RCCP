@@ -110,7 +110,6 @@ export class GanttChartComponent implements OnInit {
 
   ganttChart(){
     // @ts-ignore
-    document.getElementById("aaaaa").innerHTML.reload;
     this.loading= true;
     Promise.all([this.TaskService.get(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo)]).then(([data]) => {
     if(data.length > 0){  

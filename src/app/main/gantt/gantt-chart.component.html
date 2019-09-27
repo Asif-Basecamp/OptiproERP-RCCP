@@ -108,7 +108,7 @@
                     
                     </form> 
 
-                    <div #gantt_here id="aaaaa" style='width: 100%; height: 100%;'></div>
+                    <div #gantt_here style='width: 100%; height: 100%;'></div>
                     <app-plan-definition *ngIf="planDefinitionStatus" [planDefinitionData]="planDefinitionData" (lookupEvent)="lookupEventHander($event)" (PlanDefinitionEvent)="PlanDefinitionEventHander($event)"></app-plan-definition>
                     <app-plan-order *ngIf="planDefinitionOrderStatus" [planOrderData]="planOrderData" (lookupEvent)="lookupEventHander($event)" (PlanDefinitionOrderNoEvent)="PlanDefinitionOrderNoEventHander($event)"></app-plan-order>
                 </div>
