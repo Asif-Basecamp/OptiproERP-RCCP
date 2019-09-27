@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, Input  } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input, HostListener  } from '@angular/core';
 import { GridComponent } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import OrgChart from './../../../assets/scripts/org-chart/orgchart.js';
@@ -17,6 +17,8 @@ import { LocalStorageService } from 'src/app/core/service/localstorage.service.j
   styleUrls: ['./genealogy.component.scss']
 })
 export class GenealogyComponent implements OnInit {
+  public isMobile:boolean;
+  public seachPanelCollapse:boolean;
 
   public lookup: boolean = false;
   public ItemData: any;
@@ -52,13 +54,25 @@ export class GenealogyComponent implements OnInit {
     translate.use(userLang);
     ServiceLocator.injector = this.injector;
   }
-
+  @HostListener('window:resize', ['$event']) onResize() {
+    this.mobileView();
+  }
   ngOnInit() {
+    this.mobileView();
     this.CompanyDB = JSON.parse(localStorage.getItem('CompanyDB'));
     let PrcrmntMtd = "'B','M'";
     this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB, PrcrmntMtd);
   }
 
+  public mobileView(): void {
+    if(window.innerWidth <= 767){
+      this.isMobile = true;
+      this.seachPanelCollapse = true;
+    }else{
+      this.isMobile = false;
+      this.seachPanelCollapse = false;
+    }
+  }
   getItemData(api, companyDB, PrcrmntMtd){
     this.genealogyService.GetItemList(api, companyDB, PrcrmntMtd).subscribe(
       data => {
