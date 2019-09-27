@@ -82,7 +82,7 @@ export class GenealogyComponent implements OnInit {
   public showValidation: boolean = false;
   isColumnFilter = true;
  
-  constructor(private dialogService: NbDialogService, private dash: GenealogyService, private router: Router, private toastrService: NotificationService) {}
+  constructor(private dialogService: NbDialogService, private dash: GenealogyService, private router: Router, private notificationService: NotificationService) {}
  
   ngOnInit() {
    this.arrConfigData = JSON.parse(window.localStorage.getItem('arrConfigData'));
@@ -336,7 +336,14 @@ export class GenealogyComponent implements OnInit {
      this.dialogService.open(dialog);
     },
     error => {
-     this.toastrService.danger(this.language.no_record_found);    
+    // this.toastrService.danger(this.language.no_record_found);   
+     this.notificationService.show({
+      content: this.language.no_record_found,
+      animation: { type: 'fade', duration: 400 },
+      position: { horizontal: 'right', vertical: 'top' },
+      type: { style: 'error', icon: true },
+      hideAfter: 1000
+    }); 
     }
    )
   }
@@ -370,7 +377,14 @@ export class GenealogyComponent implements OnInit {
      this.dialogService.open(dialog);
     },
     error => {
-     this.toastrService.danger(this.language.no_record_found);    
+    // this.toastrService.danger(this.language.no_record_found); 
+    this.notificationService.show({
+      content: this.language.no_record_found,
+      animation: { type: 'fade', duration: 400 },
+      position: { horizontal: 'right', vertical: 'top' },
+      type: { style: 'error', icon: true },
+      hideAfter: 1000
+    });   
     }
     
    )
@@ -398,11 +412,25 @@ export class GenealogyComponent implements OnInit {
      document.getElementById('chart-container').innerHTML = ""; 
  
     if(this.DistNumFrom.trim() != "" && this.DistNumTo.trim() == ""){
-      this.toastrService.danger(this.language.error_enter_lot_to);
+      //this.toastrService.danger(this.language.error_enter_lot_to);
+      this.notificationService.show({
+        content: this.language.error_enter_lot_to,
+        animation: { type: 'fade', duration: 400 },
+        position: { horizontal: 'right', vertical: 'top' },
+        type: { style: 'error', icon: true },
+        hideAfter: 1000
+      });
       return;
     }
     else if(this.DistNumTo.trim() != "" && this.DistNumFrom.trim() == ""){
-      this.toastrService.danger(this.language.error_enter_lot_from);
+    //  this.toastrService.danger(this.language.error_enter_lot_from);
+      this.notificationService.show({
+        content: this.language.error_enter_lot_to,
+        animation: { type: 'fade', duration: 400 },
+        position: { horizontal: 'right', vertical: 'top' },
+        type: { style: 'error', icon: true },
+        hideAfter: 1000
+      });
       return;
     }
  
@@ -427,7 +455,14 @@ export class GenealogyComponent implements OnInit {
      if(!data){
        this.loading = false;
        this.gridViewShow = false;
-       this.toastrService.danger(this.language.no_record_found);
+       //this.toastrService.danger(this.language.no_record_found);
+       this.notificationService.show({
+        content: this.language.no_record_found,
+        animation: { type: 'fade', duration: 400 },
+        position: { horizontal: 'right', vertical: 'top' },
+        type: { style: 'error', icon: true },
+        hideAfter: 1000
+      });
        this.AnalysisData = [];
        this.nodes1 = [];
        this.nodes2 = [];
@@ -436,7 +471,14 @@ export class GenealogyComponent implements OnInit {
       if(data.length <= 0){
         this.loading = false;
         this.gridViewShow = false;
-        this.toastrService.danger(this.language.no_record_found);  
+       // this.toastrService.danger(this.language.no_record_found);  
+       this.notificationService.show({
+        content: this.language.no_record_found,
+        animation: { type: 'fade', duration: 400 },
+        position: { horizontal: 'right', vertical: 'top' },
+        type: { style: 'error', icon: true },
+        hideAfter: 1000
+      });
         this.AnalysisData = [];
         this.nodes1 = [];
         this.nodes2 = []; 
@@ -462,7 +504,14 @@ export class GenealogyComponent implements OnInit {
     },
      error => {
        this.loading = false;
-       this.toastrService.danger(this.language.no_record_found);    
+       //this.toastrService.danger(this.language.no_record_found);  
+       this.notificationService.show({
+        content: this.language.no_record_found,
+        animation: { type: 'fade', duration: 400 },
+        position: { horizontal: 'right', vertical: 'top' },
+        type: { style: 'error', icon: true },
+        hideAfter: 1000
+      });  
      }
     )
       this.searchCriteriaToggle(event);
@@ -567,13 +616,27 @@ export class GenealogyComponent implements OnInit {
     else{
      this.loading = false;
      this.transactionViewShow = false;
-     this.toastrService.danger(this.language.no_record_found);  
+     //this.toastrService.danger(this.language.no_record_found);  
+     this.notificationService.show({
+      content: this.language.no_record_found,
+      animation: { type: 'fade', duration: 400 },
+      position: { horizontal: 'right', vertical: 'top' },
+      type: { style: 'error', icon: true },
+      hideAfter: 1000
+    });
     }
     },
     error => {
      this.loading = false;
      this.transactionViewShow = false;
-     this.toastrService.danger(this.language.no_record_found);    
+     //this.toastrService.danger(this.language.no_record_found); 
+     this.notificationService.show({
+      content: this.language.no_record_found,
+      animation: { type: 'fade', duration: 400 },
+      position: { horizontal: 'right', vertical: 'top' },
+      type: { style: 'error', icon: true },
+      hideAfter: 1000
+    });   
     }
    )
   }
@@ -793,13 +856,27 @@ export class GenealogyComponent implements OnInit {
    else{
     this.Analysisloading = false;
     this.analysisViewShow = false;
-    this.toastrService.danger(this.language.no_record_found); 
+   // this.toastrService.danger(this.language.no_record_found); 
+   this.notificationService.show({
+    content: this.language.no_record_found,
+    animation: { type: 'fade', duration: 400 },
+    position: { horizontal: 'right', vertical: 'top' },
+    type: { style: 'error', icon: true },
+    hideAfter: 1000
+  });
    }
   },
   error => {
      this.Analysisloading = false;
      this.analysisViewShow = false;
-     this.toastrService.danger(this.language.no_record_found);    
+    // this.toastrService.danger(this.language.no_record_found);   
+    this.notificationService.show({
+      content: this.language.no_record_found,
+      animation: { type: 'fade', duration: 400 },
+      position: { horizontal: 'right', vertical: 'top' },
+      type: { style: 'error', icon: true },
+      hideAfter: 1000
+    }); 
     }
    )
   }
@@ -825,7 +902,14 @@ export class GenealogyComponent implements OnInit {
      } 
     }
     else {
-     this.toastrService.danger(this.language.error_item_none_tracked);
+    // this.toastrService.danger(this.language.error_item_none_tracked);
+    this.notificationService.show({
+      content: this.language.error_item_none_tracked,
+      animation: { type: 'fade', duration: 400 },
+      position: { horizontal: 'right', vertical: 'top' },
+      type: { style: 'error', icon: true },
+      hideAfter: 1000
+    });
      this.loading = false;
      return;
     }
