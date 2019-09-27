@@ -87,14 +87,25 @@
 }
 
 
+
 .dashboard-left{
     padding:15px 0 15px 15px;
     height: 100%; 
     width: 300px;
-    flex: 1 1 265px;
-    flex: 1 1 265px;
+    flex: 0 0 300px;
     min-width: 300px;
     max-width: 300px;
+}
+.dashboard-right{    
+    padding: 15px 15px 15px 0;
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+    width: 100% !important;
+    height: 100%;
+    & > .card{
+        overflow: auto;
+        height:100%;
+    }
 }
 .card-header{
     background: #fff;
@@ -154,12 +165,6 @@
     }
   }
 
-.dashboard-right{
-    flex:1 1 100%;
-    padding-left:5px; 
-    height: calc(100vh - 65px);
-    max-width: 100%;
-}
 .dashboard-container{
     display: flex;
     height: 100%;

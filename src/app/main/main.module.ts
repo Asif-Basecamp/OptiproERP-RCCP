@@ -16,7 +16,6 @@ import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
 import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
-import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -34,8 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
     TreeTableModule,
     NotificationModule,
     TrnaslateLazyModule,
-    CountdownModule,
-    ToastrModule.forRoot()
+    CountdownModule
   ],
   providers: [
     DatePipe

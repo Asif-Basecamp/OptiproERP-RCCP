@@ -319,9 +319,13 @@ button.btn.btn-icon {
       background: theme-color("primary");
       border-color:theme-color("primary");
     }
+    & input[type="radio"]:disabled:checked + span:before {
+      background: lighten(theme-color("primary"), 20%);
+      border-color:lighten(theme-color("primary"), 20%);
+    }
     & input[type="radio"]:disabled + span {
       color: #b8b8b8;
-      cursor: auto;
+      cursor: not-allowed;
     }
     & input[type="radio"]:disabled + span:before {
       box-shadow: none;

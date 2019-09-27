@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { GridModule } from '@progress/kendo-angular-grid';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomLayoutModule } from './@layout/customLayout.module';
 import { NotificationModule } from '@progress/kendo-angular-notification';
@@ -14,7 +13,7 @@ import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http'
 import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -29,14 +28,12 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    GridModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NotificationModule,
     CustomLayoutModule,
     DialogsModule,
     FormsModule,
-    ToastrModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
