@@ -3,6 +3,7 @@ import {Task} from "../model/task";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { promise } from 'protractor';
 
 @Injectable({
 	providedIn: 'root'
@@ -11,11 +12,11 @@ import { Router } from '@angular/router';
 export class TaskService {
 
 	public products: any;
-    public arrays: any;
     public db: any;
     public description: any;
     public order: any;
     private subject = new Subject<any>();
+    public data: any;
 
     constructor(private httpClient : HttpClient, private Router : Router) { }
     
@@ -68,22 +69,20 @@ export class TaskService {
         
                         delete obj['OPTM_OPERNO'];
                         delete obj['OPTM_OPR_ID'];
-                        delete obj['OPTM_RES_ID']
-                        delete obj['U_O_RESNAME']
+                        delete obj['OPTM_RES_ID'];
+                        delete obj['U_O_RESNAME'];
                         return obj; 
                     });   
                 }
-                localStorage.setItem('ganttChart', JSON.stringify(this.products));
+                this.data = this.products;
             });  
         }
 
         return new Promise(resolve => {
             setTimeout(() => {
-                this.arrays = JSON.parse(localStorage.getItem('ganttChart'));
-                this.products = this.arrays; 
-                console.log(this.products);
+                this.products = this.data; 
                 resolve(this.products);
-            }, 6000);
+            }, 4000);
         });
     }
 }	

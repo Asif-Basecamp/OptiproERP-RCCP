@@ -109,10 +109,11 @@ export class GanttChartComponent implements OnInit {
   }
 
   ganttChart(){
+    // @ts-ignore
+    document.getElementById("aaaaa").innerHTML.reload;
     this.loading= true;
     Promise.all([this.TaskService.get(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo)]).then(([data]) => {
     if(data.length > 0){  
-      
     gantt.config.scale_height = 25 * 3;
     gantt.config.link_line_width = 1;
     gantt.config.row_height = 25;
@@ -252,7 +253,7 @@ export class GanttChartComponent implements OnInit {
     gantt.init(this.ganttContainer.nativeElement);
       this.GanttChartStatus = true;
       this.loading= false;
-      console.log({data});
+     // console.log({data});
       gantt.parse({data});
     }else{
       this.GanttChartStatus = false;
