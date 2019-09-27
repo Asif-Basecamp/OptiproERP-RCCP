@@ -1,14 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BOMComponent } from './bom/bom.component';
-import { GanttChartComponent } from './gantt/gantt-chart.component';
+//import { BOMComponent } from './bom/bom.component';
+//import { GanttChartComponent } from './gantt/gantt-chart.component';
 import { MainComponent } from './main.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'default', pathMatch: 'full'},
   { path: 'default', component: MainComponent },
-  { path: 'BOM',  pathMatch: 'full', component: BOMComponent },
-  { path: 'gantt-chart',  pathMatch: 'full', component: GanttChartComponent },
+ // { path: 'BOM',  pathMatch: 'full', component: BOMComponent },
+  //{ path: 'gantt-chart',  pathMatch: 'full', component: GanttChartComponent },
+  {
+    path: 'BOM',
+    loadChildren: () => import('./bom/bom.module').then(m => m.BOMModule),     
+    data: { showHeader: false, showSidebar: false, showFooter:false, compactLayout:false }
+  },
+  {
+    path: 'gantt-chart',
+    loadChildren: () => import('./gantt/gantt-chart.module').then(m => m.GanttChartModule),     
+    data: { showHeader: false, showSidebar: false, showFooter:false, compactLayout:false }
+  },
   {
     path: 'genealogy',
     loadChildren: () => import('./genealogy/genealogy.module').then(m => m.GenealogyModule),     
@@ -26,3 +36,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class MainRoutingModule { }
+

@@ -24,6 +24,7 @@ import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-vi
 import { PlanDefinitionComponent } from './gantt/plan-definition/plan-definition.component';
 import { PlanOrderComponent } from './gantt/plan-order/plan-order.component';
 import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup
     NotificationModule,
     TrnaslateLazyModule,
     CountdownModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     DatePipe

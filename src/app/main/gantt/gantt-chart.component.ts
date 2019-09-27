@@ -40,6 +40,8 @@ export class GanttChartComponent implements OnInit {
   public planDefinitionStatus: boolean = false;
   public planDefinitionOrderStatus: boolean = false;
   public GanttChartStatus: boolean;
+  public loading: boolean = false;
+
 
   constructor(private linkService: LinkService, private _elementRef: ElementRef, private TaskService: TaskService, private GanttChartService:GanttChartService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { 
 
@@ -107,7 +109,8 @@ export class GanttChartComponent implements OnInit {
   }
 
   ganttChart(){
-      Promise.all([this.TaskService.get(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo)]).then(([data]) => {
+    this.loading= true;
+    Promise.all([this.TaskService.get(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo)]).then(([data]) => {
     if(data.length > 0){  
       
     gantt.config.scale_height = 25 * 3;
@@ -248,10 +251,12 @@ export class GanttChartComponent implements OnInit {
     };
     gantt.init(this.ganttContainer.nativeElement);
       this.GanttChartStatus = true;
+      this.loading= false;
       console.log({data});
       gantt.parse({data});
     }else{
       this.GanttChartStatus = false;
+      this.loading= false;
       this.notificationService.show({
         content: 'No Record Found',
         animation: { type: 'slide', duration: 400 },

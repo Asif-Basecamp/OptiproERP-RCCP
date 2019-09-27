@@ -58,6 +58,7 @@ export class ProductionComponent implements OnInit {
   public ItemCodeTo: any = '';
   public nodes2: any = [];
   public RadioBtnWO: any = 'simple';
+  public RadioBtnInventShort: any = 'Warehouse';
   public materialViewOption: any = 'immediate';
   public FromDate: any ;
   public ToDate: any ;
@@ -95,7 +96,6 @@ export class ProductionComponent implements OnInit {
   public value: any;
   public hour: any;
   public myVar: any;
-  public RadioBtnInventShort: any = 'Warehouse';
   public WHInventShort: boolean = false;
   public CmpInventShort: boolean = false;
   isColumnFilter1 = true;

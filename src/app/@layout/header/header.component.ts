@@ -2,6 +2,7 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'src/app/core/service/localstorage.service';
 import { ServiceLocator } from 'src/app/servicelocator';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -11,12 +12,16 @@ import { ServiceLocator } from 'src/app/servicelocator';
 export class HeaderComponent implements OnInit {
     private _sidebarStatus: string ;
 
-    constructor(private translate: TranslateService, private localStorageService: LocalStorageService, private injector: Injector) {
+    constructor(private translate: TranslateService, private router: Router, private localStorageService: LocalStorageService, private injector: Injector) {
         let userLang: string = this.localStorageService.getCurrentLanguage();
         translate.use(userLang);
         ServiceLocator.injector = this.injector;
     }
-    ngOnInit() {        
+    ngOnInit() { 
+        
+        if (window.localStorage.getItem('Username') == null || window.localStorage.getItem('Username') == undefined) {
+            this.router.navigateByUrl('/login');
+        }       
         this.sidebar();
     }
 
@@ -42,6 +47,11 @@ export class HeaderComponent implements OnInit {
                 document.getElementById("sidebar-wrapper").classList.add("toggle");
             }
         }        
+    }
+
+    public logout(){
+        localStorage.clear();
+        this.router.navigateByUrl('/login');
     }
 
 }

@@ -307,14 +307,14 @@
                   <fieldset class="form-group px-0 mb-2 py-2">
                     <label class="custom-radio mr-3">
                       <input #RadioBtnWO1 type="radio" id="radioExplode1" value="simple" name="RadioBtnWO"
-                        [(ngModel)]="RadioBtnWO" class="k-radio" checked />
+                        [(ngModel)]="RadioBtnWO" (change)="getWoRadioClick(RadioBtnWO)" class="k-radio" checked />
                       <span class="radio"></span>
                       <span>{{language.show_Wo_FG}}</span>
                     </label>
   
                     <label class="custom-radio">
                       <input #RadioBtnWO2 type="radio" id="radioExplode2" value="all" name="RadioBtnWO"
-                        [(ngModel)]="RadioBtnWO" class="k-radio" />
+                        [(ngModel)]="RadioBtnWO" (change)="getWoRadioClick(RadioBtnWO)" class="k-radio" />
                       <span class="radio"></span>
                       <span>{{language.show_Wo_subassemblies}}</span>
                     </label>
@@ -473,17 +473,21 @@
                             <ng-template kendoTabContent>
                               <fieldset class="form-group px-0 mb-1">
                                 <label class="custom-radio mr-3">
-                                  <input #RadioBtnInventShort1 type="radio" id="radioExplode1" value="immediate"
+                                    <!--<input #RadioBtnInventShort1 type="radio" id="radioExplode1" value="immediate"
                                     name="RadioBtnInventShort" [(ngModel)]="materialViewOption" class="k-radio"
-                                    [checked]="materialViewOption == 'immediate'" />
+                                    [checked]="materialViewOption == 'immediate'" />-->
+                                    <input type="radio"  [value]="'immediate'" name="materialViewOption" [(ngModel)]="materialViewOption" class="k-radio" [checked]="materialViewOption == 'immediate'" />
+
                                   <span class="radio"></span>
                                   <span>{{language.show_immediate_components}}</span>
                                 </label>
   
                                 <label class="custom-radio">
-                                  <input #RadioBtnInventShort2 type="radio" id="radioExplode2" value="all"
+                                  <input type="radio" [value]="'all'" name="materialViewOption" [(ngModel)]="materialViewOption" class="k-radio" [checked]="materialViewOption == 'all'" />
+
+                                  <!--<input #RadioBtnInventShort2 type="radio" id="radioExplode2" value="all"
                                     name="RadioBtnInventShort" [(ngModel)]="materialViewOption" class="k-radio"
-                                    [checked]="materialViewOption == 'all'" />
+                                    [checked]="materialViewOption == 'all'" />-->
                                   <span class="radio"></span>
                                   <span>{{language.show_subassemblies_components}}</span>
                                 </label>
