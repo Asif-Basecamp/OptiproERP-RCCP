@@ -98,7 +98,7 @@
                 </form>
             </div>
             <div class="card-footer text-center py-2">
-                <button type="submit" class="btn btn-primary btn-icon btn-sm px-2" id="process">
+                <button type="button" class="btn btn-primary btn-icon btn-sm px-2" id="process" (click)="GetExplosion($event)" [disabled]="!criteriaForm.form.valid || (itemStatus || WarehouseStatus || LotFromStatus || LotToStatus)">
                     {{'Process' | translate}}
                     <svg viewBox="0 0 24 24" class="icon">
                         <use xlink:href="#rightArrow"></use>
@@ -417,4 +417,73 @@
       </div>  
   </kendo-splitter-pane>
 </kendo-splitter>
-  
+
+
+<kendo-dialog *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450">
+  <kendo-dialog-titlebar>{{lookUpHeading}}</kendo-dialog-titlebar>
+  <div *ngIf="Item">
+    <kendo-grid [kendoGridBinding]="gridData" [filterable]=isColumnFilter [groupable]=isColumnGroup [selectable]="true" [rowSelected]="isItemCodeSelected" [sort]="state.sort"
+    [filter]="state.filter" [resizable]="true" (selectionChange)="gridRowSelectionChange($event, ref)" [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px'}">
+      <ng-template kendoGridToolbarTemplate>
+          <form class="k-form opti_show-hide-grid-column-filter float-left opti_hide-in-mobile pl-0 pt-0">
+              <div class="k-form-field d-flex">
+                  <input #chkFilter  type="checkbox" (change)="onFilterChange(chkFilter,gridData)" id="opti_SalesOrderListColumnFilterID"
+                      [(ngModel)]="isColumnFilter" class="k-checkbox" name="columnfilter"/>
+                  <label class="k-checkbox-label" for="opti_SalesOrderListColumnFilterID">{{language.enable_filter}}</label>
+              </div>
+          </form>
+      </ng-template>
+      <kendo-grid-column field="ItemCode" title="{{language.item_code}}" width="80">
+      </kendo-grid-column>
+      <kendo-grid-column field="ItemName" title="{{language.description}}" width="80">
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+
+  <div *ngIf="whse">
+    <kendo-grid [kendoGridBinding]="gridData" [filterable]=isColumnFilter [groupable]=isColumnGroup [selectable]="true" [rowSelected]="wareHouseSelected" [sort]="state.sort"
+    [filter]="state.filter" [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)" [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px' }">
+      <ng-template kendoGridToolbarTemplate>
+        <form class="k-form opti_show-hide-grid-column-filter float-left opti_hide-in-mobile pl-0 pt-0">
+          <div class="k-form-field d-flex">
+            <input #chkFilter  type="checkbox" (change)="onFilterChange(chkFilter,gridData)" id="opti_SalesOrderListColumnFilterID"
+              [(ngModel)]="isColumnFilter" class="k-checkbox" name="columnfilter" />
+            <label class="k-checkbox-label" for="opti_SalesOrderListColumnFilterID">{{language.enable_filter}}</label>
+          </div>
+        </form>
+      </ng-template>
+      <kendo-grid-column field="WhsCode" title="{{language.warehouse_code}}" width="80">
+      </kendo-grid-column>
+      <kendo-grid-column field="WhsName" title="{{language.description}}" width="80">
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+
+  <div *ngIf="LotFrom || LotTo">
+    <kendo-grid [kendoGridBinding]="gridData" [filterable]=isColumnFilter [groupable]=isColumnGroup [selectable]="true" [rowSelected]="lotSelected" [sort]="state.sort"
+    [filter]="state.filter" [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)" [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px' }">
+      <ng-template kendoGridToolbarTemplate>
+        <form class="k-form opti_show-hide-grid-column-filter float-left opti_hide-in-mobile pl-0 pt-0">
+          <div class="k-form-field d-flex">
+            <input #chkFilter  type="checkbox" (change)="onFilterChange(chkFilter,gridData)" id="opti_SalesOrderListColumnFilterID"
+              [(ngModel)]="isColumnFilter" class="k-checkbox" name="columnfilter" />
+            <label class="k-checkbox-label" for="opti_SalesOrderListColumnFilterID">{{language.enable_filter}}</label>
+          </div>
+        </form>
+      </ng-template>
+      <kendo-grid-column *ngIf="!vendor" field="DistNumber" title="{{language.serial_batch_no}}" width="80">
+      </kendo-grid-column>
+      <kendo-grid-column *ngIf="vendor" field="MnfSerial" title="{{language.vendor_serial_batch_no}}" width="80">
+        </kendo-grid-column>
+      <kendo-grid-column field="ItemCode" title="{{language.item_code}}" width="80">
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+  <kendo-dialog-actions class="p-2 align-items-end">
+    <button class="btn btn-danger btn-sm d-flex align-items-center" type="button" (click)="close()">
+      <svg viewBox="0 0 489 489" class="icon mr-2">
+        <use xlink:href="#cancel"></use>
+      </svg> {{language.close}}
+    </button>
+  </kendo-dialog-actions>
+</kendo-dialog>

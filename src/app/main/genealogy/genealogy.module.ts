@@ -8,6 +8,7 @@ import { TreeModule } from 'angular-tree-component';
 import { TrnaslateLazyModule } from '../../core/module/translate-lazy.module';
 import { SharedModules } from 'src/app/shared/shared.module';
 import { SplitterModule } from '@progress/kendo-angular-layout';
+import { DialogModule } from '@progress/kendo-angular-dialog';
 
 @NgModule({
   declarations: [GenealogyComponent],
@@ -19,6 +20,7 @@ import { SplitterModule } from '@progress/kendo-angular-layout';
     FlexLayoutModule,
     CommonModule,
     SplitterModule,
+    DialogModule,
     TreeModule.forRoot()
   ],
   exports: [],
