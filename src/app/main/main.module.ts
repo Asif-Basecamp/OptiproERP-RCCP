@@ -16,13 +16,9 @@ import { DatePipe } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 
 import { MainComponent } from './main.component';
-import { BOMComponent } from './bom/bom.component';
-import { BOMGridViewComponent } from './bom/bom-grid-view/bom-grid-view.component';
 import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
-import { GanttChartComponent } from './gantt/gantt-chart.component';
-import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-view.component';
-import { PlanDefinitionComponent } from './gantt/plan-definition/plan-definition.component';
-import { PlanOrderComponent } from './gantt/plan-order/plan-order.component';
+//import { GanttChartComponent } from './gantt/gantt-chart.component';
+//import { GanttChartViewComponent } from './gantt/gantt-chart-view/gantt-chart-view.component';
 import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
 
 
@@ -46,6 +42,6 @@ import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup
   providers: [
     DatePipe
   ],
-  declarations: [MainComponent, BOMComponent, BOMGridViewComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent, GanttChartComponent, GanttChartViewComponent, PlanDefinitionComponent, PlanOrderComponent]
+  declarations: [MainComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent]
 })
 export class MainModule { }

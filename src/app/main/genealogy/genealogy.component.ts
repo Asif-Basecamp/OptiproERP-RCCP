@@ -123,6 +123,7 @@ export class GenealogyComponent implements OnInit {
         this.LotFrom = false;
         this.lookUpHeading = this.language.Item_Code;
         this.gridData = gridData;
+        this.open();
   } 
 
   public mobileView(): void {
