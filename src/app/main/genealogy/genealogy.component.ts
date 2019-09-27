@@ -18,6 +18,10 @@ import { NotificationService } from '@progress/kendo-angular-notification';
   styleUrls: ['./genealogy.component.scss']
 })
 export class GenealogyComponent implements OnInit {
+  public isMobile:boolean;
+  public seachPanelCollapse:boolean;
+  public opened : boolean = false;
+
   @Input() serviceData: any;
   public gridData: any[];
   public arrConfigData: any;
@@ -82,8 +86,11 @@ export class GenealogyComponent implements OnInit {
   public showValidation: boolean = false;
   isColumnFilter = true;
  
-  constructor(private dialogService: NbDialogService, private dash: GenealogyService, private router: Router, private notificationService: NotificationService) {}
- 
+  constructor(private dash: GenealogyService, private router: Router, private notificationService: NotificationService) {}
+  @HostListener('window:resize', ['$event']) onResize() {
+    this.mobileView();
+  }
+
   ngOnInit() {
    this.arrConfigData = JSON.parse(window.localStorage.getItem('arrConfigData'));
    this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
@@ -97,8 +104,9 @@ export class GenealogyComponent implements OnInit {
    this.radioExplode = 'Lot Explosion';
    this.radioLevel = 'Single Level';
    this.radioTransaction = 'ParentLot';
+   this.mobileView();
   }
- 
+  
    /*-- Item Code functions --*/
   getItemCodeData(api, companyDB){
     let PrcrmntMtd = "'B','M'";
@@ -108,18 +116,27 @@ export class GenealogyComponent implements OnInit {
       });    
   }
  
-  setParamItemLookup(gridData,dialog){
+  setParamItemLookup(gridData){
         this.Item = true;
         this.whse = false;
         this.LotTo = false;
         this.LotFrom = false;
         this.lookUpHeading = this.language.Item_Code;
         this.gridData = gridData;
-        this.dialogService.open(dialog);
   } 
+
+  public mobileView(): void {
+    if(window.innerWidth <= 767){
+      this.isMobile = true;
+      this.seachPanelCollapse = true;
+    }else{
+      this.isMobile = false;
+      this.seachPanelCollapse = false;
+    }
+  }
   
  
-  openItemLookup(dialog: TemplateRef<any>){
+  openItemLookup(){
     let select = [];
     if(this.isColumnFilter == true){
      this.isColumnFilter = !this.isColumnFilter;
@@ -137,14 +154,14 @@ export class GenealogyComponent implements OnInit {
        this.dash.GetItemList(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, PrcrmntMtd).subscribe(
          data => {
            this.vendorData = data;
-           this.setParamItemLookup(this.vendorData,dialog);
+           this.setParamItemLookup(this.vendorData);
          });
      }
-     else
-     {
+     else{
        if(this.ItemCodeData)
-       this.setParamItemLookup(this.ItemCodeData,dialog);
+       this.setParamItemLookup(this.ItemCodeData);
      }
+     this.open()
   }
  
   onItemCodeBlur(){
@@ -225,7 +242,7 @@ export class GenealogyComponent implements OnInit {
       this.LotFrom = false;
       this.LotTo = false;
       this.lookUpHeading = this.language.warehouse;
-      this.dialogService.open(dialog);
+      this.open();
     }
   }
  
@@ -333,7 +350,7 @@ export class GenealogyComponent implements OnInit {
      this.lookUpHeading = this.language.vendor_lot_from;
      else
      this.lookUpHeading = this.language.lot_from;   
-     this.dialogService.open(dialog);
+     this.open();
     },
     error => {
     // this.toastrService.danger(this.language.no_record_found);   
@@ -374,7 +391,7 @@ export class GenealogyComponent implements OnInit {
      this.lookUpHeading = this.language.vendor_lot_to;
      else
      this.lookUpHeading = this.language.lot_to;
-     this.dialogService.open(dialog);
+     this.open();
     },
     error => {
     // this.toastrService.danger(this.language.no_record_found); 
@@ -514,7 +531,6 @@ export class GenealogyComponent implements OnInit {
       });  
      }
     )
-      this.searchCriteriaToggle(event);
    }
   
  
@@ -547,7 +563,7 @@ export class GenealogyComponent implements OnInit {
    else {
     this.DfltWarehouse = evt.selectedRows[0].dataItem.WhsCode;
    }
-   ref.close();
+   this.close();
   }
  
   getHierarchyTransaction(dataa, Id) {
@@ -878,12 +894,12 @@ export class GenealogyComponent implements OnInit {
       hideAfter: 1000
     }); 
     }
-   )
+   )  
   }
  
-  open(dialog: TemplateRef < any > ) {
-   this.dialogService.open(dialog);
-  }
+  // open(dialog: TemplateRef < any > ) {
+  //  this.dialogService.open(dialog);
+  // }
  
   process() {
    this.gridStatus = !this.gridStatus;
@@ -942,21 +958,7 @@ export class GenealogyComponent implements OnInit {
     this.GetTransactionDetails(dcentry, disnum);
    }
   }
-  //Search criteria expand-shrink function  
-  searchCriteriaToggle(event) {
-   event.stopPropagation();
-   if (document.getElementById("dashboard-left").classList.contains('shrink')) {
-    document.getElementById("dashboard-left").classList.remove('shrink');
-    document.getElementById("selection-criteria-body").style.height = '100%';
-    document.getElementById("selection-criteria-body").style.display = 'flex';
-    this.searchCriteria = false;
-   } else {
-    document.getElementById("dashboard-left").classList.add('shrink');
-    document.getElementById("selection-criteria-body").style.height = '0';
-    document.getElementById("selection-criteria-body").style.display = 'none';
-    this.searchCriteria = true;
-   }
-  }
+
  
  
   onCheckboxClick(checked: any, index: number) {
@@ -1021,6 +1023,14 @@ export class GenealogyComponent implements OnInit {
   }
   colorCodeWrapperToggle(e){
    document.getElementById('color-code-wrapper').classList.toggle('open');
+  }
+
+  public close() {
+    this.opened = false;
+  }
+
+  public open() {
+    this.opened = true;
   }
  }
  

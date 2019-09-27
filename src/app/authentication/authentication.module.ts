@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ToastrModule } from 'ngx-toastr';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
+import { NotificationService } from '@progress/kendo-angular-notification';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
     DropDownsModule,
     FormsModule,
     FlexLayoutModule,
-    ToastrModule.forRoot()
+    NotificationService
   ]
 })
 export class AuthenticationModule { }
