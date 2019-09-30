@@ -15,10 +15,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModules } from 'src/app/core/shared.module';
 import { SplitterModule } from '@progress/kendo-angular-layout';
 import { DatePipe } from '@angular/common';
-import { ItemCodeLookupComponent } from '../bom/item-code-lookup/item-code-lookup.component';
+//import { ItemCodeLookupComponent } from '../bom/item-code-lookup/item-code-lookup.component';
 
 @NgModule({
-  declarations: [BOMComponent, WarehouseCodeLookupComponent, BOMGridViewComponent,  ItemCodeLookupComponent, WarehouseCodeLookupComponent],
+  declarations: [BOMComponent, WarehouseCodeLookupComponent, BOMGridViewComponent, WarehouseCodeLookupComponent],
   imports: [
     CommonModule,
     BOMRoutingModule,
