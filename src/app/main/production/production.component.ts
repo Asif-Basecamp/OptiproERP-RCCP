@@ -29,7 +29,8 @@ export interface TreeNode {
 @Component({
   selector: 'app-production',
   templateUrl: './production.component.html',
-  styleUrls: ['./production.component.scss']
+  styleUrls: ['./production.component.scss'],
+  providers: [DatePipe]
 })
 export class ProductionComponent implements OnInit {
   public isMobile:boolean;
