@@ -111,6 +111,9 @@ export class GanttChartComponent implements OnInit {
   ganttChart(){
     // @ts-ignore
     this.loading= true;
+        // @ts-ignore
+    
+
     Promise.all([this.TaskService.get(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo)]).then(([data]) => {
     if(data.length > 0){  
     gantt.config.scale_height = 25 * 3;
