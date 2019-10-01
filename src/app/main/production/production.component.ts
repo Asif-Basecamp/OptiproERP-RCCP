@@ -30,7 +30,7 @@ export interface TreeNode {
   selector: 'app-production',
   templateUrl: './production.component.html',
   styleUrls: ['./production.component.scss'],
-  providers:[DatePipe]
+  providers: [DatePipe]
 })
 export class ProductionComponent implements OnInit {
   public isMobile:boolean;

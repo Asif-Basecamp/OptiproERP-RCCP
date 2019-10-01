@@ -19,9 +19,9 @@ export class HeaderComponent implements OnInit {
     }
     ngOnInit() { 
         
-       /* if (window.localStorage.getItem('Username') == null || window.localStorage.getItem('Username') == undefined) {
+        if (window.localStorage.getItem('Username') == null || window.localStorage.getItem('Username') == undefined) {
             this.router.navigateByUrl('/login');
-        }  */     
+        }      
         this.sidebar();
     }
 
