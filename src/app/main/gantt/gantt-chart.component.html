@@ -82,7 +82,7 @@
     <kendo-splitter-pane class="slim-scroll">
         <div class="dashboard-right" id="dashboard-right">
             <div class="card" fxFlex="0 0 100%">
-                <div class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3"
+                <div class="justify-content-between flex-direction-column d-flex card-body " [ngClass]="(GanttChartStatus == true) ? 'px-3':'p-0'"
                     [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
                     <gantt-chart-view *ngIf="GanttChartStatus" fxLayout="column"></gantt-chart-view>   
                     <app-plan-definition *ngIf="planDefinitionStatus" [planDefinitionData]="planDefinitionData" (lookupEvent)="lookupEventHander($event)" (PlanDefinitionEvent)="PlanDefinitionEventHander($event)"></app-plan-definition>
