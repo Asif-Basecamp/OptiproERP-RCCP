@@ -45,7 +45,7 @@
                   <div class="input-group">
                     <input type="text" name="ItemCodeFrom" id="ItemCodeFrom" class="form-control form-control-sm"
                       #ItemCF=ngModel [(ngModel)]="ItemCodeFrom" placeholder="{{'item_from' | translate}}"
-                      (blur)="onItemFromBlur()" autocomplete="off">
+                      (keyup)="onItemFromBlur()" autocomplete="off">
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-primary btn-icon d-flex d-flex"
                         (click)="openItemFromLookup()">
@@ -67,7 +67,7 @@
                   <div class="input-group">
                     <input type="text" name="ItemCodeTo" id="ItemCodeTo" class="form-control form-control-sm"
                       class="form-control form-control-sm" #ItemCT=ngModel [(ngModel)]="ItemCodeTo"
-                      placeholder="{{'item_to' | translate}}" (blur)="onItemToBlur()" autocomplete="off">
+                      placeholder="{{'item_to' | translate}}" (keyup)="onItemToBlur()" autocomplete="off">
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-primary btn-icon d-flex" (click)="openItemToLookup()">
                         <svg viewBox="0 -96 512 512" class="icon">

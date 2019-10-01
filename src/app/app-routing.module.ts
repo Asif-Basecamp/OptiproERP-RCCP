@@ -9,7 +9,7 @@ const routes: Routes = [
     pathMatch: 'full'    
   },  
   { path: 'main',
-    loadChildren: () => import('./main/main.module').then(m => m.MainModule),    
+    loadChildren: () => import('./main/main.module').then(m => m.MainModule),   
     data: { showHeader: true, showSidebar: true, showFooter:false, compactLayout:false }
   },
   {

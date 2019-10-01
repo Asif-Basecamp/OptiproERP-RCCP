@@ -46,7 +46,7 @@
                   <div class="input-group">
                     <input type="text" name="ItemValue" id="ItemValue" class="form-control form-control-sm"
                       placeholder="{{'Item' | translate}}" #ItemVal=ngModel [(ngModel)]="ItemValue"
-                      (blur)="onItemCodeBlur()" required autocomplete="off">
+                      (keyup)="onItemCodeBlur()" required autocomplete="off">
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-primary btn-icon d-flex d-flex" (click)="openItemLookup()">
                         <svg viewBox="0 -96 512 512" class="icon">

@@ -26,7 +26,7 @@
                                         <input type="text" name="ItemCodeFrom" id="ItemCodeFrom"
                                             class="form-control form-control-sm" #ItemCF=ngModel
                                             [(ngModel)]="ItemCodeFrom" placeholder="{{'ItemForm' | translate}}"
-                                            autocomplete="off">
+                                            (keyup)="onItemFromBlur()" autocomplete="off">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary btn-icon d-flex d-flex"
                                                 (click)="openItemCodeFromLookup()">
@@ -37,6 +37,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
+                                *ngIf="ItemFromStatus && ItemCF.touched">Enter correct item code</small>
                             </div>
                             <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
                                 <label for="ItemFrom" class="form-label mb-0">{{'ItemTo' | translate}}</label>
@@ -45,7 +47,7 @@
                                         <input type="text" name="ItemCodeTo" id="ItemCodeTo"
                                             class="form-control form-control-sm" #ItemCT=ngModel
                                             [(ngModel)]="ItemCodeTo" placeholder="{{'ItemTo' | translate}}"
-                                            autocomplete="off">
+                                            (keyup)="onItemToBlur()" autocomplete="off">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary btn-icon d-flex"
                                                 (click)="openItemCodeToLookup()">
@@ -56,6 +58,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
+                                *ngIf="ItemToStatus && ItemCT.touched">Enter correct item code</small>
                             </div>
                             <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
                                 <label for="WarehouseFrom"
@@ -65,7 +69,7 @@
                                         <input type="text" name="WarehouseFrom" id="WarehouseFrom"
                                             class="form-control form-control-sm" #WarehouseCF=ngModel
                                             [(ngModel)]="WarehouseFrom" placeholder="{{'WarehouseFrom' | translate}}"
-                                            autocomplete="off">
+                                            (keyup)="onWarehouseFromBlur()" autocomplete="off">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary btn-icon d-flex"
                                                 (click)="openWarehouseFromLookup()">
@@ -76,6 +80,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
+                                *ngIf="WarehouseFromStatus && WarehouseCF.touched">Enter correct warehouse</small>
                             </div>
                             <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
                                 <label for="WarehouseTo" class="form-label mb-0">{{'WarehouseTo' | translate}}</label>
@@ -84,7 +90,7 @@
                                         <input type="text" name="WarehouseTo" id="WarehouseTo"
                                             class="form-control form-control-sm" #WarehouseCT=ngModel
                                             [(ngModel)]="WarehouseTo" placeholder="{{'WarehouseTo' | translate}}"
-                                            autocomplete="off">
+                                            (keyup)="onWarehouseToBlur()" autocomplete="off">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary btn-icon d-flex"
                                                 (click)="openWarehouseToLookup()">
@@ -94,6 +100,8 @@
                                             </button>
                                         </div>
                                     </div>
+                                    <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
+                                *ngIf="WarehouseToStatus && WarehouseCT.touched">Enter correct warehouse</small>
                                 </div>
                             </div>
                             <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
@@ -144,7 +152,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-center py-2">
-                    <button type="submit" (click)="processData()" class="btn btn-primary btn-icon btn-sm px-2"
+                    <button type="submit" [disabled]="ItemFromStatus || ItemToStatus || WarehouseFromStatus || WarehouseToStatus" (click)="processData()" class="btn btn-primary btn-icon btn-sm px-2"
                         id="process">
                         {{'Process' | translate}}
                         <svg viewBox="0 0 24 24" class="icon">
