@@ -215,12 +215,14 @@ export class GanttChartViewComponent implements OnInit {
         
                 return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration:</b><span> " + Math.round((task.duration/1440) *10)/10 + " Day(s)"+"</span></div>";
                  //+ Math.round(task.progress*100) + "%</span></div>";
-            };
-            gantt.init(this.ganttContainer.nativeElement);
-              this.loading = false;
-              this.chartDataStatus = true;
-              gantt.clearAll();
-              gantt.parse({data});
+            };  
+                this.chartDataStatus = true;
+                setTimeout(()=>{
+                    this.loading = false;
+                    gantt.init(this.ganttContainer.nativeElement);
+                    gantt.clearAll();
+                    gantt.parse({data});
+                }, 1000);
             }else{
             this.loading = false;
             this.chartDataStatus = false;

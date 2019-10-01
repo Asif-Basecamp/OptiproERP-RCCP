@@ -1,28 +1,30 @@
-<form *ngIf="chartDataStatus" class="gantt_control p-2 border border-bottom-0">
-    <div class="d-flex">
-        <button type="button" class="btn btn-primary btn-icon btn-sm mr-2" (click)="zoomIn()">
-            <svg viewBox="0 0 129 129" class="icon">
-                <use xlink:href="#zoomIn"></use>
-            </svg>
-        </button>
-        <button type="button" class="btn btn-primary btn-icon btn-sm mr-2" (click)="zoomOut()">
-            <svg viewBox="0 0 129 129" class="icon">
-                <use xlink:href="#zoomOut"></use>
-            </svg>
-        </button>
-        <button type="button" class="btn btn-primary btn-icon btn-sm mr-2" (click)="toggleCritical()">
-            Critical
-        </button>
-    
-        <select id="scale" name="scale" [ngStyle]="{'width':'150px'}"  [(ngModel)]="scaler" class="form-control form-control-sm"  (change)="onScaleChange($event)" [ngModelOptions]="{standalone: true}">
-            <option *ngFor="let scale of scales" value={{scale.value}} [selected]="scale.value==scaler">
-            {{scale.name}}
-            </option>
-        </select>
-    </div>
-</form>
-<div [hidden]="chartDataStatus === false" #gantt_here style='width: 100%; height: 100%;'></div>
-<div *ngIf="loading" class="k-i-loading"></div>
+<div class="justify-content-between flex-column d-flex" fxFlex="0 1 100%" [hidden]="chartDataStatus === false" [ngClass]="(chartDataStatus === true)?'p-3':''">
+    <form *ngIf="chartDataStatus" class="gantt_control p-2 border border-bottom-0">
+        <div class="d-flex">
+            <button type="button" class="btn btn-primary btn-icon btn-sm mr-2" (click)="zoomIn()">
+                <svg viewBox="0 0 129 129" class="icon">
+                    <use xlink:href="#zoomIn"></use>
+                </svg>
+            </button>
+            <button type="button" class="btn btn-primary btn-icon btn-sm mr-2" (click)="zoomOut()">
+                <svg viewBox="0 0 129 129" class="icon">
+                    <use xlink:href="#zoomOut"></use>
+                </svg>
+            </button>
+            <button type="button" class="btn btn-primary btn-icon btn-sm mr-2" (click)="toggleCritical()">
+                Critical
+            </button>
+        
+            <select id="scale" name="scale" [ngStyle]="{'width':'150px'}"  [(ngModel)]="scaler" class="form-control form-control-sm"  (change)="onScaleChange($event)" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let scale of scales" value={{scale.value}} [selected]="scale.value==scaler">
+                {{scale.name}}
+                </option>
+            </select>
+        </div>
+    </form>
+    <div [hidden]="chartDataStatus === false" #gantt_here style='width: 100%; height: 100%;'></div>
+    <div *ngIf="loading" class="k-i-loading"></div>
+</div>
 
 <div class="welcome-page" *ngIf="!chartDataStatus" fxLayout="column" fxFlex="0 0 100%">
     <div class="welcome-innner" fxLayout="column" fxFlex="0 0 100%">
