@@ -218,8 +218,10 @@ export class GanttChartViewComponent implements OnInit {
             };
             gantt.init(this.ganttContainer.nativeElement);
               this.loading = false;
+              gantt.clearAll();
               gantt.parse({data});
            }else{
+            gantt.clearAll();   
             this.loading = false;
             this.notificationService.show({
               content: 'No Record Found',
@@ -250,6 +252,7 @@ export class GanttChartViewComponent implements OnInit {
 			gantt.config.highlight_critical_path = true;
 		gantt.render();
     }
+    
     
     // ngOnDestroy(){
     //     gantt.destructor();

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { CountdownComponent } from 'ngx-countdown';
@@ -6,13 +6,14 @@ import { DatePipe } from '@angular/common';
 import { Scale } from 'src/app/core/model/scale';
 import { DataService } from './data.service';
 import { GanttChartService } from './service/gantt-chart.service';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-gantt',
   templateUrl: './gantt-chart.component.html',
   styleUrls: ['./gantt-chart.component.scss'],
 })
-export class GanttChartComponent implements OnInit {
+export class GanttChartComponent implements OnInit, OnDestroy {
 
   public isMobile:boolean;
   public seachPanelCollapse:boolean;
@@ -27,7 +28,7 @@ export class GanttChartComponent implements OnInit {
   public loading: boolean = false;
 
 
-  constructor(private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService, private translate: TranslateService, private datePipe: DatePipe) { 
+  constructor(private route: ActivatedRoute, private router: Router,private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService, private translate: TranslateService, private datePipe: DatePipe) { 
 
   }
 
@@ -88,15 +89,30 @@ export class GanttChartComponent implements OnInit {
   }
 
   processData(){
-    //this.seachPanelCollapse = false;
-    this.collapse();
+    this.seachPanelCollapse = true;
     this.GanttChartStatus = true;
     this.dataService.setData(this.PlanDefinition);
     this.dataService.setOrder(this.PlanOrderNo);
   }
 
-  collapse(){
+  onRefresh() {
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
+  
+    let currentUrl = this.router.url + '?';
+  
+    this.router.navigateByUrl(currentUrl)
+      .then(() => {
+        this.router.navigated = false;
+        this.router.navigate([this.router.url]);
+      });
+    }
+
+    ngOnDestroy() {
+     
+    }
+
+ /* collapse(){
     this.seachPanelCollapse = true;
-  }
+  }*/
 
 }
