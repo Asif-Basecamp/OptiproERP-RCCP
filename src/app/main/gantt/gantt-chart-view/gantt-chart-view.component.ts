@@ -29,9 +29,9 @@ export class GanttChartViewComponent implements OnInit {
     @Input() PlanDefinition;
     @Input() PlanOrderNo;
     public CompanyDB: any;
-    public loading: boolean = false;
+    public loading: boolean;
     public products: any;
-    public chartData: any;
+    public chartDataStatus: boolean;
 
     constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private dataService: DataService, private TaskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef, private GanttChartService: GanttChartService) { 
        
@@ -80,6 +80,7 @@ export class GanttChartViewComponent implements OnInit {
             }
             let data = this.products;
             if(data && data.length>0){
+            this.chartDataStatus = true;
             gantt.config.scale_height = 25 * 3;
             gantt.config.link_line_width = 1;
             gantt.config.row_height = 25;
@@ -220,9 +221,9 @@ export class GanttChartViewComponent implements OnInit {
               this.loading = false;
               gantt.clearAll();
               gantt.parse({data});
-           }else{
-            gantt.clearAll();   
+            }else{
             this.loading = false;
+            this.chartDataStatus = false;
             this.notificationService.show({
               content: 'No Record Found',
               animation: { type: 'fade', duration: 400 },
