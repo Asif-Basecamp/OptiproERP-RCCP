@@ -26,7 +26,6 @@ export class GanttChartComponent implements OnInit {
   public planDefinitionStatus: boolean = false;
   public planDefinitionOrderStatus: boolean = false;
   public GanttChartStatus: boolean;
-  public loading: boolean = false;
   public PDStatus:boolean = false;
   public OrderStatus:boolean = false;
 

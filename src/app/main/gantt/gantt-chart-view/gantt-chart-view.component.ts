@@ -39,12 +39,12 @@ export class GanttChartViewComponent implements OnInit {
 
     ngOnInit() {
         this.CompanyDB =  'PLANNING_ENGINE03';
-        this.loading = true;
         this.dataService.getData().subscribe(definition=>{
             this.PlanDefinition = definition;
         });
         this.dataService.getOrder().subscribe(order=>{
           this.PlanOrderNo = order;
+          this.loading = true;
           this.TaskService.getJSON(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(res => {
             if(res){
                 this.products = res.map(function(obj) {
