@@ -9,7 +9,6 @@
           </svg>
           <span class="h5 mb-0">{{'SelectionCriteria' | translate}}</span>
           <span class="ml-auto mr-3 d-flex justify-content-center align-items-center timer-wrapper"></span>
-          <span class="optipro-icon-arrow-left cursor-pointer mr-1 d-flex"></span>
         </div>
         <div class="overflow-auto d-flex flex-column" fxFlex="0 1 100%">
           <div id="selection-criteria-body"
@@ -182,11 +181,19 @@
               <kendo-splitter class="h-100 internal-spitter">
                 <kendo-splitter-pane [collapsible]="true" size="250px">
 
-                  <div class="overflow-auto h-100 px-2">
+                  <div class="overflow-auto h-100">
                     <div class="tree-wrapper pt-2">
                       <div class="d-flex w-100 mb-2">
-                          <span class="cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" (click)="diffTree.treeModel.expandAll()" title="Expand All"><i class="optipro-icon-expand"></i></span>
-                          <span class="cursor-pointer btn btn-primary btn-icon-with-input" (click)="diffTree.treeModel.collapseAll()"  title="Collapse All"><i class="optipro-icon-collapse"></i></span>
+                          <span class="cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" (click)="diffTree.treeModel.expandAll()" title="Expand All">
+                              <svg viewBox="0 0 1024 1024" class="icon">
+                                  <use xlink:href="#expandAll"></use>
+                              </svg>
+                          </span>
+                          <span class="cursor-pointer btn btn-primary btn-icon-with-input" (click)="diffTree.treeModel.collapseAll()"  title="Collapse All">
+                            <svg viewBox="0 0 1024 1024" class="icon">
+                                <use xlink:href="#collapseAll"></use>
+                            </svg>
+                          </span>
                       </div>
                       <tree-root id="tree2" #diffTree [focused]="true" [nodes]="nodes2" (click)="clickTransaction($event)">
                         <ng-template #treeNodeFullTemplate let-node let-index="index" let-templates="templates">
@@ -238,8 +245,16 @@
                       <div class="card-header">Transaction Type</div>
                       <div class="card-body p-2">
                         <div class="d-flex w-100 mb-2">
-                          <span class="cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" status="success" (click)="diffTree2.treeModel.expandAll()" title="Expand All"><i class="optipro-icon-expand"></i></span>
-                          <span class="cursor-pointer btn btn-primary btn-icon-with-input" (click)="diffTree2.treeModel.collapseAll()"  title="Collapse All"><i class="optipro-icon-collapse"></i></span>
+                          <span class="cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" status="success" (click)="diffTree2.treeModel.expandAll()" title="Expand All">
+                            <svg viewBox="0 0 1024 1024" class="icon">
+                                <use xlink:href="#expandAll"></use>
+                            </svg>
+                          </span>
+                          <span class="cursor-pointer btn btn-primary btn-icon-with-input" (click)="diffTree2.treeModel.collapseAll()"  title="Collapse All">
+                            <svg viewBox="0 0 1024 1024" class="icon">
+                                <use xlink:href="#collapseAll"></use>
+                            </svg>
+                          </span>
                         </div>
                         <tree-root id="tree2" #diffTree2 [focused]="true" [nodes]="nodes1" (click)="clickTransactionDetails($event)">
                             <ng-template #treeNodeFullTemplate let-node let-index="index" let-templates="templates">
@@ -282,7 +297,11 @@
                 <div class="color-code-wrapper" id="color-code-wrapper">
                   <div class="color-code-content">
                     <div class="color-code-toggle">
-                      <button type="button" (click)="colorCodeWrapperToggle($event)"><i class="optipro-icon-chevron-left"></i></button>
+                      <button type="button" (click)="colorCodeWrapperToggle($event)">
+                        <svg viewBox="0 0 451.846 451.847" class="icon colorCodeWrapperToggle-icon">
+                            <use xlink:href="#caretLeft"></use>
+                        </svg>
+                      </button>
                     </div>
                     <div class="color-code-heading">Color scheme</div>
                     <ul class="list-unstyled">

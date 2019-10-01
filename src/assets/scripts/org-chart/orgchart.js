@@ -67,8 +67,8 @@ export default class OrgChart {
       let exportBtn = document.createElement('button'),
         downloadBtn = document.createElement('a');
 
-      exportBtn.setAttribute('class', 'oc-export-btn' + (opts.chartClass !== '' ? ' ' + opts.chartClass : ''));
-      exportBtn.innerHTML = 'Export';
+      exportBtn.setAttribute('class', 'oc-export-btn cursor-pointer btn btn-primary btn-icon-with-input' + (opts.chartClass !== '' ? ' ' + opts.chartClass : ''));
+      exportBtn.innerHTML = '<svg viewBox="0 0 512 512" class="icon">'+ '<use xlink:href="#download">'+'</use>'+'</svg>';
       exportBtn.addEventListener('click', this._clickExportButton.bind(this));
       downloadBtn.setAttribute('class', 'oc-download-btn' + (opts.chartClass !== '' ? ' ' + opts.chartClass : ''));
       downloadBtn.setAttribute('download', opts.exportFilename + '.png');
