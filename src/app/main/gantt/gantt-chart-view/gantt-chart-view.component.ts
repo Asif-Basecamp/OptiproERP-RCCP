@@ -80,7 +80,6 @@ export class GanttChartViewComponent implements OnInit {
             }
             let data = this.products;
             if(data && data.length>0){
-            this.chartDataStatus = true;
             gantt.config.scale_height = 25 * 3;
             gantt.config.link_line_width = 1;
             gantt.config.row_height = 25;
@@ -219,6 +218,7 @@ export class GanttChartViewComponent implements OnInit {
             };
             gantt.init(this.ganttContainer.nativeElement);
               this.loading = false;
+              this.chartDataStatus = true;
               gantt.clearAll();
               gantt.parse({data});
             }else{

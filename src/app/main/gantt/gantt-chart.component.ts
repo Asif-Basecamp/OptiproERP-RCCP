@@ -7,6 +7,7 @@ import { Scale } from 'src/app/core/model/scale';
 import { DataService } from './data.service';
 import { GanttChartService } from './service/gantt-chart.service';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
   selector: 'app-gantt',
@@ -26,11 +27,10 @@ export class GanttChartComponent implements OnInit, OnDestroy {
   public planDefinitionOrderStatus: boolean = false;
   public GanttChartStatus: boolean;
   public loading: boolean = false;
+  public PDStatus:boolean = false;
+  public OrderStatus:boolean = false;
 
-
-  constructor(private route: ActivatedRoute, private router: Router,private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService, private translate: TranslateService, private datePipe: DatePipe) { 
-
-  }
+  constructor(private route: ActivatedRoute, private notificationService: NotificationService, private router: Router,private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService, private translate: TranslateService, private datePipe: DatePipe) {}
 
   @HostListener('window:resize', ['$event']) onResize() {
     this.mobileView();
@@ -64,6 +64,58 @@ export class GanttChartComponent implements OnInit, OnDestroy {
       data => {
         this.planOrderData = data;
       });    
+  }
+
+  onPlanDefinitionBlur(){
+    let Plan = this.PlanDefinition;
+    let PlanFromArray = [];
+    if(Plan){
+      for(var i in this.planDefinitionData){
+        if(Plan === this.planDefinitionData[i].Code){
+          PlanFromArray.push(this.planDefinitionData[i]);
+        }
+      }
+      if(PlanFromArray.length>0){
+        this.PDStatus = false;
+      }else{
+        this.PDStatus = true;
+      }
+    }else{
+        this.PDStatus = false;
+    } 
+  }
+
+  onPlanOrderNoBlur(){
+    if(this.PlanDefinition){
+      this.getPlanOrderNo(environment.optiProGanttChartAPIURL, this.CompanyDB, this.PlanDefinition);
+    }else{
+      this.notificationService.show({
+        content: 'Please Enter Plan Definition',
+        animation: { type: 'fade', duration: 400 },
+        position: { horizontal: 'right', vertical: 'top' },
+        type: { style: 'error', icon: true },
+        hideAfter: 1000
+      });  
+    }
+    
+    if(this.planOrderData && this.planOrderData.length>0){
+      let Order = this.PlanOrderNo;
+      let OrderFromArray = [];
+      if(Order){
+      for(var i in this.planOrderData){
+        if(Order == this.planOrderData[i].OPTM_SUPPLLY_ID){
+          OrderFromArray.push(this.planOrderData[i]);
+        }
+      }
+      if(OrderFromArray.length>0){
+        this.OrderStatus = false;
+      }else{
+        this.OrderStatus = true;
+      }
+      }else{
+        this.OrderStatus = false;
+      } 
+    }
   }
 
   openPlanDefinition(){
