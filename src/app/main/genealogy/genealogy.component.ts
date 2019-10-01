@@ -135,6 +135,11 @@ export class GenealogyComponent implements OnInit {
       this.seachPanelCollapse = false;
     }
   }
+
+  
+  collapse(){
+    this.seachPanelCollapse = true;
+  }
   
  
   openItemLookup(){
@@ -427,10 +432,9 @@ export class GenealogyComponent implements OnInit {
    /*-- get data on grid view after click on process --*/
  
    GetExplosion() {
-     document.getElementById('chart-container').innerHTML = ""; 
- 
+    this.seachPanelCollapse = false;
+    document.getElementById('chart-container').innerHTML = ""; 
     if(this.DistNumFrom.trim() != "" && this.DistNumTo.trim() == ""){
-      //this.toastrService.danger(this.language.error_enter_lot_to);
       this.notificationService.show({
         content: this.language.error_enter_lot_to,
         animation: { type: 'fade', duration: 400 },
@@ -441,7 +445,6 @@ export class GenealogyComponent implements OnInit {
       return;
     }
     else if(this.DistNumTo.trim() != "" && this.DistNumFrom.trim() == ""){
-    //  this.toastrService.danger(this.language.error_enter_lot_from);
       this.notificationService.show({
         content: this.language.error_enter_lot_to,
         animation: { type: 'fade', duration: 400 },
@@ -473,7 +476,7 @@ export class GenealogyComponent implements OnInit {
      if(!data){
        this.loading = false;
        this.gridViewShow = false;
-       //this.toastrService.danger(this.language.no_record_found);
+       this.collapse();
        this.notificationService.show({
         content: this.language.no_record_found,
         animation: { type: 'fade', duration: 400 },
@@ -489,7 +492,7 @@ export class GenealogyComponent implements OnInit {
       if(data.length <= 0){
         this.loading = false;
         this.gridViewShow = false;
-       // this.toastrService.danger(this.language.no_record_found);  
+        this.collapse();
        this.notificationService.show({
         content: this.language.no_record_found,
         animation: { type: 'fade', duration: 400 },
@@ -515,6 +518,7 @@ export class GenealogyComponent implements OnInit {
         Arr.push(this.data[i]);
        }
       }
+      this.collapse();
       this.nodes2 = this.getHierarchy(Arr, '-1', Arr[0].OPTM_SEQ);
       this.gridStatus = !this.gridStatus;
       this.loading = false;
@@ -522,7 +526,7 @@ export class GenealogyComponent implements OnInit {
     },
      error => {
        this.loading = false;
-       //this.toastrService.danger(this.language.no_record_found);  
+       this.collapse();
        this.notificationService.show({
         content: this.language.no_record_found,
         animation: { type: 'fade', duration: 400 },
@@ -633,7 +637,6 @@ export class GenealogyComponent implements OnInit {
     else{
      this.loading = false;
      this.transactionViewShow = false;
-     //this.toastrService.danger(this.language.no_record_found);  
      this.notificationService.show({
       content: this.language.no_record_found,
       animation: { type: 'fade', duration: 400 },
@@ -646,7 +649,6 @@ export class GenealogyComponent implements OnInit {
     error => {
      this.loading = false;
      this.transactionViewShow = false;
-     //this.toastrService.danger(this.language.no_record_found); 
      this.notificationService.show({
       content: this.language.no_record_found,
       animation: { type: 'fade', duration: 400 },
@@ -761,9 +763,6 @@ export class GenealogyComponent implements OnInit {
       'data' : result,
       'depth': 1,
       'direction': 'l2r',
-      
-      // 'chartClass':'ItemCode',
-      // 'nodeID': 'id',
       'createNode': function(node, data) {
         node.getElementsByClassName('title')[0].addEventListener('click', () => {
           node.classList.toggle("expanded");   
@@ -921,7 +920,6 @@ export class GenealogyComponent implements OnInit {
      } 
     }
     else {
-    // this.toastrService.danger(this.language.error_item_none_tracked);
     this.notificationService.show({
       content: this.language.error_item_none_tracked,
       animation: { type: 'fade', duration: 400 },

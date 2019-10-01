@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { CountdownComponent } from 'ngx-countdown';
@@ -14,10 +14,10 @@ import { NotificationService } from '@progress/kendo-angular-notification';
   templateUrl: './gantt-chart.component.html',
   styleUrls: ['./gantt-chart.component.scss'],
 })
-export class GanttChartComponent implements OnInit, OnDestroy {
+export class GanttChartComponent implements OnInit {
 
   public isMobile:boolean;
-  public seachPanelCollapse:boolean;
+  public searchPanelCollapse:boolean;
   public CompanyDB: any;
   public PlanDefinition: any;
   public planDefinitionData: any;
@@ -26,7 +26,6 @@ export class GanttChartComponent implements OnInit, OnDestroy {
   public planDefinitionStatus: boolean = false;
   public planDefinitionOrderStatus: boolean = false;
   public GanttChartStatus: boolean;
-  public loading: boolean = false;
   public PDStatus:boolean = false;
   public OrderStatus:boolean = false;
 
@@ -45,10 +44,10 @@ export class GanttChartComponent implements OnInit, OnDestroy {
   public mobileView(): void {
     if(window.innerWidth <= 767){
       this.isMobile = true;
-      this.seachPanelCollapse = true;
+      this.searchPanelCollapse = true;
     }else{
       this.isMobile = false;
-      this.seachPanelCollapse = false;
+      this.searchPanelCollapse = false;
     }
   }
 
@@ -141,7 +140,7 @@ export class GanttChartComponent implements OnInit, OnDestroy {
   }
 
   processData(){
-    this.seachPanelCollapse = true;
+    this.searchPanelCollapse = true;
     this.GanttChartStatus = true;
     this.dataService.setData(this.PlanDefinition);
     this.dataService.setOrder(this.PlanOrderNo);
@@ -158,13 +157,4 @@ export class GanttChartComponent implements OnInit, OnDestroy {
         this.router.navigate([this.router.url]);
       });
     }
-
-    ngOnDestroy() {
-     
-    }
-
- /* collapse(){
-    this.seachPanelCollapse = true;
-  }*/
-
 }

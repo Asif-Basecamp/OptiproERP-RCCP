@@ -1,13 +1,13 @@
 <kendo-splitter><!--[orientation]="isMobile ? 'vertical':'horizontal'"-->
     <kendo-splitter-pane class="slim-scroll" [collapsible]="true" size="300px" [resizable]="false"
-        [collapsed]="seachPanelCollapse">
+        [collapsed]="searchPanelCollapse">
         <div class="dashboard-left" id="dashboard-left">
             <div class="card flex-column" id="selection-criteria-section" fxFlex="0 0 100%">
                 <div class="card-header d-flex">
                     <svg viewBox="0 0 410.23 410.23" class="icon mr-2 icon-dark" fill="#2a2a2a">
                         <use xlink:href="#search"></use>
                     </svg>
-                    <span class="h5 mb-0">{{OrderStatus}} {{'SelectionCriteria' | translate}}</span>
+                    <span class="h5 mb-0">{{'SelectionCriteria' | translate}}</span>
                     <span class="ml-auto mr-3 d-flex justify-content-center align-items-center timer-wrapper"></span>
                     <span class="optipro-icon-arrow-left cursor-pointer mr-1 d-flex"></span>
                 </div>
@@ -84,7 +84,7 @@
             <div class="card" fxFlex="0 0 100%">
                 <div class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3"
                     [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}">
-                    <gantt-chart-view #varName *ngIf="GanttChartStatus"></gantt-chart-view>
+                    <gantt-chart-view *ngIf="GanttChartStatus"></gantt-chart-view>   
                     <app-plan-definition *ngIf="planDefinitionStatus" [planDefinitionData]="planDefinitionData" (lookupEvent)="lookupEventHander($event)" (PlanDefinitionEvent)="PlanDefinitionEventHander($event)"></app-plan-definition>
                     <app-plan-order *ngIf="planDefinitionOrderStatus" [planOrderData]="planOrderData" (lookupEvent)="lookupEventHander($event)" (PlanDefinitionOrderNoEvent)="PlanDefinitionOrderNoEventHander($event)"></app-plan-order>
                 </div>

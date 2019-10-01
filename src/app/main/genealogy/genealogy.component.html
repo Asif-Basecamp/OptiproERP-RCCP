@@ -171,13 +171,12 @@
 
   <kendo-splitter-pane>
     <div class="dashboard-right" [ngClass]="{'default-screen':!gridViewShow}">
-      
+      <div *ngIf="loading" class="k-i-loading"></div>
       <div class="card" fxFlex="0 1 100%">
         <kendo-splitter class="h-100 internal-spitter p-3" orientation="vertical">
           <kendo-splitter-pane [collapsible]="true" size="50%">
 
             <div class="card-body p-0" id="grid-accordian-body">
-
               <kendo-splitter class="h-100 internal-spitter">
                 <kendo-splitter-pane [collapsible]="true" size="250px">
 
@@ -256,6 +255,7 @@
                         </span>
                       </div>
                       <div class="card-body p-2 d-flex flex-column h-100">
+                        <div *ngIf="loading" class="k-i-loading"></div>
                         <tree-root id="tree2" #diffTree2 [focused]="true" class="flex-100 overflow-auto" [nodes]="nodes1" (click)="clickTransactionDetails($event)">
                             <ng-template #treeNodeFullTemplate let-node let-index="index" let-templates="templates">
                               <div class="tree-node">
@@ -290,6 +290,8 @@
           <kendo-splitter-pane [collapsible]="true" class="pt-1">
 
             <div class="card w-100 h-100 no-shadow-card">
+                <div *ngIf="Analysisloading" class="k-i-loading"></div>
+
               <div id="analysis-accordian-body" class="card-body p-2">
 
                 <div id="chart-container" class="overflow-auto h-100 w-100 d-flex position-relative"></div>
