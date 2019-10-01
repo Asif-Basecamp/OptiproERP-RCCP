@@ -173,7 +173,7 @@
     <div class="dashboard-right" [ngClass]="{'default-screen':!gridViewShow}">
       
       <div class="card" fxFlex="0 1 100%">
-        <kendo-splitter class="h-100 internal-spitter" orientation="vertical">
+        <kendo-splitter class="h-100 internal-spitter p-3" orientation="vertical">
           <kendo-splitter-pane [collapsible]="true" size="50%">
 
             <div class="card-body p-0" id="grid-accordian-body">
@@ -181,8 +181,8 @@
               <kendo-splitter class="h-100 internal-spitter">
                 <kendo-splitter-pane [collapsible]="true" size="250px">
 
-                  <div class="overflow-auto h-100">
-                    <div class="tree-wrapper pt-2">
+                  <div class="overflow-auto h-100 pr-1 pb-1">
+                    <div class="tree-wrapper">
                       <div class="d-flex w-100 mb-2">
                           <span class="cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" (click)="diffTree.treeModel.expandAll()" title="Expand All">
                               <svg viewBox="0 0 1024 1024" class="icon">
@@ -223,8 +223,8 @@
 
                 <kendo-splitter-pane>
 
-                  <div class="p-2 overflow-auto h-100 d-flex flex-column">
-                    <div class="clearfix mb-2">
+                  <div class="pl-1 pb-1 overflow-auto h-100 d-flex flex-column">
+                    <div class="clearfix">
                       <div class="col-12 p-0">
                         <label class="custom-radio mr-3">
                           <input #singleLevel type="radio" id="singleLevel" value="ParentLot" name="radioTransaction"
@@ -241,22 +241,22 @@
                       </div>
                     </div>
 
-                    <div class="card mb-0 no-shadow-card flex-100 card-min-85">
-                      <div class="card-header">Transaction Type</div>
-                      <div class="card-body p-2">
-                        <div class="d-flex w-100 mb-2">
-                          <span class="cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" status="success" (click)="diffTree2.treeModel.expandAll()" title="Expand All">
-                            <svg viewBox="0 0 1024 1024" class="icon">
-                                <use xlink:href="#expandAll"></use>
-                            </svg>
-                          </span>
-                          <span class="cursor-pointer btn btn-primary btn-icon-with-input" (click)="diffTree2.treeModel.collapseAll()"  title="Collapse All">
-                            <svg viewBox="0 0 1024 1024" class="icon">
-                                <use xlink:href="#collapseAll"></use>
-                            </svg>
-                          </span>
-                        </div>
-                        <tree-root id="tree2" #diffTree2 [focused]="true" [nodes]="nodes1" (click)="clickTransactionDetails($event)">
+                    <div class="card mb-0 no-shadow-card flex-100 h-100 overflow-auto">
+                      <div class="card-header px-2 py-1 border-bottom d-flex align-items-center">
+                        <span class="h6 m-0">Transaction Type</span>
+                        <span class="cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" status="success" (click)="diffTree2.treeModel.expandAll()" title="Expand All">
+                          <svg viewBox="0 0 1024 1024" class="icon">
+                              <use xlink:href="#expandAll"></use>
+                          </svg>
+                        </span>
+                        <span class="cursor-pointer btn btn-primary btn-icon-with-input" (click)="diffTree2.treeModel.collapseAll()"  title="Collapse All">
+                          <svg viewBox="0 0 1024 1024" class="icon">
+                              <use xlink:href="#collapseAll"></use>
+                          </svg>
+                        </span>
+                      </div>
+                      <div class="card-body p-2 d-flex flex-column h-100">
+                        <tree-root id="tree2" #diffTree2 [focused]="true" class="flex-100 overflow-auto" [nodes]="nodes1" (click)="clickTransactionDetails($event)">
                             <ng-template #treeNodeFullTemplate let-node let-index="index" let-templates="templates">
                               <div class="tree-node">
                                 <tree-node-expander [node]="node"></tree-node-expander>
@@ -287,10 +287,10 @@
 
           </kendo-splitter-pane>
 
-          <kendo-splitter-pane [collapsible]="true">
+          <kendo-splitter-pane [collapsible]="true" class="pt-1">
 
-            <div class="card w-100 h-100">
-              <div id="analysis-accordian-body" class="card-body p-0">
+            <div class="card w-100 h-100 no-shadow-card">
+              <div id="analysis-accordian-body" class="card-body p-2">
 
                 <div id="chart-container" class="overflow-auto h-100 w-100 d-flex position-relative"></div>
 
