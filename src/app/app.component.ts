@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   compactLayout = false;
 
   public svgFile:string = 'assets/images/svg/svg-sprite.svg';
-  public svgVersion:any = "1.6";
+  public svgVersion:any = "1.79";
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 

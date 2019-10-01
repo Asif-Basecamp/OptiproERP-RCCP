@@ -726,14 +726,9 @@ div.tree>tree-node>div>.node-wrapper-box>tree-node-expander>.toggle-children-wra
     width: 164px;
     transform-origin: 0 0;
   }
-  & .node-img i{
-    font-size: 33px;
-    color: rgba(0,0,0,0.5);
-    &.optipro-icon-null{
-      &:before{
-        content: "\e93a";
-      }
-    }
+  & .node-img svg{
+    width: 33px;
+    fill: rgba(0,0,0,0.5);
   }
   & .node-footer{
     display: none;

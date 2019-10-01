@@ -773,7 +773,9 @@ export class GenealogyComponent implements OnInit {
         secondMenu.innerHTML = `
           <div class="node-content">
             <div class="node-img">
-              <i class="optipro-icon-${data.className}"></i>
+              <svg viewBox="0 0 1024 1024" class="icon">
+                <use xlink:href="#${data.className}"></use>
+              </svg>
             </div>
             <div class="node-data">
               <div class="data-column">
