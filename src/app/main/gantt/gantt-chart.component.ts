@@ -93,7 +93,7 @@ export class GanttChartComponent implements OnInit {
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
-        hideAfter: 1000
+        hideAfter: 3000
       });  
     }
     
