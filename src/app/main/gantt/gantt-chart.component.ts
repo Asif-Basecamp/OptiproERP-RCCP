@@ -29,7 +29,9 @@ export class GanttChartComponent implements OnInit {
   public PDStatus:boolean = false;
   public OrderStatus:boolean = false;
 
-  constructor(private route: ActivatedRoute, private notificationService: NotificationService, private router: Router,private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService, private translate: TranslateService, private datePipe: DatePipe) {}
+  constructor(private route: ActivatedRoute, private notificationService: NotificationService, private router: Router,private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService, private translate: TranslateService, private datePipe: DatePipe) {
+  
+  }
 
   @HostListener('window:resize', ['$event']) onResize() {
     this.mobileView();
@@ -40,6 +42,7 @@ export class GanttChartComponent implements OnInit {
     this.getPlanDefinition(environment.optiProGanttChartAPIURL, this.CompanyDB);
     this.mobileView();
   }
+
 
   public mobileView(): void {
     if(window.innerWidth <= 767){
@@ -145,16 +148,4 @@ export class GanttChartComponent implements OnInit {
     this.dataService.setData(this.PlanDefinition);
     this.dataService.setOrder(this.PlanOrderNo);
   }
-
-  onRefresh() {
-    this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
-  
-    let currentUrl = this.router.url + '?';
-  
-    this.router.navigateByUrl(currentUrl)
-      .then(() => {
-        this.router.navigated = false;
-        this.router.navigate([this.router.url]);
-      });
-    }
 }
