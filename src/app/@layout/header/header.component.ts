@@ -18,7 +18,8 @@ export class HeaderComponent implements OnInit {
         ServiceLocator.injector = this.injector;
     }
     ngOnInit() { 
-        
+      
+     
         if (window.localStorage.getItem('Username') == null || window.localStorage.getItem('Username') == undefined) {
             this.router.navigateByUrl('/login');
         }      

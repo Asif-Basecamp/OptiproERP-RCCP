@@ -44,7 +44,10 @@ export class BOMComponent implements OnInit {
   time: any;
   public ItemData: any;
   public WarehouseData: any;
-  
+  public ItemFromStatus:boolean = false;
+  public ItemToStatus:boolean = false;
+  public WarehouseFromStatus:boolean = false;
+  public WarehouseToStatus:boolean = false;
 
   constructor(private BOMService: BOMService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { }  
   @HostListener('window:resize', ['$event']) onResize() {
@@ -80,6 +83,83 @@ export class BOMComponent implements OnInit {
         this.WarehouseData = data;
       });    
   } 
+
+
+  onItemFromBlur(){
+    let ItemFrom = this.ItemCodeFrom;
+    let ItemFromArray = [];
+    if(ItemFrom){
+      for(var i in this.ItemData){
+        if(ItemFrom === this.ItemData[i].ItemCode){
+          ItemFromArray.push(this.ItemData[i]);
+        }
+      }
+      if(ItemFromArray.length>0){
+        this.ItemFromStatus = false;
+      }else{
+        this.ItemFromStatus = true;
+      }
+    }else{
+        this.ItemFromStatus = false;
+    } 
+  }
+
+  onItemToBlur(){
+    let ItemTo = this.ItemCodeTo;
+    let ItemToArray = [];
+    if(ItemTo){
+      for(var i in this.ItemData){
+        if(ItemTo === this.ItemData[i].ItemCode){
+          ItemToArray.push(this.ItemData[i]);
+        }
+      }
+      if(ItemToArray.length>0){
+        this.ItemToStatus = false;
+      }else{
+        this.ItemToStatus = true;
+      }
+    }else{
+        this.ItemToStatus = false;
+    } 
+  }
+
+  onWarehouseFromBlur(){
+    let WarehouseFrom = this.WarehouseFrom;
+    let WarehouseFromArray = [];
+    if(WarehouseFrom){
+      for(var i in this.WarehouseData){
+        if(WarehouseFrom === this.WarehouseData[i].WhsCode){
+          WarehouseFromArray.push(this.WarehouseData[i]);
+        }
+      }
+      if(WarehouseFromArray.length>0){
+        this.WarehouseFromStatus = false;
+      }else{
+        this.WarehouseFromStatus = true;
+      }
+    }else{
+        this.WarehouseFromStatus = false;
+    } 
+  }
+
+  onWarehouseToBlur(){
+    let WarehouseTo = this.WarehouseTo;
+    let WarehouseToArray = [];
+    if(WarehouseTo){
+      for(var i in this.WarehouseData){
+        if(WarehouseTo === this.WarehouseData[i].WhsCode){
+          WarehouseToArray.push(this.WarehouseData[i]);
+        }
+      }
+      if(WarehouseToArray.length>0){
+        this.WarehouseToStatus = false;
+      }else{
+        this.WarehouseToStatus = true;
+      }
+    }else{
+        this.WarehouseToStatus = false;
+    } 
+  }
 
   onChange(e){
     if(e.target.checked){

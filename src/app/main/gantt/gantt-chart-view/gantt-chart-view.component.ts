@@ -224,8 +224,8 @@ export class GanttChartViewComponent implements OnInit {
                     gantt.parse({data});
                 }, 1000);
             }else{
-            this.loading = false;
             this.chartDataStatus = false;
+            this.loading = false;
             this.notificationService.show({
               content: 'No Record Found',
               animation: { type: 'fade', duration: 400 },

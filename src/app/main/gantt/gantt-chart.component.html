@@ -22,7 +22,7 @@
                                         <input type="text" name="PlanDefinition" id="PlanDefinition"
                                             class="form-control form-control-sm" #PlanDF=ngModel
                                             [(ngModel)]="PlanDefinition" placeholder="{{'PlanDefinition' | translate}}"
-                                            (blur)="onPlanDefinitionBlur()" autocomplete="off" required>
+                                            (keyup)="onPlanDefinitionBlur()" autocomplete="off" required>
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary btn-icon d-flex d-flex"
                                                 (click)="openPlanDefinition()">
@@ -34,10 +34,10 @@
                                     </div>
                                 </div>
                             <div id="emailHelp" class="form-text text-muted float-right opti_error-msg" *ngIf="PlanDF.invalid && (PlanDF.dirty || PlanDF.touched)">
-                                <small *ngIf="PlanDF.errors.required">Plan Definition Required</small>
+                                <small *ngIf="PlanDF.errors.required">Plan definition required</small>
                             </div>
                             <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
-                            *ngIf="PDStatus && PlanDF.touched">Please Enter Correct Plan Definition</small>
+                            *ngIf="PDStatus && PlanDF.touched">Enter correct plan definition</small>
                             </div>
                             <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
                                 <label for="ItemFrom" class="form-label mb-0">{{'PlanOrderNo' | translate}}</label>
@@ -46,7 +46,7 @@
                                         <input type="text" name="PlanOrderNo" id="PlanOrderNo"
                                             class="form-control form-control-sm" #PlanOrder=ngModel
                                             [(ngModel)]="PlanOrderNo" placeholder="{{'PlanOrderNo' | translate}}"
-                                            (blur)="onPlanOrderNoBlur()" autocomplete="off" required>
+                                            (keyup)="onPlanOrderNoBlur()" autocomplete="off" required>
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary btn-icon d-flex"
                                                 (click)="openPlanOrderNo()">
@@ -58,10 +58,10 @@
                                     </div>
                                 </div>
                                 <div id="emailHelp" class="form-text text-muted float-right opti_error-msg" *ngIf="PlanOrder.invalid && (PlanOrder.dirty || PlanOrder.touched)">
-                                    <small *ngIf="PlanOrder.errors.required">Plan Order Number Required</small>
+                                    <small *ngIf="PlanOrder.errors.required">Plan order number required</small>
                                 </div>
                                 <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
-                                *ngIf="OrderStatus">Please Enter Correct Plan Order No</small>
+                                *ngIf="OrderStatus">Enter correct plan order number</small>
                             </div>
                         </form>
                     </div>
