@@ -27,7 +27,7 @@ export class TaskService {
 		  })
     };
 
-    public getJSON(db, desc, order): Observable<any> { 
+    getJSON(db, desc, order): Observable<any> { 
         let jObject:any={ ItemList: JSON.stringify([{ 
             CompanyDBID: db,
 			PlannedDefination: desc,
