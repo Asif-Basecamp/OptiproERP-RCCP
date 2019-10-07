@@ -151,8 +151,9 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                         scale_height: 48,
                         min_column_width:55,
                         scales:[
-                            {unit: "day", step: 1, format: "%d %M"},
+                            {unit: "day", step: 1, format: "%d %D %M, %Y"},
                             {unit: "hour", step: 1, format: "%g %a"},
+                            
                         ]
                     },
                     {
@@ -169,13 +170,14 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                         scale_height: 48,
                         min_column_width:100,
                         scales:[
-                            {unit: "week", step: 1, format: function (date) {
+                            {unit: "day", step: 1, format: "%d %D"},
+                            {unit: "week", step: 1, format: function (date, time) {
                                 var dateToStr = gantt.date.date_to_str("%d %M");
                                 var endDate = gantt.date.add(date, 6, "day");
+                                console.log(this);
                                 var weekNum = gantt.date.date_to_str("%W")(date);
                                 return "#" + weekNum + ", " + dateToStr(date) + " - " + dateToStr(endDate);
                             }},
-                            {unit: "day", step: 1, format: "%d %D"}
                         ]
                     },
                     {
@@ -204,7 +206,20 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
             gantt.templates.time_picker = function(date){
                 return gantt.date.date_to_str(gantt.config.time_picker)(date);
             };
-            
+            gantt.templates.timeline_cell_class = function (task, date) {
+                var d = new Date(date);
+                var dayName = d.toString().split(' ')[0];
+                if (dayName == "Sun" || dayName == "Sat")
+                    return "week_end";
+                return "";
+            };
+            gantt.templates.scale_cell_class = function (date) {
+                var d = new Date(date);
+                var dayName = d.toString().split(' ')[0];
+                if (dayName == "Sun" || dayName == "Sat")
+                    return "week_end";
+                return "";
+            };
             //tooltip
             gantt.templates.tooltip_text = function(start,end,task){
                 function tConvert(time) {
