@@ -143,8 +143,18 @@ export class GanttChartComponent implements OnInit {
   }
 
   processData(){
-    this.searchPanelCollapse = true;
-    this.GanttChartStatus = true;
+    this.searchPanelCollapse = !this.searchPanelCollapse;
+    if(this.searchPanelCollapse == false){
+      setTimeout(()=>{
+        this.searchPanelCollapse = true;
+      }, 100);
+    }
+    this.GanttChartStatus = !this.GanttChartStatus;
+    if(this.GanttChartStatus == false){
+      setTimeout(()=>{
+        this.GanttChartStatus = true;
+      }, 100);
+    }
     this.dataService.setData(this.PlanDefinition);
     this.dataService.setOrder(this.PlanOrderNo);
   }

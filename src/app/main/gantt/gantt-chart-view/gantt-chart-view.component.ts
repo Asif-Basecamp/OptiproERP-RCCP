@@ -10,6 +10,7 @@ import { GanttChartService } from '../service/gantt-chart.service';
 import { DataService } from '../data.service';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: "gantt-chart-view",
@@ -32,25 +33,27 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
     public loading: boolean;
     public products: any;
     public chartDataStatus: boolean;
+    public mySubscription: Subscription;
 
     constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private dataService: DataService, private TaskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef, private GanttChartService: GanttChartService) { 
        
     }
 
-    ngOnDestroy(): void {
+    ngOnDestroy() {
+        this.mySubscription.unsubscribe();
     }
 
     ngOnInit() {  
         this.CompanyDB =  'PLANNING_ENGINE03';
-        this.dataService.getData().subscribe(definition=>{
+        this.mySubscription = this.dataService.getData().subscribe(definition=>{
             this.PlanDefinition = definition;
         });
-        this.dataService.getOrder().subscribe(order=>{
+        this.mySubscription = this.dataService.getOrder().subscribe(order=>{
           this.PlanOrderNo = order;
         });
         this.products = [];
         this.loading = true;
-          this.TaskService.getJSON(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(res => {
+        this.mySubscription = this.TaskService.getJSON(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(res => {
             if(res){
                 this.loading = true;
                 this.products = res.map(function(obj) {
