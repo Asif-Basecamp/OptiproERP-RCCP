@@ -54,7 +54,7 @@ export class BOMComponent implements OnInit {
     this.mobileView();
   }
   ngOnInit() {
-    this.CompanyDB = 'OPTIPRO129';
+    this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
     this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
     this.getWarehouseData(environment.optiProDashboardAPIURL, this.CompanyDB);
     this.mobileView();

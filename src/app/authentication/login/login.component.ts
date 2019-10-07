@@ -85,7 +85,7 @@ export class LoginComponent {
 			});
 	}
 	getPSURL() {
-		this.auth.getPSURL(environment.optiProDashboardURL, this.adminDBName).subscribe(
+		this.auth.getPSURL(this.arrConfigData[0].optiProDashboardAPIURL, this.adminDBName).subscribe(
 			data => {
 				if (data != null) {
 					this.psURL = data;

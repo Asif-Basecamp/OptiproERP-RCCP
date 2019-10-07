@@ -61,7 +61,7 @@ export class ItemCodeLookupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.CompanyDB = 'OPTIPRO129';
+    this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
     this.EnableLoader = false;
   }
 }

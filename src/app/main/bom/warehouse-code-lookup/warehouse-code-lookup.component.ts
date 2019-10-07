@@ -19,7 +19,7 @@ export class WarehouseCodeLookupComponent implements OnInit {
   constructor(private BOMService: BOMService, private translate: TranslateService) { }
 
   ngOnInit() {
-    this.CompanyDB = 'QAS2129IR1';
+    this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
     this.EnableLoader = false;
   }
 

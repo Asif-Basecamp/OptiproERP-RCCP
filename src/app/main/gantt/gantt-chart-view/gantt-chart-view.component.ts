@@ -47,6 +47,7 @@ export class GanttChartViewComponent implements OnInit {
           this.loading = true;
           this.TaskService.getJSON(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(res => {
             if(res){
+                this.products = [];
                 this.products = res.map(function(obj) {
                     obj['id'] = obj['SeqNo'];
                     delete obj['SeqNo'];
