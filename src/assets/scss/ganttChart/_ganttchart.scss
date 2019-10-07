@@ -28,11 +28,16 @@
 	}
   }
 
+.gantt_scale_cell.week_end {
+    background-color: #EFF5FD;
+}
+.gantt_task_cell.week_end {
+    background-color: #EFF5FD;
+}
 .gantt_task_line.gantt_critical_task {
 	background-color: #ff5252;
 	border: 1px solid #ff5252
 }
-
 .gantt_task_line.gantt_critical_task .gantt_task_progress {
 	background-color: rgba(0, 0, 0, .25)
 }
