@@ -38,9 +38,9 @@ export class SidebarComponent implements OnInit {
 
   public sidebarCloseMobileWithRefresh(): void {
     this.router.navigateByUrl('/gantt-chart');
-    setTimeout(function(){
+   /* setTimeout(function(){
       window.location.reload();   
-    },500) 
+    },500) */
     if(window.innerWidth <= 991){
       document.getElementById("sidebar-wrapper").classList.remove("toggle");
     }

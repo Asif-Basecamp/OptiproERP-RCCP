@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import "../../../../assets/scripts/dhtmlx-gantt/codebase/dhtmlxgantt";
 import { TaskService } from "../../../core/service/task.service";
 import { LinkService } from "../../../core/service/link.service";
@@ -17,7 +17,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
     providers: [TaskService, LinkService],
     templateUrl: './gantt-chart-view.component.html',
 })
-export class GanttChartViewComponent implements OnInit {
+export class GanttChartViewComponent implements OnInit, OnDestroy {
     @ViewChild("gantt_here", { static: true }) ganttContainer: ElementRef;    
     public scales: Scale[] = [
         { value: "hour", name: 'Hour' },
@@ -37,49 +37,54 @@ export class GanttChartViewComponent implements OnInit {
        
     }
 
-    ngOnInit() {
+    ngOnDestroy(): void {
+    }
+
+    ngOnInit() {  
         this.CompanyDB =  'PLANNING_ENGINE03';
         this.dataService.getData().subscribe(definition=>{
             this.PlanDefinition = definition;
         });
         this.dataService.getOrder().subscribe(order=>{
           this.PlanOrderNo = order;
-          this.loading = true;
+        });
+        this.products = [];
+        this.loading = true;
           this.TaskService.getJSON(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(res => {
             if(res){
-                this.products = [];
+                this.loading = true;
                 this.products = res.map(function(obj) {
-                    obj['id'] = obj['SeqNo'];
-                    delete obj['SeqNo'];
+                obj['id'] = obj['SeqNo'];
+                delete obj['SeqNo'];
     
-                    obj['text'] = obj['name'];
-                    delete obj['name'];
+                obj['text'] = obj['name'];
+                delete obj['name'];
     
-                    obj['start_date'] = obj['STARTDATETIME']; 
-                    delete obj['STARTDATETIME'];
+                obj['start_date'] = obj['STARTDATETIME']; 
+                delete obj['STARTDATETIME'];
                      
-                    obj['end_date'] = obj['ENDDATETIME']; 
-                    delete obj['ENDDATETIME']; 
+                obj['end_date'] = obj['ENDDATETIME']; 
+                delete obj['ENDDATETIME']; 
         
-                    obj['parent'] = obj['ParantId']; 
-                    delete obj['ParantId'];
+                obj['parent'] = obj['ParantId']; 
+                delete obj['ParantId'];
     
-                    obj['open'] = true; 
+                obj['open'] = true; 
     
-                    if(obj['parent'] == ""){
-                        obj['type'] = "project"; 
-                    }else{
-                        obj['type'] = "task";  
-                    }
-    
-                    delete obj['OPTM_OPERNO'];
-                    delete obj['OPTM_OPR_ID'];
-                    delete obj['OPTM_RES_ID'];
-                    delete obj['U_O_RESNAME'];
-                    return obj; 
-                });   
+                if(obj['parent'] == ""){
+                    obj['type'] = "project"; 
+                }else{
+                    obj['type'] = "task";  
+                }
+                delete obj['OPTM_OPERNO'];
+                delete obj['OPTM_OPR_ID'];
+                delete obj['OPTM_RES_ID'];
+                delete obj['U_O_RESNAME'];
+                return obj; 
+                }); 
             }
             let data = this.products;
+            console.log(data);
             if(data && data.length>0){
             gantt.config.scale_height = 25 * 3;
             gantt.config.link_line_width = 1;
@@ -236,7 +241,6 @@ export class GanttChartViewComponent implements OnInit {
             }); 
           }
          });
-        });
     }
 
 
