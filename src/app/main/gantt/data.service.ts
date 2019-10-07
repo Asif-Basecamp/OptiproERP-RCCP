@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +16,9 @@ export class DataService {
       })
   };
 
+  address:any = [];
   private _data: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private _order: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-
 
     public setData(data: any){
         this._data.next(data);

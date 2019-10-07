@@ -47,7 +47,7 @@ export class BOMGridViewComponent implements OnInit {
   constructor(private BOMService: BOMService, private translate: TranslateService, private notificationService: NotificationService) {}
   
   ngOnInit() {
-    this.CompanyDB = 'OPTIPRO129';
+    this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
   }
 
   /*-- on click simple Grid Row--*/
