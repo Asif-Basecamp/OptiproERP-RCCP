@@ -74,6 +74,7 @@ export class BOMComponent implements OnInit {
     this.BOMService.GetItemList(api, companyDB).subscribe(
       data => {
         this.ItemData = data;
+        console.log(this.ItemData);
       });    
   } 
 
