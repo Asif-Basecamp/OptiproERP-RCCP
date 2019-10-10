@@ -55,8 +55,8 @@ export class BOMComponent implements OnInit {
   }
   ngOnInit() {
     this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
-    this.getItemData(environment.optiProDashboardAPIURL, this.CompanyDB);
-    this.getWarehouseData(environment.optiProDashboardAPIURL, this.CompanyDB);
+    this.getItemData(environment.service_url, this.CompanyDB);
+    this.getWarehouseData(environment.service_url, this.CompanyDB);
     this.mobileView();
   }
 
@@ -272,7 +272,7 @@ export class BOMComponent implements OnInit {
     }
 
     if(this.ItemCodeFrom != undefined && this.ItemCodeTo != undefined && this.WarehouseFrom != undefined && this.WarehouseTo != undefined){
-    this.BOMService.GetItemExplosionData(environment.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.WarehouseFrom, this.WarehouseTo, this.IsPrimary).subscribe(
+    this.BOMService.GetItemExplosionData(environment.service_url, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.WarehouseFrom, this.WarehouseTo, this.IsPrimary).subscribe(
       data => {
         this.gridData = data;
         this.SimpleGridEnableLoader = false;

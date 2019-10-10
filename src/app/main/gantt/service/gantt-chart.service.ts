@@ -20,7 +20,7 @@ export class GanttChartService {
     let jObject:any={ ItemList: JSON.stringify([{ 
      CompanyDBID: CompanyDBID
     }])};
-    return this.httpClient.post(optiProDashboardAPIURL +"GetPlanDefinitionList",jObject,this.httpOptions);
+    return this.httpClient.post(optiProDashboardAPIURL +"PlanningDashboard/GetPlanDefinitionList",jObject,this.httpOptions);
   } 
 
   GetPlanOrderNo(optiProDashboardAPIURL:string,CompanyDBID:string,PlanDefinition:string): Observable<any>{
@@ -28,7 +28,7 @@ export class GanttChartService {
      CompanyDBID: CompanyDBID,
      PlannedDefination: PlanDefinition
     }])};
-    return this.httpClient.post(optiProDashboardAPIURL +"GetPlannedOrderNoList",jObject,this.httpOptions);
+    return this.httpClient.post(optiProDashboardAPIURL +"PlanningDashboard/GetPlannedOrderNoList",jObject,this.httpOptions);
   } 
 
   GetHeaderData(optiProDashboardAPIURL:string,CompanyDBID:string,PlanDefinition:string,PlanOrder:string): Observable<any>{
@@ -37,6 +37,6 @@ export class GanttChartService {
      PlannedDefination: PlanDefinition,
      PlannedOrderNo: PlanOrder
     }])};
-    return this.httpClient.post(optiProDashboardAPIURL +"GetGanttChartHeader",jObject,this.httpOptions);
+    return this.httpClient.post(optiProDashboardAPIURL +"PlanningDashboard/GetGanttChartHeader",jObject,this.httpOptions);
   }
 }

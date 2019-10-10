@@ -98,8 +98,8 @@ export class GenealogyComponent implements OnInit {
    this.Userpwd = JSON.parse(window.localStorage.getItem('Userpwd'));
    this.language = JSON.parse(window.localStorage.getItem('language'));
  
-   this.getItemCodeData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB);
-   this.getWarehouseCodeData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB); 
+   this.getItemCodeData(this.arrConfigData.service_url, this.CompanyDB);
+   this.getWarehouseCodeData(this.arrConfigData.service_url, this.CompanyDB); 
  
    this.radioExplode = 'Lot Explosion';
    this.radioLevel = 'Single Level';
@@ -157,7 +157,7 @@ export class GenealogyComponent implements OnInit {
  
     if(this.vendor){
        let PrcrmntMtd = "'B'";
-       this.dash.GetItemList(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, PrcrmntMtd).subscribe(
+       this.dash.GetItemList(this.arrConfigData.service_url, this.CompanyDB, PrcrmntMtd).subscribe(
          data => {
            this.vendorData = data;
            this.setParamItemLookup(this.vendorData);
@@ -223,7 +223,7 @@ export class GenealogyComponent implements OnInit {
    /*-- Warehousecode functions --*/
  
   getWarehouseCodeData(api, companyDB){
-    this.dash.GetWarehouseList(this.arrConfigData.optiProDashboardAPIURL,this.CompanyDB).subscribe(
+    this.dash.GetWarehouseList(this.arrConfigData.service_url,this.CompanyDB).subscribe(
       data =>{
         this.WarehouseData = data;
       });   
@@ -277,7 +277,7 @@ export class GenealogyComponent implements OnInit {
   onLotFromNumberBlur(LotNum) {
   
   if(this.DistNumFrom.trim() != ""){
-    this.dash.GetLotNumber(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
+    this.dash.GetLotNumber(this.arrConfigData.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
       data => {
        let DistNum = '';
        let LotFromCode = [];
@@ -306,7 +306,7 @@ export class GenealogyComponent implements OnInit {
  
   onLotToNumberBlur(LotNum) {
     if(this.DistNumTo.trim() != ""){
-    this.dash.GetLotNumber(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
+    this.dash.GetLotNumber(this.arrConfigData.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
      data => {
       let DistNums = '';
       let LotToCode = [];
@@ -345,7 +345,7 @@ export class GenealogyComponent implements OnInit {
     }else{
       this.lotSelected = (e: RowArgs) => LotFromSelect.indexOf(e.dataItem.DistNumber) >=0 ;
     } 
-   this.dash.GetLotNumber(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
+   this.dash.GetLotNumber(this.arrConfigData.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
     data => {
      this.gridData = data;
      this.Item = false;
@@ -385,7 +385,7 @@ export class GenealogyComponent implements OnInit {
     }else{
       this.lotSelected = (e: RowArgs) => LotToSelect.indexOf(e.dataItem.DistNumber) >=0 ;
     } 
-   this.dash.GetLotNumber(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
+   this.dash.GetLotNumber(this.arrConfigData.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
     data => {
      this.gridData = data;
      this.Item = false;
@@ -470,7 +470,7 @@ export class GenealogyComponent implements OnInit {
       if(this.vendor)
       ExplosionBasedOn = 'VENDOR';
   
-     this.dash.GetLotExplosionData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemValue, this.DfltWarehouse, this.DistNumFrom, this.DistNumTo, this.explodeDirection, this.explodeLevel, this.trackName,
+     this.dash.GetLotExplosionData(this.arrConfigData.service_url, this.CompanyDB, this.ItemValue, this.DfltWarehouse, this.DistNumFrom, this.DistNumTo, this.explodeDirection, this.explodeLevel, this.trackName,
        ExplosionBasedOn).subscribe(
      data => {
      if(!data){
@@ -622,7 +622,7 @@ export class GenealogyComponent implements OnInit {
       this.explodeDirection = 'UP';
  
     
-   this.dash.GetTransaction(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.NodeName,this.DfltWarehouse,this.explodeTransaction,this.explodeDirection).subscribe(
+   this.dash.GetTransaction(this.arrConfigData.service_url, this.CompanyDB, this.NodeName,this.DfltWarehouse,this.explodeTransaction,this.explodeDirection).subscribe(
     data => {
     if(data){
      this.loading = false;
@@ -746,7 +746,7 @@ export class GenealogyComponent implements OnInit {
    });
    }  
  
-  this.dash.GetTransactionDetails(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, DC, ObjType, node,this.DfltWarehouse).subscribe(
+  this.dash.GetTransactionDetails(this.arrConfigData.service_url, this.CompanyDB, DC, ObjType, node,this.DfltWarehouse).subscribe(
     data => {
     if(data){ 
      this.analysisViewShow = true; 

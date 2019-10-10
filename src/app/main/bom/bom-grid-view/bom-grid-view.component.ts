@@ -78,7 +78,7 @@ export class BOMGridViewComponent implements OnInit {
   }
 
   detailGridData(GridViewdata, db){
-    this.BOMService.GetBOMDetailedData(environment.optiProDashboardAPIURL, db, GridViewdata.U_O_ITEMCODE, 
+    this.BOMService.GetBOMDetailedData(environment.service_url, db, GridViewdata.U_O_ITEMCODE, 
       GridViewdata.CreateDate, GridViewdata.Code, GridViewdata.U_O_BOM_SEQ, GridViewdata.U_O_WHSECODE, 
       GridViewdata.U_O_REVISION, this.primaryEvent).subscribe(
       data => {
@@ -113,7 +113,7 @@ export class BOMGridViewComponent implements OnInit {
 
   /*-- Get BOM DEtail --*/
   getBOMDetail(code){
-    this.BOMService.GetBOMDetail(environment.optiProDashboardAPIURL, this.CompanyDB, code).subscribe(
+    this.BOMService.GetBOMDetail(environment.service_url, this.CompanyDB, code).subscribe(
       data => {
         this.BomDetail = data;
         this.BOMDetailStatus = false;
@@ -125,7 +125,7 @@ export class BOMGridViewComponent implements OnInit {
   getRoutingHeaderDetail(ItemCode){
     this.RoutingHeaderStatus = true;
     this.datas = [];
-    this.BOMService.GetRoutingHeaderDetail(environment.optiProDashboardAPIURL, this.CompanyDB, ItemCode, this.primaryEvent).subscribe(
+    this.BOMService.GetRoutingHeaderDetail(environment.service_url, this.CompanyDB, ItemCode, this.primaryEvent).subscribe(
       headerdata => {
         if(headerdata && headerdata.length == 0){
           this.RoutingHeaderStatus = false;
@@ -139,11 +139,11 @@ export class BOMGridViewComponent implements OnInit {
           }); 
         }
         for(let i=0;i< headerdata.length; i++){
-          this.BOMService.GetRoutingLineDetail(environment.optiProDashboardAPIURL, this.CompanyDB, headerdata[i].Code).subscribe(
+          this.BOMService.GetRoutingLineDetail(environment.service_url, this.CompanyDB, headerdata[i].Code).subscribe(
             Linedata => {
               headerdata[i]["LineDetail"] = Linedata;
               for(let j=0;j< headerdata[i].LineDetail.length; j++){
-                this.BOMService.GetResourceDetail(environment.optiProDashboardAPIURL, this.CompanyDB, headerdata[i].LineDetail[j].Code, headerdata[i].LineDetail[j].U_O_LINE_NO).subscribe(
+                this.BOMService.GetResourceDetail(environment.service_url, this.CompanyDB, headerdata[i].LineDetail[j].Code, headerdata[i].LineDetail[j].U_O_LINE_NO).subscribe(
                 ResourceData => {
                   headerdata[i].LineDetail[j]["ResourceDetail"] = ResourceData;
                 });
