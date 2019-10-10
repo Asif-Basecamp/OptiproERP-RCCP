@@ -39,7 +39,7 @@ export class GanttChartComponent implements OnInit {
   
   ngOnInit() {
     this.CompanyDB =  'PLANNING_ENGINE03',
-    this.getPlanDefinition(environment.optiProGanttChartAPIURL, this.CompanyDB);
+    this.getPlanDefinition(environment.service_url, this.CompanyDB);
     this.mobileView();
   }
 
@@ -89,7 +89,7 @@ export class GanttChartComponent implements OnInit {
 
   onPlanOrderNoBlur(){
     if(this.PlanDefinition){
-      this.getPlanOrderNo(environment.optiProGanttChartAPIURL, this.CompanyDB, this.PlanDefinition);
+      this.getPlanOrderNo(environment.service_url, this.CompanyDB, this.PlanDefinition);
     }else{
       this.notificationService.show({
         content: 'Please Enter Plan Definition',
@@ -135,7 +135,7 @@ export class GanttChartComponent implements OnInit {
 
   PlanDefinitionEventHander(e){
     this.PlanDefinition = e;
-    this.getPlanOrderNo(environment.optiProGanttChartAPIURL, this.CompanyDB, this.PlanDefinition);
+    this.getPlanOrderNo(environment.service_url, this.CompanyDB, this.PlanDefinition);
   }
 
   PlanDefinitionOrderNoEventHander(e){

@@ -53,7 +53,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
           this.PlanOrderNo = order;
         });
 
-        this.GanttChartService.GetHeaderData(environment.optiProGanttChartAPIURL,  this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(
+        this.GanttChartService.GetHeaderData(environment.service_url,  this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(
             data => {
               this.HeaderData = data[0];
               console.log(this.HeaderData);

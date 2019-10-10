@@ -34,7 +34,7 @@ export class TaskService {
 			PlannedDefination: desc,
             PlannedOrderNo: order
         }])};  
-    return this.httpClient.post(environment.optiProGanttChartAPIURL+"GetGanttChartData",jObject,this.httpOptions);
+    return this.httpClient.post(environment.service_url+"PlanningDashboard/GetGanttChartData",jObject,this.httpOptions);
     } 
 }	
 	

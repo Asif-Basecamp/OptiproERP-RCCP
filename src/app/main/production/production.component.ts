@@ -129,7 +129,7 @@ export class ProductionComponent implements OnInit {
   ];
   this.getCheckedItemList();
   this.checkUncheckAll();
-  this.getItemData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB);  
+  this.getItemData(this.arrConfigData.service_url, this.CompanyDB);  
   let WoSelect = [];
   this.WOSelected = (e: RowArgs) => WoSelect.indexOf(e.dataItem.DocEntry) >=0 ;
 
@@ -167,7 +167,7 @@ this.mobileView();
  } 
 
 showDetailCompleteLookup(data){
-  this.prod.GetCompletedQtyDetails(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, data.U_O_ORDRNO).subscribe(
+  this.prod.GetCompletedQtyDetails(this.arrConfigData.service_url, this.CompanyDB, data.U_O_ORDRNO).subscribe(
     data => {
       if(data != undefined && data != null){
         if(data.length > 0){
@@ -208,7 +208,7 @@ showDetailCompleteLookup(data){
 }
 
 showDetailsIssuedLookup(data){
-  this.prod.GetIssuedQtyDetails(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, data.U_O_COMPID,data.DocEntry).subscribe(
+  this.prod.GetIssuedQtyDetails(this.arrConfigData.service_url, this.CompanyDB, data.U_O_COMPID,data.DocEntry).subscribe(
     data => {
        if(data != undefined && data != null){
         if(data.length > 0){
@@ -251,7 +251,7 @@ showDetailsIssuedLookup(data){
 showDetailsInStockLookup(Inputdata,check,allGrid){
   
   if(check == 'WH'){
-    this.prod.GetWarehouseWiseInStockQtyDetails(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, Inputdata.U_O_COMPID, Inputdata.U_O_ISSWH).subscribe(
+    this.prod.GetWarehouseWiseInStockQtyDetails(this.arrConfigData.service_url, this.CompanyDB, Inputdata.U_O_COMPID, Inputdata.U_O_ISSWH).subscribe(
       data => {
          if(data != undefined && data != null){
           if(data.length > 0){
@@ -297,7 +297,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
     else
    itemCode = Inputdata.U_O_COMPID;
 
-    this.prod.GetInStockQtyDetails(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, itemCode).subscribe(
+    this.prod.GetInStockQtyDetails(this.arrConfigData.service_url, this.CompanyDB, itemCode).subscribe(
       data => {         
         if(data != undefined && data != null){
           if(data.length > 0){
@@ -372,7 +372,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
   getWorkOrder(itemName){
    this.FGLoader = true; 
    this.itemName = itemName;
-   this.prod.GetWorkOrderFG(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, itemName, this.RadioBtnWO, this.checkedList.toString(), this.FromDate, this.ToDate).subscribe(
+   this.prod.GetWorkOrderFG(this.arrConfigData.service_url, this.CompanyDB, itemName, this.RadioBtnWO, this.checkedList.toString(), this.FromDate, this.ToDate).subscribe(
      data => {
          if(!data){
              this.gridMaterial = [];
@@ -413,7 +413,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
 showDetailsOnOrderLookup(Inputdata,check,allGrid){
   if(check == 'WH'){
     
-    this.prod.GetWarehouseWiseOnOrderQtyDetails(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, Inputdata.U_O_COMPID, Inputdata.U_O_ISSWH).subscribe(
+    this.prod.GetWarehouseWiseOnOrderQtyDetails(this.arrConfigData.service_url, this.CompanyDB, Inputdata.U_O_COMPID, Inputdata.U_O_ISSWH).subscribe(
       data => {
        if(data != undefined && data != null){
          if(data.length > 0){
@@ -460,7 +460,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
      else
     itemCode = Inputdata.U_O_COMPID;
 
-    this.prod.GetOnOrderQtyDetails(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, itemCode).subscribe(
+    this.prod.GetOnOrderQtyDetails(this.arrConfigData.service_url, this.CompanyDB, itemCode).subscribe(
       data => {
        if(data != undefined && data != null){
          if(data.length > 0){
@@ -515,7 +515,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
      this.ItemCodeSelected = (e: RowArgs) => itemFromSelect.indexOf(e.dataItem.ItemCode) >=0 ;
    } 
   if(!this.ItemData){
-    this.getItemData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB);
+    this.getItemData(this.arrConfigData.service_url, this.CompanyDB);
   }        
     this.lookUpHeading = this.language.item_from;
     this.gridData = this.ItemData;
@@ -556,7 +556,7 @@ openItemToLookup(){
    this.ItemCodeSelected = (e: RowArgs) => itemToSelect.indexOf(e.dataItem.ItemCode) >=0 ;
  } 
   if(!this.ItemData){
-    this.getItemData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB);
+    this.getItemData(this.arrConfigData.service_url, this.CompanyDB);
   }        
     this.lookUpHeading = this.language.item_to;
     this.gridData = this.ItemData;
@@ -636,7 +636,7 @@ gridRowSelectionChange(evt) {
      else 
      this.showMaterialView = 'all';
        
-     this.prod.GetMaterialData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, DocEntry,this.materialViewOption, ItemCode, 
+     this.prod.GetMaterialData(this.arrConfigData.service_url, this.CompanyDB, DocEntry,this.materialViewOption, ItemCode, 
        this.FromDate, this.ToDate, this.checkedList.toString()).subscribe(
        data => {
            this.gridMaterial = data; 
@@ -665,7 +665,7 @@ gridRowSelectionChange(evt) {
 
   getOperations(DocEntry){
      this.OperationLoader = true;
-     this.prod.GetOperationData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, DocEntry).subscribe(
+     this.prod.GetOperationData(this.arrConfigData.service_url, this.CompanyDB, DocEntry).subscribe(
        data => {
            this.gridOperation = data; 
            if(this.gridOperation != null && this.gridOperation != undefined){
@@ -690,7 +690,7 @@ gridRowSelectionChange(evt) {
 
   getResources(DocEntry){
    this.ResourceLoader = true; 
-   this.prod.GetResourceData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, DocEntry).subscribe(
+   this.prod.GetResourceData(this.arrConfigData.service_url, this.CompanyDB, DocEntry).subscribe(
      data => {
          this.gridResource = data;
          if(this.gridResource != null && this.gridResource != undefined){
@@ -771,7 +771,7 @@ gridRowSelectionChange(evt) {
       if(this.ItemCodeTo == 'undefined' || this.ItemCodeTo == undefined){
         this.ItemCodeTo = '';
       }  
-      this.prod.GetItemExplosionData(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.viewOption, this.FromDate, this.ToDate).subscribe(
+      this.prod.GetItemExplosionData(this.arrConfigData.service_url, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.viewOption, this.FromDate, this.ToDate).subscribe(
         data => {
             if(data.length == 0){
               this.loading = false;
@@ -951,7 +951,7 @@ getInventshortRadioClick(){
 }
 
 showDetailsCommittedLookup(dataItem){
- this.prod.GetCommittedQtyDetails(this.arrConfigData.optiProDashboardAPIURL, this.CompanyDB, dataItem.ItemCode).subscribe(
+ this.prod.GetCommittedQtyDetails(this.arrConfigData.service_url, this.CompanyDB, dataItem.ItemCode).subscribe(
    data => {
       if(data != undefined && data != null){
        if(data.length > 0){
