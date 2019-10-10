@@ -88,6 +88,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
             }
             let data = this.products;
             console.log(data);
+          
             if(data && data.length>0){
             gantt.config.scale_height = 25 * 3;
             gantt.config.link_line_width = 1;
@@ -98,6 +99,11 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
             gantt.config.drag_progress = true;
             gantt.config.date_grid = "%d-%M-%Y";
             gantt.config.fit_tasks = true;
+
+            // gantt.config.auto_types = true;
+            // gantt.config.auto_scheduling = true;
+            // gantt.config.auto_scheduling_compatibility = true;
+            // gantt.locale.labels.section_split = "Display"
          
             //gantt editable configuration
             gantt.config.readonly = true;

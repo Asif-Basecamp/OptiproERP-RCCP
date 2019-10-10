@@ -28,6 +28,7 @@ export class GanttChartComponent implements OnInit {
   public GanttChartStatus: boolean = false;
   public PDStatus:boolean = false;
   public OrderStatus:boolean = false;
+  public HeaderData: any;
 
   constructor(private route: ActivatedRoute, private notificationService: NotificationService, private router: Router,private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService, private translate: TranslateService, private datePipe: DatePipe) {
   
@@ -143,6 +144,10 @@ export class GanttChartComponent implements OnInit {
   }
 
   processData(){
+    this.GanttChartService.GetHeaderData(environment.optiProGanttChartAPIURL,  this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(
+      data => {
+        this.HeaderData = data;
+      });   
     this.searchPanelCollapse = !this.searchPanelCollapse;
     if(this.searchPanelCollapse == false){
       setTimeout(()=>{
@@ -152,7 +157,7 @@ export class GanttChartComponent implements OnInit {
     this.GanttChartStatus = !this.GanttChartStatus;
     if(this.GanttChartStatus == false){
       setTimeout(()=>{
-        this.GanttChartStatus = true;
+        this.GanttChartStatus = true; 
       }, 100);
     }
     this.dataService.setData(this.PlanDefinition);

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { promise } from 'protractor';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root'
@@ -33,7 +34,7 @@ export class TaskService {
 			PlannedDefination: desc,
             PlannedOrderNo: order
         }])};  
-    return this.httpClient.post("http://172.16.6.117/OptiProRCCPGanttChart/RCCPGanttChart/GetGanttChartData",jObject,this.httpOptions);
+    return this.httpClient.post(environment.optiProGanttChartAPIURL+"GetGanttChartData",jObject,this.httpOptions);
     } 
 }	
 	

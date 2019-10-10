@@ -30,4 +30,13 @@ export class GanttChartService {
     }])};
     return this.httpClient.post(optiProDashboardAPIURL +"GetPlannedOrderNoList",jObject,this.httpOptions);
   } 
+
+  GetHeaderData(optiProDashboardAPIURL:string,CompanyDBID:string,PlanDefinition:string,PlanOrder:string): Observable<any>{
+    let jObject:any={ ItemList: JSON.stringify([{ 
+     CompanyDBID: CompanyDBID,
+     PlannedDefination: PlanDefinition,
+     PlannedOrderNo: PlanOrder
+    }])};
+    return this.httpClient.post(optiProDashboardAPIURL +"GetGanttChartHeader",jObject,this.httpOptions);
+  }
 }
