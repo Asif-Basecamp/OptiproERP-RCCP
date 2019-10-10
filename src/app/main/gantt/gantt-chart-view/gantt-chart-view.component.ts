@@ -29,6 +29,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
     public scaler:string = 'day';
     @Input() PlanDefinition;
     @Input() PlanOrderNo;
+    public HeaderData: any;
     public CompanyDB: any;
     public loading: boolean;
     public products: any;
@@ -51,6 +52,13 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
         this.mySubscription = this.dataService.getOrder().subscribe(order=>{
           this.PlanOrderNo = order;
         });
+
+        this.GanttChartService.GetHeaderData(environment.optiProGanttChartAPIURL,  this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(
+            data => {
+              this.HeaderData = data[0];
+              console.log(this.HeaderData);
+        });  
+
         this.products = [];
         this.loading = true;
         this.mySubscription = this.TaskService.getJSON(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(res => {
@@ -116,6 +124,8 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                     return obj.end_date}, align: "center", width: '90', resize: true},
                 {name: "duration", label:"Duration", template:function(obj){
                     return Math.round((obj.duration/1440) *10)/10 + " Day(s)"},align: "center", width: '100', resize: true},
+                {name: "OPTM_INFSQTY_PERC", label:"Infusion Qty", align: "center", width: '90', resize: true},
+    
                 // {name: "progress", label:"Progress",template:function(obj){
                 //     return Math.round(obj.progress*100) + "%"}, align: "center", width: '80', resize: true},
                 // {name: "add", width: 40}

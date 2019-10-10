@@ -20,6 +20,8 @@
                 {{scale.name}}
                 </option>
             </select>
+
+            <p>Plan Definition ({{HeaderData.OPTM_PD_CODE}}), Plan Order No ({{HeaderData.OPTM_SUPPLLY_ID}}), Item Code ({{HeaderData.OPTM_ITEM_CODE}}), OPTM Supply Qty ({{HeaderData.OPTM_SUPP_QTY}})</p>
         </div>
     </form>
     <div [hidden]="chartDataStatus === false" #gantt_here style='width: 100%; height: 100%;'></div>
