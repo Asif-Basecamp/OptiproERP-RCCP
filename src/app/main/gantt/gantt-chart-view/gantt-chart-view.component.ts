@@ -107,11 +107,6 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
             gantt.config.drag_progress = true;
             gantt.config.date_grid = "%d-%M-%Y";
             gantt.config.fit_tasks = true;
-
-            // gantt.config.auto_types = true;
-            // gantt.config.auto_scheduling = true;
-            // gantt.config.auto_scheduling_compatibility = true;
-            // gantt.locale.labels.section_split = "Display"
          
             //gantt editable configuration
             gantt.config.readonly = true;
@@ -122,8 +117,10 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                 {name: "start_date", label:"Start Date", align: "center", width: '90', resize: true},
                 {name: "end_date", label:"End Date", template:function(obj){
                     return obj.end_date}, align: "center", width: '90', resize: true},
-                {name: "duration", label:"Duration", template:function(obj){
+                {name: "duration", label:"Duration (Day)", template:function(obj){
                     return Math.round((obj.duration/1440) *10)/10 + " Day(s)"},align: "center", width: '100', resize: true},
+                {name: "duration", label:"Duration (Hour)", template:function(obj){
+                        return Math.round((obj.duration / 60) / 24) * 8 + " Hour(s)"},align: "center", width: '100', resize: true},
                 {name: "OPTM_INFSQTY_PERC", label:"Infusion Qty", align: "center", width: '90', resize: true},
     
                 // {name: "progress", label:"Progress",template:function(obj){
@@ -253,7 +250,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                     Start = tConvert(StartEl.toTimeString().substr(0,5)) +" "+ StartEl.getUTCDate() +"-" + StartEl.getUTCMonth() + "-" + StartEl.getUTCFullYear(),
                     End = tConvert(EndEl.toTimeString().substr(0,5)) +" "+ EndEl.getUTCDate() +"-" + EndEl.getUTCMonth() + "-" + EndEl.getUTCFullYear();
         
-                return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration:</b><span> " + Math.round((task.duration/1440) *10)/10 + " Day(s)"+"</span></div>";
+                return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration (Day):</b><span> " + Math.round((task.duration/1440) *10)/10 + " Day(s)"+"</span></div>"+"</span></div><div><b>Duration (Hour):</b><span> " + Math.round(task.duration / 60) + " Hour(s)"+"</span></div>";
                  //+ Math.round(task.progress*100) + "%</span></div>";
             };  
                 this.chartDataStatus = true;
