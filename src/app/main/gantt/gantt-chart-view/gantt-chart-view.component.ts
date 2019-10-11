@@ -61,6 +61,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
 
         this.products = [];
         this.loading = true;
+        let _this = this;
         this.mySubscription = this.TaskService.getJSON(this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(res => {
             if(res){
                 this.loading = true;
@@ -117,15 +118,11 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                 {name: "start_date", label:"Start Date", align: "center", width: '90', resize: true},
                 {name: "end_date", label:"End Date", template:function(obj){
                     return obj.end_date}, align: "center", width: '90', resize: true},
-                {name: "duration", label:"Duration (Day)", template:function(obj){
-                    return Math.round((obj.duration/1440) *10)/10 + " Day(s)"},align: "center", width: '100', resize: true},
-                {name: "duration", label:"Duration (Hour)", template:function(obj){
-                        return Math.round((obj.duration / 60) / 24) * 8 + " Hour(s)"},align: "center", width: '100', resize: true},
+                {name: "DURATION_IN_DAYS", label:"Duration (Days)", template:function(obj){
+                        return Number.parseFloat(obj.DURATION_IN_DAYS).toFixed(3) + " Day(s)"},align: "center", width: '100', resize: true},
+                {name: "DURATION_IN_HR", label:"Duration (Hour)", template:function(obj){                    
+                    return _this.timeConvert(obj.DURATION_IN_HR)}, align: "center", width: '100', resize: true},
                 {name: "OPTM_INFSQTY_PERC", label:"Infusion Qty", align: "center", width: '90', resize: true},
-    
-                // {name: "progress", label:"Progress",template:function(obj){
-                //     return Math.round(obj.progress*100) + "%"}, align: "center", width: '80', resize: true},
-                // {name: "add", width: 40}
             ];
         
             gantt.config.layout = {
@@ -152,8 +149,6 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
             
             gantt.config.duration_unit = "minute";//an minute
             // gantt.config.duration_step = 30; // 0.5 hour
-            // gantt.config.work_time = true;
-            // gantt.config.xml_date = "%h:%i %d-%m-%Y";
             gantt.config.xml_date = "%Y-%m-%d %H:%i";
             
         
@@ -250,8 +245,9 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                     Start = tConvert(StartEl.toTimeString().substr(0,5)) +" "+ StartEl.getUTCDate() +"-" + StartEl.getUTCMonth() + "-" + StartEl.getUTCFullYear(),
                     End = tConvert(EndEl.toTimeString().substr(0,5)) +" "+ EndEl.getUTCDate() +"-" + EndEl.getUTCMonth() + "-" + EndEl.getUTCFullYear();
         
-                return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration (Day):</b><span> " + Math.round((task.duration/1440) *10)/10 + " Day(s)"+"</span></div>"+"</span></div><div><b>Duration (Hour):</b><span> " + Math.round(task.duration / 60) + " Hour(s)"+"</span></div>";
-                 //+ Math.round(task.progress*100) + "%</span></div>";
+                return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration (Day):</b><span> " + 
+                 Number.parseFloat(task.DURATION_IN_DAYS).toFixed(3) + " Day(s)"+"</span></div>"+"</span></div><div><b>Duration (Hour):</b><span> " + 
+                    _this.timeConvert(task.DURATION_IN_HR) +"</span></div>";
             };  
                 this.chartDataStatus = true;
                 setTimeout(()=>{
@@ -292,7 +288,13 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
 		gantt.render();
     }
     
-    
+    public timeConvert(num) { 
+        var _num = num * 60;
+        var hours = Math.floor(_num / 60);  
+        var minutes = Math.floor(_num % 60);
+        return (hours !=0 ? (hours + ' Hr') :'') +' '+(minutes !=0 ? (minutes + ' Min') :'');         
+    }
+
     // ngOnDestroy(){
     //     gantt.destructor();
     // }
