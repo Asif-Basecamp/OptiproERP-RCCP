@@ -44,9 +44,9 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
         this.mySubscription.unsubscribe();
     }
 
-    ngOnInit() {  
-        this.CompanyDB =  'PLANNING_ENGINE03';
-        this.mySubscription = this.dataService.getData().subscribe(definition=>{
+    ngOnInit() { 
+        this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
+         this.mySubscription = this.dataService.getData().subscribe(definition=>{
             this.PlanDefinition = definition;
         });
         this.mySubscription = this.dataService.getOrder().subscribe(order=>{

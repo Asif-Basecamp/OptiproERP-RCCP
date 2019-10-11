@@ -38,7 +38,7 @@ export class GanttChartComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.CompanyDB =  'PLANNING_ENGINE03',
+    this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
     this.getPlanDefinition(environment.service_url, this.CompanyDB);
     this.mobileView();
   }

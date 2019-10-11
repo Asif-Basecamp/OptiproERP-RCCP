@@ -17,7 +17,7 @@ export class PlanOrderComponent implements OnInit {
   @Output() lookupEvent = new EventEmitter<string>();
   @Output() PlanDefinitionOrderNoEvent = new EventEmitter<any>();
   @Input() planOrderData: any;
-  public CompanyDB: any;
+  //public CompanyDB: any;
   public itemCode: any;
   public EnableLoader: boolean = true;
   isColumnFilter: boolean = false;
@@ -62,7 +62,7 @@ export class PlanOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.CompanyDB = 'OPTIPRO129';
+   // this.CompanyDB = 'OPTIPRO129';
     this.EnableLoader = false;
   }
 
