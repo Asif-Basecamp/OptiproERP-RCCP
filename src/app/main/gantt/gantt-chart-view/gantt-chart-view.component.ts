@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs';
 })
 export class GanttChartViewComponent implements OnInit, OnDestroy {
     @ViewChild("gantt_here", { static: true }) ganttContainer: ElementRef;    
+    @ViewChild("ganttWrapper", { static: true }) ganttWrapper: ElementRef;    
     public scales: Scale[] = [
         { value: "hour", name: 'Hour' },
         { value: "day", name: 'Day' },
@@ -40,11 +41,10 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
        
     }
 
-    ngOnDestroy() {
-        this.mySubscription.unsubscribe();
-    }
+    
 
     ngOnInit() { 
+        gantt = Gantt.getGanttInstance();
         this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
          this.mySubscription = this.dataService.getData().subscribe(definition=>{
             this.PlanDefinition = definition;
@@ -241,9 +241,11 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                 }
                 let StartEl = new Date(start),
                     EndEl = new Date(end),
-                    Start = tConvert(StartEl.toTimeString().substr(0,5)) +" "+ StartEl.getUTCDate() +"-" + StartEl.getUTCMonth() + "-" + StartEl.getUTCFullYear(),
-                    End = tConvert(EndEl.toTimeString().substr(0,5)) +" "+ EndEl.getUTCDate() +"-" + EndEl.getUTCMonth() + "-" + EndEl.getUTCFullYear();
-        
+                    Start = tConvert(StartEl.toTimeString().substr(0,5)) +" "+ StartEl.getDate() +"-" + StartEl.getMonth() + "-" + StartEl.getFullYear(),
+                    End = tConvert(EndEl.toTimeString().substr(0,5)) +" "+ EndEl.getDate() +"-" + EndEl.getMonth() + "-" + EndEl.getFullYear();
+                    console.log(StartEl.getDate());
+                    console.log(task);
+                    
                 return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration (Day):</b><span> " + 
                  Number.parseFloat(task.DURATION_IN_DAYS).toFixed(3) + " Day(s)"+"</span></div>"+"</span></div><div><b>Duration (Hour):</b><span> " + 
                     _this.timeConvert(task.DURATION_IN_HR) +"</span></div>";
@@ -267,6 +269,11 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
             }); 
           }
          });
+         this.ganttWrapper.nativeElement.onmouseout = function(){
+            setTimeout(()=>{
+                gantt.ext.tooltips.tooltip.hide();
+            },100);
+         }
     }
 
 
@@ -294,7 +301,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
         return (hours !=0 ? (hours + ' Hr') :'') +' '+(minutes !=0 ? (minutes + ' Min') :'');         
     }
 
-    // ngOnDestroy(){
-    //     gantt.destructor();
-    // }
+    ngOnDestroy() {
+        this.mySubscription.unsubscribe();
+    }
 }
