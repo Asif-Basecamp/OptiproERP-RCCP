@@ -90,7 +90,8 @@ export class LoginComponent {
 				if (data != null) {
 					//this.psURL = data;
 				//	console.log(this.psURL);
-					this.psURL = 'http://172.16.6.147/OptiProAdmin/';
+					//this.psURL = 'http://172.16.6.147/OptiProAdmin/';
+					this.psURL = 'http://172.16.6.117/OptiProAdmin/';
 					//console.log(data)
 				}
 				console.log(this.psURL);
@@ -110,8 +111,8 @@ export class LoginComponent {
 		if (this.loginId == "" || this.loginId == undefined || this.password == "" || this.password == undefined) {
 			return;
 		} else {
-			//this.psURL = 'http://172.16.6.147/OptiProAdmin/';
-
+			this.psURL = 'http://172.16.6.117/OptiProAdmin/';
+			//alert(this.psURL);
 			this.auth.login(this.loginId, this.password, this.psURL).subscribe(
 				data => {
 					this.modelSource = data;

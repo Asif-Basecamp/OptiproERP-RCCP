@@ -52,7 +52,6 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
         this.mySubscription = this.dataService.getOrder().subscribe(order=>{
           this.PlanOrderNo = order;
         });
-
         this.GanttChartService.GetHeaderData(environment.service_url,  this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(
             data => {
               this.HeaderData = data[0];
@@ -96,8 +95,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                 }); 
             }
             let data = this.products;
-            console.log(data);
-          
+                      
             if(data && data.length>0){
             gantt.config.scale_height = 25 * 3;
             gantt.config.link_line_width = 1;
@@ -200,6 +198,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
         
             let  that = this;
             gantt.ext.zoom.init(zoomConfig);
+            gantt.ext.tooltips.tooltip.hide();
             gantt.ext.zoom.setLevel("day");
             gantt.ext.zoom.attachEvent("onAfterZoom", function(level, config){
                 that.scaler = config.name;  
