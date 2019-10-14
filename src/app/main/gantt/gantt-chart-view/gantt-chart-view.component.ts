@@ -120,7 +120,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                         return Number.parseFloat(obj.DURATION_IN_DAYS).toFixed(3) + " Day(s)"},align: "center", width: '100', resize: true},
                 {name: "DURATION_IN_HR", label:"Duration (Hour)", template:function(obj){                    
                     return _this.timeConvert(obj.DURATION_IN_HR)}, align: "center", width: '100', resize: true},
-                {name: "OPTM_INFSQTY_PERC", label:"Infusion Qty", align: "center", width: '90', resize: true},
+                {name: "OPTM_INFSQTY_PERC", label:"Infuse Quantity %", align: "center", width: '90', resize: true},
             ];
         
             gantt.config.layout = {
