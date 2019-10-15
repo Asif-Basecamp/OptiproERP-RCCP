@@ -13,27 +13,17 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./lookup.component.scss']
 })
 export class LookupComponent implements OnInit {
-  @ViewChild("lookupsearch", { static: true }) _el: ElementRef;
   @Input() serviceData: any;
   @Input() lookupfor: any;
-  @Input() fillLookupArray: any;
-  @Input() selectedImage: any
   @Output() lookupvalue = new EventEmitter();
   @Output() lookupkey = new EventEmitter();
-  @Input() ruleselected: any;
-  @ViewChild('myInput', { static: true })
-  myInputVariable: ElementRef;
   public table_head: ColumnSetting[] = [];
   dialogOpened: boolean = true;
   lookupTitle: string;
   pagable: boolean = false;
   pagesize: number;
-  isMobile: boolean;
   isColumnFilter: boolean = false;
   isColumnGroup: boolean = false;
-  gridHeight: number;
-  showLoader: boolean = false;
-  grid: any;
   showSelection: boolean = false;
   selectedValues: Array<any> = [];
   public mySelection: number[] = [];
