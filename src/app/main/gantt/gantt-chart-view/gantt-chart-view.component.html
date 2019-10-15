@@ -1,4 +1,4 @@
-<div id="gantt_tooltip" class="justify-content-between flex-column d-flex" fxFlex="0 1 100%" [hidden]="chartDataStatus === false" [ngClass]="(chartDataStatus === true)?'p-3':''">
+<div id="gantt_tooltip" #ganttWrapper class="justify-content-between flex-column d-flex" fxFlex="0 1 100%" [hidden]="chartDataStatus === false" [ngClass]="(chartDataStatus === true)?'p-3':''">
     <form *ngIf="chartDataStatus" class="gantt_control p-2 border border-bottom-0">
         <div class="d-flex">
             <button type="button" class="btn btn-primary btn-icon btn-sm mr-2" (click)="zoomIn()">
@@ -21,7 +21,18 @@
                 </option>
             </select>
 
-            <p class="mb-0 d-flex align-items-center ml-3">Plan Definition ({{HeaderData.OPTM_PD_CODE}}), Company ({{HeaderData.OPTM_DB_NAME}}), Plan Order No ({{HeaderData.OPTM_SUPPLLY_ID}}), Item Code ({{HeaderData.OPTM_ITEM_CODE}}), Item Description ({{HeaderData.U_O_ITEMNAME}}), Qty ({{HeaderData.OPTM_SUPP_QTY}}), Order Start Date ({{HeaderData.OPTM_DOC_DATE | date : "dd/MM/y"}}), Order End Date ({{HeaderData.OPTM_DUE_DATE| date : "dd/MM/y"}}), Routing Sequence ({{HeaderData.OPTM_RUTNGSEQ}}), Routing Revision ({{HeaderData.OPTM_RTNGREV}})</p>
+            <ul class="d-flex align-items-center ml-3 pl-3 flex-wrap mb-0">
+                <li class="mr-5">Plan Definition ({{HeaderData.OPTM_PD_CODE}})</li>
+                <li class="mr-5">Company ({{HeaderData.OPTM_DB_NAME}})</li>
+                <li class="mr-5">Plan Order No ({{HeaderData.OPTM_SUPPLLY_ID}})</li>
+                <li class="mr-5">Item Code ({{HeaderData.OPTM_ITEM_CODE}})</li>
+                <li class="mr-5">Item Description ({{HeaderData.U_O_ITEMNAME}})</li>                
+                <li class="mr-5">Order Start Date ({{HeaderData.OPTM_DOC_DATE | date : "dd/MM/y"}})</li>                
+                <li class="mr-5">Order End Date ({{HeaderData.OPTM_DUE_DATE| date : "dd/MM/y"}})</li>
+                <li class="mr-5">Routing Sequence ({{HeaderData.OPTM_RUTNGSEQ}})</li>
+                <li class="mr-5">Qty ({{HeaderData.OPTM_SUPP_QTY}})</li>
+                <li>Routing Revision ({{HeaderData.OPTM_RTNGREV}})</li>
+            </ul>
         </div>
     </form>
     <div [hidden]="chartDataStatus === false" #gantt_here style='width: 100%; height: 100%;'></div>
