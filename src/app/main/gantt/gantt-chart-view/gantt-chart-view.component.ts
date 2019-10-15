@@ -11,6 +11,8 @@ import { DataService } from '../data.service';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
     selector: "gantt-chart-view",
@@ -37,13 +39,14 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
     public chartDataStatus: boolean;
     public mySubscription: Subscription;
 
-    constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private dataService: DataService, private TaskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef, private GanttChartService: GanttChartService) { 
+    constructor(private LanguageService: LanguageService, private translate: TranslateService, private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private dataService: DataService, private TaskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef, private GanttChartService: GanttChartService) { 
        
     }
 
     
 
     ngOnInit() { 
+        this.LanguageService.languageSet(this.translate, environment.language);
         gantt = Gantt.getGanttInstance();
         this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
          this.mySubscription = this.dataService.getData().subscribe(definition=>{
@@ -120,7 +123,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                         return Number.parseFloat(obj.DURATION_IN_DAYS).toFixed(3) + " Day(s)"},align: "center", width: '100', resize: true},
                 {name: "DURATION_IN_HR", label:"Duration (Hour)", template:function(obj){                    
                     return _this.timeConvert(obj.DURATION_IN_HR)}, align: "center", width: '100', resize: true},
-                {name: "OPTM_INFSQTY_PERC", label:"Infuse Quantity %", align: "center", width: '90', resize: true},
+                {name: "OPTM_INFSQTY_PERC", label:"Infuse Quantity %", align: "center", width: '110', resize: true},
             ];
         
             gantt.config.layout = {

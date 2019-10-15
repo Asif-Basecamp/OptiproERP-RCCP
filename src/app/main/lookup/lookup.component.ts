@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { GridComponent } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { ColumnSetting } from 'src/app/core/data/CommonData';
+import { LanguageService } from 'src/app/core/language.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-lookup',
@@ -34,11 +37,91 @@ export class LookupComponent implements OnInit {
   showSelection: boolean = false;
   selectedValues: Array<any> = [];
   public mySelection: number[] = [];
-  public language: any;
+  public serial_Batch_number: any;
+  public quantity_accept: any;
+  public quantity_rejected: any;
+  public quantity_completed: any;
+  public issue_warehouse: any;
+  public Quantity: any;
+  public In_Stock: any;
+  public Vendor: any;
+  public Quantity_Committed: any;
+  public UOM: any;
+  public Received_Quantity: any;
+  public Ordered_Quantity: any;
+  public Quantity_On_Order: any;
+  public Receive_Date: any;
+  public Quantity_Received: any;
+  public Quantity_Ordered: any;
+  public Warehouse: any;
+  public Quantity_Issued: any;
+  public Issue_Quantity: any; 
+  public Issue_bin: any;
 
-  constructor(private router: Router) {
-    this.language = JSON.parse(window.localStorage.getItem('language'));
+  constructor(private LanguageService: LanguageService, private translate: TranslateService, private router: Router) {
   }
+
+  ngOnInit() {
+    this.LanguageService.languageSet(this.translate, environment.language);
+    this.translate.get('serial_Batch_number').subscribe((text:string) => {
+      this.serial_Batch_number = text;
+     }); 
+     this.translate.get('quantity_accept').subscribe((text:string) => {
+      this.quantity_accept = text;
+     }); 
+     this.translate.get('quantity_rejected').subscribe((text:string) => {
+      this.quantity_rejected = text;
+     });
+     this.translate.get('quantity_completed').subscribe((text:string) => {
+      this.quantity_completed = text;
+     }); 
+     this.translate.get('issue_warehouse').subscribe((text:string) => {
+      this.issue_warehouse = text;
+     });
+     this.translate.get('Quantity').subscribe((text:string) => {
+      this.Quantity = text;
+     });
+     this.translate.get('In_Stock').subscribe((text:string) => {
+      this.In_Stock = text;
+     });
+     this.translate.get('Vendor').subscribe((text:string) => {
+      this.Vendor = text;
+     });
+     this.translate.get('Quantity_Committed').subscribe((text:string) => {
+      this.Quantity_Committed = text;
+     });
+     this.translate.get('UOM').subscribe((text:string) => {
+      this.UOM = text;
+     });
+     this.translate.get('Received_Quantity').subscribe((text:string) => {
+      this.Received_Quantity = text;
+     });
+     this.translate.get('Ordered_Quantity').subscribe((text:string) => {
+      this.Ordered_Quantity = text;
+     });
+     this.translate.get('Quantity_On_Order').subscribe((text:string) => {
+      this.Quantity_On_Order = text;
+     });
+     this.translate.get('Receive_Date').subscribe((text:string) => {
+      this.Receive_Date = text;
+     });
+     this.translate.get('Quantity_Received').subscribe((text:string) => {
+      this.Quantity_Received = text;
+     });
+     this.translate.get('Quantity_Ordered').subscribe((text:string) => {
+      this.Quantity_Ordered = text;
+     });
+     this.translate.get('Warehouse').subscribe((text:string) => {
+      this.Warehouse = text;
+     });
+     this.translate.get('Quantity_Issued').subscribe((text:string) => {
+      this.Quantity_Issued = text;
+     });
+     this.translate.get('Issue_Quantity').subscribe((text:string) => {
+      this.Issue_Quantity = text;
+     });
+  }
+
 
   close() {
     this.dialogOpened = false;
@@ -66,10 +149,7 @@ export class LookupComponent implements OnInit {
   clearFilter(grid: GridComponent) {
     this.clearFilters()
   }
-  ngOnInit() {
-   
-  }
-
+  
 
   async ngOnChanges(): Promise<void> {
 
@@ -100,27 +180,27 @@ export class LookupComponent implements OnInit {
       },
       {
         field: 'OPTM_BTCHSERNO',
-        title: this.language.serial_Batch_number,
+        title: this.serial_Batch_number,
         type: 'text',
         width: '100'
       },
       {
         field: 'OPTM_QUANTITY',
-        title: this.language.quantity_accept,
+        title: this.quantity_accept,
         type: 'text',
         width: '100',
         class: 'text-right'
       },
       {
         field: 'REJECTEDQTY',
-        title: this.language.quantity_rejected,
+        title:  this.quantity_rejected,
         type: 'text',
         width: '100',
         class: 'text-right'
       }
       
     ];
-    this.lookupTitle = this.language.quantity_completed;
+    this.lookupTitle = this.quantity_completed;
     if (this.serviceData !== undefined) {
       if (this.serviceData.length > 0) {
         this.dialogOpened = true;
@@ -138,27 +218,27 @@ export class LookupComponent implements OnInit {
       },
       {
         field: 'BATCHSERNO',
-        title: this.language.serial_Batch_number,
+        title: this.serial_Batch_number,
         type: 'text',
         width: '100'
       },
       {
         field: 'WhsCode',
-        title: this.language.issue_warehouse,
+        title: this.issue_warehouse,
         type: 'text',
         width: '100'
       },
       
       {
         field: 'QUANTITY',
-        title: this.language.Quantity,
+        title: this.Quantity,
         type: 'text',
         width: '100',
         class: 'text-right'
       }
       
     ];
-    this.lookupTitle = this.language.In_Stock;
+    this.lookupTitle = this.In_Stock;
     if (this.serviceData !== undefined) {
       if (this.serviceData.length > 0) {
         this.dialogOpened = true;
@@ -177,32 +257,32 @@ export class LookupComponent implements OnInit {
       },
       {
         field: 'DistNumber',
-        title: this.language.serial_Batch_number,
+        title: this.serial_Batch_number,
         type: 'text',
         width: '100'
       },
       {
         field: 'Warehouse',
-        title: this.language.issue_warehouse,
+        title: this.issue_warehouse,
         type: 'text',
         width: '100'
       },
       {
         field: 'BinCode',
-        title: this.language.Issue_bin,
+        title: this.Issue_bin,
         type: 'text',
         width: '100'
       },
       {
         field: 'Quantity',
-        title: this.language.Issue_Quantity,
+        title: this.Issue_Quantity,
         type: 'text',
         width: '100',
         class: 'text-right'
       }
       
     ];
-    this.lookupTitle = this.language.Quantity_Issued;
+    this.lookupTitle = this.Quantity_Issued;
     if (this.serviceData !== undefined) {
       if (this.serviceData.length > 0) {
         this.dialogOpened = true;
@@ -220,44 +300,44 @@ export class LookupComponent implements OnInit {
       },
       {
         field: 'VENDOR',
-        title: this.language.Vendor,
+        title: this.Vendor,
         type: 'text',
         width: '100'
       },
       {
         field: 'WHCODE',
-        title: this.language.Warehouse,
+        title: this.Warehouse,
         type: 'text',
         width: '100'
       },
       {
         field: 'UOM',
-        title: this.language.UOM,
+        title: this.UOM,
         type: 'text',
         width: '100'
       },
       {
         field: 'ORDERED_QTY',
-        title: this.language.Quantity_Ordered,
+        title: this.Quantity_Ordered,
         type: 'text',
         width: '100',
         class: 'text-right'
       },
       {
         field: 'RECEIVE_QTY',
-        title: this.language.Quantity_Received,
+        title: this.Quantity_Received,
         type: 'text',
         width: '100',
         class: 'text-right'
       },
       {
         field: 'RECV_DATE',
-        title: this.language.Receive_Date,
+        title: this.Receive_Date,
         type: 'text',
         width: '100',
         format: '{0: MM/dd/yyyy}'
       }];
-    this.lookupTitle = this.language.Quantity_On_Order;
+    this.lookupTitle = this.Quantity_On_Order;
     if (this.serviceData !== undefined) {
       if (this.serviceData.length > 0) {
         this.dialogOpened = true;
@@ -269,32 +349,32 @@ export class LookupComponent implements OnInit {
     this.table_head = [
       {
         field: 'ORDERED_QTY',
-        title: this.language.Ordered_Quantity,
+        title: this.Ordered_Quantity,
         type: 'text',
         width: '100'
       },
       {
         field: 'RECEIVE_QTY',
-        title: this.language.Received_Quantity,
+        title: this.Received_Quantity,
         type: 'text',
         width: '100'
       },
       {
         field: 'VENDOR',
-        title: this.language.Vendor,
+        title: this.Vendor,
         type: 'text',
         width: '100',
         class: 'text-right'
       },
       {
         field: 'UOM',
-        title: this.language.UOM,
+        title: this.UOM,
         type: 'text',
         width: '100',
         class: 'text-right'
       }      
     ];
-    this.lookupTitle = this.language.Quantity_Committed;
+    this.lookupTitle = this.Quantity_Committed;
     if (this.serviceData !== undefined) {
       if (this.serviceData.length > 0) {
         this.dialogOpened = true;
@@ -302,7 +382,6 @@ export class LookupComponent implements OnInit {
     }
   }
 
-  
   on_item_select(selection) {
     if (!this.showSelection) {
       const lookup_key = selection.selectedRows[0].dataItem;
@@ -316,27 +395,19 @@ export class LookupComponent implements OnInit {
     }
   }
 
-
-
   onCheckboxClick(checked: any, index: number) {
-
     let servivceItem: any = this.serviceData[index];
     if (checked) {
       this.selectedValues.push(servivceItem);
     }
     else {
-      // let rixd: number= this.selectedValues.findIndex(i => i.LOTNO == servivceItem.LOTNO && i.LOTNO == servivceItem.BINNO)
       this.selectedValues = this.selectedValues.splice(index, 1);
     }
   }
-
-
-
 
   Done() {
     this.lookupkey.emit(this.selectedValues);
     this.dialogOpened = false;
   }
-
 
 }

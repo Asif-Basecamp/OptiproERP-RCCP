@@ -5,6 +5,7 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 import { TranslateService } from '@ngx-translate/core';
 import { CountdownComponent } from 'ngx-countdown';
 import { DatePipe } from '@angular/common';
+import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
   selector: 'bom',
@@ -49,7 +50,7 @@ export class BOMComponent implements OnInit {
   public WarehouseFromStatus:boolean = false;
   public WarehouseToStatus:boolean = false;
 
-  constructor(private BOMService: BOMService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { }  
+  constructor(private LanguageService: LanguageService, private BOMService: BOMService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { }  
   @HostListener('window:resize', ['$event']) onResize() {
     this.mobileView();
   }
@@ -58,6 +59,7 @@ export class BOMComponent implements OnInit {
     this.getItemData(environment.service_url, this.CompanyDB);
     this.getWarehouseData(environment.service_url, this.CompanyDB);
     this.mobileView();
+    this.LanguageService.languageSet(this.translate, environment.language);
   }
 
   public mobileView(): void {

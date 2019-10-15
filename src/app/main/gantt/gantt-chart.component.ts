@@ -8,6 +8,7 @@ import { DataService } from './data.service';
 import { GanttChartService } from './service/gantt-chart.service';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { NotificationService } from '@progress/kendo-angular-notification';
+import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
   selector: 'app-gantt',
@@ -29,7 +30,7 @@ export class GanttChartComponent implements OnInit {
   public PDStatus:boolean = false;
   public OrderStatus:boolean = false;
 
-  constructor(private route: ActivatedRoute, private notificationService: NotificationService, private router: Router,private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService, private translate: TranslateService, private datePipe: DatePipe) {
+  constructor(private LanguageService: LanguageService, private route: ActivatedRoute, private notificationService: NotificationService, private router: Router,private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService, private translate: TranslateService, private datePipe: DatePipe) {
   
   }
 
@@ -41,6 +42,7 @@ export class GanttChartComponent implements OnInit {
     this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
     this.getPlanDefinition(environment.service_url, this.CompanyDB);
     this.mobileView();
+    this.LanguageService.languageSet(this.translate, environment.language);
   }
 
 

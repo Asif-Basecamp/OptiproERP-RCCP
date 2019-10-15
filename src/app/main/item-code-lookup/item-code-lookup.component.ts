@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { RowArgs } from '@progress/kendo-angular-grid';
 import { BOMService } from 'src/app/services/bom.service';
 import { environment } from 'src/environments/environment';
+import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
   selector: 'app-item-code-lookup',
@@ -16,13 +17,18 @@ export class ItemCodeLookupComponent implements OnInit {
   @Output() lookupEvent = new EventEmitter<string>();
   @Output() itemCodeEvent = new EventEmitter<any>();
   @Input() ItemData: any;
-  public CompanyDB: any;
   public itemCode: any;
   public EnableLoader: boolean = true;
   isColumnFilter: boolean = false;
   
-  constructor(private BOMService: BOMService, private translate: TranslateService) {}
+  constructor(private LanguageService: LanguageService, private BOMService: BOMService, private translate: TranslateService) {}
 
+  
+  ngOnInit() {
+    this.LanguageService.languageSet(this.translate, environment.language);
+    this.EnableLoader = false;
+  }
+  
   close(){
     this.lookupEvent.emit('false');
   }
@@ -58,10 +64,5 @@ export class ItemCodeLookupComponent implements OnInit {
   async ngOnChanges(): Promise<void> {
     this.clearFilters();
     this.isColumnFilter = false
-  }
-
-  ngOnInit() {
-    this.CompanyDB = 'QAS2129IR1';
-    this.EnableLoader = false;
   }
 }

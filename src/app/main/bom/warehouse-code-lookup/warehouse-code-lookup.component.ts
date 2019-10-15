@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { BOMService } from '../service/bom.service';
 import { environment } from '../../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
   selector: 'app-warehouse-code-lookup',
@@ -16,11 +17,12 @@ export class WarehouseCodeLookupComponent implements OnInit {
   public CompanyDB: any;
   public EnableLoader: boolean = true;
 
-  constructor(private BOMService: BOMService, private translate: TranslateService) { }
+  constructor(private LanguageService: LanguageService, private BOMService: BOMService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
     this.EnableLoader = false;
+    this.LanguageService.languageSet(this.translate, environment.language);
   }
 
   close(){

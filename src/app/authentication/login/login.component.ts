@@ -10,6 +10,7 @@ import { CommonData } from 'src/app/core/data/CommonData';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { TranslateService } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
+import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
 	selector: 'app-login',
@@ -38,7 +39,7 @@ export class LoginComponent {
 	public some_error: any;
 	public password_error: any;
 
-	constructor(private notificationService: NotificationService, private datePipe: DatePipe, private router: Router, private translate: TranslateService, private auth: AuthenticationService, private httpClientSer: HttpClient) { }
+	constructor(private LanguageService: LanguageService, private notificationService: NotificationService, private datePipe: DatePipe, private router: Router, private translate: TranslateService, private auth: AuthenticationService, private httpClientSer: HttpClient) { }
 
 	ngOnInit() {
 		this.translate.get('company_placeholder').subscribe((text:string) => {
@@ -57,6 +58,7 @@ export class LoginComponent {
 		this.translate.get('password_incorrect').subscribe((text:string) => {
 			this.password_error = text;
 		});
+		this.LanguageService.languageSet(this.translate, environment.language);
 		this.getPSURL();
 	}
 

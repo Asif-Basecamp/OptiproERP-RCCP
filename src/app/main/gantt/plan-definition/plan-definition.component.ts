@@ -5,6 +5,7 @@ import { GridComponent } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { TranslateService } from '@ngx-translate/core';
 import { RowArgs } from '@progress/kendo-angular-grid';
+import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
   selector: 'app-plan-definition',
@@ -17,12 +18,16 @@ export class PlanDefinitionComponent implements OnInit {
   @Output() lookupEvent = new EventEmitter<string>();
   @Output() PlanDefinitionEvent = new EventEmitter<any>();
   @Input() planDefinitionData: any;
-  //public CompanyDB: any;
   public itemCode: any;
   public EnableLoader: boolean = true;
   isColumnFilter: boolean = false;
 
-  constructor(private GanttChartService: GanttChartService, private translate: TranslateService) { }
+  constructor(private LanguageService: LanguageService, private GanttChartService: GanttChartService, private translate: TranslateService) { }
+
+  ngOnInit() {
+    this.EnableLoader = false;
+    this.LanguageService.languageSet(this.translate, environment.language);
+  }
 
   close(){
     this.lookupEvent.emit('false');
@@ -60,10 +65,4 @@ export class PlanDefinitionComponent implements OnInit {
     this.clearFilters();
     this.isColumnFilter = false
   }
-
-  ngOnInit() {
-   // this.CompanyDB = 'OPTIPRO129';
-    this.EnableLoader = false;
-  }
-
 }

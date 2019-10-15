@@ -456,7 +456,7 @@
                     <div class="w-100 h-100 pt-2">
                       <div class="border border-light-gray h-100 overflow-auto" fxFlex="0 0 100%">
                         <kendo-tabstrip class="custom-tab h-100" (tabSelect)="toggleLoadingAnimation()">
-                          <kendo-tabstrip-tab [title]="{{'material' | translate}}" [selected]="true">
+                          <kendo-tabstrip-tab [title]="Material" [selected]="true">
                             <ng-template kendoTabContent>
                               <fieldset class="form-group px-0 mb-1">
                                 <label class="custom-radio mr-3">
@@ -755,7 +755,7 @@
                             </ng-template>
                           </kendo-tabstrip-tab>
     
-                          <kendo-tabstrip-tab [title]="{{'operations' | translate}}">
+                          <kendo-tabstrip-tab [title]="Operations">
                             <ng-template kendoTabContent>
                                 <kendo-grid [kendoGridBinding]="gridOperation" [selectable]="selectableSettings"
                                   class="primary-table-colored" [filterable]=isColumnFilter5 [groupable]=isColumnGroup6
@@ -859,7 +859,7 @@
                             </ng-template>
                           </kendo-tabstrip-tab>
     
-                          <kendo-tabstrip-tab [title]="{{'resources' | translate}}">
+                          <kendo-tabstrip-tab [title]="Resources">
                             <ng-template kendoTabContent>
                               <kendo-grid [kendoGridBinding]="gridResource" [selectable]="selectableSettings"
                                 class="primary-table-colored" [filterable]=isColumnFilter6 [groupable]=isColumnGroup7

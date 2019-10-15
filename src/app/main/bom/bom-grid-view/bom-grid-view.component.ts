@@ -3,6 +3,7 @@ import { BOMService } from '../service/bom.service';
 import { environment } from '../../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from '@progress/kendo-angular-notification';
+import { LanguageService } from 'src/app/core/language.service';
 
 export interface TreeNode {
   label?: string;
@@ -44,10 +45,11 @@ export class BOMGridViewComponent implements OnInit {
   public detailRowGridCollapse: boolean = false;
   public headerRowGridCollapse: boolean = false;
 
-  constructor(private BOMService: BOMService, private translate: TranslateService, private notificationService: NotificationService) {}
+  constructor(private LanguageService: LanguageService, private BOMService: BOMService, private translate: TranslateService, private notificationService: NotificationService) {}
   
   ngOnInit() {
     this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
+    this.LanguageService.languageSet(this.translate, environment.language);
   }
 
   /*-- on click simple Grid Row--*/

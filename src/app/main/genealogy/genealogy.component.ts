@@ -11,6 +11,7 @@ import { ServiceLocator } from 'src/app/servicelocator.js';
 import { GenealogyService } from 'src/app/core/service/genealogy.service.js';
 import { LocalStorageService } from 'src/app/core/service/localstorage.service.js';
 import { NotificationService } from '@progress/kendo-angular-notification';
+import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
   selector: 'app-genealogy',
@@ -88,7 +89,7 @@ export class GenealogyComponent implements OnInit {
   public vendorError: any;
   public Analysis_View: any;
  
-  constructor(private dash: GenealogyService, private translate: TranslateService, private router: Router, private notificationService: NotificationService) {}
+  constructor(private LanguageService: LanguageService, private dash: GenealogyService, private translate: TranslateService, private router: Router, private notificationService: NotificationService) {}
   @HostListener('window:resize', ['$event']) onResize() {
     this.mobileView();
   }
@@ -117,6 +118,7 @@ export class GenealogyComponent implements OnInit {
    this.radioLevel = 'Single Level';
    this.radioTransaction = 'ParentLot';
    this.mobileView();
+   this.LanguageService.languageSet(this.translate, environment.language);
   }
   
    /*-- Item Code functions --*/
