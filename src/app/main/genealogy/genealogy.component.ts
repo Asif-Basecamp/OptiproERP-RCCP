@@ -24,7 +24,6 @@ export class GenealogyComponent implements OnInit {
 
   @Input() serviceData: any;
   public gridData: any[];
-  public arrConfigData: any;
   dataGridSelectNum: number;
   public ItemValue: any;
   public ItemDesc: any;
@@ -73,7 +72,6 @@ export class GenealogyComponent implements OnInit {
   public orgchart: any;
   public nodes3: any;
   public nodes4: any;
-  public language: any;
   public isItemCodeSelected: any;
   public wareHouseSelected: any;
   public lotSelected: any;
@@ -85,21 +83,35 @@ export class GenealogyComponent implements OnInit {
   public transactionViewShow: boolean = false;
   public showValidation: boolean = false;
   isColumnFilter = true;
+  public error: any;
+  public lotToError: any;
+  public vendorError: any;
+  public Analysis_View: any;
  
-  constructor(private dash: GenealogyService, private router: Router, private notificationService: NotificationService) {}
+  constructor(private dash: GenealogyService, private translate: TranslateService, private router: Router, private notificationService: NotificationService) {}
   @HostListener('window:resize', ['$event']) onResize() {
     this.mobileView();
   }
 
   ngOnInit() {
-   this.arrConfigData = JSON.parse(window.localStorage.getItem('arrConfigData'));
    this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
    this.Username = JSON.parse(window.localStorage.getItem('Username'));
    this.Userpwd = JSON.parse(window.localStorage.getItem('Userpwd'));
-   this.language = JSON.parse(window.localStorage.getItem('language'));
- 
-   this.getItemCodeData(this.arrConfigData.service_url, this.CompanyDB);
-   this.getWarehouseCodeData(this.arrConfigData.service_url, this.CompanyDB); 
+   
+   this.translate.get('no_record_found').subscribe((text:string) => {
+    this.error = text;
+   }); 
+   this.translate.get('error_enter_lot_to').subscribe((text:string) => {
+    this.lotToError = text;
+   });
+   this.translate.get('error_item_none_tracked').subscribe((text:string) => {
+    this.vendorError = text;
+   });    
+   this.translate.get('exportFilename').subscribe((text:string) => {
+    this.Analysis_View = text;
+   }); 
+   this.getItemCodeData(environment.service_url, this.CompanyDB);
+   this.getWarehouseCodeData(environment.service_url, this.CompanyDB); 
  
    this.radioExplode = 'Lot Explosion';
    this.radioLevel = 'Single Level';
@@ -121,7 +133,9 @@ export class GenealogyComponent implements OnInit {
         this.whse = false;
         this.LotTo = false;
         this.LotFrom = false;
-        this.lookUpHeading = this.language.Item_Code;
+        this.translate.get('Item_Code').subscribe((text:string) => {
+          this.lookUpHeading = text;
+        });
         this.gridData = gridData;
         this.open();
   } 
@@ -157,7 +171,7 @@ export class GenealogyComponent implements OnInit {
  
     if(this.vendor){
        let PrcrmntMtd = "'B'";
-       this.dash.GetItemList(this.arrConfigData.service_url, this.CompanyDB, PrcrmntMtd).subscribe(
+       this.dash.GetItemList(environment.service_url, this.CompanyDB, PrcrmntMtd).subscribe(
          data => {
            this.vendorData = data;
            this.setParamItemLookup(this.vendorData);
@@ -223,7 +237,7 @@ export class GenealogyComponent implements OnInit {
    /*-- Warehousecode functions --*/
  
   getWarehouseCodeData(api, companyDB){
-    this.dash.GetWarehouseList(this.arrConfigData.service_url,this.CompanyDB).subscribe(
+    this.dash.GetWarehouseList(environment.service_url,this.CompanyDB).subscribe(
       data =>{
         this.WarehouseData = data;
       });   
@@ -247,7 +261,9 @@ export class GenealogyComponent implements OnInit {
       this.whse = true;
       this.LotFrom = false;
       this.LotTo = false;
-      this.lookUpHeading = this.language.warehouse;
+      this.translate.get('warehouse').subscribe((text:string) => {
+        this.lookUpHeading = text;
+      });
       this.open();
     }
   }
@@ -277,7 +293,7 @@ export class GenealogyComponent implements OnInit {
   onLotFromNumberBlur(LotNum) {
   
   if(this.DistNumFrom.trim() != ""){
-    this.dash.GetLotNumber(this.arrConfigData.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
+    this.dash.GetLotNumber(environment.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
       data => {
        let DistNum = '';
        let LotFromCode = [];
@@ -306,7 +322,7 @@ export class GenealogyComponent implements OnInit {
  
   onLotToNumberBlur(LotNum) {
     if(this.DistNumTo.trim() != ""){
-    this.dash.GetLotNumber(this.arrConfigData.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
+    this.dash.GetLotNumber(environment.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
      data => {
       let DistNums = '';
       let LotToCode = [];
@@ -345,7 +361,7 @@ export class GenealogyComponent implements OnInit {
     }else{
       this.lotSelected = (e: RowArgs) => LotFromSelect.indexOf(e.dataItem.DistNumber) >=0 ;
     } 
-   this.dash.GetLotNumber(this.arrConfigData.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
+   this.dash.GetLotNumber(environment.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
     data => {
      this.gridData = data;
      this.Item = false;
@@ -353,15 +369,18 @@ export class GenealogyComponent implements OnInit {
      this.LotFrom = true;
      this.LotTo = false;
      if(this.vendor)
-     this.lookUpHeading = this.language.vendor_lot_from;
+     this.translate.get('vendor_lot_from').subscribe((text:string) => {
+      this.lookUpHeading = text;
+     });
      else
-     this.lookUpHeading = this.language.lot_from;   
+     this.translate.get('lot_from').subscribe((text:string) => {
+      this.lookUpHeading = text;
+     });   
      this.open();
     },
     error => {
-    // this.toastrService.danger(this.language.no_record_found);   
      this.notificationService.show({
-      content: this.language.no_record_found,
+      content: this.error,
       animation: { type: 'fade', duration: 400 },
       position: { horizontal: 'right', vertical: 'top' },
       type: { style: 'error', icon: true },
@@ -385,7 +404,7 @@ export class GenealogyComponent implements OnInit {
     }else{
       this.lotSelected = (e: RowArgs) => LotToSelect.indexOf(e.dataItem.DistNumber) >=0 ;
     } 
-   this.dash.GetLotNumber(this.arrConfigData.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
+   this.dash.GetLotNumber(environment.service_url, this.CompanyDB, this.ItemValue, this.trackName).subscribe(
     data => {
      this.gridData = data;
      this.Item = false;
@@ -394,15 +413,18 @@ export class GenealogyComponent implements OnInit {
      this.LotTo = true;
      
      if(this.vendor)
-     this.lookUpHeading = this.language.vendor_lot_to;
+     this.translate.get('vendor_lot_to').subscribe((text:string) => {
+      this.lookUpHeading = text;
+     });
      else
-     this.lookUpHeading = this.language.lot_to;
+     this.translate.get('lot_to').subscribe((text:string) => {
+      this.lookUpHeading = text;
+     });
      this.open();
     },
     error => {
-    // this.toastrService.danger(this.language.no_record_found); 
     this.notificationService.show({
-      content: this.language.no_record_found,
+      content: this.error,
       animation: { type: 'fade', duration: 400 },
       position: { horizontal: 'right', vertical: 'top' },
       type: { style: 'error', icon: true },
@@ -436,7 +458,7 @@ export class GenealogyComponent implements OnInit {
     document.getElementById('chart-container').innerHTML = ""; 
     if(this.DistNumFrom.trim() != "" && this.DistNumTo.trim() == ""){
       this.notificationService.show({
-        content: this.language.error_enter_lot_to,
+        content: this.lotToError,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -446,7 +468,7 @@ export class GenealogyComponent implements OnInit {
     }
     else if(this.DistNumTo.trim() != "" && this.DistNumFrom.trim() == ""){
       this.notificationService.show({
-        content: this.language.error_enter_lot_to,
+        content: this.lotToError,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -470,7 +492,7 @@ export class GenealogyComponent implements OnInit {
       if(this.vendor)
       ExplosionBasedOn = 'VENDOR';
   
-     this.dash.GetLotExplosionData(this.arrConfigData.service_url, this.CompanyDB, this.ItemValue, this.DfltWarehouse, this.DistNumFrom, this.DistNumTo, this.explodeDirection, this.explodeLevel, this.trackName,
+     this.dash.GetLotExplosionData(environment.service_url, this.CompanyDB, this.ItemValue, this.DfltWarehouse, this.DistNumFrom, this.DistNumTo, this.explodeDirection, this.explodeLevel, this.trackName,
        ExplosionBasedOn).subscribe(
      data => {
      if(!data){
@@ -478,7 +500,7 @@ export class GenealogyComponent implements OnInit {
        this.gridViewShow = false;
        this.collapse();
        this.notificationService.show({
-        content: this.language.no_record_found,
+        content: this.error,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -494,7 +516,7 @@ export class GenealogyComponent implements OnInit {
         this.gridViewShow = false;
         this.collapse();
        this.notificationService.show({
-        content: this.language.no_record_found,
+        content: this.error,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -528,7 +550,7 @@ export class GenealogyComponent implements OnInit {
        this.loading = false;
        this.collapse();
        this.notificationService.show({
-        content: this.language.no_record_found,
+        content: this.error,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -622,7 +644,7 @@ export class GenealogyComponent implements OnInit {
       this.explodeDirection = 'UP';
  
     
-   this.dash.GetTransaction(this.arrConfigData.service_url, this.CompanyDB, this.NodeName,this.DfltWarehouse,this.explodeTransaction,this.explodeDirection).subscribe(
+   this.dash.GetTransaction(environment.service_url, this.CompanyDB, this.NodeName,this.DfltWarehouse,this.explodeTransaction,this.explodeDirection).subscribe(
     data => {
     if(data){
      this.loading = false;
@@ -638,7 +660,7 @@ export class GenealogyComponent implements OnInit {
      this.loading = false;
      this.transactionViewShow = false;
      this.notificationService.show({
-      content: this.language.no_record_found,
+      content: this.error,
       animation: { type: 'fade', duration: 400 },
       position: { horizontal: 'right', vertical: 'top' },
       type: { style: 'error', icon: true },
@@ -650,7 +672,7 @@ export class GenealogyComponent implements OnInit {
      this.loading = false;
      this.transactionViewShow = false;
      this.notificationService.show({
-      content: this.language.no_record_found,
+      content: this.error,
       animation: { type: 'fade', duration: 400 },
       position: { horizontal: 'right', vertical: 'top' },
       type: { style: 'error', icon: true },
@@ -746,7 +768,7 @@ export class GenealogyComponent implements OnInit {
    });
    }  
  
-  this.dash.GetTransactionDetails(this.arrConfigData.service_url, this.CompanyDB, DC, ObjType, node,this.DfltWarehouse).subscribe(
+  this.dash.GetTransactionDetails(environment.service_url, this.CompanyDB, DC, ObjType, node,this.DfltWarehouse).subscribe(
     data => {
     if(data){ 
      this.analysisViewShow = true; 
@@ -867,16 +889,14 @@ export class GenealogyComponent implements OnInit {
         node.appendChild(secondMenu);
       },
       'exportButton': true,
-      'exportFilename': 'Analysis View' 
-      //'exportFilename': this.language.exportFilename    
+      'exportFilename':  this.Analysis_View
     });
     } 
    else{
     this.Analysisloading = false;
     this.analysisViewShow = false;
-   // this.toastrService.danger(this.language.no_record_found); 
    this.notificationService.show({
-    content: this.language.no_record_found,
+    content: this.error,
     animation: { type: 'fade', duration: 400 },
     position: { horizontal: 'right', vertical: 'top' },
     type: { style: 'error', icon: true },
@@ -887,9 +907,8 @@ export class GenealogyComponent implements OnInit {
   error => {
      this.Analysisloading = false;
      this.analysisViewShow = false;
-    // this.toastrService.danger(this.language.no_record_found);   
-    this.notificationService.show({
-      content: this.language.no_record_found,
+     this.notificationService.show({
+      content: this.error,
       animation: { type: 'fade', duration: 400 },
       position: { horizontal: 'right', vertical: 'top' },
       type: { style: 'error', icon: true },
@@ -898,10 +917,6 @@ export class GenealogyComponent implements OnInit {
     }
    )  
   }
- 
-  // open(dialog: TemplateRef < any > ) {
-  //  this.dialogService.open(dialog);
-  // }
  
   process() {
    this.gridStatus = !this.gridStatus;
@@ -921,7 +936,7 @@ export class GenealogyComponent implements OnInit {
     }
     else {
     this.notificationService.show({
-      content: this.language.error_item_none_tracked,
+      content: this.vendorError,
       animation: { type: 'fade', duration: 400 },
       position: { horizontal: 'right', vertical: 'top' },
       type: { style: 'error', icon: true },

@@ -99,10 +99,12 @@
     "Instruction": "Instruction",
     "optiprodashboard": "OptiProERP Dashboard",
     "username": "User ID",
-    "username_required": "User ID Required",
+    "Username": "Username",
+    "username_required": "Username is required",
     "username_placeholder": "Enter User ID",
+    "Password_active_user": "Password Active User",
     "password": "Password",
-    "password_required":"Password required",
+    "password_required":"Password is required",
     "password_activeuser": "You are not active user",
     "password_placeholder": "Enter Password",
     "company_placeholder": "Select Company",    
@@ -312,5 +314,6 @@
     "Close": "Close",
     "Copyright": "Copyright 2000-2019. All rights reserved.",
     "OptiPro_Dashboard": "OptiPro Dashboard",
-    "exportFilename": "Analysis View"
+    "exportFilename": "Analysis View",
+    "CompanyAssignError": "No Company assign!"
 }

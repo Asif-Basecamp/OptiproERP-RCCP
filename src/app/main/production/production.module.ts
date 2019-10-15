@@ -12,6 +12,7 @@ import { TrnaslateLazyModule } from '../../core/module/translate-lazy.module';
 import { SharedModules } from 'src/app/shared/shared.module';
 import { SplitterModule, TabStripModule } from '@progress/kendo-angular-layout';
 import { LookupComponent } from '../lookup/lookup.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [ProductionComponent, LookupComponent],
@@ -30,6 +31,8 @@ import { LookupComponent } from '../lookup/lookup.component';
     SplitterModule,
     TabStripModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
 })
 export class ProductionModule { }

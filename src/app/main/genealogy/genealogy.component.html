@@ -19,24 +19,24 @@
                   <input #radioExplode1 type="radio" id="radioExplode1" [value]="'Lot Explosion'" name="radioExplode"
                     [(ngModel)]="radioExplode" class="k-radio" [disabled]="vendor" />
                   <span class="radio"></span>
-                  <span>{{language.lotexplosion}}</span>
+                  <span>{{'lotexplosion' | translate}}</span>
                 </label>
 
                 <label class="custom-radio">
                   <input #radioExplode2 type="radio" id="radioExplode2" [value]="'Where Used'" name="radioExplode"
                     [(ngModel)]="radioExplode" class="k-radio" />
                   <span class="radio"></span>
-                  <span>{{language.whereused}}</span>
+                  <span>{{'whereused' | translate}}</span>
                 </label>
               </fieldset>
               <h6 class="border-bottom pb-1 mb-2 d-flex align-items-center">
-                <span>{{language.select}}</span>
+                <span>{{'select' | translate}}</span>
                 <span class="ml-auto">
                   <label class="custom-checkbox mb-0 mr-2 filter-checkbox" for="vendor">
                     <input #chkFilter17 type="checkbox" id="vendor" [(ngModel)]="vendor" class="k-checkbox"
                       (change)="VendorCheck($event)" name="columnfilter" />
                     <span class="checkbox"></span>
-                    <span>{{language.Vendor}}</span>
+                    <span>{{'Vendor' | translate}}</span>
                   </label>
                 </span>
               </h6>
@@ -97,8 +97,8 @@
               </div>
 
               <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                <label for="inputPassword3" class="form-label mb-0" *ngIf="!vendor">{{language.lot_from}}</label>
-                <label for="inputPassword3" class="form-label mb-0" *ngIf="vendor">{{language.vendor_lot_from}}</label>
+                <label for="inputPassword3" class="form-label mb-0" *ngIf="!vendor">{{'lot_from' | translate}}</label>
+                <label for="inputPassword3" class="form-label mb-0" *ngIf="vendor">{{'vendor_lot_from' | translate}}</label>
                 <div class="w-100">
                   <div class="input-group">
                     <input type="text" name="DistNumFrom" id="DistNumFrom" class="form-control form-control-sm"
@@ -119,8 +119,8 @@
               </div>
 
               <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                <label for="inputPassword3" class="form-label mb-0" *ngIf="!vendor">{{language.lot_to}}</label>
-                <label for="inputPassword3" class="form-label mb-0" *ngIf="vendor">{{language.vendor_lot_to}}</label>
+                <label for="inputPassword3" class="form-label mb-0" *ngIf="!vendor">{{'lot_to' | translate}}</label>
+                <label for="inputPassword3" class="form-label mb-0" *ngIf="vendor">{{'vendor_lot_to' | translate}}</label>
                 <div class="w-100">
                   <div class="input-group">
                     <input type="text" name="DistNumTo" id="DistNumTo" class="form-control form-control-sm"
@@ -144,13 +144,13 @@
                   <input #singleLevel type="radio" id="singleLevel" value="Single Level" name="radioLevel"
                     [(ngModel)]="radioLevel" class="k-radio" />
                   <span class="radio"></span>
-                  <span>{{language.single_level}}</span>
+                  <span>{{'single_level' | translate}}</span>
                 </label>
                 <label class="custom-radio">
                   <input #multiLevel type="radio" id="multiLevel" value="Multi Level" name="radioLevel"
                     [(ngModel)]="radioLevel" class="k-radio" />
                   <span class="radio"></span>
-                  <span>{{language.multi_level}}</span>
+                  <span>{{'multi_level' | translate}}</span>
                 </label>
               </fieldset>
             </form>
@@ -229,20 +229,20 @@
                           <input #singleLevel type="radio" id="singleLevel" value="ParentLot" name="radioTransaction"
                             [(ngModel)]="radioTransaction" class="k-radio" (change)="getTransactionRadioClick($event)" />
                           <span class="radio"></span>
-                          <span>{{language.show_parent_lot}}</span>
+                          <span>{{'show_parent_lot' | translate}}</span>
                         </label>
                         <label class="custom-radio">
                           <input #multiLevel type="radio" id="multiLevel" value="ImmediateLot" name="radioTransaction"
                             [(ngModel)]="radioTransaction" class="k-radio" (change)="getTransactionRadioClick($event)" />
                           <span class="radio"></span>
-                          <span>{{language.show_immediate_lot}}</span>
+                          <span>{{'show_immediate_lot' | translate}}</span>
                         </label>
                       </div>
                     </div>
 
                     <div class="card mb-0 no-shadow-card flex-100 h-100 overflow-auto">
                       <div class="card-header px-2 py-1 border-bottom d-flex align-items-center">
-                        <span class="h6 m-0">Transaction Type</span>
+                        <span class="h6 m-0">{{'transaction_type' | translate}}</span>
                         <span class="cursor-pointer mr-2 btn btn-success btn-icon-with-input ml-auto" status="success" (click)="diffTree2.treeModel.expandAll()" title="Expand All">
                           <svg viewBox="0 0 1024 1024" class="icon">
                               <use xlink:href="#expandAll"></use>
@@ -270,7 +270,7 @@
                                   [class.node-content-wrapper-focused]="node.isFocused"
                                   (click)="node.mouseAction('click', $event)"
                                   (dblclick)="node.mouseAction('dblClick', $event)">
-                                    <span>({{node.data.DistNumber}}) {{language.Doc_Entry}}:{{node.data.DocEntry}} ~ {{node.data.ObjectTypeDesc}}</span>
+                                    <span>({{node.data.DistNumber}}) {{'Doc_Entry' | translate}}:{{node.data.DocEntry}} ~ {{node.data.ObjectTypeDesc}}</span>
                                   </div>
                                 <tree-node-children [node]="node" [templates]="templates"></tree-node-children>
                               </div>
@@ -305,119 +305,119 @@
                         </svg>
                       </button>
                     </div>
-                    <div class="color-code-heading">Color scheme</div>
+                    <div class="color-code-heading">{{'Color_Scheme' | translate}}</div>
                     <ul class="list-unstyled">
                       <li>
                         <span class="color-code JournalEntry"></span>
-                        <span class="color-type">Journal Entry</span>
+                        <span class="color-type">{{'Journal_Entry' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code SalesQuotation"></span>
-                        <span class="color-type">Sales Quotation</span>
+                        <span class="color-type">{{'Sales_Quotation' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code SalesOrder"></span>
-                        <span class="color-type">Sales Order</span>
+                        <span class="color-type">{{'Sales_Order' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code Delivery"></span>
-                        <span class="color-type">Delivery </span>
+                        <span class="color-type">{{'Delivery' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code ReturnRequest"></span>
-                        <span class="color-type">Return Request</span>
+                        <span class="color-type">{{'Return_Request' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code Return"></span>
-                        <span class="color-type">Return</span>
+                        <span class="color-type">{{'Return' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code ARDownPayment"></span>
-                        <span class="color-type">AR Down Payment</span>
+                        <span class="color-type">{{'AR_Down_Payment' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code ARCreditMemo"></span>
-                        <span class="color-type">AR Credit Memo</span>
+                        <span class="color-type">{{'AR_Credit_Memo' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code ARInvoice"></span>
-                        <span class="color-type">AR Invoice</span>
+                        <span class="color-type">{{'AR_Invoice' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code PurchaseRequest"></span>
-                        <span class="color-type">Purchase Request</span>
+                        <span class="color-type">{{'Purchase_Request' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code PurchaseQuotation"></span>
-                        <span class="color-type">Purchase Quotation</span>
+                        <span class="color-type">{{'Purchase_Quotation' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code PurchaseOrder"></span>
-                        <span class="color-type">Purchase_Order</span>
+                        <span class="color-type">{{'Purchase_Order' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code GoodsReceiptPO"></span>
-                        <span class="color-type">Goods Receipt PO</span>
+                        <span class="color-type">{{'Goods_Receipt_PO' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code GoodsReturnRequest"></span>
-                        <span class="color-type">Goods Return Request</span>
+                        <span class="color-type">{{'Goods_Return_Request' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code GoodsReturn"></span>
-                        <span class="color-type">Goods Return</span>
+                        <span class="color-type">{{'Goods_Return' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code APDownPaymentInvoice"></span>
-                        <span class="color-type">AP DownPayment Invoice</span>
+                        <span class="color-type">{{'AP_DownPayment_Invoice' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code APInvoice"></span>
-                        <span class="color-type">AP Invoice</span>
+                        <span class="color-type">{{'AP_Invoice' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code APCreditMemo"></span>
-                        <span class="color-type">AP Credit Memo</span>
+                        <span class="color-type">{{'AP_Credit_Memo' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code Deposit"></span>
-                        <span class="color-type">Deposit</span>
+                        <span class="color-type">{{'Deposit' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code OutgoingPayment"></span>
-                        <span class="color-type">Outgoing Payment</span>
+                        <span class="color-type">{{'Outgoing_Payment' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code GoodsReceipt"></span>
-                        <span class="color-type">Goods Receipt</span>
+                        <span class="color-type">{{'Goods_Receipt' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code GoodsIssue"></span>
-                        <span class="color-type">Goods Issue</span>
+                        <span class="color-type">{{'Goods_Issue' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code InventoryTransferRequest"></span>
-                        <span class="color-type">Inventory Transfer Request</span>
+                        <span class="color-type">{{'Inventory_Transfer_Request' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code InventoryTransfer"></span>
-                        <span class="color-type">Inventory Transfer</span>
+                        <span class="color-type">{{'Inventory_Transfer' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code InventoryRevaluation"></span>
-                        <span class="color-type">Inventory Revaluation</span>
+                        <span class="color-type">{{'Inventory_Revaluation' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code ProductionOrder"></span>
-                        <span class="color-type">Production Order</span>
+                        <span class="color-type">{{'Production_Order' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code IssueFromProduction"></span>
-                        <span class="color-type">Issue from Production</span>
+                        <span class="color-type">{{'Issue_from_Production' | translate}}</span>
                       </li>
                       <li>
                         <span class="color-code ReceiptFromProduction"></span>
-                        <span class="color-type">Receipt from Production</span>
+                        <span class="color-type">{{'Receipt_from_Production' | translate}}</span>
                       </li>
                     </ul>
                   </div>
@@ -437,8 +437,8 @@
               </svg>
             </div>
             <div class="mt-3">
-              <p>Version</p>
-              <small>Copyright 2000-2019. All rights reserved.</small>
+              <p>{{'Version' | translate}}</p>
+              <small>{{'Copyright' | translate}}</small>
             </div>
           </div>
         </div>
@@ -466,9 +466,9 @@
           </label>
         </div>
       </ng-template>
-      <kendo-grid-column field="ItemCode" title="{{language.item_code}}" width="80">
+      <kendo-grid-column field="ItemCode" title="{{'item_code' | translate}}" width="80">
       </kendo-grid-column>
-      <kendo-grid-column field="ItemName" title="{{language.description}}" width="80">
+      <kendo-grid-column field="ItemName" title="{{'description' | translate}}" width="80">
       </kendo-grid-column>
     </kendo-grid>
   </div>
@@ -488,9 +488,9 @@
           </label>
         </div>
       </ng-template>
-      <kendo-grid-column field="WhsCode" title="{{language.warehouse_code}}" width="80">
+      <kendo-grid-column field="WhsCode" title="{{'warehouse_code' | translate}}" width="80">
       </kendo-grid-column>
-      <kendo-grid-column field="WhsName" title="{{language.description}}" width="80">
+      <kendo-grid-column field="WhsName" title="{{'description' | translate}}" width="80">
       </kendo-grid-column>
     </kendo-grid>
   </div>
@@ -510,11 +510,11 @@
           </label>
         </div>
       </ng-template>
-      <kendo-grid-column *ngIf="!vendor" field="DistNumber" title="{{language.serial_batch_no}}" width="80">
+      <kendo-grid-column *ngIf="!vendor" field="DistNumber" title="{{'serial_batch_no' | translate}}" width="80">
       </kendo-grid-column>
-      <kendo-grid-column *ngIf="vendor" field="MnfSerial" title="{{language.vendor_serial_batch_no}}" width="80">
+      <kendo-grid-column *ngIf="vendor" field="MnfSerial" title="{{'vendor_serial_batch_no' | translate}}" width="80">
       </kendo-grid-column>
-      <kendo-grid-column field="ItemCode" title="{{language.item_code}}" width="80">
+      <kendo-grid-column field="ItemCode" title="{{'item_code' | translate}}" width="80">
       </kendo-grid-column>
     </kendo-grid>
   </div>
@@ -522,7 +522,7 @@
     <button class="btn btn-danger btn-sm d-flex align-items-center" type="button" (click)="close()">
       <svg viewBox="0 0 489 489" class="icon mr-2">
         <use xlink:href="#cancel"></use>
-      </svg> {{language.close}}
+      </svg>{{'close' | translate}}
     </button>
   </kendo-dialog-actions>
 </kendo-dialog>
