@@ -227,6 +227,22 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                     return "week_end";
                 return "";
             };
+            gantt.config.type_renderers[gantt.config.types.project]=function(task, defaultRender){
+                var main_el = document.createElement("div");
+                main_el.setAttribute(gantt.config.task_attribute, task.id);
+                var size = gantt.getTaskPosition(task, task.planned_start, task.planned_end);
+                main_el.innerHTML = [
+                    "<div class='project-left'></div>",
+                    "<div class='project-name'>"+ task.description +"</div>",
+                    "<div class='project-right'></div>"
+                ].join('');
+                main_el.className = "custom-project";
+                main_el.style.left = size.left + "px";
+                main_el.style.top = size.top + 7 + "px";
+                main_el.style.width = size.width + "px";
+             
+                return main_el;
+            };
             //tooltip
             gantt.templates.tooltip_text = function(start,end,task){
                 function tConvert(time) {
@@ -243,8 +259,6 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
                     EndEl = new Date(end),
                     Start = tConvert(StartEl.toTimeString().substr(0,5)) +" "+ StartEl.getDate() +"-" + StartEl.getMonth() + "-" + StartEl.getFullYear(),
                     End = tConvert(EndEl.toTimeString().substr(0,5)) +" "+ EndEl.getDate() +"-" + EndEl.getMonth() + "-" + EndEl.getFullYear();
-                    console.log(StartEl.getDate());
-                    console.log(task);
                     
                 return "<div class='header'><span>"+task.text+"</span></div><div><b>Description:</b><span> " + task.description+"</span></div><div><b>Start:</b><span> " + Start+"</span></div><div><b>End:</b><span> " + End+"</span></div><div><b>Duration (Day):</b><span> " + 
                  Number.parseFloat(task.DURATION_IN_DAYS).toFixed(3) + " Day(s)"+"</span></div>"+"</span></div><div><b>Duration (Hour):</b><span> " + 
