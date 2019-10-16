@@ -23,6 +23,7 @@ export class AuthenticationService {
 
   login(loginId:string,password:string,psURL:string):Observable<any>{
     let jObject:any={ Login: JSON.stringify([{ User: loginId, Password: password, IsAdmin: false }]) };
+    console.log(jObject);
     return this.httpClient.post(psURL+"api/login/ValidateUserLogin",jObject,this.httpOptions);
   }
 

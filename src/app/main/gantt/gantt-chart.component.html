@@ -7,7 +7,7 @@
                     <svg viewBox="0 0 410.23 410.23" class="icon mr-2 icon-dark" fill="#2a2a2a">
                         <use xlink:href="#search"></use>
                     </svg>
-                    <span class="h5 mb-0">{{'SelectionCriteria' | translate}}</span>
+                    <span class="h5 mb-0">{{language.SelectionCriteria}}</span>
                     <span class="ml-auto mr-3 d-flex justify-content-center align-items-center timer-wrapper"></span>
                     <span class="optipro-icon-arrow-left cursor-pointer mr-1 d-flex"></span>
                 </div>
@@ -16,12 +16,12 @@
                         class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3 pt-1 flex-100">
                         <form class="w-100" #criteriaForm="ngForm">
                             <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                                <label for="ItemFrom" class="form-label mb-0">{{'PlanDefinition' | translate}}</label>
+                                <label for="ItemFrom" class="form-label mb-0">{{language.PlanDefinition}}</label>
                                 <div class="w-100">
                                     <div class="input-group">
                                         <input type="text" name="PlanDefinition" id="PlanDefinition"
                                             class="form-control form-control-sm" #PlanDF=ngModel
-                                            [(ngModel)]="PlanDefinition" placeholder="{{'PlanDefinition' | translate}}"
+                                            [(ngModel)]="PlanDefinition" placeholder="{{language.PlanDefinition}}"
                                             (keyup)="onPlanDefinitionBlur()" autocomplete="off" required>
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary btn-icon d-flex d-flex"
@@ -34,18 +34,18 @@
                                     </div>
                                 </div>
                             <div id="emailHelp" class="form-text text-muted float-right opti_error-msg" *ngIf="PlanDF.invalid && (PlanDF.dirty || PlanDF.touched)">
-                                <small *ngIf="PlanDF.errors.required">Plan definition required</small>
+                                <small *ngIf="PlanDF.errors.required">{{language.Plan_Definition_Required}}</small>
                             </div>
                             <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
-                            *ngIf="PDStatus && PlanDF.touched">Enter correct plan definition</small>
+                            *ngIf="PDStatus && PlanDF.touched">{{language.Correct_Plan_Definition_Error}}</small>
                             </div>
                             <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                                <label for="ItemFrom" class="form-label mb-0">{{'PlanOrderNo' | translate}}</label>
+                                <label for="ItemFrom" class="form-label mb-0">{{language.PlanOrderNo}}</label>
                                 <div class="w-100">
                                     <div class="input-group">
                                         <input type="text" name="PlanOrderNo" id="PlanOrderNo"
                                             class="form-control form-control-sm" #PlanOrder=ngModel
-                                            [(ngModel)]="PlanOrderNo" placeholder="{{'PlanOrderNo' | translate}}"
+                                            [(ngModel)]="PlanOrderNo" placeholder="{{language.PlanOrderNo}}"
                                             (keyup)="onPlanOrderNoBlur()" autocomplete="off" required>
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary btn-icon d-flex"
@@ -58,10 +58,10 @@
                                     </div>
                                 </div>
                                 <div id="emailHelp" class="form-text text-muted float-right opti_error-msg" *ngIf="PlanOrder.invalid && (PlanOrder.dirty || PlanOrder.touched)">
-                                    <small *ngIf="PlanOrder.errors.required">Plan order number required</small>
+                                    <small *ngIf="PlanOrder.errors.required">{{language.Plan_Order_Required}}</small>
                                 </div>
                                 <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
-                                *ngIf="OrderStatus">Enter correct plan order number</small>
+                                *ngIf="OrderStatus">{{language.Correct_Plan_Order_Error}}</small>
                             </div>
                         </form>
                     </div>
@@ -70,7 +70,7 @@
                 <div class="card-footer text-center py-2">
                     <button type="submit" (click)="processData()" class="btn btn-primary btn-icon btn-sm px-2"
                         id="process" [disabled]="!criteriaForm.form.valid || PDStatus || OrderStatus">
-                        {{'Process' | translate}}
+                        {{language.Process}}
                         <svg viewBox="0 0 24 24" class="icon">
                             <use xlink:href="#rightArrow"></use>
                         </svg>
@@ -83,8 +83,8 @@
         <div class="dashboard-right" id="dashboard-right">
             <div class="card" fxFlex="0 0 100%">                
                 <gantt-chart-view *ngIf="GanttChartStatus" fxLayout="column"></gantt-chart-view>   
-                <app-plan-definition *ngIf="planDefinitionStatus" [planDefinitionData]="planDefinitionData" (lookupEvent)="lookupEventHander($event)" (PlanDefinitionEvent)="PlanDefinitionEventHander($event)"></app-plan-definition>
-                <app-plan-order *ngIf="planDefinitionOrderStatus" [planOrderData]="planOrderData" (lookupEvent)="lookupEventHander($event)" (PlanDefinitionOrderNoEvent)="PlanDefinitionOrderNoEventHander($event)"></app-plan-order>
+                <app-plan-definition *ngIf="planDefinitionStatus" [planDefinitionData]="planDefinitionData" [PlanDefinitionSelect]="PlanDefinitionSelect" (lookupEvent)="lookupEventHander($event)" (PlanDefinitionEvent)="PlanDefinitionEventHander($event)"></app-plan-definition>
+                <app-plan-order *ngIf="planDefinitionOrderStatus" [planOrderData]="planOrderData" [PlanOrderSelect]="PlanOrderSelect" (lookupEvent)="lookupEventHander($event)" (PlanDefinitionOrderNoEvent)="PlanDefinitionOrderNoEventHander($event)"></app-plan-order>
 
                 <div class="welcome-page" fxLayout="column" fxFlex="0 0 100%" *ngIf="!GanttChartStatus">
                     <div class="welcome-innner" fxLayout="column" fxFlex="0 0 100%">
@@ -95,8 +95,8 @@
                             </svg>
                             </div>
                             <div class="mt-3">
-                            <p>Version</p>
-                            <small>Copyright 2000-2019. All rights reserved.</small>
+                            <p>{{language.Version}}</p>
+                            <small>{{language.Copyright}}</small>
                             </div>
                         </div>
                     </div>

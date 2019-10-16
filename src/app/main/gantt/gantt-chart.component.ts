@@ -1,14 +1,10 @@
 import { Component, OnInit, ElementRef, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { TranslateService } from '@ngx-translate/core';
 import { CountdownComponent } from 'ngx-countdown';
-import { DatePipe } from '@angular/common';
 import { Scale } from 'src/app/core/model/scale';
 import { DataService } from './data.service';
 import { GanttChartService } from './service/gantt-chart.service';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { NotificationService } from '@progress/kendo-angular-notification';
-import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
   selector: 'app-gantt',
@@ -29,8 +25,12 @@ export class GanttChartComponent implements OnInit {
   public GanttChartStatus: boolean = false;
   public PDStatus:boolean = false;
   public OrderStatus:boolean = false;
+  public arrConfigData: any;
+  public language: any;
+  public PlanDefinitionSelect: any;
+  public PlanOrderSelect: any;
 
-  constructor(private LanguageService: LanguageService, private route: ActivatedRoute, private notificationService: NotificationService, private router: Router,private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService, private translate: TranslateService, private datePipe: DatePipe) {
+  constructor(private route: ActivatedRoute, private notificationService: NotificationService, private router: Router,private dataService: DataService, private _elementRef: ElementRef, private GanttChartService:GanttChartService) {
   
   }
 
@@ -39,10 +39,11 @@ export class GanttChartComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.arrConfigData = JSON.parse(window.localStorage.getItem('arrConfigData'));
+    this.language = JSON.parse(window.localStorage.getItem('language'));
     this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
-    this.getPlanDefinition(environment.service_url, this.CompanyDB);
+    this.getPlanDefinition(this.arrConfigData.service_url, this.CompanyDB);
     this.mobileView();
-    this.LanguageService.languageSet(this.translate, environment.language);
   }
 
 
@@ -91,10 +92,10 @@ export class GanttChartComponent implements OnInit {
 
   onPlanOrderNoBlur(){
     if(this.PlanDefinition){
-      this.getPlanOrderNo(environment.service_url, this.CompanyDB, this.PlanDefinition);
+      this.getPlanOrderNo(this.arrConfigData.service_url, this.CompanyDB, this.PlanDefinition);
     }else{
       this.notificationService.show({
-        content: 'Please Enter Plan Definition',
+        content: this.language.Plan_Definition_Error,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -124,10 +125,26 @@ export class GanttChartComponent implements OnInit {
 
   openPlanDefinition(){
     this.planDefinitionStatus = true;
+    if(this.PlanDefinition){
+      this.PlanDefinitionSelect = this.PlanDefinition;
+    }
   }
 
   openPlanOrderNo(){
-    this.planDefinitionOrderStatus = true;
+    if(!this.PlanDefinition){
+      this.notificationService.show({
+        content: this.language.Plan_Definition_Error,
+        animation: { type: 'fade', duration: 400 },
+        position: { horizontal: 'right', vertical: 'top' },
+        type: { style: 'error', icon: true },
+        hideAfter: 3000
+      });
+    }else{
+      this.planDefinitionOrderStatus = true;
+      if(this.PlanOrderNo){
+        this.PlanOrderSelect = this.PlanOrderNo;
+      }
+    }
   }
 
   lookupEventHander(){
@@ -137,7 +154,7 @@ export class GanttChartComponent implements OnInit {
 
   PlanDefinitionEventHander(e){
     this.PlanDefinition = e;
-    this.getPlanOrderNo(environment.service_url, this.CompanyDB, this.PlanDefinition);
+    this.getPlanOrderNo(this.arrConfigData.service_url, this.CompanyDB, this.PlanDefinition);
   }
 
   PlanDefinitionOrderNoEventHander(e){

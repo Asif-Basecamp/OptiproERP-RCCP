@@ -1,11 +1,8 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { GridComponent } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
-import { TranslateService } from '@ngx-translate/core';
 import { RowArgs } from '@progress/kendo-angular-grid';
 import { BOMService } from 'src/app/services/bom.service';
-import { environment } from 'src/environments/environment';
-import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
   selector: 'app-item-code-lookup',
@@ -17,16 +14,33 @@ export class ItemCodeLookupComponent implements OnInit {
   @Output() lookupEvent = new EventEmitter<string>();
   @Output() itemCodeEvent = new EventEmitter<any>();
   @Input() ItemData: any;
+  @Input() ItemCodeFromSelect: any;
+  @Input() ItemCodeToSelect: any;
   public itemCode: any;
   public EnableLoader: boolean = true;
   isColumnFilter: boolean = false;
+  public language: any;
+  public isItemCodeSelected: any;
   
-  constructor(private LanguageService: LanguageService, private BOMService: BOMService, private translate: TranslateService) {}
+  constructor(private BOMService: BOMService) {}
 
-  
   ngOnInit() {
-    this.LanguageService.languageSet(this.translate, environment.language);
+    this.language = JSON.parse(window.localStorage.getItem('language'));
     this.EnableLoader = false;
+    let select = [];
+    if(this.ItemCodeFromSelect){
+      select.push(this.ItemCodeFromSelect);
+      this.isItemCodeSelected = (e: RowArgs) => select.indexOf(e.dataItem.ItemCode) >=0 ;
+    }else{
+      this.isItemCodeSelected = (e: RowArgs) => select.indexOf(e.dataItem.ItemCode) >=0 ;
+    }
+
+    if(this.ItemCodeToSelect){
+      select.push(this.ItemCodeToSelect);
+      this.isItemCodeSelected = (e: RowArgs) => select.indexOf(e.dataItem.ItemCode) >=0 ;
+    }else{
+      this.isItemCodeSelected = (e: RowArgs) => select.indexOf(e.dataItem.ItemCode) >=0 ;
+    }
   }
   
   close(){

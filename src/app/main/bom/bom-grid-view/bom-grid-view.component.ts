@@ -1,9 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { BOMService } from '../service/bom.service';
-import { environment } from '../../../../environments/environment';
-import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from '@progress/kendo-angular-notification';
-import { LanguageService } from 'src/app/core/language.service';
 
 export interface TreeNode {
   label?: string;
@@ -41,15 +38,17 @@ export class BOMGridViewComponent implements OnInit {
   public DetailGridStatus: boolean = false;
   public BOMDetailStatus: boolean = false;
   public RoutingHeaderStatus: boolean = false;
-
   public detailRowGridCollapse: boolean = false;
   public headerRowGridCollapse: boolean = false;
+  public arrConfigData: any;
+  public language: any;
 
-  constructor(private LanguageService: LanguageService, private BOMService: BOMService, private translate: TranslateService, private notificationService: NotificationService) {}
+  constructor(private BOMService: BOMService, private notificationService: NotificationService) {}
   
   ngOnInit() {
+    this.arrConfigData = JSON.parse(window.localStorage.getItem('arrConfigData'));
+    this.language = JSON.parse(window.localStorage.getItem('language'));
     this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
-    this.LanguageService.languageSet(this.translate, environment.language);
   }
 
   /*-- on click simple Grid Row--*/
@@ -80,7 +79,7 @@ export class BOMGridViewComponent implements OnInit {
   }
 
   detailGridData(GridViewdata, db){
-    this.BOMService.GetBOMDetailedData(environment.service_url, db, GridViewdata.U_O_ITEMCODE, 
+    this.BOMService.GetBOMDetailedData(this.arrConfigData.service_url, db, GridViewdata.U_O_ITEMCODE, 
       GridViewdata.CreateDate, GridViewdata.Code, GridViewdata.U_O_BOM_SEQ, GridViewdata.U_O_WHSECODE, 
       GridViewdata.U_O_REVISION, this.primaryEvent).subscribe(
       data => {
@@ -115,7 +114,7 @@ export class BOMGridViewComponent implements OnInit {
 
   /*-- Get BOM DEtail --*/
   getBOMDetail(code){
-    this.BOMService.GetBOMDetail(environment.service_url, this.CompanyDB, code).subscribe(
+    this.BOMService.GetBOMDetail(this.arrConfigData.service_url, this.CompanyDB, code).subscribe(
       data => {
         this.BomDetail = data;
         this.BOMDetailStatus = false;
@@ -127,13 +126,13 @@ export class BOMGridViewComponent implements OnInit {
   getRoutingHeaderDetail(ItemCode){
     this.RoutingHeaderStatus = true;
     this.datas = [];
-    this.BOMService.GetRoutingHeaderDetail(environment.service_url, this.CompanyDB, ItemCode, this.primaryEvent).subscribe(
+    this.BOMService.GetRoutingHeaderDetail(this.arrConfigData.service_url, this.CompanyDB, ItemCode, this.primaryEvent).subscribe(
       headerdata => {
         if(headerdata && headerdata.length == 0){
           this.RoutingHeaderStatus = false;
           this.BomDetail = '';
           this.notificationService.show({
-            content: 'No Record Found',
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -141,11 +140,11 @@ export class BOMGridViewComponent implements OnInit {
           }); 
         }
         for(let i=0;i< headerdata.length; i++){
-          this.BOMService.GetRoutingLineDetail(environment.service_url, this.CompanyDB, headerdata[i].Code).subscribe(
+          this.BOMService.GetRoutingLineDetail(this.arrConfigData.service_url, this.CompanyDB, headerdata[i].Code).subscribe(
             Linedata => {
               headerdata[i]["LineDetail"] = Linedata;
               for(let j=0;j< headerdata[i].LineDetail.length; j++){
-                this.BOMService.GetResourceDetail(environment.service_url, this.CompanyDB, headerdata[i].LineDetail[j].Code, headerdata[i].LineDetail[j].U_O_LINE_NO).subscribe(
+                this.BOMService.GetResourceDetail(this.arrConfigData.service_url, this.CompanyDB, headerdata[i].LineDetail[j].Code, headerdata[i].LineDetail[j].U_O_LINE_NO).subscribe(
                 ResourceData => {
                   headerdata[i].LineDetail[j]["ResourceDetail"] = ResourceData;
                 });

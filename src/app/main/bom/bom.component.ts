@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { BOMService } from './service/bom.service';
-import { environment } from '../../../environments/environment';
 import { NotificationService } from '@progress/kendo-angular-notification';
-import { TranslateService } from '@ngx-translate/core';
 import { CountdownComponent } from 'ngx-countdown';
 import { DatePipe } from '@angular/common';
-import { LanguageService } from 'src/app/core/language.service';
+import { RowArgs } from '@progress/kendo-angular-grid';
 
 @Component({
   selector: 'bom',
@@ -49,17 +47,24 @@ export class BOMComponent implements OnInit {
   public ItemToStatus:boolean = false;
   public WarehouseFromStatus:boolean = false;
   public WarehouseToStatus:boolean = false;
+  public arrConfigData: any;
+  public language: any;
+  public ItemCodeFromSelect: any;
+  public ItemCodeToSelect: any;
+  public WarehouseFromSelect: any;
+  public WarehouseToSelect: any;
 
-  constructor(private LanguageService: LanguageService, private BOMService: BOMService, private notificationService: NotificationService, private translate: TranslateService, private datePipe: DatePipe) { }  
+  constructor(private BOMService: BOMService, private notificationService: NotificationService, private datePipe: DatePipe) { }  
   @HostListener('window:resize', ['$event']) onResize() {
     this.mobileView();
   }
   ngOnInit() {
+    this.arrConfigData = JSON.parse(window.localStorage.getItem('arrConfigData'));
+    this.language = JSON.parse(window.localStorage.getItem('language'));
     this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
-    this.getItemData(environment.service_url, this.CompanyDB);
-    this.getWarehouseData(environment.service_url, this.CompanyDB);
+    this.getItemData(this.arrConfigData.service_url, this.CompanyDB);
+    this.getWarehouseData(this.arrConfigData.service_url, this.CompanyDB);
     this.mobileView();
-    this.LanguageService.languageSet(this.translate, environment.language);
   }
 
   public mobileView(): void {
@@ -76,7 +81,6 @@ export class BOMComponent implements OnInit {
     this.BOMService.GetItemList(api, companyDB).subscribe(
       data => {
         this.ItemData = data;
-        console.log(this.ItemData);
       });    
   } 
 
@@ -179,11 +183,19 @@ export class BOMComponent implements OnInit {
   openItemCodeFromLookup(){
     this.lookupStatus = true;
     this.itemCode = 'From';
+    this.ItemCodeToSelect = '';
+    if(this.ItemCodeFrom && this.itemCode == 'From'){
+      this.ItemCodeFromSelect = this.ItemCodeFrom;
+    }
   }
 
   openItemCodeToLookup(){
     this.lookupStatus = true;
     this.itemCode = 'To';
+    this.ItemCodeFromSelect = '';
+    if(this.ItemCodeTo && this.itemCode == 'To'){
+      this.ItemCodeToSelect = this.ItemCodeTo;
+    }
   }
 
   itemCodeEventHander(e){
@@ -201,11 +213,19 @@ export class BOMComponent implements OnInit {
   openWarehouseFromLookup(){
     this.warehouseCode = 'From';
     this.WarehouseStatus = true;
+    this.WarehouseToSelect = '';
+    if(this.WarehouseFrom && this.warehouseCode == 'From'){
+      this.WarehouseFromSelect = this.WarehouseFrom;
+    }
   }
 
   openWarehouseToLookup(){
     this.warehouseCode = 'To';
     this.WarehouseStatus = true;
+    this.WarehouseFromSelect = '';
+    if(this.WarehouseTo && this.warehouseCode == 'To'){
+      this.WarehouseToSelect = this.WarehouseTo;
+    }
   }
 
   warehouseCodeEventHander(e){
@@ -229,7 +249,7 @@ export class BOMComponent implements OnInit {
       this.ItemCodeTo = undefined;
       this.SimpleGridEnableLoader = false;
       this.notificationService.show({
-        content: 'Item To Required',
+        content: this.language.ItemToRequired,
         hideAfter: 3000,
         position: { horizontal: 'right', vertical: 'top' },
         animation: { type: 'fade', duration: 400 },
@@ -239,7 +259,7 @@ export class BOMComponent implements OnInit {
       this.ItemCodeFrom = undefined;
       this.SimpleGridEnableLoader = false;
       this.notificationService.show({
-        content: 'Item From Required',
+        content: this.language.ItemFromRequired,
         hideAfter: 3000,
         position: { horizontal: 'right', vertical: 'top' },
         animation: { type: 'fade', duration: 400 },
@@ -249,7 +269,7 @@ export class BOMComponent implements OnInit {
       this.WarehouseTo = undefined;
       this.SimpleGridEnableLoader = false;
       this.notificationService.show({
-        content: 'Warehouse To Required',
+        content: this.language.WarehouseToRequired,
         hideAfter: 3000,
         position: { horizontal: 'right', vertical: 'top' },
         animation: { type: 'fade', duration: 400 },
@@ -259,7 +279,7 @@ export class BOMComponent implements OnInit {
       this.WarehouseFrom = undefined;
       this.SimpleGridEnableLoader = false;
       this.notificationService.show({
-        content: 'Warehouse From Required',
+        content: this.language.WarehouseFromRequired,
         hideAfter: 3000,
         position: { horizontal: 'right', vertical: 'top' },
         animation: { type: 'fade', duration: 400 },
@@ -274,14 +294,14 @@ export class BOMComponent implements OnInit {
     }
 
     if(this.ItemCodeFrom != undefined && this.ItemCodeTo != undefined && this.WarehouseFrom != undefined && this.WarehouseTo != undefined){
-    this.BOMService.GetItemExplosionData(environment.service_url, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.WarehouseFrom, this.WarehouseTo, this.IsPrimary).subscribe(
+    this.BOMService.GetItemExplosionData(this.arrConfigData.service_url, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.WarehouseFrom, this.WarehouseTo, this.IsPrimary).subscribe(
       data => {
         this.gridData = data;
         this.SimpleGridEnableLoader = false;
         if(this.gridData.length==0){
           this.bomGrid = false;
           this.notificationService.show({
-            content: 'No Record Found',
+            content: this.language.no_record_found,
             hideAfter: 3000,
             position: { horizontal: 'right', vertical: 'top' },
             animation: { type: 'fade', duration: 400 },
@@ -353,6 +373,4 @@ autoRefresh(){
     this.countdown(this.hour); 
   }
 }
-
-
 }

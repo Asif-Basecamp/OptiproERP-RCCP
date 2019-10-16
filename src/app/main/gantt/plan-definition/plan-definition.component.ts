@@ -1,11 +1,8 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { GanttChartService } from '../service/gantt-chart.service';
-import { environment } from '../../../../environments/environment';
 import { GridComponent } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
-import { TranslateService } from '@ngx-translate/core';
 import { RowArgs } from '@progress/kendo-angular-grid';
-import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
   selector: 'app-plan-definition',
@@ -18,15 +15,25 @@ export class PlanDefinitionComponent implements OnInit {
   @Output() lookupEvent = new EventEmitter<string>();
   @Output() PlanDefinitionEvent = new EventEmitter<any>();
   @Input() planDefinitionData: any;
+  @Input() PlanDefinitionSelect: any;
   public itemCode: any;
   public EnableLoader: boolean = true;
   isColumnFilter: boolean = false;
+  public language: any;
+  public isPlanDefinitionSelected: any;
 
-  constructor(private LanguageService: LanguageService, private GanttChartService: GanttChartService, private translate: TranslateService) { }
+  constructor(private GanttChartService: GanttChartService) { }
 
   ngOnInit() {
+    this.language = JSON.parse(window.localStorage.getItem('language'));
     this.EnableLoader = false;
-    this.LanguageService.languageSet(this.translate, environment.language);
+    let select = [];
+    if(this.PlanDefinitionSelect){
+      select.push(this.PlanDefinitionSelect);
+      this.isPlanDefinitionSelected = (e: RowArgs) => select.indexOf(e.dataItem.Code) >=0 ;
+    }else{
+      this.isPlanDefinitionSelected = (e: RowArgs) => select.indexOf(e.dataItem.Code) >=0 ;
+    }
   }
 
   close(){

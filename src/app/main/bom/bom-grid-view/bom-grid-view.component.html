@@ -1,7 +1,7 @@
 <kendo-splitter orientation="vertical" class="w-100 h-100 slim-scroll">
   <kendo-splitter-pane class="slim-scroll" [collapsible]="true">
     <div class="simple-grid-view">
-      <div class="h5 p-2 mb-0 border border-bottom-0">{{'SimpleGrid' | translate}}</div>
+      <div class="h5 p-2 mb-0 border border-bottom-0">{{language.SimpleGrid}}</div>
       <kendo-grid [kendoGridBinding]="gridDataEvent" [selectable]="true" [resizable]="true" [groupable]=isColumnGroup [filterable]=isColumnFilter [sortable]="true"
         (selectionChange)="simpleGridRowSelect($event)" class="SimpleGridTable primary-table-colored" [ngStyle]="{ 'cursor': 'pointer'}">
         <ng-template kendoGridToolbarTemplate>
@@ -9,10 +9,10 @@
                 <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
                     <input type="checkbox" [(ngModel)]="isColumnFilter" [ngModelOptions]="{standalone: true}">
                     <span class="checkbox"></span>
-                    <span>{{'EnableFilter' | translate}}</span>
+                    <span>{{language.EnableFilter}}</span>
                 </label>
                 <!-- export -->
-                <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
+                <button type="button" kendoGridExcelCommand title="{{language.ExportToExcel}}"
                     class="ml-auto btn btn-link btn-sm btn-icon p-0">
                     <svg viewBox="0 0 512 512" class="icon">
                         <use xlink:href="#download"></use>
@@ -21,16 +21,16 @@
             </div>
         </ng-template>
       
-        <kendo-grid-column field="U_O_ITEMCODE" title="{{'ProductNumber' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
-        <kendo-grid-column field="U_O_DESC" title="{{'Description' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
-        <kendo-grid-column field="U_O_BOM_SEQ" title="{{'BOMSequence' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
-        <kendo-grid-column field="U_O_REVISION" title="{{'Revision' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
-        <kendo-grid-column field="TYPE" title="{{'Type' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
-        <kendo-grid-column field="EFFECTIVEDATE" title="{{'EffectiveDate' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column> 
-        <kendo-grid-column field="U_O_WHSECODE" title="{{'Warehouse' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
-        <kendo-grid-column field="U_O_QUANTITY" title="{{'BOMQuantity' | translate}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column> 
-        <kendo-grid-column field="U_O_UOM" title="{{'UOM' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>  
-        <kendo-grid-column field="BOMTYPE" title="{{'BOMType' | translate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>   
+        <kendo-grid-column field="U_O_ITEMCODE" title="{{language.ProductNumber}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
+        <kendo-grid-column field="U_O_DESC" title="{{language.Description}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
+        <kendo-grid-column field="U_O_BOM_SEQ" title="{{language.BOMSequence}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_O_REVISION" title="{{language.Revision}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="TYPE" title="{{language.Type}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
+        <kendo-grid-column field="EFFECTIVEDATE" title="{{language.EffectiveDate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_WHSECODE" title="{{language.Warehouse}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_O_QUANTITY" title="{{language.BOMQuantity}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_UOM" title="{{language.UOM}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>  
+        <kendo-grid-column field="BOMTYPE" title="{{language.BOMType}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>   
         <!-- xlsx template start -->
         <kendo-grid-excel fileName="grid-view.xlsx"></kendo-grid-excel>
         <!-- xlsx template end -->
@@ -41,7 +41,7 @@
     <div class="detail-grid-wrapper d-flex">
       <div *ngIf="DetailGridStatus" class="k-i-loading"></div>
       <div class="dashboard-detail-grid" *ngIf="files2">
-        <div class="h5 p-2 mb-0 border border-bottom-0 bg-white">{{'DetailGrid' | translate}}</div>
+        <div class="h5 p-2 mb-0 border border-bottom-0 bg-white">{{language.DetailGrid}}</div>
         <div class="tree-wrapper">
           <div class="content-section implementation restrictedHeight">
         <p-treeTable [value]="files2" [columns]="cols" selectionMode="single" [scrollable]="true" scrollHeight=""
@@ -67,21 +67,21 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th ttResizableColumn>{{'BOMItemCode' | translate}}</th>
-            <th ttResizableColumn>{{'Description' | translate}}</th>
-            <th ttResizableColumn>{{'BOMQuantity' | translate}}</th>
-            <th ttResizableColumn>{{'UOM' | translate}}</th>
-            <th ttResizableColumn>{{'ItemBasis' | translate}}</th>
-            <th ttResizableColumn>{{'EffectiveFromDate' | translate}}</th>
-            <th ttResizableColumn>{{'EffectiveToDate' | translate}}</th>
-            <th ttResizableColumn>{{'IssueMethod' | translate}}</th>
-            <th ttResizableColumn>{{'WarehouseIssue' | translate}}</th>
-            <th ttResizableColumn>{{'BinIssue' | translate}}</th>
-            <th ttResizableColumn>{{'OperationNumber' | translate}}</th>
-            <th ttResizableColumn>{{'CostRollUp' | translate}}</th>
-            <th ttResizableColumn>{{'ECO' | translate}}</th>
-            <th ttResizableColumn>{{'Comments' | translate}}</th>
-            <th ttResizableColumn>{{'Attachments' | translate}}</th>
+            <th ttResizableColumn>{{language.BOMItemCode}}</th>
+            <th ttResizableColumn>{{language.Description}}</th>
+            <th ttResizableColumn>{{language.BOMQuantity}}</th>
+            <th ttResizableColumn>{{language.UOM}}</th>
+            <th ttResizableColumn>{{language.ItemBasis}}</th>
+            <th ttResizableColumn>{{language.EffectiveFromDate}}</th>
+            <th ttResizableColumn>{{language.EffectiveToDate}}</th>
+            <th ttResizableColumn>{{language.IssueMethod}}</th>
+            <th ttResizableColumn>{{language.WarehouseIssue}}</th>
+            <th ttResizableColumn>{{language.BinIssue}}</th>
+            <th ttResizableColumn>{{language.OperationNumber}}</th>
+            <th ttResizableColumn>{{language.CostRollUp}}</th>
+            <th ttResizableColumn>{{language.ECO}}</th>
+            <th ttResizableColumn>{{language.Comments}}</th>
+            <th ttResizableColumn>{{language.Attachments}}</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowNode let-node="node" let-rowNodeIndex="rowNodeIndex" let-rowData="rowData">
@@ -115,7 +115,7 @@
   <kendo-splitter-pane class="slim-scroll" *ngIf="headerRowGridCollapse" [collapsible]="true">
     <div class="d-flex routingHeaderGridWrapper h-100" fxFlex fxLayout="column">
       <!--<div *ngIf="RoutingHeaderStatus" class="k-i-loading"></div>-->
-      <div class="h5 p-2 mb-0 border border-bottom-0 bg-white" *ngIf="BomDetail">{{'RoutingHeader' | translate}} (Item Code: {{headerData.U_O_ITEMCODE}})</div>
+      <div class="h5 p-2 mb-0 border border-bottom-0 bg-white" *ngIf="BomDetail">{{language.RoutingHeader}} (Item Code: {{headerData.U_O_ITEMCODE}})</div>
       <kendo-grid *ngIf="BomDetail" [kendoGridBinding]="datas" class="routingHeaderGrid primary-table-colored" [navigable]="true" [resizable]="true" [groupable]=isColumnGroup3 [filterable]=isColumnFilter3 [sortable]="true"
        [ngStyle]="{ 'cursor': 'pointer'}" [loading]="RoutingHeaderStatus" kendoGridFocusable>
         <ng-template kendoGridToolbarTemplate>
@@ -123,19 +123,19 @@
                 <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
                     <input type="checkbox" [(ngModel)]="isColumnFilter3" [ngModelOptions]="{standalone: true}">
                     <span class="checkbox"></span>
-                    <span>{{'EnableFilter' | translate}}</span>
+                    <span>{{language.EnableFilter}}</span>
                 </label>
             </div>
         </ng-template>
-        <kendo-grid-column field="U_O_ROUT_SEQ" title="{{'RoutingSequence' | translate}}" class="text-right" headerClass="text-right"></kendo-grid-column>
-        <kendo-grid-column field="U_O_REVI_NO" title="{{'RoutingRevision' | translate}}" class="text-right" headerClass="text-right"></kendo-grid-column>
-        <kendo-grid-column field="ROUTTYPE" title="{{'RoutingType' | translate}}"></kendo-grid-column>
-        <kendo-grid-column field="EFFECTIVEDATE" title="{{'EffectiveDate' | translate}}"></kendo-grid-column>
-        <kendo-grid-column field="U_O_FG_WH_ID" title="{{'Warehouse' | translate}}" class="text-right" headerClass="text-right"></kendo-grid-column>
-        <kendo-grid-column field="U_O_DFLT_LOT_SIZE" title="{{'DefaultBatchSize' | translate}}" class="text-right" headerClass="text-right"></kendo-grid-column>
-        <kendo-grid-column field="U_OPTM_APCLBLBOMUNIT" title="{{'ApplicableBOMUnit' | translate}}" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_O_ROUT_SEQ" title="{{language.RoutingSequence}}" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_O_REVI_NO" title="{{language.RoutingRevision}}" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="ROUTTYPE" title="{{language.RoutingType}}"></kendo-grid-column>
+        <kendo-grid-column field="EFFECTIVEDATE" title="{{language.EffectiveDate}}"></kendo-grid-column>
+        <kendo-grid-column field="U_O_FG_WH_ID" title="{{language.Warehouse}}" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_O_DFLT_LOT_SIZE" title="{{language.DefaultBatchSize}}" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_OPTM_APCLBLBOMUNIT" title="{{language.ApplicableBOMUnit}}" class="text-right" headerClass="text-right"></kendo-grid-column>
         <div *kendoGridDetailTemplate="let dataItem">
-          <div class="h5 p-2 mb-0 border border-bottom-0 bg-white">{{'RoutingLine' | translate}}</div>
+          <div class="h5 p-2 mb-0 border border-bottom-0 bg-white">{{language.RoutingLine}}</div>
           <kendo-grid [kendoGridBinding]="dataItem.LineDetail" [navigable]="true" [resizable]="true" [groupable]=isColumnGroup4 [filterable]=isColumnFilter4 [sortable]="true"
             [ngStyle]="{ 'cursor': 'pointer'}" kendoGridFocusable>
             <ng-template kendoGridToolbarTemplate>
@@ -143,85 +143,85 @@
                   <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
                       <input type="checkbox" [(ngModel)]="isColumnFilter4" [ngModelOptions]="{standalone: true}">
                       <span class="checkbox"></span>
-                      <span>{{'EnableFilter' | translate}}</span>
+                      <span>{{language.EnableFilter}}</span>
                   </label>
               </div>
             </ng-template>
-            <kendo-grid-column field="Code" title="{{'OperationNumber' | translate}}" width="92" class="text-right" headerClass="text-right">
+            <kendo-grid-column field="Code" title="{{language.OperationNumber}}" width="92" class="text-right" headerClass="text-right">
             </kendo-grid-column>
-            <kendo-grid-column field="OPERATIONCODE" title="{{'OperationCode' | translate}}" width="100">
+            <kendo-grid-column field="OPERATIONCODE" title="{{language.OperationCode}}" width="100">
             </kendo-grid-column>
-            <kendo-grid-column field="OPERATIONTYPE" title="{{'OperationType' | translate}}" width="100">
+            <kendo-grid-column field="OPERATIONTYPE" title="{{language.OperationType}}" width="100">
             </kendo-grid-column>
-            <kendo-grid-column field="U_O_OPR_DESC" title="{{'OperationDescription' | translate}}" width="137">
+            <kendo-grid-column field="U_O_OPR_DESC" title="{{language.OperationDescription}}" width="137">
             </kendo-grid-column>
-            <kendo-grid-column field="RESCNSMETHOD" title="{{'ResConsumptionMethod' | translate}}" width="160">
+            <kendo-grid-column field="RESCNSMETHOD" title="{{language.ResConsumptionMethod}}" width="160">
             </kendo-grid-column>
-            <kendo-grid-column field="PARALLELOPERATION" title="{{'PARALLELOPERATION' | translate}}" width="135">
+            <kendo-grid-column field="PARALLELOPERATION" title="{{language.PARALLELOPERATION}}" width="135">
             </kendo-grid-column>
-            <kendo-grid-column field="MATCH_WITH_PREV_OP" title="{{'MatchWithPrevOperation' | translate}}" width="165">
+            <kendo-grid-column field="MATCH_WITH_PREV_OP" title="{{language.MatchWithPrevOperation}}" width="165">
             </kendo-grid-column>
-            <kendo-grid-column field="U_O_WC_ID" title="{{'WorkCenterCode' | translate}}" width="120">
+            <kendo-grid-column field="U_O_WC_ID" title="{{language.WorkCenterCode}}" width="120">
             </kendo-grid-column>
-            <kendo-grid-column field="EFFECTIVE_FROM_DATE" title="{{'EffectiveFromDate' | translate}}" width="125" >
+            <kendo-grid-column field="EFFECTIVE_FROM_DATE" title="{{language.EffectiveFromDate}}" width="125" >
             </kendo-grid-column>
-            <kendo-grid-column field="EFFECTIVE_TO_DATE" title="{{'EffectiveToDate' | translate}}" width="110">
+            <kendo-grid-column field="EFFECTIVE_TO_DATE" title="{{language.EffectiveToDate}}" width="110">
             </kendo-grid-column>
-            <kendo-grid-column field="COUNT_POINT_OPERATION" title="{{'CountPointOperation' | translate}}" width="140">
+            <kendo-grid-column field="COUNT_POINT_OPERATION" title="{{language.CountPointOperation}}" width="140">
             </kendo-grid-column>
-            <kendo-grid-column field="U_OPTM_AUTOMOVE" title="{{'AutoMove' | translate}}" width="75">
+            <kendo-grid-column field="U_OPTM_AUTOMOVE" title="{{language.AutoMove}}" width="75">
             </kendo-grid-column>
-            <kendo-grid-column field="MIN_TRANSFER_QTY" title="{{'MinTransferQty' | translate}}" width="135" class="text-right" headerClass="text-right">
+            <kendo-grid-column field="MIN_TRANSFER_QTY" title="{{language.MinTransferQty}}" width="135" class="text-right" headerClass="text-right">
             </kendo-grid-column>
-            <kendo-grid-column field="U_O_INC_LEAD_TIM_CAL" title="{{'InclInLeadTimeCal' | translate}}" width="135">
+            <kendo-grid-column field="U_O_INC_LEAD_TIM_CAL" title="{{language.InclInLeadTimeCal}}" width="135">
             </kendo-grid-column>
-            <kendo-grid-column field="U_OPTM_MOVE_TIME" title="{{'MoveTime' | translate}}" width="75">
+            <kendo-grid-column field="U_OPTM_MOVE_TIME" title="{{language.MoveTime}}" width="75">
             </kendo-grid-column>
-            <kendo-grid-column field="U_OPTM_QCTIME" title="{{'QCTime' | translate}}" width="60">
+            <kendo-grid-column field="U_OPTM_QCTIME" title="{{language.QCTime}}" width="60">
             </kendo-grid-column>
-            <kendo-grid-column field="TIME_UOM" title="{{'TimeUOM' | translate}}" width="75">
+            <kendo-grid-column field="TIME_UOM" title="{{language.TimeUOM}}" width="75">
             </kendo-grid-column>
-            <kendo-grid-column field="EXTERNAL_INFUSE_QTY_PERC" title="{{'PerExternalInfuseQty' | translate}}" width="135" class="text-right" headerClass="text-right">
+            <kendo-grid-column field="EXTERNAL_INFUSE_QTY_PERC" title="{{language.PerExternalInfuseQty}}" width="135" class="text-right" headerClass="text-right">
             </kendo-grid-column>
-            <kendo-grid-column field="U_OPTM_INSTRUCTION" title="{{'Instruction' | translate}}" width="75">
+            <kendo-grid-column field="U_OPTM_INSTRUCTION" title="{{language.Instruction}}" width="75">
             </kendo-grid-column>
-            <kendo-grid-column field="U_OPTM_ATTACHMENT" title="{{'Attachments' | translate}}" width="85">
+            <kendo-grid-column field="U_OPTM_ATTACHMENT" title="{{language.Attachments}}" width="85">
             </kendo-grid-column>
-            <kendo-grid-column field="U_O_WC_ID" title="{{'U_O_WC_ID' | translate}}" width="80">
+            <kendo-grid-column field="U_O_WC_ID" title="{{language.U_O_WC_ID}}" width="80">
             </kendo-grid-column>
             <div *kendoGridDetailTemplate="let dataItem">
-              <div class="h5 p-2 mb-0 border border-bottom-0 bg-white">{{'ResourceDetail' | translate}}</div>
+              <div class="h5 p-2 mb-0 border border-bottom-0 bg-white">{{language.ResourceDetail}}</div>
               <kendo-grid [kendoGridBinding]="dataItem.ResourceDetail" [navigable]="true" [resizable]="true" kendoGridFocusable [groupable]=isColumnGroup5 [filterable]=isColumnFilter5 [sortable]="true">
                 <ng-template kendoGridToolbarTemplate>
                   <div class="d-flex align-items-center">        
                       <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
                           <input type="checkbox" [(ngModel)]="isColumnFilter5" [ngModelOptions]="{standalone: true}">
                           <span class="checkbox"></span>
-                          <span>{{'EnableFilter' | translate}}</span>
+                          <span>{{language.EnableFilter}}</span>
                       </label>
                   </div>
                 </ng-template>
-                <kendo-grid-column field="U_O_LINE_NO" title="{{'OperationNumber' | translate}}" width="60" class="text-right" headerClass="text-right">
+                <kendo-grid-column field="U_O_LINE_NO" title="{{language.OperationNumber}}" width="60" class="text-right" headerClass="text-right">
                 </kendo-grid-column>
-                <kendo-grid-column field="U_O_RESO_ID" title="{{'ResourceCode' | translate}}" width="62">
+                <kendo-grid-column field="U_O_RESO_ID" title="{{language.ResourceCode}}" width="62">
                 </kendo-grid-column>
-                <kendo-grid-column field="U_O_RUOM" title="{{'ResourceUOM' | translate}}" width="65">
+                <kendo-grid-column field="U_O_RUOM" title="{{language.ResourceUOM}}" width="65">
                 </kendo-grid-column>
-                <kendo-grid-column field="U_O_RCONSU" title="{{'Consumption' | translate}}" width="60" class="text-right" headerClass="text-right">
+                <kendo-grid-column field="U_O_RCONSU" title="{{language.Consumption}}" width="60" class="text-right" headerClass="text-right">
                 </kendo-grid-column>
-                <kendo-grid-column field="U_O_INVERSE" title="{{'Inverse' | translate}}" width="40" class="text-right" headerClass="text-right">
+                <kendo-grid-column field="U_O_INVERSE" title="{{language.Inverse}}" width="40" class="text-right" headerClass="text-right">
                 </kendo-grid-column>
-                <kendo-grid-column field="U_O_NOF_RESO_USED" title="{{'NoResourceUsed' | translate}}" width="90" class="text-right" headerClass="text-right">
+                <kendo-grid-column field="U_O_NOF_RESO_USED" title="{{language.NoResourceUsed}}" width="90" class="text-right" headerClass="text-right">
                 </kendo-grid-column>
-                <kendo-grid-column field="U_O_UOM" title="{{'TimeUOM' | translate}}" width="50">
+                <kendo-grid-column field="U_O_UOM" title="{{language.TimeUOM}}" width="50">
                 </kendo-grid-column>
-                <kendo-grid-column field="U_O_CONSUMPTION" title="{{'Consumption' | translate}}" width="60" class="text-right" headerClass="text-right">
+                <kendo-grid-column field="U_O_CONSUMPTION" title="{{language.Consumption}}" width="60" class="text-right" headerClass="text-right">
                 </kendo-grid-column>
-                <kendo-grid-column field="U_O_CONSTYPE" title="{{'ConsumptionType' | translate}}" width="80" class="text-right" headerClass="text-right">
+                <kendo-grid-column field="U_O_CONSTYPE" title="{{language.ConsumptionType}}" width="80" class="text-right" headerClass="text-right">
                 </kendo-grid-column>
-                <kendo-grid-column field="U_O_COMPUTION_BASIS" title="{{'Basis' | translate}}" width="40" class="text-right" headerClass="text-right">
+                <kendo-grid-column field="U_O_COMPUTION_BASIS" title="{{language.Basis}}" width="40" class="text-right" headerClass="text-right">
                 </kendo-grid-column>
-                <kendo-grid-column field="U_OPTM_SCHEDULE" title="{{'Schedule' | translate}}" width="40" class="text-right" headerClass="text-right">
+                <kendo-grid-column field="U_OPTM_SCHEDULE" title="{{language.Schedule}}" width="40" class="text-right" headerClass="text-right">
                 </kendo-grid-column>
               </kendo-grid>
             </div>

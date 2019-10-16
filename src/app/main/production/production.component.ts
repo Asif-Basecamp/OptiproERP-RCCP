@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { ProductionService } from 'src/app/core/service/production.service';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { TranslateService } from '@ngx-translate/core';
-import { environment } from '../../../environments/environment';
 
 export interface TreeNode {
   label?: string;
@@ -109,88 +108,37 @@ export class ProductionComponent implements OnInit {
   public MaterialLoader: any;  
   public OperationLoader: any;  
   public ResourceLoader: any;
-  public InProcess: any;  
-  public New: any;
-  public Close: any;
-  public Cancel: any;
-  public simple_View: any;
-  public detail_view: any;
-  public error: any;
-  public item_from: any;
-  public item_to: any;
-  public item_code_from_error: any;
-  public item_code_to_error: any;
+  public language: any;
+  public arrConfigData: any;
 
   constructor(private router: Router, private notificationService: NotificationService, private datePipe: DatePipe,private prod: ProductionService, private translate: TranslateService) {}
   @HostListener('window:resize', ['$event']) onResize() {
     this.mobileView();
   }
  ngOnInit() { 
+  this.language = JSON.parse(window.localStorage.getItem('language'));
+  this.arrConfigData = JSON.parse(window.localStorage.getItem('arrConfigData'));  
   this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
   this.FromDate = new Date();
   this.ToDate = new Date();
   this.masterSelected = true;
 
-  this.translate.get('In_Process').subscribe((text:string) => {
-    this.InProcess = text;
-  });
-
-  this.translate.get('New').subscribe((text:string) => {
-    this.New = text;
-  }); 
-  
-  this.translate.get('Close').subscribe((text:string) => {
-    this.Close = text;
-  }); 
-
-  this.translate.get('Cancel').subscribe((text:string) => {
-    this.Cancel = text;
-  }); 
-
-  this.translate.get('simple_View').subscribe((text:string) => {
-    this.simple_View = text;
-  }); 
-
-  this.translate.get('detail_view').subscribe((text:string) => {
-    this.detail_view = text;
-  }); 
-
-  this.translate.get('no_record_found').subscribe((text:string) => {
-    this.error = text;
-  });
-
-  this.translate.get('item_from').subscribe((text:string) => {
-    this.item_from = text;
-  });
-
-  this.translate.get('item_to').subscribe((text:string) => {
-    this.item_to = text;
-  });
-
-  this.translate.get('item_code_to_msg').subscribe((text:string) => {
-    this.item_code_to_error = text;
-  });
-
-  this.translate.get('item_code_from_msg').subscribe((text:string) => {
-    this.item_code_from_error = text;
-  });
-
   this.checklist = [
-    {id:1, name: this.InProcess, value: '6', isSelected:false},
-    {id:2, name: this.New, value: '1', isSelected:false},
-    {id:3, name: this.Close, value: '4', isSelected:false},
-    {id:4, name: this.Cancel, value: '3', isSelected:false}
+    {id:1, name:this.language.In_Process, value: '6', isSelected:false},
+    {id:2, name:this.language.New, value: '1', isSelected:false},
+    {id:3, name:this.language.Close, value: '4', isSelected:false},
+    {id:4, name:this.language.Cancel, value: '3', isSelected:false}
   ];
   this.getCheckedItemList();
   this.checkUncheckAll();
-  this.getItemData(environment.service_url, this.CompanyDB);  
+  this.getItemData(this.arrConfigData.service_url, this.CompanyDB);  
   let WoSelect = [];
   this.WOSelected = (e: RowArgs) => WoSelect.indexOf(e.dataItem.DocEntry) >=0 ;
 
- this.viewOptions = [
-   { value: 'SIMPLE', label: this.simple_View },
-   { value: 'Multi', label:  this.detail_view },
- ];
+  this.viewOptions = [
+    { value: 'SIMPLE', label: this.language.simple_View },
+    { value: 'Multi', label: this.language.detail_view },
+  ];
 this.viewOption = 'SIMPLE'; 
 this.mobileView(); 
  }
@@ -204,11 +152,6 @@ this.mobileView();
   }
 }
 
-
- //open(dialog: TemplateRef < any > ) {
-  //this.dialogService.open(dialog);
- //}
-
  process() {
   this.gridStatus = !this.gridStatus;
  }
@@ -221,7 +164,7 @@ this.mobileView();
  } 
 
 showDetailCompleteLookup(data){
-  this.prod.GetCompletedQtyDetails(environment.service_url, this.CompanyDB, data.U_O_ORDRNO).subscribe(
+  this.prod.GetCompletedQtyDetails(this.arrConfigData.service_url, this.CompanyDB, data.U_O_ORDRNO).subscribe(
     data => {
       if(data != undefined && data != null){
         if(data.length > 0){
@@ -231,7 +174,7 @@ showDetailCompleteLookup(data){
         }
         else { 
          this.notificationService.show({
-          content: this.error,
+          content: this.language.no_record_found,
           animation: { type: 'fade', duration: 400 },
           position: { horizontal: 'right', vertical: 'top' },
           type: { style: 'error', icon: true },
@@ -241,7 +184,7 @@ showDetailCompleteLookup(data){
       }
       else {
        this.notificationService.show({
-        content: this.error,
+        content: this.language.no_record_found,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -252,7 +195,7 @@ showDetailCompleteLookup(data){
     },
     error => {
       this.notificationService.show({
-        content: this.error,
+        content: this.language.no_record_found,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -262,7 +205,7 @@ showDetailCompleteLookup(data){
 }
 
 showDetailsIssuedLookup(data){
-  this.prod.GetIssuedQtyDetails(environment.service_url, this.CompanyDB, data.U_O_COMPID,data.DocEntry).subscribe(
+  this.prod.GetIssuedQtyDetails(this.arrConfigData.service_url, this.CompanyDB, data.U_O_COMPID,data.DocEntry).subscribe(
     data => {
        if(data != undefined && data != null){
         if(data.length > 0){
@@ -272,7 +215,7 @@ showDetailsIssuedLookup(data){
         }
         else {
          this.notificationService.show({
-          content: this.error,
+          content: this.language.no_record_found,
           animation: { type: 'fade', duration: 400 },
           position: { horizontal: 'right', vertical: 'top' },
           type: { style: 'error', icon: true },
@@ -283,7 +226,7 @@ showDetailsIssuedLookup(data){
       }
       else {
        this.notificationService.show({
-        content: this.error,
+        content: this.language.no_record_found,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -293,7 +236,7 @@ showDetailsIssuedLookup(data){
     },
     error => {
       this.notificationService.show({
-        content: this.error,
+        content: this.language.no_record_found,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -305,7 +248,7 @@ showDetailsIssuedLookup(data){
 showDetailsInStockLookup(Inputdata,check,allGrid){
   
   if(check == 'WH'){
-    this.prod.GetWarehouseWiseInStockQtyDetails(environment.service_url, this.CompanyDB, Inputdata.U_O_COMPID, Inputdata.U_O_ISSWH).subscribe(
+    this.prod.GetWarehouseWiseInStockQtyDetails(this.arrConfigData.service_url, this.CompanyDB, Inputdata.U_O_COMPID, Inputdata.U_O_ISSWH).subscribe(
       data => {
          if(data != undefined && data != null){
           if(data.length > 0){
@@ -315,7 +258,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
           }
           else { 
            this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -325,7 +268,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
         }
         else {  
          this.notificationService.show({
-          content: this.error,
+          content: this.language.no_record_found,
           animation: { type: 'fade', duration: 400 },
           position: { horizontal: 'right', vertical: 'top' },
           type: { style: 'error', icon: true },
@@ -335,7 +278,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
       },
       error => {
         this.notificationService.show({
-          content: this.error,
+          content: this.language.no_record_found,
           animation: { type: 'fade', duration: 400 },
           position: { horizontal: 'right', vertical: 'top' },
           type: { style: 'error', icon: true },
@@ -351,7 +294,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
     else
    itemCode = Inputdata.U_O_COMPID;
 
-    this.prod.GetInStockQtyDetails(environment.service_url, this.CompanyDB, itemCode).subscribe(
+    this.prod.GetInStockQtyDetails(this.arrConfigData.service_url, this.CompanyDB, itemCode).subscribe(
       data => {         
         if(data != undefined && data != null){
           if(data.length > 0){
@@ -361,7 +304,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
           }
           else {
            this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -371,7 +314,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
         }
         else {
          this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -381,7 +324,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
       },
       error => {
         this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -426,7 +369,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
   getWorkOrder(itemName){
    this.FGLoader = true; 
    this.itemName = itemName;
-   this.prod.GetWorkOrderFG(environment.service_url, this.CompanyDB, itemName, this.RadioBtnWO, this.checkedList.toString(), this.FromDate, this.ToDate).subscribe(
+   this.prod.GetWorkOrderFG(this.arrConfigData.service_url, this.CompanyDB, itemName, this.RadioBtnWO, this.checkedList.toString(), this.FromDate, this.ToDate).subscribe(
      data => {
          if(!data){
              this.gridMaterial = [];
@@ -455,7 +398,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
      error => {
        this.FGLoader = false;
        this.notificationService.show({
-        content: this.error,
+        content: this.language.no_record_found,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -467,7 +410,7 @@ showDetailsInStockLookup(Inputdata,check,allGrid){
 showDetailsOnOrderLookup(Inputdata,check,allGrid){
   if(check == 'WH'){
     
-    this.prod.GetWarehouseWiseOnOrderQtyDetails(environment.service_url, this.CompanyDB, Inputdata.U_O_COMPID, Inputdata.U_O_ISSWH).subscribe(
+    this.prod.GetWarehouseWiseOnOrderQtyDetails(this.arrConfigData.service_url, this.CompanyDB, Inputdata.U_O_COMPID, Inputdata.U_O_ISSWH).subscribe(
       data => {
        if(data != undefined && data != null){
          if(data.length > 0){
@@ -477,7 +420,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
          }
          else {
            this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -487,7 +430,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
        }
        else {
          this.notificationService.show({
-          content: this.error,
+          content: this.language.no_record_found,
           animation: { type: 'fade', duration: 400 },
           position: { horizontal: 'right', vertical: 'top' },
           type: { style: 'error', icon: true },
@@ -498,7 +441,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
       },
       error => {
         this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -514,7 +457,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
      else
     itemCode = Inputdata.U_O_COMPID;
 
-    this.prod.GetOnOrderQtyDetails(environment.service_url, this.CompanyDB, itemCode).subscribe(
+    this.prod.GetOnOrderQtyDetails(this.arrConfigData.service_url, this.CompanyDB, itemCode).subscribe(
       data => {
        if(data != undefined && data != null){
          if(data.length > 0){
@@ -524,7 +467,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
          }
          else {
            this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -534,7 +477,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
        }
        else {
          this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -545,7 +488,7 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
       },
       error => {
         this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -569,9 +512,9 @@ showDetailsOnOrderLookup(Inputdata,check,allGrid){
      this.ItemCodeSelected = (e: RowArgs) => itemFromSelect.indexOf(e.dataItem.ItemCode) >=0 ;
    } 
   if(!this.ItemData){
-    this.getItemData(environment.service_url, this.CompanyDB);
+    this.getItemData(this.arrConfigData.service_url, this.CompanyDB);
   }        
-    this.lookUpHeading =  this.item_from;
+    this.lookUpHeading =  this.language.item_from;
     this.gridData = this.ItemData;
     this.open();
     this.ItemFrom = true;
@@ -610,9 +553,9 @@ openItemToLookup(){
    this.ItemCodeSelected = (e: RowArgs) => itemToSelect.indexOf(e.dataItem.ItemCode) >=0 ;
  } 
   if(!this.ItemData){
-    this.getItemData(environment.service_url, this.CompanyDB);
+    this.getItemData(this.arrConfigData.service_url, this.CompanyDB);
   }        
-    this.lookUpHeading = this.item_to;
+    this.lookUpHeading = this.language.item_to;
     this.gridData = this.ItemData;
     this.open();
     this.ItemFrom = false;
@@ -690,7 +633,7 @@ gridRowSelectionChange(evt) {
      else 
      this.showMaterialView = 'all';
        
-     this.prod.GetMaterialData(environment.service_url, this.CompanyDB, DocEntry,this.materialViewOption, ItemCode, 
+     this.prod.GetMaterialData(this.arrConfigData.service_url, this.CompanyDB, DocEntry,this.materialViewOption, ItemCode, 
        this.FromDate, this.ToDate, this.checkedList.toString()).subscribe(
        data => {
            this.gridMaterial = data; 
@@ -708,7 +651,7 @@ gridRowSelectionChange(evt) {
        error => {
          this.MaterialLoader = false;
          this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -719,7 +662,7 @@ gridRowSelectionChange(evt) {
 
   getOperations(DocEntry){
      this.OperationLoader = true;
-     this.prod.GetOperationData(environment.service_url, this.CompanyDB, DocEntry).subscribe(
+     this.prod.GetOperationData(this.arrConfigData.service_url, this.CompanyDB, DocEntry).subscribe(
        data => {
            this.gridOperation = data; 
            if(this.gridOperation != null && this.gridOperation != undefined){
@@ -733,7 +676,7 @@ gridRowSelectionChange(evt) {
        error => {
          this.OperationLoader = false;       
          this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -744,7 +687,7 @@ gridRowSelectionChange(evt) {
 
   getResources(DocEntry){
    this.ResourceLoader = true; 
-   this.prod.GetResourceData(environment.service_url, this.CompanyDB, DocEntry).subscribe(
+   this.prod.GetResourceData(this.arrConfigData.service_url, this.CompanyDB, DocEntry).subscribe(
      data => {
          this.gridResource = data;
          if(this.gridResource != null && this.gridResource != undefined){
@@ -759,7 +702,7 @@ gridRowSelectionChange(evt) {
      error => {
        this.ResourceLoader = false;       
        this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -787,7 +730,7 @@ gridRowSelectionChange(evt) {
     this.seachPanelCollapse = false;
     if(this.ItemCodeFrom && !this.ItemCodeTo){
       this.notificationService.show({
-        content: this.item_code_to_error,
+        content: this.language.item_code_to_msg,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -795,7 +738,7 @@ gridRowSelectionChange(evt) {
       }); 
     }else if(!this.ItemCodeFrom && this.ItemCodeTo){
       this.notificationService.show({
-        content: this.item_code_from_error,
+        content: this.language.item_code_from_msg,
         animation: { type: 'fade', duration: 400 },
         position: { horizontal: 'right', vertical: 'top' },
         type: { style: 'error', icon: true },
@@ -825,13 +768,13 @@ gridRowSelectionChange(evt) {
       if(this.ItemCodeTo == 'undefined' || this.ItemCodeTo == undefined){
         this.ItemCodeTo = '';
       }  
-      this.prod.GetItemExplosionData(environment.service_url, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.viewOption, this.FromDate, this.ToDate).subscribe(
+      this.prod.GetItemExplosionData(this.arrConfigData.service_url, this.CompanyDB, this.ItemCodeFrom, this.ItemCodeTo, this.viewOption, this.FromDate, this.ToDate).subscribe(
         data => {
             if(data.length == 0){
               this.loading = false;
               this.collapse();
               this.notificationService.show({
-                content: this.error,
+                content: this.language.no_record_found,
                 animation: { type: 'fade', duration: 400 },
                 position: { horizontal: 'right', vertical: 'top' },
                 type: { style: 'error', icon: true },
@@ -855,7 +798,7 @@ gridRowSelectionChange(evt) {
               else {
                 this.collapse();
                 this.notificationService.show({
-                content: this.error,
+                content: this.language.no_record_found,
                 animation: { type: 'fade', duration: 400 },
                 position: { horizontal: 'right', vertical: 'top' },
                 type: { style: 'error', icon: true },
@@ -867,7 +810,7 @@ gridRowSelectionChange(evt) {
         },
         error => {
           this.notificationService.show({
-                content: this.error,
+                content: this.language.no_record_found,
                 animation: { type: 'fade', duration: 400 },
                 position: { horizontal: 'right', vertical: 'top' },
                 type: { style: 'error', icon: true },
@@ -1005,7 +948,7 @@ getInventshortRadioClick(){
 }
 
 showDetailsCommittedLookup(dataItem){
- this.prod.GetCommittedQtyDetails(environment.service_url, this.CompanyDB, dataItem.ItemCode).subscribe(
+ this.prod.GetCommittedQtyDetails(this.arrConfigData.service_url, this.CompanyDB, dataItem.ItemCode).subscribe(
    data => {
       if(data != undefined && data != null){
        if(data.length > 0){
@@ -1015,7 +958,7 @@ showDetailsCommittedLookup(dataItem){
        }
        else {
         this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -1026,7 +969,7 @@ showDetailsCommittedLookup(dataItem){
      }
      else {
       this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },
@@ -1036,7 +979,7 @@ showDetailsCommittedLookup(dataItem){
    },
    error => {
      this.notificationService.show({
-            content: this.error,
+            content: this.language.no_record_found,
             animation: { type: 'fade', duration: 400 },
             position: { horizontal: 'right', vertical: 'top' },
             type: { style: 'error', icon: true },

@@ -14,9 +14,6 @@ import { CountdownModule } from 'ngx-countdown';
 import { DatePipe } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
-import { WarehouseCodeLookupComponent } from './bom/warehouse-code-lookup/warehouse-code-lookup.component';
-import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup.component';
-
 
 @NgModule({
   imports: [
@@ -38,6 +35,6 @@ import { ItemCodeLookupComponent } from './bom/item-code-lookup/item-code-lookup
   providers: [
     DatePipe
   ],
-  declarations: [MainComponent, ItemCodeLookupComponent, WarehouseCodeLookupComponent]
+  declarations: [MainComponent]
 })
 export class MainModule { }

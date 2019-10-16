@@ -11,7 +11,7 @@
             <span>{{minutes}}</span>
             <span>{{seconds}}</span>
           </span>
-          <span class="h5 mb-0">{{'SelectionCriteria' | translate}}</span>
+          <span class="h5 mb-0">{{language.selection_criteria}}</span>
           <span class="ml-auto mr-3 d-flex justify-content-center align-items-center timer-wrapper"></span>
           <span class="optipro-icon-arrow-left cursor-pointer mr-1 d-flex"></span>
         </div>
@@ -25,25 +25,25 @@
                   <input #radioExplode1 type="radio" id="radioExplode1" value="SIMPLE" name="radioExplode"
                     [(ngModel)]="viewOption" class="k-radio" checked />
                   <span class="radio"></span>
-                  <span>{{'simple_View' | translate}}</span>
+                  <span>{{language.simple_View}}</span>
                 </label>
 
                 <label class="custom-radio">
                   <input #radioExplode2 type="radio" id="radioExplode2" value="DETAIL" name="radioExplode"
                     [(ngModel)]="viewOption" class="k-radio" />
                   <span class="radio"></span>
-                  <span>{{'detail_view' | translate}}</span>
+                  <span>{{language.detail_view}}</span>
                 </label>
               </fieldset>
 
 
 
               <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                <label for="ItemFrom" class="form-label mb-0">{{'ItemForm' | translate}}</label>
+                <label for="ItemFrom" class="form-label mb-0">{{language.ItemForm}}</label>
                 <div class="w-100">
                   <div class="input-group">
                     <input type="text" name="ItemCodeFrom" id="ItemCodeFrom" class="form-control form-control-sm"
-                      #ItemCF=ngModel [(ngModel)]="ItemCodeFrom" placeholder="{{'item_from' | translate}}"
+                      #ItemCF=ngModel [(ngModel)]="ItemCodeFrom" placeholder="{{language.item_from}}"
                       (keyup)="onItemFromBlur()" autocomplete="off">
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-primary btn-icon d-flex d-flex"
@@ -56,17 +56,17 @@
                   </div>
                 </div>
                 <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
-                  *ngIf="itemFromStatus && ItemCF.touched">{{'correct_item_code' | translate}}</small>
+                  *ngIf="itemFromStatus && ItemCF.touched">{{language.correct_item_code}}</small>
                 <small id="emailHelp" class="form-text text-muted opti_error-msg"></small>
               </div>
 
               <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                <label for="ItemFrom" class="form-label mb-0">{{'ItemTo' | translate}}</label>
+                <label for="ItemFrom" class="form-label mb-0">{{language.ItemTo}}</label>
                 <div class="w-100">
                   <div class="input-group">
                     <input type="text" name="ItemCodeTo" id="ItemCodeTo" class="form-control form-control-sm"
                       class="form-control form-control-sm" #ItemCT=ngModel [(ngModel)]="ItemCodeTo"
-                      placeholder="{{'item_to' | translate}}" (keyup)="onItemToBlur()" autocomplete="off">
+                      placeholder="{{language.item_to}}" (keyup)="onItemToBlur()" autocomplete="off">
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-primary btn-icon d-flex" (click)="openItemToLookup()">
                         <svg viewBox="0 -96 512 512" class="icon">
@@ -77,11 +77,11 @@
                   </div>
                 </div>
                 <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
-                  *ngIf="itemToStatus && ItemCT.touched">{{'correct_item_code' | translate}}</small>
+                  *ngIf="itemToStatus && ItemCT.touched">{{language.correct_item_code}}</small>
               </div>
 
               <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                <label for="FromDate" class="form-label mb-0">{{'wo_date_from' | translate}}</label>
+                <label for="FromDate" class="form-label mb-0">{{language.wo_date_from}}</label>
                 <div class="w-100">
                   <kendo-datepicker id="FromDate" class="w-100" [format]="'MMMM dd, yyyy'" [(ngModel)]="FromDate"
                     [(value)]="FromDate" [ngModelOptions]="{standalone: true}">
@@ -90,7 +90,7 @@
               </div>
 
               <div class="form-group" [ngStyle]="{'margin-bottom.px': 10}">
-                <label for="ToDate" class="form-label mb-0">{{'wo_date_to' | translate}}</label>
+                <label for="ToDate" class="form-label mb-0">{{language.wo_date_to}}</label>
                 <div class="w-100">
                   <kendo-datepicker id="ToDate" class="w-100" [format]="'MMMM dd, yyyy'" [(ngModel)]="ToDate"
                     [(value)]="ToDate" [ngModelOptions]="{standalone: true}">
@@ -98,7 +98,7 @@
                 </div>
               </div>
 
-              <h6 class="border-bottom pb-2 mb-2 mt-3">{{'wo_status' | translate}}</h6>
+              <h6 class="border-bottom pb-2 mb-2 mt-3">{{language.wo_status}}</h6>
 
               <div class="form-group d-flex flex-row flex-wrap" [ngStyle]="{'margin-bottom.px': 10}">
                 <div>
@@ -106,7 +106,7 @@
                     <input type="checkbox" id="all" name="WO_Status" [(ngModel)]="masterSelected"
                       (change)="checkUncheckAll()">
                     <span class="checkbox"></span>
-                    <span>{{'all' | translate}}</span>
+                    <span>{{language.all}}</span>
                   </label>
                 </div>
                 <div *ngFor="let item of checklist">
@@ -119,7 +119,7 @@
                 </div>
                 <div>
                   <small id="emailHelp" class="form-text text-muted float-right opti_error-msg"
-                    *ngIf="checkboxStatus">{{'select_one_wo' | translate}}</small>
+                    *ngIf="checkboxStatus">{{language.select_one_wo}}</small>
                 </div>
               </div>
 
@@ -133,7 +133,7 @@
                   <input type="checkbox" id="autorefreshTime" name="autorefreshTime" [(ngModel)]="refreshCheck"
                     (click)="refreshEvent($event)">
                   <span class="checkbox"></span>
-                  <span class="text-nowrap">{{'auto_refresh_time' | translate}}</span>
+                  <span class="text-nowrap">{{language.auto_refresh_time}}</span>
                 </label>
                 <kendo-timepicker class="form-control-sm" [ngStyle]="{'max-width': '109px'}" format="HH:mm"
                   formatPlaceholder="formatPattern" [(value)]="value" [disabled]="!refreshStatus">
@@ -162,7 +162,7 @@
         <div class="card-footer text-center py-2">
           <button type="button" class="btn btn-primary btn-icon btn-sm px-2" id="process"
             (click)="GetExplosionData($event)"
-            [disabled]="!criteriaForm.form.valid || (itemFromStatus || itemToStatus)">{{'process' | translate}}
+            [disabled]="!criteriaForm.form.valid || (itemFromStatus || itemToStatus)">{{language.process}}
             <svg viewBox="0 0 24 24" class="icon">
               <use xlink:href="#rightArrow"></use>
             </svg>
@@ -184,39 +184,39 @@
           <kendo-splitter class="h-100 p-3 internal-spitter">
             <kendo-splitter-pane [collapsible]="true" size="25%" [resizable]="true">
               <div class="pr-1 h-100" *ngIf="showView == 'simple'">
-                <div class="h5 p-2 mb-0 border border-bottom-0">{{'simple_view' | translate}}</div>
+                <div class="h5 p-2 mb-0 border border-bottom-0">{{language.simple_view}}</div>
                 <kendo-grid [kendoGridBinding]="gridViewData" class="primary-table-colored simpleViewTable"
                   [groupable]=isColumnGroup [selectable]="true" [rowSelected]="GridViewSelected" [sort]="state.sort"
                   [resizable]="true" (selectionChange)="gridRowSelectFG($event)"
                   [ngStyle]="{ 'cursor': 'pointer', 'max-height': 'calc(100% - 33px)','height': 'calc(100% - 33px)'}">
 
-                  <kendo-grid-column field="ItemCode" title="{{'item' | translate}}" width="80">
+                  <kendo-grid-column field="ItemCode" title="{{language.item}}" width="80">
                   </kendo-grid-column>
-                  <kendo-grid-column field="U_O_BOM_SEQ" title="{{'bom_seq' | translate}}" width="80" class="text-right"
+                  <kendo-grid-column field="U_O_BOM_SEQ" title="{{language.bom_seq}}" width="80" class="text-right"
                     headerClass="text-right">
                   </kendo-grid-column>
-                  <kendo-grid-column field="OnHand" title="{{'in_stock' | translate}}" width="80" class="text-right"
+                  <kendo-grid-column field="OnHand" title="{{language.in_stock}}" width="80" class="text-right"
                     headerClass="text-right">
                     <ng-template kendoGridCellTemplate let-dataItem>
                       <a class="cursor-pointer text-primary"
                         (click)="showDetailsInStockLookup(dataItem,'CP',true)">{{dataItem.OnHand}}</a>
                     </ng-template>
                   </kendo-grid-column>
-                  <kendo-grid-column field="IsCommited" title="{{'commited' | translate}}" width="80" class="text-right"
+                  <kendo-grid-column field="IsCommited" title="{{language.commited}}" width="80" class="text-right"
                     headerClass="text-right">
                     <ng-template kendoGridCellTemplate let-dataItem>
                       <a class="cursor-pointer text-primary"
                         (click)="showDetailsCommittedLookup(dataItem)">{{dataItem.IsCommited}}</a>
                     </ng-template>
                   </kendo-grid-column>
-                  <kendo-grid-column field="OnOrder" title="{{'on_order' | translate}}" width="80" class="text-right"
+                  <kendo-grid-column field="OnOrder" title="{{language.on_order}}" width="80" class="text-right"
                     headerClass="text-right">
                     <ng-template kendoGridCellTemplate let-dataItem>
                       <a class="cursor-pointer text-primary"
                         (click)="showDetailsOnOrderLookup(dataItem,'CP',true)">{{dataItem.OnOrder}}</a>
                     </ng-template>
                   </kendo-grid-column>
-                  <kendo-grid-column field="AVAILABLE" title="{{'available_qty' | translate}}" width="120"
+                  <kendo-grid-column field="AVAILABLE" title="{{language.available_qty}}" width="120"
                     class="text-right" headerClass="text-right">
                     <ng-template kendoGridCellTemplate let-dataItem>
                       <span *ngIf="!CmpInventShort || (dataItem.AVAILABLE > 0)">{{dataItem.AVAILABLE}}</span>
@@ -224,14 +224,14 @@
                         class="text-danger">{{dataItem.AVAILABLE}}</span>
                     </ng-template>
                   </kendo-grid-column>
-                  <kendo-grid-column field="U_O_UOM" title="{{'uom' | translate}}" width="80" class="text-right"
+                  <kendo-grid-column field="U_O_UOM" title="{{language.uom}}" width="80" class="text-right"
                     headerClass="text-right">
                   </kendo-grid-column>
                 </kendo-grid>
               </div>
 
               <div class="pr-1 h-100" *ngIf="showView == 'detail'">
-                <div class="h5 p-2 mb-0 border border-bottom-0">{{'detail_view' | translate}}</div>
+                <div class="h5 p-2 mb-0 border border-bottom-0">{{language.detail_view}}</div>
                 <div class="detail-view-tree-table tree-wrapper implementation restrictedHeight">
                   <p-treeTable [value]="files2" class="primary-table-colored detailViewTable" selectionMode="single"
                     [scrollable]="true" scrollHeight="" [resizableColumns]="true">
@@ -248,13 +248,13 @@
                     </ng-template>
                     <ng-template pTemplate="header">
                       <tr>
-                        <th ttResizableColumn>{{'item' | translate}}</th>
-                        <th ttResizableColumn>{{'bom_seq' | translate}}</th>
-                        <th ttResizableColumn>{{'in_stock' | translate}}</th>
-                        <th ttResizableColumn>{{'commited' | translate}}</th>
-                        <th ttResizableColumn>{{'on_order' | translate}}</th>
-                        <th ttResizableColumn>{{'available_qty' | translate}}</th>
-                        <th ttResizableColumn>{{'uom' | translate}}</th>
+                        <th ttResizableColumn>{{language.item}}</th>
+                        <th ttResizableColumn>{{language.bom_seq}}</th>
+                        <th ttResizableColumn>{{language.in_stock}}</th>
+                        <th ttResizableColumn>{{language.commited}}</th>
+                        <th ttResizableColumn>{{language.on_order}}</th>
+                        <th ttResizableColumn>{{language.available_qty}}</th>
+                        <th ttResizableColumn>{{language.uom}}</th>
                       </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-rowNode let-rowNodeIndex="rowNodeIndex" let-rowData="rowData">
@@ -296,33 +296,33 @@
                       <input #RadioBtnWO1 type="radio" id="radioExplode1" value="simple" name="RadioBtnWO"
                         [(ngModel)]="RadioBtnWO" (change)="getWoRadioClick(RadioBtnWO)" class="k-radio" checked />
                       <span class="radio"></span>
-                      <span>{{'show_Wo_FG' | translate}}</span>
+                      <span>{{language.show_Wo_FG}}</span>
                     </label>
   
                     <label class="custom-radio">
                       <input #RadioBtnWO2 type="radio" id="radioExplode2" value="all" name="RadioBtnWO"
                         [(ngModel)]="RadioBtnWO" (change)="getWoRadioClick(RadioBtnWO)" class="k-radio" />
                       <span class="radio"></span>
-                      <span>{{'show_Wo_subassemblies' | translate}}</span>
+                      <span>{{language.show_Wo_subassemblies}}</span>
                     </label>
                   </fieldset>
   
                   <div class="ml-auto d-flex flex-column">
                     <button type="button" (click)="getInventshortRadioClick()" class="btn btn-primary ml-auto btn-sm "
-                      style="text-transform: none;">{{'Inventory_Shortage' | translate}}</button>
+                      style="text-transform: none;">{{language.Inventory_Shortage}}</button>
                     <fieldset class="form-group px-0  mb-0 mt-2 ml-auto">
                       <label class="custom-radio mr-3">
                         <input #RadioBtnInventShort1 type="radio" id="radioExplode1" value="Warehouse"
                           name="RadioBtnInventShort" [(ngModel)]="RadioBtnInventShort" class="k-radio" checked />
                         <span class="radio"></span>
-                        <span>{{'Warehouse_Level' | translate}}</span>
+                        <span>{{language.Warehouse_Level}}</span>
                       </label>
   
                       <label class="custom-radio">
                         <input #RadioBtnInventShort2 type="radio" id="radioExplode2" value="Company"
                           name="RadioBtnInventShort" [(ngModel)]="RadioBtnInventShort" class="k-radio" />
                         <span class="radio"></span>
-                        <span>{{'Company_Level' | translate}}</span>
+                        <span>{{language.Company_Level}}</span>
                       </label>
                     </fieldset>
                   </div>
@@ -342,7 +342,7 @@
                               <input #chkFilter2 type="checkbox" (change)="onFilterChange(chkFilter2,gridItem1)"
                                 id="filter-1" [(ngModel)]="isColumnFilter2" class="k-checkbox" name="columnfilter" />
                               <span class="checkbox"></span>
-                              <span>{{'EnableFilter' | translate}}</span>
+                              <span>{{language.EnableFilter}}</span>
                             </label>
                             <!-- <label class="custom-checkbox mb-0 grouping-checkbox">
                                       <input type="checkbox" [(ngModel)]="isColumnGroup" [ngModelOptions]="{standalone: true}">
@@ -350,7 +350,7 @@
                                       <span>Enable grouping</span>
                                   </label> -->
                             <!-- export -->
-                            <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
+                            <button type="button" kendoGridExcelCommand title="{{language.ExportToExcel}}"
                               class="ml-auto btn btn-link btn-sm btn-icon p-0">
                               <svg viewBox="0 0 512 512" class="icon">
                                 <use xlink:href="#download"></use>
@@ -372,80 +372,80 @@
                           </ng-template>
                         </kendo-grid-checkbox-column>
   
-                        <kendo-grid-column field="DocEntry" title="{{'doc_entry' | translate}}" width="70"
+                        <kendo-grid-column field="DocEntry" title="{{language.doc_entry}}" width="70"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_OPTM_PRIORITY" title="{{'priority' | translate}}" width="55"
+                        <kendo-grid-column field="U_OPTM_PRIORITY" title="{{language.priority}}" width="55"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_ORDRNO" title="{{'wo' | translate}}" width="90" class="text-right"
+                        <kendo-grid-column field="U_O_ORDRNO" title="{{language.wo}}" width="90" class="text-right"
                           headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="WO_STATUS" title="{{'wo_status' | translate}}" width="80"
+                        <kendo-grid-column field="WO_STATUS" title="{{language.wo_status}}" width="80"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_PRODID" title="{{'product_no' | translate}}" width="81">
+                        <kendo-grid-column field="U_O_PRODID" title="{{language.product_no}}" width="81">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_PRODDESC" title="{{'product_desc' | translate}}" width="125">
+                        <kendo-grid-column field="U_O_PRODDESC" title="{{language.product_desc}}" width="125">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_SONO" title="{{'so_no' | translate}}" width="54" class="text-right"
+                        <kendo-grid-column field="U_O_SONO" title="{{language.so_no}}" width="54" class="text-right"
                           headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_CUSTCODE" title="{{'customer' | translate}}" width="70">
+                        <kendo-grid-column field="U_O_CUSTCODE" title="{{language.customer}}" width="70">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_STARTDATE" title="{{'sch_start_date' | translate}}" width="127">
+                        <kendo-grid-column field="U_O_STARTDATE" title="{{language.sch_start_date}}" width="127">
                           <ng-template kendoGridCellTemplate let-dataItem>
                             {{dataItem.U_O_STARTDATE | date: 'MM/dd/yyyy'}}
                           </ng-template>
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_ENDDATE" title="{{'sch_end_date' | translate}}" width="117">
+                        <kendo-grid-column field="U_O_ENDDATE" title="{{language.sch_end_date}}" width="117">
                           <ng-template kendoGridCellTemplate let-dataItem>
                             {{dataItem.U_O_ENDDATE | date: 'MM/dd/yyyy'}}
                           </ng-template>
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_UOM" title="{{'uom' | translate}}" width="44">
+                        <kendo-grid-column field="U_O_UOM" title="{{language.uom}}" width="44">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_ORDRQTY" title="{{'qty_ord' | translate}}" width="107"
+                        <kendo-grid-column field="U_O_ORDRQTY" title="{{language.qty_ord}}" width="107"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_POSTEDQTY" title="{{'qty_complete' | translate}}" width="123"
+                        <kendo-grid-column field="U_O_POSTEDQTY" title="{{language.qty_complete}}" width="123"
                           class="text-right" headerClass="text-right">
                           <ng-template kendoGridCellTemplate let-dataItem>
                             <a class="cursor-pointer text-primary"
                               (click)="showDetailCompleteLookup(dataItem)">{{dataItem.U_O_POSTEDQTY}}</a>
                           </ng-template>
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_PASSEDQTY" title="{{'qty_accept' | translate}}" width="115"
+                        <kendo-grid-column field="U_O_PASSEDQTY" title="{{language.qty_accept}}" width="115"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_REJQTY" title="{{'qty_reject' | translate}}" width="111"
+                        <kendo-grid-column field="U_O_REJQTY" title="{{language.qty_reject}}" width="111"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="BALANCE_QTY" title="{{'qty_bal' | translate}}" width="111"
+                        <kendo-grid-column field="BALANCE_QTY" title="{{language.qty_bal}}" width="111"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="COMPLETEPERCENT" title="{{'percent_complete' | translate}}" width="90"
+                        <kendo-grid-column field="COMPLETEPERCENT" title="{{language.percent_complete}}" width="90"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_FGWHSEID" title="{{'warehouse' | translate}}" width="80"
+                        <kendo-grid-column field="U_O_FGWHSEID" title="{{language.warehouse}}" width="80"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_BOMSEQ" title="{{'bom_seq' | translate}}" width="99"
+                        <kendo-grid-column field="U_O_BOMSEQ" title="{{language.bom_seq}}" width="99"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="U_O_RUTNGSEQ" title="{{'rout_seq' | translate}}" width="106"
+                        <kendo-grid-column field="U_O_RUTNGSEQ" title="{{language.rout_seq}}" width="106"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="ComponentCost" title="{{'component_cost' | translate}}" width="107"
+                        <kendo-grid-column field="ComponentCost" title="{{language.component_cost}}" width="107"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="ResourceCost" title="{{'resource_cost' | translate}}" width="95"
+                        <kendo-grid-column field="ResourceCost" title="{{language.resource_cost}}" width="95"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="ActualCost" title="{{'actual_product_cost' | translate}}" width="124"
+                        <kendo-grid-column field="ActualCost" title="{{language.actual_product_cost}}" width="124"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
-                        <kendo-grid-column field="Variance" title="{{'variance' | translate}}" width="90"
+                        <kendo-grid-column field="Variance" title="{{language.variance}}" width="90"
                           class="text-right" headerClass="text-right">
                         </kendo-grid-column>
   
@@ -456,19 +456,19 @@
                     <div class="w-100 h-100 pt-2">
                       <div class="border border-light-gray h-100 overflow-auto" fxFlex="0 0 100%">
                         <kendo-tabstrip class="custom-tab h-100" (tabSelect)="toggleLoadingAnimation()">
-                          <kendo-tabstrip-tab [title]="Material" [selected]="true">
+                          <kendo-tabstrip-tab [title]="[language.material]" [selected]="true">
                             <ng-template kendoTabContent>
                               <fieldset class="form-group px-0 mb-1">
                                 <label class="custom-radio mr-3">
                                   <input type="radio"  [value]="'immediate'" name="materialViewOption" [(ngModel)]="materialViewOption" class="k-radio" [checked]="materialViewOption == 'immediate'" />
                                   <span class="radio"></span>
-                                  <span>{{'show_immediate_components' | translate}}</span>
+                                  <span>{{language.show_immediate_components}}</span>
                                 </label>
   
                                 <label class="custom-radio">
                                   <input type="radio" [value]="'all'" name="materialViewOption" [(ngModel)]="materialViewOption" class="k-radio" [checked]="materialViewOption == 'all'" />
                                   <span class="radio"></span>
-                                  <span>{{'show_subassemblies_components' | translate}}</span>
+                                  <span>{{language.show_subassemblies_components}}</span>
                                 </label>
                               </fieldset>
                               <div class="w-100" *ngIf="materialViewOption == 'immediate'" [ngStyle]="{ 'height':'calc(100% - 28px)'}">
@@ -483,9 +483,9 @@
                                           (change)="onFilterChange(chkFilter3,gridMaterial)" id="filter-2"
                                           [(ngModel)]="isColumnFilter3" class="k-checkbox" name="columnfilter" />
                                         <span class="checkbox"></span>
-                                        <span>{{'EnableFilter' | translate}}</span>
+                                        <span>{{language.EnableFilter}}</span>
                                       </label>
-                                      <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
+                                      <button type="button" kendoGridExcelCommand title="{{language.ExportToExcel}}"
                                         class="ml-auto btn btn-link btn-sm btn-icon p-0">
                                         <svg viewBox="0 0 512 512" class="icon">
                                           <use xlink:href="#download"></use>
@@ -495,7 +495,7 @@
                                   </ng-template>
   
                                   <kendo-grid-excel fileName="MaterialGrid.xlsx"></kendo-grid-excel>
-                                  <kendo-grid-checkbox-column *ngIf="showSelection==true" title="{{'select' | translate}}"
+                                  <kendo-grid-checkbox-column *ngIf="showSelection==true" title="{{language.select}}"
                                     [width]="80">
                                     <ng-template kendoGridCellTemplate let-idx='rowIndex' let-di='dataItem'>
                                       <div class="k-form-field d-flex center-checkbox">
@@ -507,43 +507,43 @@
                                     </ng-template>
                                   </kendo-grid-checkbox-column>
   
-                                  <kendo-grid-column field="U_O_COMPID" title="{{'component' | translate}}" width="79">
+                                  <kendo-grid-column field="U_O_COMPID" title="{{language.component}}" width="79">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ITEMDESC" title="{{'description' | translate}}" width="78">
+                                  <kendo-grid-column field="U_O_ITEMDESC" title="{{language.description}}" width="78">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_UOM" title="{{'uom' | translate}}" width="44">
+                                  <kendo-grid-column field="U_O_UOM" title="{{language.uom}}" width="44">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="REQ_QTY" title="{{'qty_per_bom_unit' | translate}}" width="139"
+                                  <kendo-grid-column field="REQ_QTY" title="{{language.qty_per_bom_unit}}" width="139"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ACTISSQTY" title="{{'qty_issued' | translate}}" width="94"
+                                  <kendo-grid-column field="U_O_ACTISSQTY" title="{{language.qty_issued}}" width="94"
                                     class="text-right" headerClass="text-right">
                                     <ng-template kendoGridCellTemplate let-dataItem>
                                       <a class="cursor-pointer text-primary"
                                         (click)="showDetailsIssuedLookup(dataItem)">{{dataItem.ISSUED_QTY}}</a>
                                     </ng-template>
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_BALQTY" title="{{'qty_bal' | translate}}" width="108"
+                                  <kendo-grid-column field="U_O_BALQTY" title="{{language.qty_bal}}" width="108"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ISSUEDATE" title="{{'issue_date' | translate}}" width="82">
+                                  <kendo-grid-column field="U_O_ISSUEDATE" title="{{language.issue_date}}" width="82">
                                     <ng-template kendoGridCellTemplate let-dataItem>
                                       {{dataItem.U_O_ISSUEDATE | date: 'MM/dd/yyyy'}}
                                     </ng-template>
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ISSWH" title="{{'issue_wh' | translate}}" width="109"
+                                  <kendo-grid-column field="U_O_ISSWH" title="{{language.issue_wh}}" width="109"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ISSBIN" title="{{'issue_bin' | translate}}" width="181">
+                                  <kendo-grid-column field="U_O_ISSBIN" title="{{language.issue_bin}}" width="181">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ISSTYPE" title="{{'issue_mth' | translate}}" width="100">
+                                  <kendo-grid-column field="U_O_ISSTYPE" title="{{language.issue_mth}}" width="100">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ISSTOOPER" title="{{'opn' | translate}}" width="77"
+                                  <kendo-grid-column field="U_O_ISSTOOPER" title="{{language.opn}}" width="77"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column-group headerClass="text-center" title="{{'qty_wh_xxxx' | translate}}"
+                                  <kendo-grid-column-group headerClass="text-center" title="{{language.qty_wh_xxxx}}"
                                     [width]="300">
-                                    <kendo-grid-column field="WH_INSTOCK_QTY" title="{{'qty_in_stock' | translate}}"
+                                    <kendo-grid-column field="WH_INSTOCK_QTY" title="{{language.qty_in_stock}}"
                                       [width]="108" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <a class="cursor-pointer text-primary"
@@ -551,17 +551,17 @@
   
                                       </ng-template>
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="WH_COMMITED_QTY" title="{{'qty_commit' | translate}}"
+                                    <kendo-grid-column field="WH_COMMITED_QTY" title="{{language.qty_commit}}"
                                       [width]="122" class="text-right" headerClass="text-right">
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="WH_ONORDER_QTY" title="{{'qty_on_order' | translate}}"
+                                    <kendo-grid-column field="WH_ONORDER_QTY" title="{{language.qty_on_order}}"
                                       [width]="122" [locked]="false" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <a class="cursor-pointer text-primary"
                                           (click)="showDetailsOnOrderLookup(dataItem,'WH')">{{dataItem.WH_ONORDER_QTY}}</a>
                                       </ng-template>
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="WH_AVAILABLE_QTY" title="{{'qty_aval' | translate}}"
+                                    <kendo-grid-column field="WH_AVAILABLE_QTY" title="{{language.qty_aval}}"
                                       [width]="113" [locked]="false" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <span
@@ -571,26 +571,26 @@
                                       </ng-template>
                                     </kendo-grid-column>
                                   </kendo-grid-column-group>
-                                  <kendo-grid-column-group headerClass="text-center" title="{{'qty_company_lvl' | translate}}"
+                                  <kendo-grid-column-group headerClass="text-center" title="{{language.qty_company_lvl}}"
                                     [width]="300">
-                                    <kendo-grid-column field="COM_INSTOCK_QTY" title="{{'qty_in_stock' | translate}}"
+                                    <kendo-grid-column field="COM_INSTOCK_QTY" title="{{language.qty_in_stock}}"
                                       [width]="108" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <a class="cursor-pointer text-primary"
                                           (click)="showDetailsInStockLookup(dataItem,'CP',false)">{{dataItem.COM_INSTOCK_QTY}}</a>
                                       </ng-template>
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="COM_COMMITED_QTY" title="{{'qty_commit' | translate}}"
+                                    <kendo-grid-column field="COM_COMMITED_QTY" title="{{language.qty_commit}}"
                                       [width]="121" class="text-right" headerClass="text-right">
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="COM_ONORDER_QTY" title="{{'qty_on_order' | translate}}"
+                                    <kendo-grid-column field="COM_ONORDER_QTY" title="{{language.qty_on_order}}"
                                       [width]="122" [locked]="false" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <a class="cursor-pointer text-primary"
                                           (click)="showDetailsOnOrderLookup(dataItem,'CP')">{{dataItem.COM_ONORDER_QTY}}</a>
                                       </ng-template>
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="COM_AVAILABLE_QTY" title="{{'qty_aval' | translate}}"
+                                    <kendo-grid-column field="COM_AVAILABLE_QTY" title="{{language.qty_aval}}"
                                       [width]="113" [locked]="false" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <span
@@ -619,7 +619,7 @@
                                           (change)="onFilterChange(chkFilter4,gridMaterial)" id="filter-3"
                                           [(ngModel)]="isColumnFilter4" class="k-checkbox" name="columnfilter" />
                                         <span class="checkbox"></span>
-                                        <span>{{'EnableFilter' | translate}}</span>
+                                        <span>{{language.EnableFilter}}</span>
                                       </label>
                                       <!-- <label class="custom-checkbox mb-0 grouping-checkbox">
                                                     <input type="checkbox" [(ngModel)]="isColumnGroup5" [ngModelOptions]="{standalone: true}">
@@ -627,7 +627,7 @@
                                                     <span>Enable grouping</span>
                                                 </label> -->
                                       <!-- export -->
-                                      <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
+                                      <button type="button" kendoGridExcelCommand title="{{language.ExportToExcel}}"
                                         class="ml-auto btn btn-link btn-sm btn-icon p-0">
                                         <svg viewBox="0 0 512 512" class="icon">
                                           <use xlink:href="#download"></use>
@@ -638,7 +638,7 @@
   
                                   <kendo-grid-excel fileName="MaterialGrid.xlsx"></kendo-grid-excel>
   
-                                  <kendo-grid-checkbox-column *ngIf="showSelection==true" title="{{'select' | translate}}"
+                                  <kendo-grid-checkbox-column *ngIf="showSelection==true" title="{{language.select}}"
                                     [width]="25">
                                     <ng-template kendoGridCellTemplate let-idx='rowIndex' let-di='dataItem'>
                                       <div class="k-form-field d-flex center-checkbox">
@@ -650,66 +650,66 @@
                                     </ng-template>
                                   </kendo-grid-checkbox-column>
   
-                                  <kendo-grid-column field="PARENT_WO" title="{{'wo' | translate}}" width="95">
+                                  <kendo-grid-column field="PARENT_WO" title="{{language.wo}}" width="95">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="PARENT_ITEM_CODE" title="{{'parent_FG' | translate}}" width="100">
+                                  <kendo-grid-column field="PARENT_ITEM_CODE" title="{{language.parent_FG}}" width="100">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="PARENT_ITEM_DESC" title="{{'description' | translate}}" width="78">
+                                  <kendo-grid-column field="PARENT_ITEM_DESC" title="{{language.description}}" width="78">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_COMPID" title="{{'component' | translate}}" width="80">
+                                  <kendo-grid-column field="U_O_COMPID" title="{{language.component}}" width="80">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ITEMDESC" title="{{'description' | translate}}" width="78">
+                                  <kendo-grid-column field="U_O_ITEMDESC" title="{{language.description}}" width="78">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_UOM" title="{{'uom' | translate}}" width="44">
+                                  <kendo-grid-column field="U_O_UOM" title="{{language.uom}}" width="44">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="REQ_QTY" title="{{'qty_per_bom_unit' | translate}}" width="149"
+                                  <kendo-grid-column field="REQ_QTY" title="{{language.qty_per_bom_unit}}" width="149"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ACTISSQTY" title="{{'qty_issued' | translate}}" width="94"
+                                  <kendo-grid-column field="U_O_ACTISSQTY" title="{{language.qty_issued}}" width="94"
                                     class="text-right" headerClass="text-right">
                                     <ng-template kendoGridCellTemplate let-dataItem>
                                       <a class="cursor-pointer text-primary"
                                         (click)="showDetailsIssuedLookup(dataItem)">{{dataItem.ISSUED_QTY}}</a>
                                     </ng-template>
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_BALQTY" title="{{'qty_bal' | translate}}" width="108"
+                                  <kendo-grid-column field="U_O_BALQTY" title="{{language.qty_bal}}" width="108"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ISSUEDATE" title="{{'issue_date' | translate}}" width="84">
+                                  <kendo-grid-column field="U_O_ISSUEDATE" title="{{language.issue_date}}" width="84">
                                     <ng-template kendoGridCellTemplate let-dataItem>
                                       {{dataItem.U_O_ISSUEDATE | date: 'MM/dd/yyyy'}}
                                     </ng-template>
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ISSWH" title="{{'issue_wh' | translate}}" width="109"
+                                  <kendo-grid-column field="U_O_ISSWH" title="{{language.issue_wh}}" width="109"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ISSBIN" title="{{'issue_bin' | translate}}" width="186">
+                                  <kendo-grid-column field="U_O_ISSBIN" title="{{language.issue_bin}}" width="186">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ISSTYPE" title="{{'issue_mth' | translate}}" width="100">
+                                  <kendo-grid-column field="U_O_ISSTYPE" title="{{language.issue_mth}}" width="100">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_ISSTOOPER" title="{{'opn' | translate}}" width="46"
+                                  <kendo-grid-column field="U_O_ISSTOOPER" title="{{language.opn}}" width="46"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column-group headerClass="text-center" title="{{'qty_wh_xxxx' | translate}}"
+                                  <kendo-grid-column-group headerClass="text-center" title="{{language.qty_wh_xxxx}}"
                                     [width]="300">
-                                    <kendo-grid-column field="WH_INSTOCK_QTY" title="{{'qty_in_stock' | translate}}"
+                                    <kendo-grid-column field="WH_INSTOCK_QTY" title="{{language.qty_in_stock}}"
                                       [width]="108" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <a class="cursor-pointer text-primary"
                                           (click)="showDetailsInStockLookup(dataItem,'WH',false)">{{dataItem.WH_INSTOCK_QTY}}</a>
                                       </ng-template>
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="WH_COMMITED_QTY" title="{{'qty_commit' | translate}}"
+                                    <kendo-grid-column field="WH_COMMITED_QTY" title="{{language.qty_commit}}"
                                       [width]="121" class="text-right" headerClass="text-right">
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="WH_ONORDER_QTY" title="{{'qty_on_order' | translate}}"
+                                    <kendo-grid-column field="WH_ONORDER_QTY" title="{{language.qty_on_order}}"
                                       [width]="112" [locked]="false" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <a class="cursor-pointer text-primary"
                                           (click)="showDetailsOnOrderLookup(dataItem,'CP')">{{dataItem.WH_ONORDER_QTY}}</a>
                                       </ng-template>
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="WH_AVAILABLE_QTY" title="{{'qty_aval' | translate}}"
+                                    <kendo-grid-column field="WH_AVAILABLE_QTY" title="{{language.qty_aval}}"
                                       [width]="113" [locked]="false" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <span
@@ -719,26 +719,26 @@
                                       </ng-template>
                                     </kendo-grid-column>
                                   </kendo-grid-column-group>
-                                  <kendo-grid-column-group headerClass="text-center" title="{{'qty_company_lvl' | translate}}"
+                                  <kendo-grid-column-group headerClass="text-center" title="{{language.qty_company_lvl}}"
                                     [width]="300">
-                                    <kendo-grid-column field="COM_INSTOCK_QTY" title="{{'qty_in_stock' | translate}}"
+                                    <kendo-grid-column field="COM_INSTOCK_QTY" title="{{language.qty_in_stock}}"
                                       [width]="108" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <a class="cursor-pointer text-primary"
                                           (click)="showDetailsInStockLookup(dataItem,'CP',false)">{{dataItem.COM_INSTOCK_QTY}}</a>
                                       </ng-template>
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="COM_COMMITED_QTY" title="{{'qty_commit' | translate}}"
+                                    <kendo-grid-column field="COM_COMMITED_QTY" title="{{language.qty_commit}}"
                                       [width]="121" class="text-right" headerClass="text-right">
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="COM_ONORDER_QTY" title="{{'qty_on_order' | translate}}"
+                                    <kendo-grid-column field="COM_ONORDER_QTY" title="{{language.qty_on_order}}"
                                       [width]="116" [locked]="false" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <a class="cursor-pointer text-primary"
                                           (click)="showDetailsOnOrderLookup(dataItem,'CP')">{{dataItem.COM_ONORDER_QTY}}</a>
                                       </ng-template>
                                     </kendo-grid-column>
-                                    <kendo-grid-column field="COM_AVAILABLE_QTY" title="{{'qty_aval' | translate}}"
+                                    <kendo-grid-column field="COM_AVAILABLE_QTY" title="{{language.qty_aval}}"
                                       [width]="121" [locked]="false" class="text-right" headerClass="text-right">
                                       <ng-template kendoGridCellTemplate let-dataItem>
                                         <span
@@ -755,7 +755,7 @@
                             </ng-template>
                           </kendo-tabstrip-tab>
     
-                          <kendo-tabstrip-tab [title]="Operations">
+                          <kendo-tabstrip-tab [title]="[language.operations]">
                             <ng-template kendoTabContent>
                                 <kendo-grid [kendoGridBinding]="gridOperation" [selectable]="selectableSettings"
                                   class="primary-table-colored" [filterable]=isColumnFilter5 [groupable]=isColumnGroup6
@@ -772,9 +772,9 @@
                                           (change)="onFilterChange(chkFilter5,gridOperation)" id="filter-4"
                                           [(ngModel)]="isColumnFilter5" class="k-checkbox" name="columnfilter" />
                                         <span class="checkbox"></span>
-                                        <span>{{'EnableFilter' | translate}}</span>
+                                        <span>{{language.EnableFilter}}</span>
                                       </label>
-                                      <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
+                                      <button type="button" kendoGridExcelCommand title="{{language.ExportToExcel}}"
                                         class="ml-auto btn btn-link btn-sm btn-icon p-0">
                                         <svg viewBox="0 0 512 512" class="icon">
                                           <use xlink:href="#download"></use>
@@ -785,7 +785,7 @@
   
                                   <kendo-grid-excel fileName="OperationGrid.xlsx"></kendo-grid-excel>
   
-                                  <kendo-grid-checkbox-column *ngIf="showSelection==true" title="{{'select' | translate}}"
+                                  <kendo-grid-checkbox-column *ngIf="showSelection==true" title="{{language.select}}"
                                     [width]="25">
                                     <ng-template kendoGridCellTemplate let-idx='rowIndex' let-di='dataItem'>
                                       <div class="k-form-field d-flex center-checkbox">
@@ -797,69 +797,69 @@
                                     </ng-template>
                                   </kendo-grid-checkbox-column>
   
-                                  <kendo-grid-column field="U_O_OPERNO" title="{{'opn' | translate}}" width="85"
+                                  <kendo-grid-column field="U_O_OPERNO" title="{{language.opn}}" width="85"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_OPR_ID" title="{{'operation_code' | translate}}" width="100">
+                                  <kendo-grid-column field="U_O_OPR_ID" title="{{language.operation_code}}" width="100">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_OPR_DESC" title="{{'operation_description' | translate}}"
+                                  <kendo-grid-column field="U_O_OPR_DESC" title="{{language.operation_description}}"
                                     width="139">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_OPR_TYPE" title="{{'operation_type' | translate}}" width="110">
+                                  <kendo-grid-column field="U_O_OPR_TYPE" title="{{language.operation_type}}" width="110">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_BALQTY" title="{{'qty_bal' | translate}}" width="108"
+                                  <kendo-grid-column field="U_O_BALQTY" title="{{language.qty_bal}}" width="108"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
                                   <kendo-grid-column field="U_O_CUMPRDCDQTY"
-                                    title="{{'quantity_commited_production' | translate}}" width="146" class="text-right"
+                                    title="{{language.quantity_commited_production}}" width="146" class="text-right"
                                     headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_CUMINSPQTY" title="{{'quantity_inspection' | translate}}"
+                                  <kendo-grid-column field="U_O_CUMINSPQTY" title="{{language.quantity_inspection}}"
                                     width="147" class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_CUMPASSEDQTY" title="{{'quantity_passed' | translate}}"
+                                  <kendo-grid-column field="U_O_CUMPASSEDQTY" title="{{language.quantity_passed}}"
                                     width="133" class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_CUMREJQTY" title="{{'quantity_reject' | translate}}"
+                                  <kendo-grid-column field="U_O_CUMREJQTY" title="{{language.quantity_reject}}"
                                     width="141" class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_CUMNCQTY" title="{{'quantity_commited_nc' | translate}}"
+                                  <kendo-grid-column field="U_O_CUMNCQTY" title="{{language.quantity_commited_nc}}"
                                     width="110" class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_REWORKQTY" title="{{'quantity_commited_rework' | translate}}"
+                                  <kendo-grid-column field="U_O_REWORKQTY" title="{{language.quantity_commited_rework}}"
                                     width="135" class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_O_OPERCMPFLG" title="{{'operation_complete' | translate}}"
+                                  <kendo-grid-column field="U_O_OPERCMPFLG" title="{{language.operation_complete}}"
                                     width="134">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_OPTM_SCQTY" title="{{'quantity_commited_sc' | translate}}"
+                                  <kendo-grid-column field="U_OPTM_SCQTY" title="{{language.quantity_commited_sc}}"
                                     width="154" class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_OPTM_SCCOST" title="{{'subcontracting_cost' | translate}}"
+                                  <kendo-grid-column field="U_OPTM_SCCOST" title="{{language.subcontracting_cost}}"
                                     width="135" class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_OPTM_OPSDATE" title="{{'operation_start_date_time' | translate}}"
+                                  <kendo-grid-column field="U_OPTM_OPSDATE" title="{{language.operation_start_date_time}}"
                                     width="168">
                                     <ng-template kendoGridCellTemplate let-dataItem>
                                       {{dataItem.U_OPTM_OPSDATE | date: 'MM/dd/yyyy'}}
                                     </ng-template>
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_OPTM_OPEDATE" title="{{'operation_end_date_time' | translate}}"
+                                  <kendo-grid-column field="U_OPTM_OPEDATE" title="{{language.operation_end_date_time}}"
                                     width="155">
                                     <ng-template kendoGridCellTemplate let-dataItem>
                                       {{dataItem.U_OPTM_OPEDATE | date: 'MM/dd/yyyy'}}
                                     </ng-template>
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_OPTM_TIME_UOM" title="{{'uom' | translate}}" width="44"
+                                  <kendo-grid-column field="U_OPTM_TIME_UOM" title="{{language.uom}}" width="44"
                                     class="text-right" headerClass="text-right">
                                   </kendo-grid-column>
-                                  <kendo-grid-column field="U_OPTM_WC_ID" title="{{'work_center' | translate}}" width="86">
+                                  <kendo-grid-column field="U_OPTM_WC_ID" title="{{language.work_center}}" width="86">
                                   </kendo-grid-column>
                                 </kendo-grid>
                             </ng-template>
                           </kendo-tabstrip-tab>
     
-                          <kendo-tabstrip-tab [title]="Resources">
+                          <kendo-tabstrip-tab [title]="[language.resources]">
                             <ng-template kendoTabContent>
                               <kendo-grid [kendoGridBinding]="gridResource" [selectable]="selectableSettings"
                                 class="primary-table-colored" [filterable]=isColumnFilter6 [groupable]=isColumnGroup7
@@ -876,9 +876,9 @@
                                         [(ngModel)]="isColumnFilter6" id="opti_OperationsListColumnFilterID5"
                                         class="k-checkbox" name="columnfilter" />
                                       <span class="checkbox"></span>
-                                      <span>{{'EnableFilter' | translate}}</span>
+                                      <span>{{language.EnableFilter}}</span>
                                     </label>
-                                    <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
+                                    <button type="button" kendoGridExcelCommand title="{{language.ExportToExcel}}"
                                       class="ml-auto btn btn-link btn-sm btn-icon p-0">
                                       <svg viewBox="0 0 512 512" class="icon">
                                         <use xlink:href="#download"></use>
@@ -889,7 +889,7 @@
 
                                 <kendo-grid-excel fileName="ResourceGrid.xlsx"></kendo-grid-excel>
 
-                                <kendo-grid-checkbox-column *ngIf="showSelection==true" title="{{'select' | translate}}"
+                                <kendo-grid-checkbox-column *ngIf="showSelection==true" title="{{language.select}}"
                                   [width]="25">
                                   <ng-template kendoGridCellTemplate let-idx='rowIndex' let-di='dataItem'>
                                     <div class="k-form-field d-flex center-checkbox">
@@ -901,40 +901,40 @@
                                   </ng-template>
                                 </kendo-grid-checkbox-column>
 
-                                <kendo-grid-column field="U_O_RESID" title="{{'resource' | translate}}" width="96">
+                                <kendo-grid-column field="U_O_RESID" title="{{language.resource}}" width="96">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="U_O_RESDESC" title="{{'description' | translate}}" width="96">
+                                <kendo-grid-column field="U_O_RESDESC" title="{{language.description}}" width="96">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="RESOURCE_TYPE" title="{{'resource_type' | translate}}" width="96">
+                                <kendo-grid-column field="RESOURCE_TYPE" title="{{language.resource_type}}" width="96">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="NO_OF_RESOURCES" title="{{'no_of_resource' | translate}}"
+                                <kendo-grid-column field="NO_OF_RESOURCES" title="{{language.no_of_resource}}"
                                   width="110" class="text-right" headerClass="text-right">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="USAGE_PER_BOM_QTY" title="{{'usage_per_bom_qty' | translate}}"
+                                <kendo-grid-column field="USAGE_PER_BOM_QTY" title="{{language.usage_per_bom_qty}}"
                                   width="154" class="text-right" headerClass="text-right">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="USAGE_BASIS" title="{{'usage_basis' | translate}}" width="83">
+                                <kendo-grid-column field="USAGE_BASIS" title="{{language.usage_basis}}" width="83">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="TOTAL_USAGE" title="{{'total_usage' | translate}}" width="81"
+                                <kendo-grid-column field="TOTAL_USAGE" title="{{language.total_usage}}" width="81"
                                   class="text-right" headerClass="text-right">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="BAL_USAGE" title="{{'balance_usage' | translate}}" width="97"
+                                <kendo-grid-column field="BAL_USAGE" title="{{language.balance_usage}}" width="97"
                                   class="text-right" headerClass="text-right">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="ACTUAL_USAGE" title="{{'actual_usage' | translate}}" width="88"
+                                <kendo-grid-column field="ACTUAL_USAGE" title="{{language.actual_usage}}" width="88"
                                   class="text-right" headerClass="text-right">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="PLANNED_RESOURCE" title="{{'planned_resource' | translate}}"
+                                <kendo-grid-column field="PLANNED_RESOURCE" title="{{language.planned_resource}}"
                                   width="114">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="CONSUMPTION_TYPE" title="{{'consumption_type' | translate}}"
+                                <kendo-grid-column field="CONSUMPTION_TYPE" title="{{language.consumption_type}}"
                                   width="118">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="U_O_WC_ID" title="{{'work_center_code' | translate}}" width="114">
+                                <kendo-grid-column field="U_O_WC_ID" title="{{language.work_center_code}}" width="114">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="U_O_UOM" title="{{'uom' | translate}}" width="44">
+                                <kendo-grid-column field="U_O_UOM" title="{{language.uom}}" width="44">
                                 </kendo-grid-column>
-                                <kendo-grid-column field="OPERATION" title="{{'opn' | translate}}" width="80"
+                                <kendo-grid-column field="OPERATION" title="{{language.opn}}" width="80"
                                   class="text-right" headerClass="text-right">
                                 </kendo-grid-column>
                               </kendo-grid>
@@ -964,8 +964,8 @@
               </svg>
             </div>
             <div class="mt-3">
-              <p>{{'Version' | translate}}</p>
-              <small>{{'Copyright' | translate}}</small>
+              <p>{{language.Version}}</p>
+              <small>{{language.Copyright}}</small>
             </div>
           </div>
         </div>
@@ -990,20 +990,20 @@
             id="opti_SalesOrderListColumnFilterID1" [(ngModel)]="isColumnFilter1" class="k-checkbox"
             name="columnfilter" />
           <span class="checkbox"></span>
-          <span>{{'EnableFilter' | translate}}</span>
+          <span>{{language.EnableFilter}}</span>
         </label>
       </div>
     </ng-template>
-    <kendo-grid-column field="ItemCode" title="{{'item_code' | translate}}" width="80">
+    <kendo-grid-column field="ItemCode" title="{{language.item_code}}" width="80">
     </kendo-grid-column>
-    <kendo-grid-column field="ItemName" title="{{'description' | translate}}" width="80">
+    <kendo-grid-column field="ItemName" title="{{language.description}}" width="80">
     </kendo-grid-column>
   </kendo-grid>
   <kendo-dialog-actions class="p-2 align-items-end">
     <button class="btn btn-danger btn-sm d-flex align-items-center" type="button" (click)="close()">
       <svg viewBox="0 0 489 489" class="icon mr-2">
         <use xlink:href="#cancel"></use>
-      </svg> {{'Cancel' | translate}}
+      </svg> {{language.Cancel}}
     </button>
   </kendo-dialog-actions>
 </kendo-dialog>

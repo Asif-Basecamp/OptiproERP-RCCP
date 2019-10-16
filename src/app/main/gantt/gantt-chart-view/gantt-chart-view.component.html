@@ -11,9 +11,9 @@
                     <use xlink:href="#zoomOut"></use>
                 </svg>
             </button>
-            <button type="button" class="btn btn-primary btn-icon btn-sm mr-2" (click)="toggleCritical()">
+            <!--<button type="button" class="btn btn-primary btn-icon btn-sm mr-2" (click)="toggleCritical()">
                 Critical
-            </button>
+            </button>-->
         
             <select id="scale" name="scale" [ngStyle]="{'width':'150px'}"  [(ngModel)]="scaler" class="form-control form-control-sm"  (change)="onScaleChange($event)" [ngModelOptions]="{standalone: true}">
                 <option *ngFor="let scale of scales" value={{scale.value}} [selected]="scale.value==scaler">
@@ -22,16 +22,16 @@
             </select>
 
             <ul class="d-flex align-items-center ml-3 pl-3 flex-wrap mb-0">
-                <li class="mr-5">Plan Definition ({{HeaderData.OPTM_PD_CODE}})</li>
-                <li class="mr-5">Company ({{HeaderData.OPTM_DB_NAME}})</li>
-                <li class="mr-5">Plan Order No ({{HeaderData.OPTM_SUPPLLY_ID}})</li>
-                <li class="mr-5">Item Code ({{HeaderData.OPTM_ITEM_CODE}})</li>
-                <li class="mr-5">Item Description ({{HeaderData.U_O_ITEMNAME}})</li>                
-                <li class="mr-5">Order Start Date ({{HeaderData.OPTM_DOC_DATE | date : "dd/MM/y"}})</li>                
-                <li class="mr-5">Order End Date ({{HeaderData.OPTM_DUE_DATE| date : "dd/MM/y"}})</li>
-                <li class="mr-5">Routing Sequence ({{HeaderData.OPTM_RUTNGSEQ}})</li>
-                <li class="mr-5">Qty ({{HeaderData.OPTM_SUPP_QTY}})</li>
-                <li>Routing Revision ({{HeaderData.OPTM_RTNGREV}})</li>
+                <li class="mr-5">{{this.language.PlanDefinition}} ({{HeaderData.OPTM_PD_CODE}})</li>
+                <li class="mr-5">{{this.language.company}} ({{HeaderData.OPTM_DB_NAME}})</li>
+                <li class="mr-5">{{this.language.PlanOrderNo}} ({{HeaderData.OPTM_SUPPLLY_ID}})</li>
+                <li class="mr-5">{{this.language.ItemCode}} ({{HeaderData.OPTM_ITEM_CODE}})</li>
+                <li class="mr-5">{{this.language.Description}} ({{HeaderData.U_O_ITEMNAME}})</li>                
+                <li class="mr-5">{{this.language.OrderStartDate}} ({{HeaderData.OPTM_DOC_DATE | date : "dd/MM/y"}})</li>                
+                <li class="mr-5">{{this.language.OrderEndDate}} ({{HeaderData.OPTM_DUE_DATE| date : "dd/MM/y"}})</li>
+                <li class="mr-5">{{this.language.RoutingSequence}} ({{HeaderData.OPTM_RUTNGSEQ}})</li>
+                <li class="mr-5">{{this.language.Qty}} ({{HeaderData.OPTM_SUPP_QTY}})</li>
+                <li>{{this.language.RoutingRevision}} ({{HeaderData.OPTM_RTNGREV}})</li>
             </ul>
         </div>
     </form>
@@ -48,8 +48,8 @@
             </svg>
             </div>
             <div class="mt-3">
-            <p>Version</p>
-            <small>Copyright 2000-2019. All rights reserved.</small>
+                <p>{{language.Version}}</p>
+                <small>{{language.Copyright}}</small>
             </div>
         </div>
     </div>

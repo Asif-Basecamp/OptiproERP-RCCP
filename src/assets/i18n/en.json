@@ -11,7 +11,7 @@
     "Process": "Process",
     "WelcomeTo": "Welcome to",
     "OptiproERP": "OptiProERP",
-    "Version": "Version - 1.0",
+    "Version": "Version",
     "EnableFilter": "Enable Filter",
     "ExportToExcel": "Export to excel file",
     "Cancel": "Cancel",
@@ -315,5 +315,17 @@
     "Copyright": "Copyright 2000-2019. All rights reserved.",
     "OptiPro_Dashboard": "OptiPro Dashboard",
     "exportFilename": "Analysis View",
-    "CompanyAssignError": "No Company assign!"
+    "CompanyAssignError": "No Company assign!",
+    "Plan_Definition_Required": "Plan definition required",
+    "Correct_Plan_Definition_Error": "Enter correct plan definition",
+    "Plan_Order_Required": "Plan order number required",
+    "Correct_Plan_Order_Error": "Enter correct plan order number",
+    "Plan_Definition_Error": "Please Enter Plan Definition",
+    "Qty": "Qty",
+    "OrderStartDate": "Order Start Date",
+    "OrderEndDate": "Order End Date",
+    "ItemToRequired": "Item To Required",
+    "ItemFromRequired": "Item From Required",
+    "WarehouseFromRequired": "Warehouse From Required",
+    "WarehouseToRequired": "Warehouse To Required"
 }

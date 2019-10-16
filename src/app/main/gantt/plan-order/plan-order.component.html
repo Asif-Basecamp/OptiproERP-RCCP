@@ -2,7 +2,7 @@
 <div class="example-wrapper" *ngIf="planOrderData">
     <kendo-dialog title="Plan Order No" (close)="close()" [minWidth]="250" [width]="450">
         <kendo-grid [kendoGridBinding]="planOrderData" [filterable]=isColumnFilter [selectable]="true" [sortable]="true"
-            [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)"
+            [resizable]="true" (selectionChange)="gridRowSelectionChange($event,ref)" [rowSelected]="isPlanOrderSelected"
             [ngStyle]="{ 'cursor': 'pointer', 'max-height':'290px'}">
             <ng-template kendoGridToolbarTemplate>
                 <div class="d-flex align-items-center">
@@ -12,9 +12,9 @@
                         id="opti_SalesOrderListColumnFilterID" [(ngModel)]="isColumnFilter" class="k-checkbox" 
                         name="columnfilter" />
                         <span class="checkbox"></span>
-                        <span>{{'EnableFilter' | translate}}</span>
+                        <span>{{language.EnableFilter}}</span>
                     </label>
-                    <button type="button" kendoGridExcelCommand title="{{'ExportToExcel' | translate}}"
+                    <button type="button" kendoGridExcelCommand title="{{language.ExportToExcel}}"
                         class="ml-auto btn btn-link btn-sm btn-icon p-0">
                         <svg viewBox="0 0 512 512" class="icon">
                             <use xlink:href="#download"></use>
@@ -29,7 +29,7 @@
             <button class="btn btn-danger btn-sm d-flex align-items-center" type="button" (click)="close()">
                 <svg viewBox="0 0 489 489" class="icon mr-2">
                     <use xlink:href="#cancel"></use>
-                </svg> {{'Cancel' | translate}}
+                </svg> {{language.Cancel}}
             </button>
         </kendo-dialog-actions>
     </kendo-dialog>

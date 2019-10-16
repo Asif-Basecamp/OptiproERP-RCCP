@@ -5,14 +5,11 @@ import { LinkService } from "../../../core/service/link.service";
 import { Task } from 'src/app/core/model/task';
 import { Link } from 'src/app/core/model/link';
 import { Scale } from 'src/app/core/model/scale';
-import { environment } from '../../../../environments/environment';
 import { GanttChartService } from '../service/gantt-chart.service';
 import { DataService } from '../data.service';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
-import { LanguageService } from 'src/app/core/language.service';
 
 @Component({
     selector: "gantt-chart-view",
@@ -38,15 +35,14 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
     public products: any;
     public chartDataStatus: boolean;
     public mySubscription: Subscription;
+    public arrConfigData: any;
+    public language: any;
 
-    constructor(private LanguageService: LanguageService, private translate: TranslateService, private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private dataService: DataService, private TaskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef, private GanttChartService: GanttChartService) { 
-       
-    }
-
-    
+    constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private dataService: DataService, private TaskService: TaskService, private linkService: LinkService, private _elementRef: ElementRef, private GanttChartService: GanttChartService) { }
 
     ngOnInit() { 
-        this.LanguageService.languageSet(this.translate, environment.language);
+        this.arrConfigData = JSON.parse(window.localStorage.getItem('arrConfigData'));
+        this.language = JSON.parse(window.localStorage.getItem('language'));
         gantt = Gantt.getGanttInstance();
         this.CompanyDB = JSON.parse(window.localStorage.getItem('CompanyDB'));
          this.mySubscription = this.dataService.getData().subscribe(definition=>{
@@ -55,10 +51,9 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
         this.mySubscription = this.dataService.getOrder().subscribe(order=>{
           this.PlanOrderNo = order;
         });
-        this.GanttChartService.GetHeaderData(environment.service_url,  this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(
+        this.GanttChartService.GetHeaderData(this.arrConfigData.service_url,  this.CompanyDB, this.PlanDefinition, this.PlanOrderNo).subscribe(
             data => {
               this.HeaderData = data[0];
-              console.log(this.HeaderData);
         });  
 
         this.products = [];
@@ -278,7 +273,7 @@ export class GanttChartViewComponent implements OnInit, OnDestroy {
             this.chartDataStatus = false;
             this.loading = false;
             this.notificationService.show({
-              content: 'No Record Found',
+              content: this.language.no_record_found,
               animation: { type: 'fade', duration: 400 },
               position: { horizontal: 'right', vertical: 'top' },
               type: { style: 'error', icon: true },

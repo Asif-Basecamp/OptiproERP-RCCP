@@ -1,8 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { BOMService } from 'src/app/services/bom.service';
-import { environment } from 'src/environments/environment';
-import { LanguageService } from 'src/app/core/language.service';
+import { RowArgs } from '@progress/kendo-angular-grid';
 
 @Component({
   selector: 'app-warehouse-code-lookup',
@@ -14,14 +12,32 @@ export class WarehouseCodeLookupComponent implements OnInit {
   @Output() warehouseEvent = new EventEmitter<string>();
   @Output() warehouseCodeEvent = new EventEmitter<any>();
   @Input() WarehouseData: any;
+  @Input() WarehouseFromSelect: any;
+  @Input() WarehouseToSelect: any;
   public CompanyDB: any;
   public EnableLoader: boolean = true;
+  public language: any;
+  public isWarehouseCodeSelected: any;
 
-  constructor(private LanguageService: LanguageService, private BOMService: BOMService, private translate: TranslateService) { }
+  constructor(private BOMService: BOMService) { }
 
   ngOnInit() {
+    this.language = JSON.parse(window.localStorage.getItem('language'));
     this.EnableLoader = false;
-    this.LanguageService.languageSet(this.translate, environment.language);
+    let select = [];
+    if(this.WarehouseFromSelect){
+      select.push(this.WarehouseFromSelect);
+      this.isWarehouseCodeSelected = (e: RowArgs) => select.indexOf(e.dataItem.WhsCode) >=0 ;
+    }else{
+      this.isWarehouseCodeSelected = (e: RowArgs) => select.indexOf(e.dataItem.WhsCode) >=0 ;
+    }
+
+    if(this.WarehouseToSelect){
+      select.push(this.WarehouseToSelect);
+      this.isWarehouseCodeSelected = (e: RowArgs) => select.indexOf(e.dataItem.WhsCode) >=0 ;
+    }else{
+      this.isWarehouseCodeSelected = (e: RowArgs) => select.indexOf(e.dataItem.WhsCode) >=0 ;
+    }
   }
 
   close(){
