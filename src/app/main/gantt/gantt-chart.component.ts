@@ -95,19 +95,14 @@ export class GanttChartComponent implements OnInit {
   }
 
   onPlanOrderNoBlur(){
-    if(this.PlanDefinition){
+    if(this.PlanOrderNo){
       this.getPlanOrderNo(this.arrConfigData.service_url, this.CompanyDB, this.PlanDefinition);
-    }
-    if(this.PlanOrderNo == ''){
-      this.OrderStatus = false;   
-    }
-    if(this.planOrderData && this.planOrderData.length>0){
-      let Order = this.PlanOrderNo;
       let OrderFromArray = [];
-      if(Order){
-      for(var i in this.planOrderData){
-        if(Order == this.planOrderData[i].OPTM_SUPPLLY_ID){
-          OrderFromArray.push(this.planOrderData[i]);
+      if(this.planOrderData && this.planOrderData.length>0){
+        for(var i in this.planOrderData){
+          if(this.PlanOrderNo == this.planOrderData[i].OPTM_SUPPLLY_ID){
+            OrderFromArray.push(this.planOrderData[i]);
+          }
         }
       }
       if(OrderFromArray.length>0){
@@ -115,9 +110,6 @@ export class GanttChartComponent implements OnInit {
       }else{
         this.OrderStatus = true;
       }
-      }else{
-        this.OrderStatus = false;
-      } 
     }
   }
 
