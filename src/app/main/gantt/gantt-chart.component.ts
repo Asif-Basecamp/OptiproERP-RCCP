@@ -110,6 +110,8 @@ export class GanttChartComponent implements OnInit {
       }else{
         this.OrderStatus = true;
       }
+    }else{
+      this.OrderStatus = false;
     }
   }
 
