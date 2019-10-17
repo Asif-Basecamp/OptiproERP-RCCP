@@ -73,6 +73,10 @@ export class GanttChartComponent implements OnInit {
 
   onPlanDefinitionBlur(){
     let Plan = this.PlanDefinition;
+    this.PlanOrderNo = '';
+    if(this.PlanOrderNo == ''){
+      this.OrderStatus = false;
+    }
     let PlanFromArray = [];
     if(Plan){
       for(var i in this.planDefinitionData){
@@ -93,16 +97,10 @@ export class GanttChartComponent implements OnInit {
   onPlanOrderNoBlur(){
     if(this.PlanDefinition){
       this.getPlanOrderNo(this.arrConfigData.service_url, this.CompanyDB, this.PlanDefinition);
-    }else{
-      this.notificationService.show({
-        content: this.language.Plan_Definition_Error,
-        animation: { type: 'fade', duration: 400 },
-        position: { horizontal: 'right', vertical: 'top' },
-        type: { style: 'error', icon: true },
-        hideAfter: 3000
-      });  
     }
-    
+    if(this.PlanOrderNo == ''){
+      this.OrderStatus = false;   
+    }
     if(this.planOrderData && this.planOrderData.length>0){
       let Order = this.PlanOrderNo;
       let OrderFromArray = [];
@@ -141,6 +139,8 @@ export class GanttChartComponent implements OnInit {
       });
     }else{
       this.planDefinitionOrderStatus = true;
+      this.planOrderData = '';
+      this.getPlanOrderNo(this.arrConfigData.service_url, this.CompanyDB, this.PlanDefinition);
       if(this.PlanOrderNo){
         this.PlanOrderSelect = this.PlanOrderNo;
       }
@@ -154,11 +154,17 @@ export class GanttChartComponent implements OnInit {
 
   PlanDefinitionEventHander(e){
     this.PlanDefinition = e;
+    this.PDStatus = false;
+    this.PlanOrderNo = '';
+    if(this.PlanOrderNo == ''){
+      this.OrderStatus = false;
+    }
     this.getPlanOrderNo(this.arrConfigData.service_url, this.CompanyDB, this.PlanDefinition);
   }
 
   PlanDefinitionOrderNoEventHander(e){
     this.PlanOrderNo = e;
+    this.OrderStatus = false;
   }
 
   processData(){ 

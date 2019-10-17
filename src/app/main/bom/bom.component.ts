@@ -184,8 +184,10 @@ export class BOMComponent implements OnInit {
     this.lookupStatus = true;
     this.itemCode = 'From';
     this.ItemCodeToSelect = '';
+    this.ItemCodeFromSelect = '';
     if(this.ItemCodeFrom && this.itemCode == 'From'){
       this.ItemCodeFromSelect = this.ItemCodeFrom;
+      this.ItemFromStatus = false;
     }
   }
 
@@ -193,8 +195,10 @@ export class BOMComponent implements OnInit {
     this.lookupStatus = true;
     this.itemCode = 'To';
     this.ItemCodeFromSelect = '';
+    this.ItemCodeToSelect = '';
     if(this.ItemCodeTo && this.itemCode == 'To'){
       this.ItemCodeToSelect = this.ItemCodeTo;
+      this.ItemToStatus = false;
     }
   }
 
@@ -214,8 +218,10 @@ export class BOMComponent implements OnInit {
     this.warehouseCode = 'From';
     this.WarehouseStatus = true;
     this.WarehouseToSelect = '';
+    this.WarehouseFromSelect = '';
     if(this.WarehouseFrom && this.warehouseCode == 'From'){
       this.WarehouseFromSelect = this.WarehouseFrom;
+      this.WarehouseFromStatus = false;
     }
   }
 
@@ -223,8 +229,10 @@ export class BOMComponent implements OnInit {
     this.warehouseCode = 'To';
     this.WarehouseStatus = true;
     this.WarehouseFromSelect = '';
+    this.WarehouseToSelect = '';
     if(this.WarehouseTo && this.warehouseCode == 'To'){
       this.WarehouseToSelect = this.WarehouseTo;
+      this.WarehouseToStatus = false;
     }
   }
 
