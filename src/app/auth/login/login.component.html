@@ -1,0 +1,49 @@
+<section class="login-block">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="login-logo mx-auto text-center"><img src="./../../../assets/images/logo/OptiProERP.png" title="OptiPro-ERP" /></div>
+        <div class="auth-box card">
+          <div class="card-block">
+            <div class="card-header">
+              <div class="row m-b-20">
+                <div class="col-md-12">
+                  <h4 class="text-left m-0">{{language.login}}</h4>
+                </div>
+              </div>
+            </div>
+            <form #signInForm="ngForm">
+              <div class="card-body">
+                <div class="form-group mb-2">
+                  <label for="username" class="mb-0">{{language.Username}}<span class="text-danger">*</span></label>
+                  <input type="text" name="id" class="form-control" required #name = ngModel  [(ngModel)]="loginId" id="username" placeholder="{{language.Username}}" autocomplete="off">
+                  <small id="emailHelp" class="form-text text-muted opti_error-msg" *ngIf="name.errors?.required && name.touched" class="float-right opti_error-msg">{{language.username_required}}</small>
+                  <span *ngIf="InvalidActiveUser"  class="float-right opti_error-msg">{{language.Password_active_user}}</span>
+                </div>
+                <div class="form-group mb-2">
+                  <label for="password" class="mb-0">{{language.password}}<span class="text-danger">*</span></label>
+                  <input type="password" name="pwd" required  #PasswordBlank = ngModel [(ngModel)]="password" class="form-control" id="password" placeholder="{{language.password}}" (blur)="onPasswordBlur()">
+                  <small id="passwordHelp" class="form-text text-muted opti_error-msg" *ngIf="PasswordBlank.errors?.required && PasswordBlank.touched" class="float-right opti_error-msg">{{language.password_required}}</small>
+                  <span *ngIf="InvalidActiveUser"  class="float-right opti_error-msg">{{language.Password_active_user}}</span> 
+                </div>
+                <div class="form-group mb-2">
+                  <label for="form-company" class="mb-0">{{language.company}}<span class="text-danger">*</span></label>
+                  <select type="company" name="form-company" class="form-control" [(ngModel)]="selectedValue" id="form-company" [disabled]="disableDropDown">                         
+                    <option *ngFor="let cmp of listItems" name="selcompany" [ngValue]="cmp">{{cmp.OPTM_COMPID}}</option> 
+                  </select>
+                </div>
+                <div class="row my-4" >
+                  <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-primary btn-block btn-md" (click)="OnSignIn()" [disabled]="!signInForm.form.valid  || clickSignIn">{{language.login}}</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+

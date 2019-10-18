@@ -1,0 +1,84 @@
+
+
+:host{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    ::ng-deep{
+        & p-treetable{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex:0 0 100%;
+        }
+        & .ui-treetable,
+        & .ui-treetable-scrollable-wrapper,
+        & .ui-treetable-scrollable-view{
+            height: 100%;
+        }
+        & .ui-treetable-scrollable-body{
+            max-height: calc(100% - 30px) !important;
+            height: calc(100% - 30px) !important;
+            overflow-y: scroll !important;
+        }
+    }
+}
+.simple-grid-view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height:100%;
+    padding-bottom: 5px;
+}
+.detail-grid-wrapper{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    height:100%;
+}
+.routingHeaderGridWrapper{
+    padding-top: 5px;
+}
+.dashboard-detail-grid{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    flex: 0 0 100%;
+    overflow: auto;
+    max-width: 100%;
+    overflow: auto;
+}
+
+.bom-detail-grid{
+    max-width: calc(100% - 350px) !important;
+    min-width: auto !important;
+    overflow: auto;
+}
+
+.tree-wrapper{
+    border: 1px solid rgba(33, 37, 41, 0.125);
+    // padding: 5px;
+    border-radius: 0.2rem;
+    display: flex;
+    flex:0 0 100%;
+    max-height: calc(100% - 33px);
+    overflow: auto;
+}
+
+.SimpleGridTable{
+    height:calc(100% - 33px);
+    min-height:170px;
+}
+
+.routingHeaderGrid{
+    height:calc(100% - 33px);
+    min-height:170px;
+}
+

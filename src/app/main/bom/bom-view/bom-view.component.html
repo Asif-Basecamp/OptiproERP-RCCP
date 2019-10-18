@@ -1,0 +1,235 @@
+<kendo-splitter orientation="vertical" class="w-100 h-100 slim-scroll">
+  <kendo-splitter-pane class="slim-scroll" [collapsible]="true">
+    <div class="simple-grid-view">
+      <div class="h5 p-2 mb-0 border border-bottom-0">{{language.SimpleGrid}}</div>
+      <kendo-grid [kendoGridBinding]="gridDataEvent" [selectable]="true" [resizable]="true" [groupable]=isColumnGroup [filterable]=isColumnFilter [sortable]="true"
+        (selectionChange)="simpleGridRowSelect($event)" class="SimpleGridTable primary-table-colored" [ngStyle]="{ 'cursor': 'pointer'}">
+        <ng-template kendoGridToolbarTemplate>
+            <div class="d-flex align-items-center">        
+                <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
+                    <input type="checkbox" [(ngModel)]="isColumnFilter" [ngModelOptions]="{standalone: true}">
+                    <span class="checkbox"></span>
+                    <span>{{language.EnableFilter}}</span>
+                </label>
+                <!-- export -->
+                <button type="button" kendoGridExcelCommand title="{{language.ExportToExcel}}"
+                    class="ml-auto btn btn-link btn-sm btn-icon p-0">
+                    <svg viewBox="0 0 512 512" class="icon">
+                        <use xlink:href="#download"></use>
+                    </svg>
+                </button>
+            </div>
+        </ng-template>
+      
+        <kendo-grid-column field="U_O_ITEMCODE" title="{{language.ProductNumber}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
+        <kendo-grid-column field="U_O_DESC" title="{{language.Description}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
+        <kendo-grid-column field="U_O_BOM_SEQ" title="{{language.BOMSequence}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_O_REVISION" title="{{language.Revision}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="TYPE" title="{{language.Type}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>
+        <kendo-grid-column field="EFFECTIVEDATE" title="{{language.EffectiveDate}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_WHSECODE" title="{{language.Warehouse}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_O_QUANTITY" title="{{language.BOMQuantity}}" width="80" class="text-right" headerClass="text-right"></kendo-grid-column> 
+        <kendo-grid-column field="U_O_UOM" title="{{language.UOM}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>  
+        <kendo-grid-column field="BOMTYPE" title="{{language.BOMType}}" width="80" class="text-left" headerClass="text-left"></kendo-grid-column>   
+        <!-- xlsx template start -->
+        <kendo-grid-excel fileName="grid-view.xlsx"></kendo-grid-excel>
+        <!-- xlsx template end -->
+      </kendo-grid>
+    </div>
+  </kendo-splitter-pane>
+  <kendo-splitter-pane class="slim-scroll" *ngIf="detailRowGridCollapse" [collapsible]="true" size="33.333%">
+    <div class="detail-grid-wrapper d-flex">
+      <div *ngIf="DetailGridStatus" class="k-i-loading"></div>
+      <div class="dashboard-detail-grid" *ngIf="files2">
+        <div class="h5 p-2 mb-0 border border-bottom-0 bg-white">{{language.DetailGrid}}</div>
+        <div class="tree-wrapper">
+          <div class="content-section implementation restrictedHeight">
+        <p-treeTable [value]="files2" [columns]="cols" selectionMode="single" [scrollable]="true" scrollHeight=""
+        [resizableColumns]="true">
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col style="width: 180px;">
+            <col style="width: 85px;">
+            <col style="width: 75px;">
+            <col style="width: 60px;">
+            <col style="width: 80px;">
+            <col style="width: 135px;">
+            <col style="width: 120px;">
+            <col style="width: 100px;">
+            <col style="width: 118px;">
+            <col style="width: 160px;">
+            <col style="width: 102px;">
+            <col style="width: 130px;">
+            <col style="width: 55px;">
+            <col style="width: 85px;">
+            <col style="width: 100px;">
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th ttResizableColumn>{{language.BOMItemCode}}</th>
+            <th ttResizableColumn>{{language.Description}}</th>
+            <th ttResizableColumn>{{language.BOMQuantity}}</th>
+            <th ttResizableColumn>{{language.UOM}}</th>
+            <th ttResizableColumn>{{language.ItemBasis}}</th>
+            <th ttResizableColumn>{{language.EffectiveFromDate}}</th>
+            <th ttResizableColumn>{{language.EffectiveToDate}}</th>
+            <th ttResizableColumn>{{language.IssueMethod}}</th>
+            <th ttResizableColumn>{{language.WarehouseIssue}}</th>
+            <th ttResizableColumn>{{language.BinIssue}}</th>
+            <th ttResizableColumn>{{language.OperationNumber}}</th>
+            <th ttResizableColumn>{{language.CostRollUp}}</th>
+            <th ttResizableColumn>{{language.ECO}}</th>
+            <th ttResizableColumn>{{language.Comments}}</th>
+            <th ttResizableColumn>{{language.Attachments}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-node="node" let-rowNodeIndex="rowNodeIndex" let-rowData="rowData">
+          <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">
+            <td>
+              <p-treeTableToggler [rowNode]="rowNode" class="cursor-pointer"></p-treeTableToggler>
+              <span class="cursor-pointer" (click)="DetailGridRowSelect(node)">{{rowData.U_O_ITEMCODE}}</span>
+            </td>
+            <td class="text-left" headerClass="text-left">{{rowData.U_O_DESC}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.U_O_QUANTITY}}</td>
+            <td class="text-left" headerClass="text-left">{{rowData.U_O_UOM}}</td>
+            <td class="text-left" headerClass="text-left">{{rowData.U_O_BASIS_CODE}}</td>
+            <td class="text-left" headerClass="text-left">{{rowData.EFFECIVEFROMDATE}}</td>
+            <td class="text-left" headerClass="text-left">{{rowData.EFFECIVETODATE}}</td>
+            <td class="text-left" headerClass="text-left">{{rowData.U_O_ISSUE_METHOD}}</td>
+            <td class="text-left" headerClass="text-left">{{rowData.U_O_ISSUE_WHSE}}</td>
+            <td class="text-left" headerClass="text-left">{{rowData.U_O_BIN}}</td>
+            <td class="text-right" headerClass="text-right">{{rowData.U_O_OPERATION}}</td>
+            <td class="text-left" headerClass="text-left">{{rowData.U_O_COST_ROLLUP}}</td>
+             <td class="text-left" headerClass="text-left">{{rowData.U_OPTM_ECONO}}</td>
+              <td class="text-left" headerClass="text-left">{{rowData.U_OPTM_COMMENTS}}</td>
+              <td class="text-left" headerClass="text-left">{{rowData.U_OPTM_ATTACHMENT}}</td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </kendo-splitter-pane>
+  <kendo-splitter-pane class="slim-scroll" *ngIf="headerRowGridCollapse" [collapsible]="true">
+    <div class="d-flex routingHeaderGridWrapper h-100" fxFlex fxLayout="column">
+      <!--<div *ngIf="RoutingHeaderStatus" class="k-i-loading"></div>-->
+      <div class="h5 p-2 mb-0 border border-bottom-0 bg-white" *ngIf="BomDetail">{{language.RoutingHeader}} (Item Code: {{headerData.U_O_ITEMCODE}})</div>
+      <kendo-grid *ngIf="BomDetail" [kendoGridBinding]="datas" class="routingHeaderGrid primary-table-colored" [navigable]="true" [resizable]="true" [groupable]=isColumnGroup3 [filterable]=isColumnFilter3 [sortable]="true"
+       [ngStyle]="{ 'cursor': 'pointer'}" [loading]="RoutingHeaderStatus" kendoGridFocusable>
+        <ng-template kendoGridToolbarTemplate>
+            <div class="d-flex align-items-center">        
+                <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
+                    <input type="checkbox" [(ngModel)]="isColumnFilter3" [ngModelOptions]="{standalone: true}">
+                    <span class="checkbox"></span>
+                    <span>{{language.EnableFilter}}</span>
+                </label>
+            </div>
+        </ng-template>
+        <kendo-grid-column field="U_O_ROUT_SEQ" title="{{language.RoutingSequence}}" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_O_REVI_NO" title="{{language.RoutingRevision}}" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="ROUTTYPE" title="{{language.RoutingType}}"></kendo-grid-column>
+        <kendo-grid-column field="EFFECTIVEDATE" title="{{language.EffectiveDate}}"></kendo-grid-column>
+        <kendo-grid-column field="U_O_FG_WH_ID" title="{{language.Warehouse}}" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_O_DFLT_LOT_SIZE" title="{{language.DefaultBatchSize}}" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <kendo-grid-column field="U_OPTM_APCLBLBOMUNIT" title="{{language.ApplicableBOMUnit}}" class="text-right" headerClass="text-right"></kendo-grid-column>
+        <div *kendoGridDetailTemplate="let dataItem">
+          <div class="h5 p-2 mb-0 border border-bottom-0 bg-white">{{language.RoutingLine}}</div>
+          <kendo-grid [kendoGridBinding]="dataItem.LineDetail" [navigable]="true" [resizable]="true" [groupable]=isColumnGroup4 [filterable]=isColumnFilter4 [sortable]="true"
+            [ngStyle]="{ 'cursor': 'pointer'}" kendoGridFocusable>
+            <ng-template kendoGridToolbarTemplate>
+              <div class="d-flex align-items-center">        
+                  <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
+                      <input type="checkbox" [(ngModel)]="isColumnFilter4" [ngModelOptions]="{standalone: true}">
+                      <span class="checkbox"></span>
+                      <span>{{language.EnableFilter}}</span>
+                  </label>
+              </div>
+            </ng-template>
+            <kendo-grid-column field="Code" title="{{language.OperationNumber}}" width="92" class="text-right" headerClass="text-right">
+            </kendo-grid-column>
+            <kendo-grid-column field="OPERATIONCODE" title="{{language.OperationCode}}" width="100">
+            </kendo-grid-column>
+            <kendo-grid-column field="OPERATIONTYPE" title="{{language.OperationType}}" width="100">
+            </kendo-grid-column>
+            <kendo-grid-column field="U_O_OPR_DESC" title="{{language.OperationDescription}}" width="137">
+            </kendo-grid-column>
+            <kendo-grid-column field="RESCNSMETHOD" title="{{language.ResConsumptionMethod}}" width="160">
+            </kendo-grid-column>
+            <kendo-grid-column field="PARALLELOPERATION" title="{{language.PARALLELOPERATION}}" width="135">
+            </kendo-grid-column>
+            <kendo-grid-column field="MATCH_WITH_PREV_OP" title="{{language.MatchWithPrevOperation}}" width="165">
+            </kendo-grid-column>
+            <kendo-grid-column field="U_O_WC_ID" title="{{language.WorkCenterCode}}" width="120">
+            </kendo-grid-column>
+            <kendo-grid-column field="EFFECTIVE_FROM_DATE" title="{{language.EffectiveFromDate}}" width="125" >
+            </kendo-grid-column>
+            <kendo-grid-column field="EFFECTIVE_TO_DATE" title="{{language.EffectiveToDate}}" width="110">
+            </kendo-grid-column>
+            <kendo-grid-column field="COUNT_POINT_OPERATION" title="{{language.CountPointOperation}}" width="140">
+            </kendo-grid-column>
+            <kendo-grid-column field="U_OPTM_AUTOMOVE" title="{{language.AutoMove}}" width="75">
+            </kendo-grid-column>
+            <kendo-grid-column field="MIN_TRANSFER_QTY" title="{{language.MinTransferQty}}" width="135" class="text-right" headerClass="text-right">
+            </kendo-grid-column>
+            <kendo-grid-column field="U_O_INC_LEAD_TIM_CAL" title="{{language.InclInLeadTimeCal}}" width="135">
+            </kendo-grid-column>
+            <kendo-grid-column field="U_OPTM_MOVE_TIME" title="{{language.MoveTime}}" width="75">
+            </kendo-grid-column>
+            <kendo-grid-column field="U_OPTM_QCTIME" title="{{language.QCTime}}" width="60">
+            </kendo-grid-column>
+            <kendo-grid-column field="TIME_UOM" title="{{language.TimeUOM}}" width="75">
+            </kendo-grid-column>
+            <kendo-grid-column field="EXTERNAL_INFUSE_QTY_PERC" title="{{language.PerExternalInfuseQty}}" width="135" class="text-right" headerClass="text-right">
+            </kendo-grid-column>
+            <kendo-grid-column field="U_OPTM_INSTRUCTION" title="{{language.Instruction}}" width="75">
+            </kendo-grid-column>
+            <kendo-grid-column field="U_OPTM_ATTACHMENT" title="{{language.Attachments}}" width="85">
+            </kendo-grid-column>
+            <kendo-grid-column field="U_O_WC_ID" title="{{language.U_O_WC_ID}}" width="80">
+            </kendo-grid-column>
+            <div *kendoGridDetailTemplate="let dataItem">
+              <div class="h5 p-2 mb-0 border border-bottom-0 bg-white">{{language.ResourceDetail}}</div>
+              <kendo-grid [kendoGridBinding]="dataItem.ResourceDetail" [navigable]="true" [resizable]="true" kendoGridFocusable [groupable]=isColumnGroup5 [filterable]=isColumnFilter5 [sortable]="true">
+                <ng-template kendoGridToolbarTemplate>
+                  <div class="d-flex align-items-center">        
+                      <label class="custom-checkbox mb-0 mr-3 filter-checkbox">
+                          <input type="checkbox" [(ngModel)]="isColumnFilter5" [ngModelOptions]="{standalone: true}">
+                          <span class="checkbox"></span>
+                          <span>{{language.EnableFilter}}</span>
+                      </label>
+                  </div>
+                </ng-template>
+                <kendo-grid-column field="U_O_LINE_NO" title="{{language.OperationNumber}}" width="60" class="text-right" headerClass="text-right">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_RESO_ID" title="{{language.ResourceCode}}" width="62">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_RUOM" title="{{language.ResourceUOM}}" width="65">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_RCONSU" title="{{language.Consumption}}" width="60" class="text-right" headerClass="text-right">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_INVERSE" title="{{language.Inverse}}" width="40" class="text-right" headerClass="text-right">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_NOF_RESO_USED" title="{{language.NoResourceUsed}}" width="90" class="text-right" headerClass="text-right">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_UOM" title="{{language.TimeUOM}}" width="50">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_CONSUMPTION" title="{{language.Consumption}}" width="60" class="text-right" headerClass="text-right">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_CONSTYPE" title="{{language.ConsumptionType}}" width="80" class="text-right" headerClass="text-right">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_O_COMPUTION_BASIS" title="{{language.Basis}}" width="40" class="text-right" headerClass="text-right">
+                </kendo-grid-column>
+                <kendo-grid-column field="U_OPTM_SCHEDULE" title="{{language.Schedule}}" width="40" class="text-right" headerClass="text-right">
+                </kendo-grid-column>
+              </kendo-grid>
+            </div>
+          </kendo-grid>
+        </div>
+      </kendo-grid>
+    </div>
+    
+  </kendo-splitter-pane>
+</kendo-splitter>
+
