@@ -13,29 +13,10 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule),    
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),    
     data: { showHeader: false, showSidebar: false, showFooter:false, compactLayout:false }
   },
-  {
-    path: 'BOM',
-    loadChildren: () => import('./main/bom/bom.module').then(m => m.BOMModule),     
-    data: { showHeader: true, showSidebar: true, showFooter:false, compactLayout:false }
-  },
-  {
-    path: 'gantt-chart',
-    loadChildren: () => import('./main/gantt/gantt-chart.module').then(m => m.GanttChartModule),     
-    data: { showHeader: true, showSidebar: true, showFooter:false, compactLayout:false }
-  },
-  {
-    path: 'genealogy',
-    loadChildren: () => import('./main/genealogy/genealogy.module').then(m => m.GenealogyModule),     
-    data: { showHeader: true, showSidebar: true, showFooter:false, compactLayout:false }
-  },
-  {
-    path: 'production',
-    loadChildren: () => import('./main/production/production.module').then(m => m.ProductionModule),     
-    data: { showHeader: true, showSidebar: true, showFooter:false, compactLayout:false }
-  },
+  { path: '**', redirectTo: 'login' },
 ];
 
 const config: ExtraOptions = {

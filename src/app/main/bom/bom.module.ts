@@ -5,8 +5,8 @@ import { BOMComponent } from './bom.component';
 import { TrnaslateLazyModule } from 'src/app/core/module/translate-lazy.module';
 import { FormsModule } from '@angular/forms';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
-import { WarehouseCodeLookupComponent } from '../warehouse-code-lookup/warehouse-code-lookup.component';
-import { BOMGridViewComponent } from './bom-grid-view/bom-grid-view.component';
+import { WarehouseComponent } from '../warehouse/warehouse.component';
+import { BOMViewComponent } from './bom-view/bom-view.component';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { GridModule, ExcelModule } from '@progress/kendo-angular-grid';
 import { TreeTableModule } from 'primeng/components/treetable/treetable';
@@ -18,7 +18,7 @@ import { DatePipe } from '@angular/common';
 //import { ItemCodeLookupComponent } from '../bom/item-code-lookup/item-code-lookup.component';
 
 @NgModule({
-  declarations: [BOMComponent, WarehouseCodeLookupComponent, BOMGridViewComponent, WarehouseCodeLookupComponent],
+  declarations: [BOMComponent, BOMViewComponent, WarehouseComponent],
   imports: [
     CommonModule,
     BOMRoutingModule,

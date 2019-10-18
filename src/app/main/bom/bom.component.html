@@ -168,18 +168,18 @@
 
         <div class="dashboard-right" id="dashboard-right">
             <div class="card" fxFlex="0 0 100%">
-                <app-item-code-lookup *ngIf="lookupStatus" [ItemData]="ItemData" [ItemCodeFromSelect]="ItemCodeFromSelect" [ItemCodeToSelect]="ItemCodeToSelect"
+                <app-item-code *ngIf="lookupStatus" [ItemData]="ItemData" [ItemCodeFromSelect]="ItemCodeFromSelect" [ItemCodeToSelect]="ItemCodeToSelect"
                     (lookupEvent)="lookupEventHander($event)" (itemCodeEvent)="itemCodeEventHander($event)">
-                </app-item-code-lookup>
-                <app-warehouse-code-lookup *ngIf="WarehouseStatus" [WarehouseData]="WarehouseData" [WarehouseFromSelect]="WarehouseFromSelect" [WarehouseToSelect]="WarehouseToSelect"
+                </app-item-code>
+                <app-warehouse *ngIf="WarehouseStatus" [WarehouseData]="WarehouseData" [WarehouseFromSelect]="WarehouseFromSelect" [WarehouseToSelect]="WarehouseToSelect"
                     (warehouseEvent)="warehouseEventHander($event)"
                     (warehouseCodeEvent)="warehouseCodeEventHander($event)">
-                </app-warehouse-code-lookup>
+                </app-warehouse>
                 <div *ngIf="SimpleGridEnableLoader" class="k-i-loading"></div>
                 <div *ngIf="bomGrid" class="justify-content-between flex-direction-column d-flex card-body pb-2 px-3"
                     [ngStyle]="{'padding-top': '0.75rem', 'padding-bottom':'0.75rem'}" fxFlex="0 0 100%">
-                    <app-bom-grid-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary">
-                    </app-bom-grid-view>
+                    <app-bom-view *ngIf="bomGrid" [gridDataEvent]="gridData" [primaryEvent]="IsPrimary">
+                    </app-bom-view>
                 </div>           
                 
                 <div *ngIf="!bomGrid" class="welcome-page" fxLayout="column" fxFlex="0 0 100%">
